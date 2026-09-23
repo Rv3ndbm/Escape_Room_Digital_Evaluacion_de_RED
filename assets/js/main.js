@@ -220,15 +220,15 @@ class SoundSystem {
 // Instancia global del sistema de sonido
 window.escapeSound = new SoundSystem();
 
-// 2. SISTEMA DE ACCESIBILIDAD Y TAMAÑO DE TEXTO (A / A+ / A++)
+// 2. SISTEMA DE ACCESIBILIDAD Y TAMAÑO DE TEXTO INFANTIL (A / A+ / A++)
 class AccessibilitySystem {
   constructor() {
     this.levels = ['normal', 'large', 'xlarge'];
     this.labels = { 'normal': 'A', 'large': 'A+', 'xlarge': 'A++' };
     this.descriptions = {
-      'normal': 'Texto: Normal (100%)',
-      'large': 'Texto: Grande (115%)',
-      'xlarge': 'Texto: Extra Grande (130%)'
+      'normal': 'Texto: Tamaño Estándar Equilibrado',
+      'large': 'Texto: Grande (+12%)',
+      'xlarge': 'Texto: Extra Grande (+25%)'
     };
     this.currentLevel = localStorage.getItem('escape_text_scale') || 'normal';
     this.toastTimeout = null;
@@ -280,7 +280,203 @@ class AccessibilitySystem {
 
 window.escapeAccessibility = new AccessibilitySystem();
 
-// 3. INICIALIZACIÓN GLOBAL DE LA INTERFAZ
+// 3. MOTOR DE PROGRESIÓN SECUENCIAL ESCAPE ROOM (BLOQUEO DE SALAS)
+const ESCAPE_ROOMS = {
+  'sala1': {
+    name: 'Reto 1: El Volcán',
+    icon: 'fa-fire',
+    file: 'sala1-volcan.html',
+    requiredPrev: null // Siempre disponible para comenzar
+  },
+  'sala2': {
+    name: 'Reto 2: El Tsunami',
+    icon: 'fa-water',
+    file: 'sala2-tsunami.html',
+    requiredPrev: 'sala1'
+  },
+  'sala3': {
+    name: 'Reto 3: El Terremoto',
+    icon: 'fa-house-crack',
+    file: 'sala3-terremoto.html',
+    requiredPrev: 'sala2'
+  },
+  'sala4': {
+    name: 'Reto 4: Ola de Calor',
+    icon: 'fa-sun',
+    file: 'sala4-calor.html',
+    requiredPrev: 'sala3'
+  },
+  'final': {
+    name: 'Diploma de Graduación',
+    icon: 'fa-trophy',
+    file: 'final.html',
+    requiredPrev: 'sala4'
+  }
+};
+
+function getUnlockedBadges() {
+  try {
+    return JSON.parse(localStorage.getItem('unlocked_badges') || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function isRoomUnlocked(roomKey) {
+  if (!roomKey || roomKey === 'portada' || roomKey === 'sala1') return true;
+  const badges = getUnlockedBadges();
+  const room = ESCAPE_ROOMS[roomKey];
+  if (!room || !room.requiredPrev) return true;
+  return badges.includes(room.requiredPrev);
+}
+
+function showEscapeRoomLockedModal(targetRoomKey) {
+  const room = ESCAPE_ROOMS[targetRoomKey];
+  const prevRoomKey = room ? room.requiredPrev : 'sala1';
+  const prevRoom = ESCAPE_ROOMS[prevRoomKey] || ESCAPE_ROOMS['sala1'];
+  
+  const isInsideHtmlFolder = window.location.pathname.includes('/assets/html/');
+  const prevUrl = isInsideHtmlFolder ? prevRoom.file : `assets/html/${prevRoom.file}`;
+
+  if (window.escapeSound) window.escapeSound.playError();
+
+  let modal = document.getElementById('escapeGatekeeperModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'escapeGatekeeperModal';
+    modal.className = 'escape-gatekeeper-overlay';
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="escape-gatekeeper-card animate__animated animate__zoomIn">
+      <div class="gatekeeper-lock-icon">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h3 class="gatekeeper-title">¡Habitación Bloqueada!</h3>
+      <p class="gatekeeper-msg">
+        ¡Alto ahí, querido/a explorador/a científico/a! 🚧<br>
+        Esta sala tiene un candado digital secreto. Para abrir la puerta de <strong>${room ? room.name : 'este reto'}</strong>, primero debes superar el <strong>${prevRoom.name}</strong> e ingresar su clave secreta de desbloqueo.
+      </p>
+      <div class="gatekeeper-actions">
+        <a href="${prevUrl}" class="btn-gatekeeper-primary">
+          <i class="fa-solid fa-play"></i>
+          <span>¡Ir a superar el ${prevRoom.name}!</span>
+        </a>
+        <button type="button" class="btn-gatekeeper-secondary" id="btnGatekeeperClose">
+          <i class="fa-solid fa-xmark"></i>
+          <span>Entendido</span>
+        </button>
+      </div>
+    </div>
+  `;
+
+  modal.style.display = 'flex';
+  const closeBtn = modal.querySelector('#btnGatekeeperClose');
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      if (window.escapeSound) window.escapeSound.playPop();
+      modal.style.display = 'none';
+    };
+  }
+}
+
+// Bloqueo de acceso directo por URL si el estudiante intenta saltarse salas
+function checkCurrentPageAccess() {
+  const currentPath = window.location.pathname;
+  let currentKey = null;
+  if (currentPath.includes('sala2-tsunami')) currentKey = 'sala2';
+  else if (currentPath.includes('sala3-terremoto')) currentKey = 'sala3';
+  else if (currentPath.includes('sala4-calor')) currentKey = 'sala4';
+  else if (currentPath.includes('final.html')) currentKey = 'final';
+
+  if (currentKey && !isRoomUnlocked(currentKey)) {
+    showEscapeRoomLockedModal(currentKey);
+    const closeBtn = document.getElementById('btnGatekeeperClose');
+    if (closeBtn) {
+      closeBtn.innerHTML = '<i class="fa-solid fa-house"></i> <span>Volver a Portada</span>';
+      closeBtn.onclick = () => {
+        window.location.href = window.location.pathname.includes('/assets/html/') ? '../../index.html' : 'index.html';
+      };
+    }
+  }
+}
+
+// Configura el menú superior y las tarjetas de la portada según el avance
+function setupEscapeRoomNavigation() {
+  const badges = getUnlockedBadges();
+
+  // 1. Barra superior de navegación (.mission-progress)
+  document.querySelectorAll('.mission-progress a, .mission-progress .step-badge').forEach(badge => {
+    const href = badge.getAttribute('href') || '';
+    const text = badge.textContent || '';
+    let roomKey = null;
+
+    if (href.includes('sala1-volcan') || text.includes('Reto 1') || text.includes('Volcán')) roomKey = 'sala1';
+    else if (href.includes('sala2-tsunami') || text.includes('Reto 2') || text.includes('Tsunami')) roomKey = 'sala2';
+    else if (href.includes('sala3-terremoto') || text.includes('Reto 3') || text.includes('Terremoto')) roomKey = 'sala3';
+    else if (href.includes('sala4-calor') || text.includes('Reto 4') || text.includes('Calor')) roomKey = 'sala4';
+    else if (href.includes('final.html') || text.includes('Diploma')) roomKey = 'final';
+
+    if (!roomKey) return; // Es la portada
+
+    const isUnlocked = isRoomUnlocked(roomKey);
+    const isCompleted = badges.includes(roomKey);
+
+    if (!isUnlocked) {
+      badge.classList.add('room-locked');
+      badge.classList.remove('completed', 'active');
+      badge.setAttribute('title', `🔒 Bloqueado: Supera el reto anterior para abrir esta sala`);
+      
+      const icon = badge.querySelector('i');
+      if (icon) {
+        icon.className = 'fa-solid fa-lock';
+      }
+
+      badge.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        showEscapeRoomLockedModal(roomKey);
+      });
+    } else {
+      badge.classList.remove('room-locked');
+      if (isCompleted && !badge.classList.contains('active')) {
+        badge.classList.add('room-completed');
+      }
+    }
+  });
+
+  // 2. Tarjetas de misión en la Portada (.missions-grid-preview)
+  document.querySelectorAll('.missions-grid-preview .mission-mini-card').forEach(card => {
+    const roomKey = card.getAttribute('data-room');
+    if (!roomKey) return;
+
+    const isUnlocked = isRoomUnlocked(roomKey);
+    const tagEl = card.querySelector('.mini-card-tag');
+
+    if (!isUnlocked) {
+      card.classList.add('card-locked');
+      if (tagEl) {
+        tagEl.className = 'card-lock-badge';
+        tagEl.innerHTML = '<i class="fa-solid fa-lock"></i> Bloqueado';
+      }
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        showEscapeRoomLockedModal(roomKey);
+      });
+    } else {
+      card.classList.remove('card-locked');
+      if (badges.includes(roomKey) && tagEl) {
+        tagEl.innerHTML = '✔️ ¡Superado!';
+        tagEl.style.background = '#DCFCE7';
+        tagEl.style.color = '#15803D';
+      }
+    }
+  });
+}
+
+// 4. INICIALIZACIÓN GLOBAL DE LA INTERFAZ
 document.addEventListener('DOMContentLoaded', () => {
   // Configurar botones de sonido
   window.escapeSound.updateSoundIcons();
@@ -301,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Efecto de sonido 'pop' en todos los botones y opciones interactivas
-  document.querySelectorAll('button, .option-card, .acc-btn, .step-badge').forEach(el => {
+  document.querySelectorAll('button, .option-card, .acc-btn, .step-badge, .avatar-chip').forEach(el => {
     el.addEventListener('click', () => {
       window.escapeSound.playPop();
     });
@@ -314,7 +510,6 @@ document.addEventListener('DOMContentLoaded', () => {
       optionCards.forEach(c => c.classList.remove('selected'));
       this.classList.add('selected');
 
-      // Si la opción tiene un atributo data-code, sugerirlo o auto-rellenar
       const suggestedCode = this.getAttribute('data-suggest-code');
       const passInput = document.querySelector('.passcode-input');
       if (suggestedCode && passInput && !passInput.value) {
@@ -327,7 +522,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Recuperar nombre del explorador en pantalla final
   const explorerNameDisplay = document.getElementById('explorer-name-target');
   if (explorerNameDisplay) {
-    const savedName = localStorage.getItem('explorer_name') || 'Super Explorador/a';
+    const savedName = localStorage.getItem('explorer_name') || 'Explorador Científico';
     explorerNameDisplay.textContent = savedName;
   }
+
+  // Activar comprobación y navegación protegida de Escape Room
+  checkCurrentPageAccess();
+  setupEscapeRoomNavigation();
 });

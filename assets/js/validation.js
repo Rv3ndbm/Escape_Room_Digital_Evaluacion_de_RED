@@ -142,11 +142,14 @@ function initRoomValidation(roomKey) {
         });
       }
 
-      // Guardar insignia
+      // Guardar insignia y progreso del Escape Room
       const badges = JSON.parse(localStorage.getItem('unlocked_badges') || '[]');
       if (!badges.includes(roomKey)) {
         badges.push(roomKey);
         localStorage.setItem('unlocked_badges', JSON.stringify(badges));
+      }
+      if (typeof setupEscapeRoomNavigation === 'function') {
+        setupEscapeRoomNavigation();
       }
 
       // Mostrar modal de felicitación con retroalimentación completa y botón para continuar

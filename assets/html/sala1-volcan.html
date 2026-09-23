@@ -873,32 +873,86 @@
           const rect = this.canvas.parentElement.getBoundingClientRect();
           this.width = this.canvas.width = rect.width || 340;
           this.height = this.canvas.height = rect.height || 210;
-          // Coordenadas calculadas exactamente con respecto a la boca del cráter
+          this.updateCraterCoords();
+        }
+
+        // Calibración exacta y en tiempo real de la boca del cráter
+        updateCraterCoords() {
+          const craterEl = document.getElementById('volcanoCrater');
+          if (craterEl && this.canvas) {
+            const cRect = craterEl.getBoundingClientRect();
+            const canRect = this.canvas.getBoundingClientRect();
+            if (cRect.width > 0 && canRect.width > 0) {
+              this.craterX = (cRect.left + cRect.width / 2) - canRect.left;
+              this.craterY = (cRect.top + cRect.height * 0.42) - canRect.top;
+              this.craterWidth = cRect.width;
+              this.craterHeight = cRect.height;
+              return;
+            }
+          }
+          const svgEl = document.getElementById('volcanoSvg');
+          if (svgEl && this.canvas) {
+            const sRect = svgEl.getBoundingClientRect();
+            const canRect = this.canvas.getBoundingClientRect();
+            if (sRect.width > 0 && canRect.width > 0) {
+              this.craterX = (sRect.left + sRect.width * 0.5) - canRect.left;
+              this.craterY = (sRect.top + sRect.height * (44 / 210)) - canRect.top;
+              this.craterWidth = sRect.width * (50 / 340);
+              this.craterHeight = sRect.height * (15 / 210);
+              return;
+            }
+          }
           this.craterX = this.width * 0.5;
-          this.craterY = this.height * 0.28;
+          this.craterY = this.height * 0.58;
+          this.craterWidth = 40;
+          this.craterHeight = 12;
         }
 
         setPhase(p) {
           this.phase = p;
+          this.updateCraterCoords();
           if (p === 3) {
             this.triggerExplosionBlast();
           }
         }
 
-        // Gran ráfaga explosiva de bombas de lava disparadas en abanico a todas partes
+        // Gran ráfaga explosiva de bombas de lava disparadas en abanico justo desde la boca del cráter
         triggerExplosionBlast() {
-          const bombCount = 38;
+          this.updateCraterCoords();
+          const bombCount = 42;
+          const cw = this.craterWidth || 36;
+
+          // Ondas expansivas incandescentes en la boca del cráter
+          this.splashes.push({
+            x: this.craterX,
+            y: this.craterY,
+            rx: cw * 0.4,
+            ry: (cw * 0.4) * 0.35,
+            alpha: 1,
+            lineWidth: 4,
+            color: '#FFFFFF'
+          });
+          this.splashes.push({
+            x: this.craterX,
+            y: this.craterY,
+            rx: cw * 0.25,
+            ry: (cw * 0.25) * 0.35,
+            alpha: 0.9,
+            lineWidth: 3,
+            color: '#FDE047'
+          });
+
           for (let i = 0; i < bombCount; i++) {
-            // Ángulo amplio entre -80° y +80° para cubrir todo el cielo y laderas
-            const angle = (Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.9);
-            const speed = 4.2 + Math.random() * 8.8;
+            // Ángulo amplio entre -80° y +80° proyectado verticalmente desde la boca
+            const angle = (Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.88);
+            const speed = 4.6 + Math.random() * 9.2;
             this.bombs.push({
-              x: this.craterX + (Math.random() - 0.5) * 16,
-              y: this.craterY + (Math.random() - 0.5) * 6,
+              x: this.craterX + (Math.random() - 0.5) * (cw * 0.8),
+              y: this.craterY + (Math.random() - 0.5) * 3,
               vx: Math.cos(angle) * speed,
               vy: -Math.abs(Math.sin(angle) * speed),
               gravity: 0.16 + Math.random() * 0.08,
-              radius: 3.2 + Math.random() * 5.2,
+              radius: 3.4 + Math.random() * 5.2,
               color: Math.random() > 0.4 ? '#FF4500' : '#FFD700',
               glow: '#FF2200',
               trail: [],
@@ -911,10 +965,11 @@
 
         // Relámpago volcánico dentro de la columna de humo
         spawnLightning() {
-          const startX = this.craterX + (Math.random() - 0.5) * 70;
-          const startY = Math.max(12, this.craterY - 100);
-          const endX = this.craterX + (Math.random() - 0.5) * 45;
-          const endY = this.craterY - 10;
+          const cw = this.craterWidth || 36;
+          const startX = this.craterX + (Math.random() - 0.5) * 80;
+          const startY = Math.max(10, this.craterY - 120);
+          const endX = this.craterX + (Math.random() - 0.5) * cw;
+          const endY = this.craterY - 2;
           const segments = [{ x: startX, y: startY }];
           let curX = startX;
           let curY = startY;
@@ -947,13 +1002,17 @@
         }
 
         update() {
+          if (this.frameCount % 20 === 0) {
+            this.updateCraterCoords();
+          }
           const cx = this.craterX;
           const cy = this.craterY;
+          const cw = this.craterWidth || 36;
 
-          // 1. FASE 1: Presión (Fumarolas sutiles de vapor y gas)
+          // 1. FASE 1: Presión (Fumarolas sutiles de vapor y gas naciendo de la boca)
           if (this.phase === 1 && this.frameCount % 8 === 0) {
             this.smoke.push({
-              x: cx + (Math.random() - 0.5) * 24,
+              x: cx + (Math.random() - 0.5) * (cw * 0.7),
               y: cy - 2,
               vx: (Math.random() - 0.5) * 0.6,
               vy: -0.7 - Math.random() * 0.8,
@@ -964,12 +1023,12 @@
             });
           }
 
-          // 2. FASE 2: Ascenso (Humo denso en expansión y chispas en la boca)
+          // 2. FASE 2: Ascenso (Humo denso en expansión y chispas en la boca del cráter)
           if (this.phase === 2) {
             if (this.frameCount % 5 === 0) {
               this.smoke.push({
-                x: cx + (Math.random() - 0.5) * 20,
-                y: cy - 4,
+                x: cx + (Math.random() - 0.5) * (cw * 0.7),
+                y: cy - 3,
                 vx: (Math.random() - 0.5) * 1.2,
                 vy: -1.2 - Math.random() * 1.2,
                 radius: 10 + Math.random() * 10,
@@ -980,7 +1039,7 @@
             }
             if (this.frameCount % 6 === 0) {
               this.sparks.push({
-                x: cx + (Math.random() - 0.5) * 18,
+                x: cx + (Math.random() - 0.5) * (cw * 0.6),
                 y: cy,
                 vx: (Math.random() - 0.5) * 3,
                 vy: -2.5 - Math.random() * 3,
@@ -994,14 +1053,14 @@
             }
           }
 
-          // 3. FASE 3: ¡Gran Explosión Piroclástica! (Lluvia de lava balística a todas partes)
+          // 3. FASE 3: ¡Gran Explosión Piroclástica! (Lava y bombas disparadas de la boca a todas partes)
           if (this.phase === 3) {
-            // Emisión continua de fuentes de lava ardiente
+            // Emisión continua de fuentes de lava ardiente desde la boca
             for (let i = 0; i < 3; i++) {
-              const angle = (Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.85);
-              const spd = 3.5 + Math.random() * 7.5;
+              const angle = (Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.82);
+              const spd = 3.8 + Math.random() * 7.5;
               this.sparks.push({
-                x: cx + (Math.random() - 0.5) * 18,
+                x: cx + (Math.random() - 0.5) * (cw * 0.7),
                 y: cy,
                 vx: Math.cos(angle) * spd,
                 vy: -Math.abs(Math.sin(angle) * spd),
@@ -1014,12 +1073,12 @@
               });
             }
 
-            // Bombas volcánicas periódicas
-            if (this.frameCount % 24 === 0) {
-              const bombAngle = (Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.95);
-              const bombSpeed = 4 + Math.random() * 8;
+            // Bombas volcánicas periódicas que siguen saliendo de la boca
+            if (this.frameCount % 20 === 0) {
+              const bombAngle = (Math.PI / 2) + (Math.random() - 0.5) * (Math.PI * 0.9);
+              const bombSpeed = 4.2 + Math.random() * 8.6;
               this.bombs.push({
-                x: cx + (Math.random() - 0.5) * 14,
+                x: cx + (Math.random() - 0.5) * (cw * 0.6),
                 y: cy,
                 vx: Math.cos(bombAngle) * bombSpeed,
                 vy: -Math.abs(Math.sin(bombAngle) * bombSpeed),
@@ -1033,22 +1092,22 @@
               });
             }
 
-            // Nubes gigantes de ceniza oscura
+            // Nubes gigantes de ceniza oscura naciendo en la boca del cráter
             if (this.frameCount % 4 === 0) {
               this.smoke.push({
-                x: cx + (Math.random() - 0.5) * 26,
-                y: cy - 10,
+                x: cx + (Math.random() - 0.5) * (cw * 0.8),
+                y: cy - 4,
                 vx: (Math.random() - 0.5) * 2.2,
-                vy: -1.8 - Math.random() * 2.2,
-                radius: 14 + Math.random() * 14,
+                vy: -2.0 - Math.random() * 2.4,
+                radius: 12 + Math.random() * 12,
                 maxRadius: 55 + Math.random() * 25,
-                alpha: 0.72,
+                alpha: 0.75,
                 color: Math.random() > 0.3 ? 'rgba(30, 41, 59, ' : 'rgba(234, 88, 12, '
               });
             }
 
             // Relámpagos intermitentes en la nube
-            if (this.frameCount % 90 === 0) {
+            if (this.frameCount % 80 === 0) {
               this.spawnLightning();
             }
           }
@@ -1071,8 +1130,8 @@
             }
             if (this.frameCount % 10 === 0) {
               this.smoke.push({
-                x: cx + (Math.random() - 0.5) * 50,
-                y: cy - 10,
+                x: cx + (Math.random() - 0.5) * (cw * 0.8),
+                y: cy - 4,
                 vx: (Math.random() - 0.5) * 1.2,
                 vy: -1 - Math.random() * 1.2,
                 radius: 12 + Math.random() * 10,
@@ -1221,6 +1280,25 @@
             this.ctx.fillStyle = s.color;
             this.ctx.fill();
             this.ctx.restore();
+          }
+
+          // 5. Dibujar anillos de onda expansiva en la boca del cráter
+          for (let i = this.splashes.length - 1; i >= 0; i--) {
+            const sp = this.splashes[i];
+            this.ctx.save();
+            this.ctx.beginPath();
+            this.ctx.ellipse(sp.x, sp.y, sp.rx, sp.ry, 0, 0, Math.PI * 2);
+            this.ctx.strokeStyle = sp.color;
+            this.ctx.lineWidth = sp.lineWidth || 3;
+            this.ctx.globalAlpha = Math.max(0, sp.alpha);
+            this.ctx.shadowColor = '#EF4444';
+            this.ctx.shadowBlur = 12;
+            this.ctx.stroke();
+            this.ctx.restore();
+            sp.rx += 2.8;
+            sp.ry += 1.2;
+            sp.alpha -= 0.045;
+            if (sp.alpha <= 0) this.splashes.splice(i, 1);
           }
         }
       }
@@ -1377,6 +1455,7 @@
 
         crater.style.fill = '#1C1917';
         crater.style.stroke = '#EF4444';
+        crater.style.filter = 'none';
 
         lavaLeft.classList.remove('lava-stream-active');
         lavaLeft.style.stroke = '#78350F';
@@ -1451,6 +1530,7 @@
 
         crater.style.fill = '#F97316';
         crater.style.stroke = '#FDE047';
+        crater.style.filter = 'drop-shadow(0 0 8px #F97316)';
 
         [fissureLeft1, fissureLeft2, fissureRight1, fissureRight2].forEach(f => {
           if (f) {
@@ -1477,7 +1557,8 @@
         skyGlow.style.opacity = '1';
 
         crater.style.fill = '#EF4444';
-        crater.style.stroke = '#FFF';
+        crater.style.stroke = '#FFFFFF';
+        crater.style.filter = 'drop-shadow(0 0 16px #EF4444) drop-shadow(0 0 24px #F59E0B)';
 
         renderSmoothLetterKaraoke(
           '💥 <strong>Fase 3 (19s a 28.5s): ¡Explosión Piroclástica en el Cráter!</strong>',

@@ -216,14 +216,21 @@
   100% { transform: translateX(220%) skewX(-25deg); opacity: 0; }
 }
 
-/* 16. Balanceo juguetón de doodles */
-@keyframes doodleBobble {
-  0%, 100% { transform: translateY(0px) rotate(-3deg); }
-  50% { transform: translateY(-9px) rotate(4deg); }
+/* 16. Balanceo suave y acelerado por hardware para stickers escolares (Cero parpadeo) */
+@keyframes stickerBobble {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--base-rot, 0deg)); }
+  50% { transform: translate3d(0, -7px, 0) rotate(calc(var(--base-rot, 0deg) + 3deg)); }
 }
 
+@keyframes doodleBobble {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--base-rot, 0deg)); }
+  50% { transform: translate3d(0, -7px, 0) rotate(calc(var(--base-rot, 0deg) + 3deg)); }
+}
+
+.sticker-floating,
 .doodle-floating {
-  animation: doodleBobble 4.5s ease-in-out infinite;
+  animation: stickerBobble 4.5s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* 17. Pulsación cromática de auras */
