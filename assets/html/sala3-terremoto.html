@@ -29,8 +29,8 @@
 
     .seismic-lab-layout {
       display: grid;
-      grid-template-columns: minmax(310px, 345px) 1fr;
-      gap: 12px;
+      grid-template-columns: minmax(340px, 400px) 1fr;
+      gap: 14px;
       height: 100%;
       min-height: 0;
       background: radial-gradient(circle at 10% 20%, #F8FAFC 0%, #EFF6FF 100%);
@@ -43,7 +43,7 @@
 
     @media (max-width: 1200px) {
       .seismic-lab-layout {
-        grid-template-columns: minmax(290px, 320px) 1fr;
+        grid-template-columns: minmax(320px, 360px) 1fr;
         gap: 10px;
         padding: 8px;
       }
@@ -70,9 +70,9 @@
 
     .phone-mockup-advanced {
       width: 100%;
-      max-width: 345px;
+      max-width: 395px;
       height: 100%;
-      max-height: 550px;
+      max-height: 560px;
       background: #0F172A;
       border-radius: 36px;
       padding: 10px;
@@ -83,6 +83,49 @@
       transition: transform 0.2s;
       box-sizing: border-box;
       position: relative;
+    }
+
+    /* Guía Rápida de la App */
+    .app-quick-guide-card {
+      background: white;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 8px 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .quick-guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .guide-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 6px 8px;
+    }
+
+    .step-num-bubble {
+      width: 20px;
+      height: 20px;
+      background: #2563EB;
+      color: white;
+      border-radius: 50%;
+      font-size: 0.72rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
 
     /* Barra Superior del Sistema Operativo */
@@ -942,131 +985,71 @@
               </div>
             </div>
 
-            <!-- Subcolumna Derecha: Estación de Monitoreo Geofísico & Rigor Científico -->
+            <!-- Subcolumna Derecha: Guía Rápida de la App & Certificación de Calidad -->
             <div class="seismic-telemetry-dashboard">
               
               <!-- Tarjeta de Acreditación Oficial / Sello de Rigor -->
               <div id="btnScientificSeal" class="scientific-rigor-seal" title="Toca para ver el certificado de rigor científico">
-                <div style="font-size: 1.8rem; filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));">🏅</div>
+                <div style="font-size: 1.6rem; filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));">🏅</div>
                 <div style="flex: 1; line-height: 1.2;">
-                  <div style="font-family: var(--font-hand); font-size: 1rem; font-weight: bold; color: #92400E;">
+                  <div style="font-family: var(--font-hand); font-size: 0.95rem; font-weight: bold; color: #92400E;">
                     Avalado por Instituto Geofísico & Protección Civil
                   </div>
-                  <div style="font-size: 0.78rem; color: #B45309;">
-                    Criterio: Calidad y Rigor de la Información Científica
+                  <div style="font-size: 0.74rem; color: #B45309;">
+                    Criterio RED: Calidad y Rigor de la Información Científica
                   </div>
                 </div>
-                <span class="badge bg-warning text-dark" style="font-family: var(--font-hand); font-size: 0.8rem; padding: 3px 7px;">
+                <span class="badge bg-warning text-dark" style="font-family: var(--font-hand); font-size: 0.75rem; padding: 2px 6px;">
                   Verificado
                 </span>
               </div>
 
-              <!-- Escala Richter Interactiva (3 Niveles con Visualizador de Daños) -->
-              <div class="richter-scale-container">
-                <div class="richter-scale-header">
-                  <span style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: #1E293B;">
-                    <i class="fa-solid fa-ruler-combined" style="color: #2563EB;"></i> Escala de Intensidad Sísmica
+              <!-- Tarjeta de Guía Rápida de la App SismoKids -->
+              <div class="app-quick-guide-card">
+                <div class="quick-guide-header">
+                  <span style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; color: #1E293B;">
+                    <i class="fa-solid fa-gamepad" style="color: #2563EB;"></i> Guía Rápida para Explorar la App
                   </span>
-                  <span style="font-size: 0.75rem; color: #64748B; font-weight: bold;">(Toca un nivel)</span>
                 </div>
-
-                <div class="richter-cards-grid">
-                  <!-- 4.0 Leve -->
-                  <div class="richter-scale-card mag-4" data-mag="4">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
-                      <span class="badge bg-success" style="font-size: 0.7rem;">4.0 Leve</span>
-                      <span style="font-size: 0.95rem;">🍃</span>
+                
+                <div class="quick-guide-steps">
+                  <div class="guide-step-item">
+                    <span class="step-num-bubble">1</span>
+                    <div style="flex: 1;">
+                      <strong style="color: #0F172A; font-size: 0.82rem;">📈 Prueba el Sismógrafo & Drill:</strong>
+                      <p style="margin: 0; font-size: 0.74rem; color: #64748B; line-height: 1.2;">Elige una magnitud y pulsa <em>¡Iniciar Simulacro!</em> para observar las ondas y la sacudida en el aula.</p>
+                      <div style="display: flex; gap: 5px; margin-top: 4px;">
+                        <button class="richter-scale-card mag-4" data-mag="4" type="button" style="padding: 2px 6px; font-size: 0.68rem; border-radius: 6px; cursor: pointer; border: 1px solid #CBD5E1; background: white;">4.0 Leve 🍃</button>
+                        <button class="richter-scale-card mag-6 active" data-mag="6" type="button" style="padding: 2px 6px; font-size: 0.68rem; border-radius: 6px; cursor: pointer; border: 1px solid #F59E0B; background: #FFFBEB;">6.5 Fuerte ⚠️</button>
+                        <button class="richter-scale-card mag-8" data-mag="8" type="button" style="padding: 2px 6px; font-size: 0.68rem; border-radius: 6px; cursor: pointer; border: 1px solid #CBD5E1; background: white;">8.0 Mayor 🚨</button>
+                      </div>
                     </div>
-                    <strong style="display: block; font-size: 0.8rem; color: #166534; font-family: var(--font-hand);">Vibración Ligera</strong>
-                    <p style="font-size: 0.7rem; color: #475569; margin: 0; line-height: 1.2;">Lámparas se mueven levemente. Sin daño estructural.</p>
                   </div>
 
-                  <!-- 6.5 Fuerte -->
-                  <div class="richter-scale-card mag-6 active" data-mag="6">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
-                      <span class="badge bg-warning text-dark" style="font-size: 0.7rem;">6.5 Fuerte</span>
-                      <span style="font-size: 0.95rem;">⚠️</span>
+                  <div class="guide-step-item">
+                    <span class="step-num-bubble">2</span>
+                    <div>
+                      <strong style="color: #0F172A; font-size: 0.82rem;">🎒 Empaca la Mochila 72h:</strong>
+                      <p style="margin: 0; font-size: 0.74rem; color: #64748B; line-height: 1.2;">Toca la pestaña <em>Mochila</em> en el celular y guarda los 5 artículos vitales de supervivencia.</p>
                     </div>
-                    <strong style="display: block; font-size: 0.8rem; color: #92400E; font-family: var(--font-hand);">Sacudida Fuerte</strong>
-                    <p style="font-size: 0.7rem; color: #475569; margin: 0; line-height: 1.2;">Caen libros y útiles. ¡Agacharse bajo pupitre!</p>
                   </div>
 
-                  <!-- 8.0 Mayor -->
-                  <div class="richter-scale-card mag-8" data-mag="8">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
-                      <span class="badge bg-danger" style="font-size: 0.7rem;">8.0 Mayor</span>
-                      <span style="font-size: 0.95rem;">🚨</span>
+                  <div class="guide-step-item">
+                    <span class="step-num-bubble">3</span>
+                    <div>
+                      <strong style="color: #0F172A; font-size: 0.82rem;">📋 Aprende la Regla de Oro:</strong>
+                      <p style="margin: 0; font-size: 0.74rem; color: #64748B; line-height: 1.2;">En la pestaña <em>Consejos</em> repasa el protocolo internacional: <strong>Agáchate, Cúbrete y Sujétate</strong>.</p>
                     </div>
-                    <strong style="display: block; font-size: 0.8rem; color: #991B1B; font-family: var(--font-hand);">Terremoto Mayor</strong>
-                    <p style="font-size: 0.7rem; color: #475569; margin: 0; line-height: 1.2;">Gran energía sísmica. Alarma y evacuación total.</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Protocolo Vital D.C.H. ("Agacharse, Cubrirse, Sujetarse") -->
-              <div class="dch-protocol-box">
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                  <span style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: #1E293B;">
-                    <i class="fa-solid fa-child-reaching" style="color: #10B981;"></i> Protocolo Escolar: Triángulo D.C.H.
-                  </span>
-                  <span id="dchLiveStatus" class="badge bg-primary" style="font-size: 0.7rem;">Norma Internacional</span>
-                </div>
-
-                <div class="dch-steps-row">
-                  <!-- Paso 1 -->
-                  <div id="stepDch1" class="dch-step-pill">
-                    <div style="font-size: 1.25rem;">🙇‍♂️</div>
-                    <strong style="font-family: var(--font-hand); font-size: 0.84rem; color: #1E293B; display: block;">1. Agáchate</strong>
-                    <span style="font-size: 0.68rem; color: #64748B; display: block; line-height: 1.15;">Baja tu centro de gravedad para no caer.</span>
-                  </div>
-
-                  <!-- Paso 2 -->
-                  <div id="stepDch2" class="dch-step-pill">
-                    <div style="font-size: 1.25rem;">🪑</div>
-                    <strong style="font-family: var(--font-hand); font-size: 0.84rem; color: #1E293B; display: block;">2. Cúbrete</strong>
-                    <span style="font-size: 0.68rem; color: #64748B; display: block; line-height: 1.15;">Cabeza y nuca bajo el pupitre firme.</span>
-                  </div>
-
-                  <!-- Paso 3 -->
-                  <div id="stepDch3" class="dch-step-pill">
-                    <div style="font-size: 1.25rem;">🤝</div>
-                    <strong style="font-family: var(--font-hand); font-size: 0.84rem; color: #1E293B; display: block;">3. Sujétate</strong>
-                    <span style="font-size: 0.68rem; color: #64748B; display: block; line-height: 1.15;">Aférrate a las patas hasta que pase el sismo.</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Checklist de Verificación de Calidad Científica -->
-              <div class="scientific-checklist-box">
-                <div style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; color: #166534; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-list-check"></i> Checklist: ¿Por qué este recurso tiene Calidad y Rigor?
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.74rem; color: #14532D;">
-                  <div style="display: flex; align-items: center; gap: 5px;">
-                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
-                    <span><strong>Fuentes Verificadas:</strong> Basado en geofísica oficial.</span>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 5px;">
-                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
-                    <span><strong>Cero Mitos:</strong> Los sismos no se predicen por hora.</span>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 5px;">
-                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
-                    <span><strong>Mochila 72h:</strong> Artículos justificados para sobrevivir.</span>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 5px;">
-                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
-                    <span><strong>Sin Peligro:</strong> Desaconseja usar ascensores o correr.</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Post-it Escolar del Sismólogo -->
-              <div class="seismic-postit-note">
+              <!-- Pista Didáctica Compacta -->
+              <div class="seismic-postit-note" style="padding: 6px 10px;">
                 <div class="seismic-postit-pin">📌</div>
-                <strong>¡Pista de Calidad Científica para tu Misión!</strong>
-                <p style="margin: 2px 0 0 0; font-size: 0.82rem; line-height: 1.25;">
-                  Para evaluar si un recurso digital tiene <em>Calidad</em>, fíjate en quién lo respalda. Si la información coincide con geofísicos y organismos de emergencias certificados, ¡garantiza la máxima seguridad y aprendizaje real!
+                <strong style="font-size: 0.82rem;">¡Pista para Evaluar la Calidad!</strong>
+                <p style="margin: 2px 0 0 0; font-size: 0.78rem; line-height: 1.25;">
+                  Comprueba que la app esté respaldada por expertos geofísicos oficiales, no invente predicciones falsas y enseñe medidas de protección reales.
                 </p>
               </div>
 

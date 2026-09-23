@@ -380,7 +380,7 @@ function handleOptionSelection(qKey, optIdx, isCorrect, clickedBtn) {
 
   // Si es correcta
   clickedBtn.classList.add('correct-highlight');
-  if (window.escapeSound) window.escapeSound.playPop();
+  if (window.escapeSound) window.escapeSound.playOptionSelect();
 
   // Comprobar si ambas preguntas están respondidas
   const selQ1 = currentRoomState.selectedAnswers.q1;
@@ -529,6 +529,10 @@ function handleRoomCompleted(room) {
 
   if (typeof setupEscapeRoomNavigation === 'function') {
     setupEscapeRoomNavigation();
+  }
+
+  if (window.escapeSound) {
+    window.escapeSound.playSecretUnlock();
   }
 
   if (typeof confetti === 'function') {
