@@ -11,32 +11,44 @@ const ROOMS_CONFIG = {
     alternatives: ['312', 'A', 'OPCION A', 'OPCIÓN A'],
     criterion: 'Pertinencia',
     nextPage: 'sala2-tsunami.html',
-    successTitle: '¡Felicidades, Explorador Científico!',
-    successExplanation: '¡Has dominado el criterio de <strong>Pertinencia</strong>! Comprobaste que el video sí responde al objetivo de la clase explicando cómo funciona un volcán.'
+    badgeText: '¡RETO 1 SUPERADO!',
+    successTitle: '¡Felicidades, Explorador/a Científico/a!',
+    achievementHeader: '🎯 Has Dominado el Criterio: Pertinencia',
+    successExplanation: '<strong>¡Excelente trabajo geológico!</strong> Has demostrado que este recurso cumple al 100% el objetivo educativo. Comprobaste con rigor científico cómo la presión subterránea en la cámara magmática, el ascenso por la chimenea y los gases impulsan una erupción volcánica real.',
+    btnContinueText: '¡Continuar al Reto 2: El Tsunami! 🌊'
   },
   'sala2': {
     code: '741',
     alternatives: ['741', 'A', 'OPCION A', 'OPCIÓN A'],
     criterion: 'Usabilidad',
     nextPage: 'sala3-terremoto.html',
-    successTitle: '¡Felicidades, Explorador Científico!',
-    successExplanation: '¡Has dominado el criterio de <strong>Usabilidad</strong>! Comprobaste que los controles claros y los botones accesibles permiten que cualquier niño juegue y aprenda sin ayuda.'
+    badgeText: '¡RETO 2 SUPERADO!',
+    successTitle: '¡Felicidades, Navegante Científico/a!',
+    achievementHeader: '🎯 Has Dominado el Criterio: Usabilidad',
+    successExplanation: '<strong>¡Gran criterio tecnológico!</strong> Comprobaste que los controles intuitivos, botones claros y explicaciones accesibles permiten que cualquier estudiante aprenda y experimente de forma autónoma, fácil y sin frustraciones.',
+    btnContinueText: '¡Continuar al Reto 3: El Terremoto! 🏢'
   },
   'sala3': {
     code: '985',
     alternatives: ['985', 'A', 'OPCION A', 'OPCIÓN A'],
-    criterion: 'Calidad',
+    criterion: 'Calidad y Rigor',
     nextPage: 'sala4-calor.html',
-    successTitle: '¡Felicidades, Explorador Científico!',
-    successExplanation: '¡Has dominado el criterio de <strong>Calidad</strong>! Verificaste que los datos y los protocolos de autoprotección sísmica son verdaderos y de fuentes oficiales.'
+    badgeText: '¡RETO 3 SUPERADO!',
+    successTitle: '¡Felicidades, Experto/a en Prevención!',
+    achievementHeader: '🎯 Has Dominado el Criterio: Calidad',
+    successExplanation: '<strong>¡Análisis riguroso completado!</strong> Verificaste que los datos sismológicos y las medidas de autoprotección escolar provienen de organismos oficiales certificados y salvan vidas durante emergencias reales.',
+    btnContinueText: '¡Continuar al Reto 4: Ola de Calor! ☀️'
   },
   'sala4': {
     code: '624',
     alternatives: ['624', 'A', 'OPCION A', 'OPCIÓN A'],
     criterion: 'Accesibilidad',
     nextPage: 'final.html',
-    successTitle: '¡Felicidades, Explorador Científico!',
-    successExplanation: '¡Has dominado el criterio de <strong>Accesibilidad</strong>! Aprendiste que todos los niños merecen aprender con letras grandes y opciones de contraste.'
+    badgeText: '¡RETO 4 SUPERADO!',
+    successTitle: '¡Misión Cumplida, Guardián del Planeta!',
+    achievementHeader: '🎯 Has Dominado el Criterio: Accesibilidad',
+    successExplanation: '<strong>¡Inclusión educativa ejemplar!</strong> Aprendiste que todo material didáctico debe diseñarse para que todas las personas, sin importar sus condiciones visuales o auditivas, puedan aprender en igualdad de oportunidades.',
+    btnContinueText: '¡Ir a la Graduación y Ver Mi Medalla! 🎓'
   }
 };
 
@@ -116,16 +128,16 @@ function initRoomValidation(roomKey) {
 
       if (feedbackEl) {
         feedbackEl.className = 'feedback-msg success-text animate__animated animate__fadeIn';
-        feedbackEl.innerHTML = '🎉 ¡Clave correcta! Desbloqueando la siguiente sala...';
+        feedbackEl.innerHTML = '🎉 ¡Clave correcta! Reto desbloqueado con éxito.';
       }
 
       if (window.escapeSound) window.escapeSound.playSuccess();
 
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 120,
-          spread: 80,
-          origin: { y: 0.6 },
+          particleCount: 130,
+          spread: 85,
+          origin: { y: 0.55 },
           colors: ['#2D5A46', '#F2B705', '#3B82F6', '#EF4444', '#16A34A', '#F472B6']
         });
       }
@@ -137,19 +149,68 @@ function initRoomValidation(roomKey) {
         localStorage.setItem('unlocked_badges', JSON.stringify(badges));
       }
 
-      // Mostrar modal de felicitación
+      // Mostrar modal de felicitación con retroalimentación completa y botón para continuar
       if (successModal) {
-        const modalTitle = successModal.querySelector('h3');
-        const modalDesc = successModal.querySelector('p');
-        if (modalTitle) modalTitle.innerHTML = room.successTitle;
-        if (modalDesc) modalDesc.innerHTML = room.successExplanation;
+        const modalContent = successModal.querySelector('.success-modal-card');
+        if (modalContent) {
+          modalContent.innerHTML = `
+            <div class="success-stamp-circle animate__animated animate__heartBeat">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            
+            <div class="success-badge-pill">
+              <i class="fa-solid fa-medal"></i> ${room.badgeText}
+            </div>
+
+            <h3 style="font-family: var(--font-script); font-size: clamp(1.8rem, 2.5vw, 2.2rem); color: var(--school-green-title); margin: 0.2rem 0 0.5rem; line-height: 1.15;">
+              ${room.successTitle}
+            </h3>
+
+            <div class="success-criterion-highlight">
+              <div class="success-criterion-header">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>${room.achievementHeader}</span>
+              </div>
+              <p class="success-explanation-text">
+                ${room.successExplanation}
+              </p>
+            </div>
+
+            <div class="success-modal-actions">
+              <button id="btnContinueNextRoom" class="btn-modal-continue" type="button" title="Avanzar a la siguiente sala">
+                <span>${room.btnContinueText}</span>
+                <i class="fa-solid fa-circle-arrow-right"></i>
+              </button>
+
+              <button id="btnReviewThisRoom" class="btn-modal-review" type="button" title="Quedarse en esta sala para revisar el simulador">
+                <i class="fa-solid fa-rotate-left"></i> Seguir explorando esta sala
+              </button>
+            </div>
+          `;
+
+          // Eventos de los botones del modal
+          const continueBtn = modalContent.querySelector('#btnContinueNextRoom');
+          if (continueBtn) {
+            continueBtn.addEventListener('click', () => {
+              if (window.escapeSound) window.escapeSound.playPop();
+              continueBtn.innerHTML = '<span>Cargando siguiente misión...</span> <i class="fa-solid fa-spinner fa-spin"></i>';
+              setTimeout(() => {
+                window.location.href = room.nextPage;
+              }, 250);
+            });
+          }
+
+          const reviewBtn = modalContent.querySelector('#btnReviewThisRoom');
+          if (reviewBtn) {
+            reviewBtn.addEventListener('click', () => {
+              if (window.escapeSound) window.escapeSound.playPop();
+              successModal.style.display = 'none';
+            });
+          }
+        }
+
         successModal.style.display = 'flex';
       }
-
-      // Redirigir a la siguiente sala
-      setTimeout(() => {
-        window.location.href = room.nextPage;
-      }, 1500);
 
     } else {
       // --- ERROR Y PISTA ---

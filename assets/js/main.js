@@ -220,7 +220,67 @@ class SoundSystem {
 // Instancia global del sistema de sonido
 window.escapeSound = new SoundSystem();
 
-// 2. INICIALIZACIÓN GLOBAL DE LA INTERFAZ
+// 2. SISTEMA DE ACCESIBILIDAD Y TAMAÑO DE TEXTO (A / A+ / A++)
+class AccessibilitySystem {
+  constructor() {
+    this.levels = ['normal', 'large', 'xlarge'];
+    this.labels = { 'normal': 'A', 'large': 'A+', 'xlarge': 'A++' };
+    this.descriptions = {
+      'normal': 'Texto: Normal (100%)',
+      'large': 'Texto: Grande (115%)',
+      'xlarge': 'Texto: Extra Grande (130%)'
+    };
+    this.currentLevel = localStorage.getItem('escape_text_scale') || 'normal';
+    this.toastTimeout = null;
+    this.applyLevel(this.currentLevel, false);
+  }
+
+  cycle() {
+    const idx = this.levels.indexOf(this.currentLevel);
+    const nextIdx = (idx + 1) % this.levels.length;
+    this.currentLevel = this.levels[nextIdx];
+    localStorage.setItem('escape_text_scale', this.currentLevel);
+    this.applyLevel(this.currentLevel, true);
+  }
+
+  applyLevel(level, showToast = true) {
+    document.documentElement.setAttribute('data-text-scale', level);
+    
+    // Actualizar todos los botones en el DOM
+    document.querySelectorAll('.accessibility-toggle-btn').forEach(btn => {
+      const tag = btn.querySelector('.text-size-tag');
+      if (tag) tag.textContent = this.labels[level];
+      btn.setAttribute('title', `Accesibilidad: ${this.descriptions[level]}`);
+    });
+
+    if (showToast) {
+      this.showToast(`🔍 ${this.descriptions[level]}`);
+      if (window.escapeSound) window.escapeSound.playPop();
+    }
+  }
+
+  showToast(message) {
+    let toast = document.getElementById('accessibilityToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'accessibilityToast';
+      toast.className = 'accessibility-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.remove('toast-visible');
+    void toast.offsetWidth;
+    toast.classList.add('toast-visible');
+    clearTimeout(this.toastTimeout);
+    this.toastTimeout = setTimeout(() => {
+      toast.classList.remove('toast-visible');
+    }, 1800);
+  }
+}
+
+window.escapeAccessibility = new AccessibilitySystem();
+
+// 3. INICIALIZACIÓN GLOBAL DE LA INTERFAZ
 document.addEventListener('DOMContentLoaded', () => {
   // Configurar botones de sonido
   window.escapeSound.updateSoundIcons();
@@ -230,8 +290,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Configurar botones de accesibilidad (Ajustar texto)
+  window.escapeAccessibility.applyLevel(window.escapeAccessibility.currentLevel, false);
+  document.querySelectorAll('.accessibility-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.escapeAccessibility.cycle();
+    });
+  });
+
   // Efecto de sonido 'pop' en todos los botones y opciones interactivas
-  document.querySelectorAll('button, .option-card, .acc-btn').forEach(el => {
+  document.querySelectorAll('button, .option-card, .acc-btn, .step-badge').forEach(el => {
     el.addEventListener('click', () => {
       window.escapeSound.playPop();
     });

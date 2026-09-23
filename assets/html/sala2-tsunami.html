@@ -94,12 +94,12 @@
     <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
     <img src="../media/volcano-cute.svg" alt="Volcancito" class="decor-volcano-mini">
 
-    <!-- Destellos mágicos y estrellitas centelleantes -->
-    <div class="decor-sparkle" style="top: 14%; left: 24%; color: #EF4444;">❤️</div>
-    <div class="decor-sparkle" style="top: 22%; right: 24%; color: #2563EB; animation-delay: 0.8s;">⭐</div>
-    <div class="decor-sparkle" style="bottom: 14%; left: 26%; color: #10B981; animation-delay: 1.4s;">🌟</div>
-    <div class="decor-sparkle" style="bottom: 22%; right: 22%; color: #F59E0B; animation-delay: 0.5s;">✨</div>
-    <div class="decor-sparkle" style="top: 50%; left: 8%; color: #DC2626; animation-delay: 1.8s;">🍎</div>
+    <!-- Destellos mágicos y estrellitas en SVG vectorial (Cero parpadeo o jitter de fuentes) -->
+    <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="decor-sparkle" style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="decor-sparkle" style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="decor-sparkle" style="bottom: 22%; right: 22%; width: 24px; height: 24px; fill: #F59E0B; animation-delay: 0.5s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="decor-sparkle" style="top: 50%; left: 8%; width: 20px; height: 20px; fill: #DC2626; animation-delay: 1.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
 
     <!-- Útiles escolares -->
     <img src="../media/protractor.svg" alt="Transportador escolar" class="decor-protractor">
@@ -114,15 +114,21 @@
         <span>🌊 Reto 2: El Tsunami</span>
       </div>
 
-      <div class="mission-progress">
+      <nav class="mission-progress" aria-label="Progreso de las salas">
         <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
         <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
         <div class="step-badge active"><i class="fa-solid fa-water"></i> Reto 2</div>
-        <div class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</div>
-        <div class="step-badge"><i class="fa-solid fa-sun"></i> Reto 4</div>
-      </div>
+        <a href="sala3-terremoto.html" class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</a>
+        <a href="sala4-calor.html" class="step-badge"><i class="fa-solid fa-sun"></i> Reto 4</a>
+      </nav>
 
       <div class="hud-actions">
+        <!-- Botón de Accesibilidad de Tamaño de Texto -->
+        <button class="accessibility-toggle-btn" type="button" title="Ajustar tamaño de texto (Normal / Grande / Extra Grande)" aria-label="Ajustar tamaño de texto">
+          <i class="fa-solid fa-text-height"></i>
+          <span class="text-size-tag">A</span>
+        </button>
+
         <button class="sound-toggle-btn" title="Activar/Silenciar sonido" aria-label="Sonido">
           <i class="fa-solid fa-volume-high"></i>
         </button>
@@ -147,7 +153,6 @@
           <div class="tsunami-stage">
             
             <!-- Barra Medidora Superior con Slider y Botones de Escenario -->
-            <!-- Barra Medidora Superior con Slider y Botones de Escenario -->
             <div class="tsunami-top-controls">
               <div class="tsunami-slider-bar">
                 <span style="font-family: var(--font-hand); font-weight: bold; font-size: 0.95rem; color: #0369A1; white-space: nowrap;">
@@ -166,55 +171,133 @@
                 <button class="btn-preset" data-meters="15">15m (Tsunami)</button>
                 <button class="btn-preset" data-meters="30">30m (Mega Tsunami)</button>
               </div>
-            </div>
 
-            <!-- Escenario Central Visual de la Costa - Elevado e Independiente (La playa nunca queda tapada) -->
-            <div class="tsunami-scene-viewport">
-              <!-- Gráfico de la Gran Ola Curva que avanza hacia la izquierda en dirección a la playa -->
-              <div id="waveIllustrationBox" style="position: absolute; bottom: 25px; right: -250px; width: 230px; height: auto; z-index: 19; transform: scaleX(-1); transition: right 1.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s;">
-                <img src="../media/wave-cute.svg" alt="Gran ola de tsunami" style="width: 100%; height: auto; filter: drop-shadow(0 8px 20px rgba(2, 132, 199, 0.55));">
-              </div>
-
-              <!-- Barco que flota en el mar a la derecha y es arrastrado -->
-              <div id="tsunamiBoat" class="boat-element boat-floating" title="Toca el barquito">
-                ⛵
-              </div>
-
-              <!-- Pez que queda a la vista cuando el mar se retira hacia la derecha -->
-              <div id="exposedSeafloorFish" style="position: absolute; bottom: 15px; left: 52%; font-size: 1.6rem; z-index: 12; opacity: 0; transition: opacity 0.4s;">
-                🐟🦀
-              </div>
-
-              <!-- Colina Alta de Evacuación Segura (A la izquierda, zona segura) -->
-              <div id="safeHill" class="safe-hill-box" title="Zona alta segura para evacuación">
-                <span>⛰️ Colina Alta:</span> <span>🏃‍♂️ Refugio</span>
-              </div>
-
-              <!-- Playa a la izquierda con Castillo de Arena, Palmera, Sombrilla y Sirena (Elevada y amplia) -->
-              <div id="coastBeach" class="coast-beach-layer">
-                <span id="itemSandcastle" class="beach-item" title="¡Toca para construir el castillo!">🏰</span>
-                <span id="itemUmbrella" class="beach-item" title="¡Toca para abrir la sombrilla!">🏖️</span>
-                <span id="itemPalm" class="beach-item" title="¡Toca para sacudir la palmera!">🌴</span>
-                <span id="itemSiren" class="beach-item" title="¡Alerta sísmica y de tsunami!">🏮</span>
-              </div>
-
-              <!-- Capa de Agua Marina que inunda la arena hacia la izquierda -->
-              <div id="tsunamiWater" class="tsunami-water-sheet wave-sloshing">
-                <div class="tsunami-foam">
-                  <span>🫧</span><span>🌊</span><span>💧</span><span>🫧</span><span>🌊</span><span>💧</span>
+              <!-- Selector Manual de Cámara (Para explorar el paisaje de 4 zonas) -->
+              <div class="camera-nav-bar">
+                <span class="camera-nav-label">
+                  <i class="fa-solid fa-camera"></i> Cámara:
+                </span>
+                <div class="camera-tab-buttons">
+                  <button type="button" class="btn-camera-tab active" data-zone="beach" title="Ver la playa y orilla">
+                    <span>🏖️ Playa y Mar</span>
+                  </button>
+                  <button type="button" class="btn-camera-tab" data-zone="sea" title="Ver mar profundo y origen de la ola">
+                    <span>🌊 Mar Profundo</span>
+                  </button>
+                  <button type="button" class="btn-camera-tab" data-zone="town" title="Ver el pueblo costero y la escuela">
+                    <span>🏘️ Pueblo Costero</span>
+                  </button>
+                  <button type="button" class="btn-camera-tab" data-zone="hill" title="Ver la colina alta y refugio seguro">
+                    <span>⛰️ Colina Alta (+30m)</span>
+                  </button>
                 </div>
               </div>
+            </div>
 
-              <!-- Salpicaduras de impacto gigante en la playa izquierda -->
-              <div id="splashDroplet" class="water-splash-droplet" style="bottom: 75px; left: 24%; z-index: 22;">
-                💦🌊💦
+            <!-- Escenario Central Panorámico con Cámara Desplazable -->
+            <div class="tsunami-scene-viewport" id="tsunamiViewport">
+              <div class="tsunami-panoramic-track" id="panoramicTrack" style="transform: translateX(-50%);">
+                
+                <!-- ZONA 4: Colina Alta de Evacuación Segura (+30m Cota Segura) - Extremo Izquierdo -->
+                <div class="panoramic-zone zone-hill" id="zoneHill">
+                  <div class="hill-mountain-body"></div>
+                  <!-- Refugio y estudiantes a salvo en la cima -->
+                  <div class="hill-shelter-top">
+                    <div class="shelter-badge-banner">
+                      <i class="fa-solid fa-shield-halved" style="color: #16A34A;"></i>
+                      <span>Zona Segura: Colina (+30m)</span>
+                    </div>
+                    <div class="shelter-students-group" title="¡Estudiantes a salvo en el refugio!">
+                      <span>🏫</span><span>🏃‍♀️</span><span>🎒</span><span>🙋‍♂️</span>
+                    </div>
+                  </div>
+                  <!-- Sendero de evacuación hacia arriba -->
+                  <div class="hill-path-steps" title="Sendero de evacuación"></div>
+                </div>
+
+                <!-- ZONA 3: Pueblo Costero y Escuela (Zona Urbana Tierra Adentro) -->
+                <div class="panoramic-zone zone-town" id="zoneTown">
+                  <div class="town-skyline-buildings">
+                    <span class="building-item" title="Escuela Primaria Costera">🏫</span>
+                    <span class="building-item" title="Casas del pueblo">🏡</span>
+                    <span class="building-item" title="Comercio local">🏪</span>
+                    <span class="building-item" title="Faro de advertencia">🗼</span>
+                  </div>
+                  <div class="town-ground-street">
+                    <span class="street-item" id="townBus" title="Autobús escolar">🚌</span>
+                    <span class="street-item" id="townCar" title="Coche">🚗</span>
+                    <span class="street-item" title="Farola pública">🏮</span>
+                    <span class="street-item" title="Árbol urbano">🌳</span>
+                  </div>
+                </div>
+
+                <!-- ZONA 2: La Playa y el Malecón Costero -->
+                <div class="panoramic-zone zone-beach" id="zoneBeach">
+                  <div class="shoreline-wash-line"></div>
+                  <div class="beach-sand-ground">
+                    <span id="itemSandcastle" class="beach-item" title="¡Toca para construir el castillo!">🏰</span>
+                    <span id="itemUmbrella" class="beach-item" title="¡Toca para ajustar la sombrilla!">🏖️</span>
+                    <span id="itemPalm" class="beach-item" title="¡Toca para sacudir la palmera!">🌴</span>
+                    <span id="itemSiren" class="beach-item" title="¡Alerta acústica de tsunami!">🚨</span>
+                  </div>
+                </div>
+
+                <!-- ZONA 1: Mar Profundo y Origen del Tsunami (Extremo Derecho) -->
+                <div class="panoramic-zone zone-deep-sea" id="zoneSea">
+                  <!-- Regla Métrica de Altura de la Ola -->
+                  <div class="wave-height-ruler" id="waveHeightRuler">
+                    <div class="ruler-tick" data-level="30"><span>30m</span> ━━</div>
+                    <div class="ruler-tick" data-level="20"><span>20m</span> ━━</div>
+                    <div class="ruler-tick" data-level="15"><span>15m</span> ━━</div>
+                    <div class="ruler-tick" data-level="10"><span>10m</span> ━━</div>
+                    <div class="ruler-tick" data-level="5"><span>5m</span> ━━</div>
+                    <div class="ruler-tick tick-active" data-level="1"><span>1m</span> ━━</div>
+                  </div>
+
+                  <!-- Barco en el mar -->
+                  <div id="tsunamiBoat" class="boat-element" title="Toca el barquito">
+                    ⛵
+                  </div>
+
+                  <!-- Boya oceanográfica de alerta temprana -->
+                  <div class="ocean-buoy-element" title="Boya oceanográfica DART de alerta temprana">
+                    🟡
+                  </div>
+
+                  <!-- Lecho marino expuesto al retirarse el agua -->
+                  <div id="exposedSeafloor" class="exposed-seafloor">
+                    🐟🦀🐚
+                  </div>
+
+                  <!-- Base de agua profunda -->
+                  <div class="deep-sea-water-base" id="deepSeaWater"></div>
+
+                  <!-- La Gran Ola Estirable en el extremo derecho -->
+                  <div id="waveStretcher" class="wave-stretcher-container">
+                    <img src="../media/wave-cute.svg" alt="Gran ola de tsunami" class="wave-stretcher-svg">
+                  </div>
+                </div>
+
+                <!-- Capa de Inundación que se extiende desde la derecha hacia la izquierda -->
+                <div id="tsunamiFloodSurge" class="tsunami-flood-surge">
+                  <div class="surge-crest-foam">🌊🫧</div>
+                  <div id="waterSplash" class="water-splash-vfx">💦🌊💦</div>
+                </div>
+
+                <!-- Línea Marcadora de Límite de Inundación (Cota Máxima) -->
+                <div id="floodLimitMarker" class="flood-limit-marker">
+                  <div class="limit-marker-flag" id="limitMarkerText">
+                    <i class="fa-solid fa-flag"></i> <span>Límite de Inundación</span>
+                  </div>
+                </div>
+
               </div>
             </div>
 
             <!-- Panel de Control con BOTÓN EXCLUSIVO DE SIMULACIÓN - Debajo de la escena sin superponerse -->
             <div class="tsunami-control-panel">
               <span id="consequenceNotice" style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: #15803D;">
-                ✅ Costa Segura: Mar en calma. Toca los objetos o presiona ¡Simular Impacto!
+                ✅ Costa Segura: Mar en calma. Mueve la altura de la ola y presiona ¡Simular Impacto!
               </span>
               <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
                 <button id="btnResetBeach" type="button" class="btn-preset" style="padding: 4px 10px; font-size: 0.85rem;">
@@ -326,26 +409,74 @@
       // 1. Inicializar validación exclusiva del botón Desbloquear
       initRoomValidation('sala2');
 
-      // 2. Control del Slider y Presets en Metros
+      // 2. Elementos del Simulador Panorámico
       const rangeInput = document.getElementById('tsunamiRangeInput');
       const rangeLabel = document.getElementById('tsunamiRangeLabel');
       const metersBadge = document.getElementById('tsunamiMetersBadge');
-      const waterEl = document.getElementById('tsunamiWater');
+      const panoramicTrack = document.getElementById('panoramicTrack');
+      const cameraTabs = document.querySelectorAll('.btn-camera-tab');
+      const presetBtns = document.querySelectorAll('.btn-preset');
+      const rulerTicks = document.querySelectorAll('.ruler-tick');
+
+      // Elementos de Zonas
+      const waveStretcher = document.getElementById('waveStretcher');
+      const deepSeaWater = document.getElementById('deepSeaWater');
+      const exposedSeafloor = document.getElementById('exposedSeafloor');
       const boatEl = document.getElementById('tsunamiBoat');
+      const tsunamiFloodSurge = document.getElementById('tsunamiFloodSurge');
+      const waterSplash = document.getElementById('waterSplash');
+      const floodLimitMarker = document.getElementById('floodLimitMarker');
+      const limitMarkerText = document.getElementById('limitMarkerText');
+
+      // Elementos interactivos de la Playa
       const sandcastleEl = document.getElementById('itemSandcastle');
       const umbrellaEl = document.getElementById('itemUmbrella');
       const palmEl = document.getElementById('itemPalm');
       const sirenEl = document.getElementById('itemSiren');
-      const fishEl = document.getElementById('exposedSeafloorFish');
-      const safeHill = document.getElementById('safeHill');
-      const waveBox = document.getElementById('waveIllustrationBox');
-      const splashEl = document.getElementById('splashDroplet');
+
+      // Elementos interactivos del Pueblo y la Colina
+      const townBus = document.getElementById('townBus');
+      const townCar = document.getElementById('townCar');
+
+      // Controles y Notificaciones
       const noticeEl = document.getElementById('consequenceNotice');
-      const presetBtns = document.querySelectorAll('.btn-preset');
       const btnResetBeach = document.getElementById('btnResetBeach');
+      const btnSimTsunami = document.getElementById('btnSimulateTsunamiImpact');
+      const btnSimText = document.getElementById('btnSimTsunamiText');
 
       let currentMeters = 1;
+      let isSimulating = false;
+      let tsunamiTimeouts = [];
 
+      function clearTsunamiTimers() {
+        tsunamiTimeouts.forEach(t => clearTimeout(t));
+        tsunamiTimeouts = [];
+      }
+
+      // Control de Cámara Panorámica
+      function setCameraZone(zone) {
+        cameraTabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-zone') === zone));
+        if (zone === 'sea') {
+          panoramicTrack.style.transform = 'translateX(-61.5%)';
+        } else if (zone === 'beach') {
+          panoramicTrack.style.transform = 'translateX(-45%)';
+        } else if (zone === 'town') {
+          panoramicTrack.style.transform = 'translateX(-22%)';
+        } else if (zone === 'hill') {
+          panoramicTrack.style.transform = 'translateX(0%)';
+        }
+      }
+
+      cameraTabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const zone = this.getAttribute('data-zone');
+          setCameraZone(zone);
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      });
+
+      // Actualización de Altura de Ola en Tiempo Real (Estiramiento en Mar Profundo)
       function updateMetersDisplay(m) {
         currentMeters = m;
         rangeInput.value = m;
@@ -355,41 +486,48 @@
           btn.classList.toggle('active', parseInt(btn.getAttribute('data-meters')) === m);
         });
 
-        // Altura del agua marina en reposo dentro del viewport de la escena
-        const minH = 55;
-        const maxH = 150;
-        const h = minH + ((m - 1) / 29) * (maxH - minH);
-        waterEl.style.height = h + 'px';
-        boatEl.style.bottom = (h + 8) + 'px';
+        // Actualizar regla métrica visual
+        rulerTicks.forEach(tick => {
+          const lvl = parseInt(tick.getAttribute('data-level'));
+          tick.classList.toggle('tick-active', lvl <= m);
+        });
 
+        // Estiramiento vertical físico de la ola en el mar profundo a la derecha
+        // 1m: 46px | 5m: 85px | 15m: 160px | 30m: 235px
+        const minH = 46;
+        const maxH = 235;
+        const h = minH + ((m - 1) / 29) * (maxH - minH);
+        waveStretcher.style.height = h + 'px';
+
+        // Feedback pedagógico de severidad
         if (m <= 3) {
           metersBadge.style.background = '#DCFCE7';
           metersBadge.style.color = '#166534';
           metersBadge.style.borderColor = '#86EFAC';
           metersBadge.textContent = `Costa Segura (${m}m)`;
           noticeEl.style.color = '#15803D';
-          noticeEl.textContent = '✅ Costa Segura: Mar en calma sin peligro. Toca la arena para jugar.';
+          noticeEl.innerHTML = `✅ Costa Segura (${m}m): Mar en calma sin peligro. Mueve el control o pulsa ¡Simular Impacto!`;
         } else if (m <= 8) {
           metersBadge.style.background = '#FEF9C3';
           metersBadge.style.color = '#854D0E';
           metersBadge.style.borderColor = '#FDE047';
-          metersBadge.textContent = `Marea Fuerte (${m}m)`;
+          metersBadge.textContent = `Oleaje Fuerte (${m}m)`;
           noticeEl.style.color = '#B45309';
-          noticeEl.textContent = '⚠️ ¡Marea alta! El agua se acerca al castillo de arena.';
+          noticeEl.innerHTML = `⚠️ Oleaje Fuerte (${m}m): La ola rompe en la orilla e inunda la arena.`;
         } else if (m <= 18) {
           metersBadge.style.background = '#FEE2E2';
           metersBadge.style.color = '#991B1B';
           metersBadge.style.borderColor = '#F87171';
-          metersBadge.textContent = `¡Tsunami Destructivo! (${m}m)`;
+          metersBadge.textContent = `¡Alerta de Tsunami! (${m}m)`;
           noticeEl.style.color = '#B91C1C';
-          noticeEl.textContent = '🌊 ¡ALERTA DE TSUNAMI! Evacuar hacia la colina alta a la izquierda.';
+          noticeEl.innerHTML = `🌊 ¡ALERTA DE TSUNAMI (${m}m)! Inundación en el pueblo. ¡Evacuar a la Colina Alta!`;
         } else {
           metersBadge.style.background = '#F3E8FF';
           metersBadge.style.color = '#6B21A8';
           metersBadge.style.borderColor = '#C084FC';
           metersBadge.textContent = `¡Mega Tsunami! (${m}m)`;
           noticeEl.style.color = '#7E22CE';
-          noticeEl.textContent = '🌊 ¡IMPACTO MASIVO! Ola colosal avanza hacia la costa.';
+          noticeEl.innerHTML = `🚨 ¡MEGA TSUNAMI (${m}m)! Masa colosal de agua. Solo la Colina Alta (+30m) es zona segura.`;
         }
       }
 
@@ -402,96 +540,87 @@
         });
       });
 
-      // 3. INTERACTIVIDAD DE ELEMENTOS DE LA PLAYA (Para que los niños exploren y jueguen)
+      // 3. Interacciones Táctiles Educativas en la Playa y el Pueblo
       sandcastleEl.addEventListener('click', (e) => {
         e.stopPropagation();
-        sandcastleEl.style.transform = 'scale(1.3) rotate(-8deg)';
-        sandcastleEl.style.opacity = '1';
-        noticeEl.innerHTML = '🏰 <strong>¡Construiste el castillo!</strong> Las torres de arena quedaron firmes.';
+        sandcastleEl.style.transform = 'scale(1.25) rotate(-6deg)';
+        noticeEl.innerHTML = '🏰 <strong>¡Castillo de arena construido!</strong> Torres firmes en la orilla.';
         if (window.escapeSound) window.escapeSound.playPop();
-        setTimeout(() => { sandcastleEl.style.transform = 'scale(1)'; }, 300);
+        setTimeout(() => { sandcastleEl.style.transform = 'none'; }, 300);
       });
 
       umbrellaEl.addEventListener('click', (e) => {
         e.stopPropagation();
-        umbrellaEl.style.transform = 'scale(1.3) rotate(15deg)';
-        umbrellaEl.style.opacity = '1';
-        umbrellaEl.textContent = umbrellaEl.textContent === '🏖️' ? '⛱️' : '🏖️';
-        noticeEl.innerHTML = '⛱️ <strong>¡Sombrilla ajustada!</strong> Protegiendo del sol playero.';
+        umbrellaEl.style.transform = 'scale(1.2) rotate(15deg)';
+        noticeEl.innerHTML = '🏖️ <strong>¡Sombrilla ajustada!</strong> Brindando sombra en la costa.';
         if (window.escapeSound) window.escapeSound.playPop();
-        setTimeout(() => { umbrellaEl.style.transform = 'scale(1)'; }, 300);
+        setTimeout(() => { umbrellaEl.style.transform = 'none'; }, 300);
       });
 
       palmEl.addEventListener('click', (e) => {
         e.stopPropagation();
-        palmEl.style.transform = 'rotate(-15deg) scale(1.2)';
-        noticeEl.innerHTML = '🌴 <strong>¡Palmera sacudida!</strong> Cayeron cocos en la arena.';
+        palmEl.style.transform = 'rotate(-16deg) scale(1.15)';
+        noticeEl.innerHTML = '🌴 <strong>¡Palmera playera!</strong> Resistente al viento costero.';
         if (window.escapeSound) window.escapeSound.playPop();
-        setTimeout(() => { palmEl.style.transform = 'rotate(0deg) scale(1)'; }, 400);
+        setTimeout(() => { palmEl.style.transform = 'none'; }, 350);
       });
 
       sirenEl.addEventListener('click', (e) => {
         e.stopPropagation();
         if (window.escapeSound) window.escapeSound.playPop();
-        sirenEl.textContent = '🚨';
-        noticeEl.innerHTML = '🚨 <strong>¡Baliza de Alerta Costera!</strong> La señal luminosa advierte a los bañistas.';
-        setTimeout(() => { sirenEl.textContent = '🏮'; }, 1500);
+        noticeEl.innerHTML = '🚨 <strong>¡Sistema de Alerta Sísmica y Tsunami!</strong> Señal sonora y visual activa.';
       });
 
       boatEl.addEventListener('click', (e) => {
         e.stopPropagation();
-        boatEl.style.transform = 'rotate(-20deg) translateY(-15px) scale(1.15)';
+        boatEl.style.transform = 'rotate(-15deg) translateY(-10px)';
+        noticeEl.innerHTML = '⛵ <strong>¡Barco en altamar!</strong> En aguas profundas las olas se sienten menos.';
         if (window.escapeSound) window.escapeSound.playPop();
         setTimeout(() => { boatEl.style.transform = 'none'; }, 400);
       });
 
-      // 4. LÓGICA DEL SIMULADOR: OLA QUE AVANZA HACIA LA IZQUIERDA Y ARRASTRA LA PLAYA
-      const btnSimTsunami = document.getElementById('btnSimulateTsunamiImpact');
-      const btnSimText = document.getElementById('btnSimTsunamiText');
-      let isSimulating = false;
-      let tsunamiTimeouts = [];
-
-      function clearTsunamiTimers() {
-        tsunamiTimeouts.forEach(t => clearTimeout(t));
-        tsunamiTimeouts = [];
-      }
-
+      // 4. RESTABLECER ESCENARIO
       function resetBeachState() {
         clearTsunamiTimers();
         isSimulating = false;
         btnSimText.textContent = '¡Simular Impacto!';
         btnSimTsunami.style.background = '#0284C7';
-        
-        // Regresar la ola a la derecha fuera de pantalla
-        waveBox.style.right = '-250px';
-        waveBox.style.transform = 'scaleX(-1) scale(1)';
 
-        // Regresar agua
-        waterEl.style.transform = 'none';
-        waterEl.style.height = '55px';
-        
-        // Elementos restaurados
-        splashEl.style.opacity = '0';
-        splashEl.style.transform = 'scale(0.5)';
-        fishEl.style.opacity = '0';
+        // Regresar la cámara a la Playa y Mar
+        setCameraZone('beach');
 
-        sandcastleEl.style.opacity = '1';
-        sandcastleEl.style.transform = 'none';
+        // Restaurar ola a la derecha
+        waveStretcher.style.transition = 'height 0.4s ease, transform 0.4s ease, opacity 0.4s ease';
+        waveStretcher.style.transform = 'none';
+        waveStretcher.style.opacity = '1';
 
-        umbrellaEl.style.opacity = '1';
-        umbrellaEl.style.transform = 'none';
+        // Restaurar agua profunda y lecho marino
+        deepSeaWater.style.transform = 'none';
+        exposedSeafloor.style.opacity = '0';
 
-        palmEl.style.transform = 'none';
+        // Restaurar barco
         boatEl.style.transform = 'none';
-        boatEl.style.left = '64%';
-        boatEl.style.bottom = '63px';
+        boatEl.style.opacity = '1';
 
-        sirenEl.textContent = '🏮';
+        // Restaurar capa de inundación
+        tsunamiFloodSurge.style.transition = 'none';
+        tsunamiFloodSurge.style.width = '0%';
+        waterSplash.style.opacity = '0';
+        waterSplash.style.transform = 'scale(0.5)';
 
-        safeHill.style.transform = 'none';
-        safeHill.style.background = '#84CC16';
+        // Ocultar marcador de límite
+        floodLimitMarker.style.opacity = '0';
 
-        updateMetersDisplay(1);
+        // Restaurar objetos de la playa y pueblo
+        sandcastleEl.style.transform = 'none';
+        sandcastleEl.style.opacity = '1';
+        umbrellaEl.style.transform = 'none';
+        umbrellaEl.style.opacity = '1';
+        palmEl.style.transform = 'none';
+        if (townBus) townBus.style.transform = 'none';
+        if (townCar) townCar.style.transform = 'none';
+
+        updateMetersDisplay(currentMeters);
       }
 
       btnResetBeach.addEventListener('click', (e) => {
@@ -500,6 +629,7 @@
         if (window.escapeSound) window.escapeSound.playPop();
       });
 
+      // 5. MOTOR DE FÍSICAS DE TSUNAMI Y DESPLAZAMIENTO TIERRA ADENTRO
       btnSimTsunami.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -514,71 +644,135 @@
         btnSimText.textContent = 'Tsunami en curso...';
         btnSimTsunami.style.background = '#991B1B';
 
-        const waveHeightMeters = Math.max(currentMeters, 15);
-        updateMetersDisplay(waveHeightMeters);
+        const waveM = currentMeters;
+        clearTsunamiTimers();
 
-        // Sonido de agua marina realista al iniciar la simulación (NADA DE SIRENAS O TERREMOTOS)
+        // Asegurar que la cámara inicie viendo el Mar Profundo y la Playa
+        setCameraZone('beach');
+
+        // Sonido de oleaje marino
         if (window.escapeSound) window.escapeSound.playWave();
 
-        // FASE 1: Retirada súbita del mar hacia la derecha (Señal natural de alerta)
-        noticeEl.innerHTML = '🌊 <strong>Fase 1 (0 a 3.5s): Retirada del Océano.</strong> El mar retrocede velozmente mar adentro dejando peces a la vista. ¡Señal natural de alerta!';
-        waterEl.style.transform = 'translateX(130px) scaleY(0.6)';
-        boatEl.style.bottom = '28px';
-        fishEl.style.opacity = '1';
-        sirenEl.textContent = '🚨';
+        // -------------------------------------------------------------------
+        // FASE 1: (0s a 3.0s) - RETIRADA DEL MAR (DRAWDOWM DE ALERTA NATURAL)
+        // -------------------------------------------------------------------
+        noticeEl.innerHTML = '🌊 <strong>Fase 1 (0 a 3.0s): ¡El Océano se Retira!</strong> El mar retrocede velozmente mar adentro dejando peces y caracolas expuestos. ¡Señal natural de alerta!';
+        deepSeaWater.style.transition = 'transform 2.5s ease-out';
+        deepSeaWater.style.transform = 'translateX(65px) scaleY(0.7)';
+        exposedSeafloor.style.opacity = '1';
+        boatEl.style.transition = 'transform 2.5s ease-out';
+        boatEl.style.transform = 'translateY(14px) rotate(8deg)';
 
-        // FASE 2: Avance veloz de la gran ola HACIA LA IZQUIERDA (Sonido de ola oceánica)
-        tsunamiTimeouts.push(setTimeout(() => {
-          if (!isSimulating) return;
-          if (window.escapeSound) window.escapeSound.playWave();
-          
-          noticeEl.innerHTML = '🌊 <strong>Fase 2 (3.5s a 7.5s): ¡La Gran Ola Avanza hacia la Costa!</strong> Una colosal masa de agua se desplaza velozmente hacia la playa...';
-          const scaleVal = 1 + (waveHeightMeters / 25);
-          waveBox.style.transform = `scaleX(-1) scale(${scaleVal})`;
-          // Avanza hacia el centro
-          waveBox.style.right = '40%';
-        }, 3500));
-
-        // FASE 3: ¡IMPACTO TOTAL EN LA PLAYITA A LA IZQUIERDA Y ARRASTRE!
+        // -------------------------------------------------------------------
+        // FASE 2: (3.0s a 6.2s) - DESPLAZAMIENTO DE LA GRAN OLA HACIA LA PLAYA
+        // -------------------------------------------------------------------
         tsunamiTimeouts.push(setTimeout(() => {
           if (!isSimulating) return;
           if (window.escapeSound) window.escapeSound.playWave();
 
-          noticeEl.innerHTML = '💥 <strong>Fase 3 (7.5s a 11.5s): ¡IMPACTO EN LA PLAYA!</strong> La ola cubre la orilla de arena y arrastra los objetos.';
-          
-          // La ola llega a la playa izquierda
-          waveBox.style.right = '75%';
-          
-          // El agua inunda la costa
-          waterEl.style.transform = 'translateX(0)';
-          waterEl.style.height = '185px';
+          noticeEl.innerHTML = `🌊 <strong>Fase 2 (3.0s a 6.2s): ¡La Ola de ${waveM}m Avanza a Alta Velocidad!</strong> La masa de agua se desplaza desde el mar profundo en dirección a la orilla...`;
 
-          // Efectos en la playa
-          sandcastleEl.style.transform = 'scale(0.2) rotate(45deg)';
-          sandcastleEl.style.opacity = '0';
-          
-          umbrellaEl.style.transform = 'translate(-60px, -30px) rotate(-110deg)';
-          umbrellaEl.style.opacity = '0.3';
+          // La ola se desplaza hacia la izquierda en dirección a la orilla
+          waveStretcher.style.transition = 'transform 3.2s cubic-bezier(0.25, 0.8, 0.35, 1)';
+          waveStretcher.style.transform = 'translateX(-360px) scale(0.92)';
 
-          palmEl.style.transform = 'rotate(-38deg) translateY(14px)';
-          boatEl.style.transform = 'translate(-120px, -45px) rotate(35deg)';
+          // El barco es empujado por el oleaje hacia la costa
+          boatEl.style.transition = 'transform 3.2s cubic-bezier(0.25, 0.8, 0.35, 1)';
+          boatEl.style.transform = 'translate(-220px, -28px) rotate(-16deg)';
+        }, 3000));
+
+        // -------------------------------------------------------------------
+        // FASE 3: (6.2s a 9.0s) - IMPACTO EN LA PLAYA Y ROMPIENTE
+        // -------------------------------------------------------------------
+        tsunamiTimeouts.push(setTimeout(() => {
+          if (!isSimulating) return;
+          if (window.escapeSound) window.escapeSound.playWave();
+
+          noticeEl.innerHTML = '💥 <strong>Fase 3 (6.2s a 9.0s): ¡Impacto en la Playa!</strong> La ola rompe en la arena y se transforma en un torrente de agua que barre la orilla.';
+
+          // Desvanecer la cresta y expandir el torrente continuo
+          waveStretcher.style.opacity = '0.35';
 
           // Salpicaduras violentas
-          splashEl.style.opacity = '1';
-          splashEl.style.transform = 'scale(2) translateY(-30px)';
-        }, 7500));
+          waterSplash.style.opacity = '1';
+          waterSplash.style.transform = 'scale(2.2) translateY(-20px)';
 
-        // FASE 4: Evacuación Segura en la Colina Alta
+          // Efectos físicos en los objetos de la playa
+          sandcastleEl.style.transform = 'scale(0.15) rotate(45deg)';
+          sandcastleEl.style.opacity = '0';
+
+          umbrellaEl.style.transform = 'translate(-45px, -20px) rotate(-85deg)';
+          umbrellaEl.style.opacity = '0.35';
+
+          palmEl.style.transform = 'rotate(-32deg) translateY(8px)';
+
+          // Iniciar avance del torrente de agua
+          tsunamiFloodSurge.style.transition = 'width 2.8s cubic-bezier(0.2, 0.8, 0.3, 1)';
+
+          // Definir alcance del agua según la altura:
+          // 1m: 26% (solo orilla) | 5m: 36% (malecón) | 15m: 54% (pueblo) | 30m: 74% (base colina)
+          let targetSurgeWidth = 26;
+          if (waveM <= 3) targetSurgeWidth = 26;
+          else if (waveM <= 8) targetSurgeWidth = 37;
+          else if (waveM <= 18) targetSurgeWidth = 54;
+          else targetSurgeWidth = 74;
+
+          tsunamiFloodSurge.style.width = targetSurgeWidth + '%';
+        }, 6200));
+
+        // -------------------------------------------------------------------
+        // FASE 4: (9.0s a 13.5s) - PANEO DE CÁMARA TIERRA ADENTRO Y DETENCIÓN
+        // -------------------------------------------------------------------
         tsunamiTimeouts.push(setTimeout(() => {
           if (!isSimulating) return;
-          splashEl.style.opacity = '0';
-          safeHill.style.transform = 'scale(1.15)';
-          safeHill.style.background = '#FDE047';
-          noticeEl.innerHTML = '🛡️ <strong>Fase 4: ¡Evacuación Exitosa!</strong> Toda la población se refugió a salvo en la colina alta izquierda.';
+
+          // Desplazar la cámara suavemente siguiendo el torrente hacia el interior
+          if (waveM <= 3) {
+            setCameraZone('beach'); // Se queda en la playa
+          } else if (waveM <= 8) {
+            panoramicTrack.style.transform = 'translateX(-36%)'; // Muestra playa y malecón
+          } else if (waveM <= 18) {
+            setCameraZone('town'); // Paneo al pueblo y escuela
+            if (townCar) townCar.style.transform = 'translate(-25px, -8px) rotate(14deg)';
+          } else {
+            setCameraZone('hill'); // Paneo total hasta la colina alta
+            if (townBus) townBus.style.transform = 'translate(-35px, -12px) rotate(-10deg)';
+            if (townCar) townCar.style.transform = 'translate(-40px, -15px) rotate(20deg)';
+          }
+
+          // Posicionar y mostrar la línea de cota máxima
+          let targetSurgeWidth = 26;
+          let markerDistanceText = '0 m (En la orilla)';
+          let consequenceText = 'El mar en calma no causó daños. La playa quedó intacta.';
+
+          if (waveM <= 3) {
+            targetSurgeWidth = 26;
+            markerDistanceText = '0 m (Orilla de arena)';
+            consequenceText = '✅ <strong>Criterio Seguro:</strong> La ola de 1m solo mojó la arena. Toda la costa está a salvo.';
+          } else if (waveM <= 8) {
+            targetSurgeWidth = 37;
+            markerDistanceText = '35 m (Malecón costero)';
+            consequenceText = '⚠️ <strong>Oleaje Fuerte:</strong> El agua cubrió la playa entera pero se detuvo en el muro del malecón. El pueblo quedó a salvo.';
+          } else if (waveM <= 18) {
+            targetSurgeWidth = 54;
+            markerDistanceText = '140 m (Pueblo y Escuela)';
+            consequenceText = '🌊 <strong>¡Tsunami en el Pueblo!</strong> El agua inundó las calles y el patio de la escuela, pero toda la comunidad que subió a la Colina Alta se salvó.';
+          } else {
+            targetSurgeWidth = 74;
+            markerDistanceText = '270 m (Base de la Colina)';
+            consequenceText = '🛡️ <strong>¡Evacuación Exitosa!</strong> El Mega Tsunami de 30m cubrió todo el pueblo, pero se detuvo en la base de la colina. ¡La Colina Alta (+30m) salvó todas las vidas!';
+          }
+
+          floodLimitMarker.style.right = targetSurgeWidth + '%';
+          floodLimitMarker.style.opacity = '1';
+          limitMarkerText.innerHTML = `<i class="fa-solid fa-flag"></i> <span>Cota Máxima: ${markerDistanceText}</span>`;
+
+          noticeEl.innerHTML = consequenceText;
           btnSimText.textContent = '¡Repetir Simulación!';
           isSimulating = false;
+
           if (window.escapeSound) window.escapeSound.playSuccess();
-        }, 11500));
+        }, 9000));
       });
     });
   </script>

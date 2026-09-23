@@ -457,14 +457,18 @@ html, body {
 }
 
 /* Solecito sonriente con gafas de sol */
+/* Solecito sonriente con gafas de sol (Optimizado GPU) */
 .decor-sun {
   position: absolute;
   top: 20px;
   right: 13%;
-  width: min(72px, 7vw);
+  width: min(74px, 7.2vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(245, 158, 11, 0.32));
+  will-change: transform;
+  transform: translateZ(0);
   animation: floatingSun 5.5s ease-in-out infinite;
 }
 
@@ -473,10 +477,13 @@ html, body {
   position: absolute;
   bottom: 22px;
   right: 12%;
-  width: min(68px, 6.8vw);
+  width: min(70px, 7vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.28));
+  will-change: transform;
+  transform: translateZ(0);
   animation: floatingEarth 6.5s ease-in-out infinite;
 }
 
@@ -485,10 +492,13 @@ html, body {
   position: absolute;
   top: 26px;
   left: 14%;
-  width: min(72px, 7vw);
+  width: min(74px, 7.2vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
+  filter: drop-shadow(0 6px 12px rgba(100, 116, 139, 0.2));
+  will-change: transform;
+  transform: translateZ(0);
   animation: floatingCloud 7s ease-in-out infinite;
 }
 
@@ -497,10 +507,13 @@ html, body {
   position: absolute;
   top: 66%;
   left: 3.5%;
-  width: min(56px, 5.8vw);
+  width: min(58px, 6vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
+  filter: drop-shadow(0 6px 12px rgba(148, 163, 184, 0.22));
+  will-change: transform;
+  transform: translateZ(0);
   animation: stickerSpinSlow 4.5s ease-in-out infinite;
 }
 
@@ -509,10 +522,13 @@ html, body {
   position: absolute;
   bottom: 22px;
   left: 16%;
-  width: min(64px, 6.5vw);
+  width: min(66px, 6.6vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(239, 68, 68, 0.25));
+  will-change: transform;
+  transform: translateZ(0);
   animation: stickerBounce 5s ease-in-out infinite;
 }
 
@@ -521,20 +537,25 @@ html, body {
   position: absolute;
   top: 48%;
   right: 2.5%;
-  width: min(64px, 6.5vw);
+  width: min(66px, 6.6vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(6, 182, 212, 0.25));
+  will-change: transform;
+  transform: translateZ(0);
   animation: stickerFloat 6s ease-in-out infinite;
 }
 
-/* Destellos y estrellitas brillantes de fondo */
+/* Destellos y estrellitas brillantes de fondo (Cero parpadeo) */
 .decor-sparkle {
   position: absolute;
-  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
   z-index: 2;
   pointer-events: none;
   user-select: none;
+  will-change: opacity, transform;
+  transform: translateZ(0);
   animation: sparkleTwinkle 3.2s ease-in-out infinite;
 }
 
@@ -563,79 +584,130 @@ html, body {
 }
 
 /* ==========================================================================
-   BARRA SUPERIOR HUD
+   BARRA SUPERIOR HUD (Menú Visible, Cómodo y Accesible)
    ========================================================================== */
 .top-hud {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 2px solid var(--paper-border);
+  background: #FFFFFF;
+  border: 2px solid #E2E8F0;
   border-radius: var(--radius-pill);
-  padding: 0.3rem 1.1rem;
-  box-shadow: var(--paper-shadow);
-  height: clamp(48px, 6.2vh, 56px);
+  padding: 0.3rem 0.9rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+  height: clamp(50px, 6.2vh, 58px);
   flex-shrink: 0;
   z-index: 25;
+  gap: 10px;
+  box-sizing: border-box;
 }
 
 .mission-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-script);
-  font-weight: 700;
-  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
-  color: var(--school-green-title);
+  gap: 8px;
+  font-family: var(--font-hand);
+  font-weight: 800;
+  font-size: clamp(1.15rem, 1.45vw, 1.35rem);
+  color: #1E293B;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
 }
 
 .mission-progress {
   display: flex;
   align-items: center;
-  gap: clamp(0.25rem, 0.7vw, 0.6rem);
+  gap: clamp(4px, 0.6vw, 8px);
+  flex-wrap: nowrap;
 }
 
+/* Badges del Menú de Misión Más Claros y Grandes */
 .step-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.3rem clamp(0.45rem, 0.8vw, 0.85rem);
+  gap: 6px;
+  padding: 5px clamp(9px, 1vw, 14px);
   border-radius: var(--radius-pill);
   font-family: var(--font-hand);
-  font-size: clamp(0.82rem, 1vw, 0.96rem);
-  color: var(--text-muted);
-  background: #F1EFE9;
-  border: 1.5px solid transparent;
-  transition: all 0.25s ease;
+  font-size: clamp(0.95rem, 1.08vw, 1.1rem);
+  font-weight: 700;
+  color: #475569;
+  background: #F1F5F9;
+  border: 1.5px solid #CBD5E1;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.3, 1);
   text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.step-badge:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
 }
 
 .step-badge.active {
-  background: #FFFBEB;
-  color: #B45309;
-  border-color: #FBBF24;
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+  border-color: #F59E0B !important;
+  box-shadow: 0 3px 10px rgba(245, 158, 11, 0.28);
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.18);
-  font-weight: bold;
 }
 
 .step-badge.completed {
-  background: var(--school-green-light);
-  color: var(--school-green-title);
-  border-color: #A7F3D0;
+  background: #DCFCE7 !important;
+  color: #15803D !important;
+  border-color: #86EFAC !important;
 }
 
 .hud-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
+/* Botón de Accesibilidad para Tamaño de Texto */
+.accessibility-toggle-btn {
+  background: #FFFFFF;
+  border: 2px solid #CBD5E1;
+  color: #1E40AF;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-hand);
+  font-weight: 800;
+  font-size: 1.02rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.accessibility-toggle-btn:hover {
+  background: #EFF6FF;
+  border-color: #93C5FD;
+  color: #1D4ED8;
+  transform: translateY(-1px);
+}
+
+.text-size-tag {
+  background: #DBEAFE;
+  color: #1E40AF;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px solid #BFDBFE;
+}
+
+/* Botón de Audio */
 .sound-toggle-btn {
   background: #FFFFFF;
-  border: 2px solid var(--paper-border);
+  border: 2px solid #CBD5E1;
   color: var(--school-green-title);
   width: 38px;
   height: 38px;
@@ -646,12 +718,77 @@ html, body {
   font-size: 1.05rem;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .sound-toggle-btn:hover {
-  transform: scale(1.1);
-  background: var(--school-green-light);
+  transform: scale(1.08);
+  background: #F0FDF4;
+  border-color: #86EFAC;
+}
+
+/* Toast Notificación de Accesibilidad */
+.accessibility-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: rgba(15, 23, 42, 0.95);
+  color: #FFFFFF;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border: 2px solid #FBBF24;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100000;
+  white-space: nowrap;
+}
+
+.accessibility-toast.toast-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   SISTEMA DE ESCALA ACCESIBLE (Normal, Grande, Extra Grande)
+   ========================================================================== */
+html[data-text-scale="large"] {
+  --scale-font: 1.14;
+}
+
+html[data-text-scale="xlarge"] {
+  --scale-font: 1.28;
+}
+
+html[data-text-scale="large"] .question-title,
+html[data-text-scale="xlarge"] .question-title {
+  font-size: calc(1.3rem * var(--scale-font, 1)) !important;
+  line-height: 1.35 !important;
+}
+
+html[data-text-scale="large"] .option-card,
+html[data-text-scale="xlarge"] .option-card {
+  font-size: calc(1rem * var(--scale-font, 1)) !important;
+}
+
+html[data-text-scale="large"] .banner-body-text,
+html[data-text-scale="xlarge"] .banner-body-text {
+  font-size: calc(1.35rem * var(--scale-font, 1)) !important;
+}
+
+html[data-text-scale="large"] .step-badge,
+html[data-text-scale="xlarge"] .step-badge {
+  font-size: calc(1.05rem * var(--scale-font, 1)) !important;
+}
+
+html[data-text-scale="large"] .hero-subtitle-genially,
+html[data-text-scale="xlarge"] .hero-subtitle-genially {
+  font-size: calc(1.2rem * var(--scale-font, 1)) !important;
 }
 
 /* ==========================================================================
@@ -1156,22 +1293,22 @@ html, body {
 .feedback-msg.success-text { color: var(--stamp-green); }
 
 /* ==========================================================================
-   SIMULADOR DE TSUNAMI CON SLIDER DE METROS (SALA 2)
+   SIMULADOR DE TSUNAMI PANORÁMICO CON FÍSICAS (SALA 2)
    ========================================================================== */
 .tsunami-stage {
   width: 100%;
   height: 100%;
-  min-height: 380px;
+  min-height: 440px;
   position: relative;
-  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 40%, #FEF9C3 100%);
+  background: linear-gradient(180deg, #E0F2FE 0%, #F8FAFC 100%);
   border-radius: var(--radius-paper);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(0.45rem, 1vh, 0.75rem);
+  padding: clamp(0.4rem, 1vh, 0.7rem);
   box-sizing: border-box;
-  gap: 8px;
+  gap: 7px;
 }
 
 .tsunami-top-controls {
@@ -1179,113 +1316,452 @@ html, body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   flex-shrink: 0;
 }
 
 .tsunami-slider-bar {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   border: 2px solid var(--paper-border);
   border-radius: var(--radius-pill);
-  padding: 0.35rem 0.9rem;
+  padding: 0.35rem 0.95rem;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
   z-index: 20;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .tsunami-slider-bar input[type=range] {
   flex: 1;
-  accent-color: var(--pencil-blue);
+  accent-color: #0284C7;
   cursor: pointer;
+  height: 6px;
 }
 
-/* Escenario Central Visual de la Costa - Elevado y con Altura Amplia */
+/* Barra de Navegación de Cámara (Permite explorar las 4 Zonas del Paisaje) */
+.camera-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  background: #F1F5F9;
+  border-radius: var(--radius-pill);
+  padding: 3px 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.camera-nav-label {
+  font-family: var(--font-hand);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #475569;
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.camera-tab-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-camera-tab {
+  border: none;
+  background: transparent;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-camera-tab:hover {
+  background: rgba(255, 255, 255, 0.8);
+  color: #0F172A;
+}
+
+.btn-camera-tab.active {
+  background: #FFFFFF;
+  color: #0284C7;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.2);
+}
+
+/* ==========================================================================
+   VIEWPORT PANORÁMICO CONTINUO (CÁMARA CON DESPLAZAMIENTO TIERRA ADENTRO)
+   ========================================================================== */
 .tsunami-scene-viewport {
   flex: 1;
   width: 100%;
-  min-height: 240px;
+  min-height: 250px;
   position: relative;
   overflow: hidden;
   border-radius: 14px;
-  background: linear-gradient(180deg, #7DD3FC 0%, #BAE6FD 38%, #E0F2FE 68%, #FDE047 100%);
-  border: 1.5px solid rgba(2, 132, 199, 0.25);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: linear-gradient(180deg, #38BDF8 0%, #BAE6FD 45%, #E0F2FE 80%, #FEF08A 100%);
+  border: 2px solid rgba(2, 132, 199, 0.3);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.coast-beach-layer {
+/* Pista Panorámica Continua (260% de ancho para albergar las 4 Zonas) */
+.tsunami-panoramic-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260%;
+  height: 100%;
+  display: flex;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Cada una de las 4 Zonas Geográficas */
+.panoramic-zone {
+  position: relative;
+  height: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* ZONA 4: Colina Alta y Refugio (+30m Cota Segura) - Extremo Izquierdo */
+.zone-hill {
+  width: 25%;
+  background: linear-gradient(180deg, #7DD3FC 0%, #BAE6FD 55%, transparent 100%);
+}
+
+.hill-mountain-body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 50%;
-  height: 96px;
-  background: linear-gradient(135deg, #FEF08A 0%, #F59E0B 100%);
-  border-radius: 0 48px 0 0;
+  width: 100%;
+  height: 82%;
+  background: linear-gradient(135deg, #65A30D 0%, #4D7C0F 60%, #365314 100%);
+  border-radius: 0 100px 0 0;
+  box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.25), 6px 0 20px rgba(0, 0, 0, 0.15);
+  border-top: 4px solid #84CC16;
+}
+
+.hill-shelter-top {
+  position: absolute;
+  top: 14%;
+  left: 18%;
   z-index: 10;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 0.8rem;
-  box-shadow: 4px 0 16px rgba(217, 119, 6, 0.25);
-  border-top: 3px solid #FEF08A;
 }
 
-.beach-item {
-  font-size: 2.7rem;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
-  display: inline-block;
-  cursor: pointer;
-  user-select: none;
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
-}
-.beach-item:hover {
-  transform: scale(1.22);
-}
-
-.safe-hill-box {
-  position: absolute;
-  bottom: 88px;
-  left: 12px;
-  z-index: 17;
-  background: #84CC16;
-  border: 2px solid #4D7C0F;
-  border-radius: 20px 20px 0 0;
-  padding: 4px 12px;
+.shelter-badge-banner {
+  background: #FEF3C7;
+  border: 2px solid #F59E0B;
+  color: #92400E;
   font-family: var(--font-hand);
-  font-size: 0.92rem;
-  font-weight: bold;
-  color: #1A2E05;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: transform 0.3s, background 0.3s;
+}
+
+.shelter-students-group {
+  font-size: 2.2rem;
+  margin-top: 4px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+  animation: studentsCheer 2s ease-in-out infinite;
+}
+
+.hill-path-steps {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 60px;
+  height: 90px;
+  border-right: 4px dashed #FEF08A;
+  transform: rotate(-25deg);
+  opacity: 0.75;
+}
+
+/* ZONA 3: Pueblo Costero y Escuela (Zona Urbana) */
+.zone-town {
+  width: 25%;
+  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 70%, transparent 100%);
+}
+
+.town-ground-street {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  background: linear-gradient(180deg, #94A3B8 0%, #64748B 100%);
+  border-top: 4px solid #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.town-skyline-buildings {
+  position: absolute;
+  bottom: 72px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.building-item {
+  font-size: 2.8rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.street-item {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* ZONA 2: La Playa y el Malecón */
+.zone-beach {
+  width: 25%;
+  background: linear-gradient(180deg, #7DD3FC 0%, #BAE6FD 60%, transparent 100%);
+}
+
+.beach-sand-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 86px;
+  background: linear-gradient(180deg, #FDE047 0%, #F59E0B 100%);
+  border-top: 3px solid #FEF08A;
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.beach-item {
+  font-size: 2.6rem;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  display: inline-block;
   cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.18));
+}
+
+.beach-item:hover {
+  transform: scale(1.2) translateY(-4px);
+}
+
+.shoreline-wash-line {
+  position: absolute;
+  bottom: 84px;
+  right: 0;
+  width: 100%;
+  height: 12px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, transparent 80%);
+}
+
+/* ZONA 1: Mar Profundo y Origen del Tsunami (Extremo Derecho) */
+.zone-deep-sea {
+  width: 25%;
+  background: linear-gradient(180deg, #38BDF8 0%, #0284C7 65%, #0369A1 100%);
+  position: relative;
+  overflow: visible;
+}
+
+.deep-sea-water-base {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 98px;
+  background: linear-gradient(180deg, #0284C7 0%, #0C4A6E 100%);
+  border-top: 3px solid #7DD3FC;
+  z-index: 4;
+}
+
+.ocean-buoy-element {
+  position: absolute;
+  bottom: 106px;
+  left: 20%;
+  font-size: 2.2rem;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+  animation: buoyBobble 3s ease-in-out infinite;
+  z-index: 6;
 }
 
 .boat-element {
   position: absolute;
-  bottom: 60px;
-  left: 65%;
-  font-size: 2.6rem;
-  z-index: 18;
+  bottom: 102px;
+  left: 45%;
+  font-size: 2.7rem;
+  z-index: 8;
   cursor: pointer;
-  transition: transform 0.5s ease-out, bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.8s ease;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1), bottom 0.6s ease, left 0.8s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+  animation: boatRocking 3.5s ease-in-out infinite;
 }
 
-.tsunami-water-sheet {
+/* Contenedor de la Gran Ola Estirable en el Mar Profundo (A la derecha) */
+.wave-stretcher-container {
+  position: absolute;
+  bottom: 92px;
+  right: 14px;
+  width: 185px;
+  height: 60px; /* Se estira dinámicamente con JS */
+  z-index: 15;
+  transition: height 0.4s cubic-bezier(0.34, 1.25, 0.64, 1), transform 0.5s ease;
+  transform-origin: bottom center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.wave-stretcher-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  filter: drop-shadow(0 8px 24px rgba(2, 132, 199, 0.55));
+  transform: scaleX(-1); /* Apunta hacia la izquierda en dirección a la playa */
+}
+
+/* Regla Métrica de Altura junto a la Ola */
+.wave-height-ruler {
+  position: absolute;
+  bottom: 96px;
+  right: 205px;
+  height: 190px;
+  width: 48px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--font-hand);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0369A1;
+  border-right: 2px solid rgba(2, 132, 199, 0.4);
+  padding-right: 4px;
+  z-index: 12;
+  user-select: none;
+}
+
+.ruler-tick {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.6;
+  transition: all 0.25s ease;
+}
+
+.ruler-tick.tick-active {
+  opacity: 1;
+  color: #DC2626;
+  font-size: 0.96rem;
+  font-weight: 800;
+  transform: scale(1.15);
+}
+
+/* Lecho marino expuesto durante la retirada (Peces y caracolas) */
+.exposed-seafloor {
+  position: absolute;
+  bottom: 25px;
+  right: 18%;
+  font-size: 1.8rem;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Capa de Inundación y Torrente de Agua que avanza tierra adentro */
+.tsunami-flood-surge {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 100%;
-  height: 55px;
-  background: linear-gradient(180deg, rgba(56, 189, 248, 0.92) 0%, rgba(2, 132, 199, 0.98) 100%);
-  border-top: 4px solid rgba(255, 255, 255, 0.9);
-  border-radius: 65% 35% 0 0 / 25px 25px 0 0;
-  z-index: 15;
-  transition: height 0.6s cubic-bezier(0.34, 1.25, 0.64, 1), transform 0.6s ease;
+  width: 0%; /* Crece hacia la izquierda con JS */
+  height: 70px;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.95) 0%, rgba(2, 132, 199, 0.98) 70%, rgba(3, 105, 161, 1) 100%);
+  border-top: 5px solid #FFFFFF;
+  border-radius: 40px 0 0 0;
+  z-index: 18;
+  box-shadow: -6px 0 20px rgba(2, 132, 199, 0.6);
+  pointer-events: none;
+  transition: width 1.8s cubic-bezier(0.2, 0.8, 0.3, 1), height 0.6s ease;
+}
+
+.surge-crest-foam {
+  position: absolute;
+  top: -18px;
+  left: 0;
+  width: 50px;
+  height: 25px;
+  font-size: 1.8rem;
+  animation: crestTurbulence 0.3s infinite alternate;
+}
+
+/* Salpicaduras Violentas de Agua */
+.water-splash-vfx {
+  position: absolute;
+  top: -35px;
+  left: -20px;
+  font-size: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+}
+
+/* Marcador Oficial de Cota Máxima de Inundación */
+.flood-limit-marker {
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  height: 100%;
+  background: #DC2626;
+  border-left: 2px dashed #FEF08A;
+  z-index: 22;
+  opacity: 0;
+  transition: opacity 0.5s ease, left 0.5s ease;
+  pointer-events: none;
+}
+
+.limit-marker-flag {
+  position: absolute;
+  top: 15px;
+  left: 6px;
+  background: #DC2626;
+  color: #FFFFFF;
+  font-family: var(--font-hand);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.45);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 /* Panel Inferior de Control y Noticia - Separado de la Escena */
@@ -1300,10 +1776,31 @@ html, body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   flex-shrink: 0;
   min-height: 52px;
   box-sizing: border-box;
+}
+
+/* Animaciones Clave del Simulador de Tsunami */
+@keyframes buoyBobble {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(8deg); }
+}
+
+@keyframes boatRocking {
+  0%, 100% { transform: rotate(-5deg) translateY(0); }
+  50% { transform: rotate(6deg) translateY(-5px); }
+}
+
+@keyframes crestTurbulence {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.15) translateY(-3px); }
+}
+
+@keyframes studentsCheer {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 /* ==========================================================================
@@ -1327,16 +1824,19 @@ html, body {
   background: #FFFFFF;
   border: 4px solid var(--btn-gold);
   border-radius: var(--radius-card);
-  padding: clamp(1.4rem, 3vh, 2.2rem) clamp(1.6rem, 3.5vw, 2.6rem);
+  padding: clamp(1.4rem, 2.8vh, 2.2rem) clamp(1.5rem, 3.2vw, 2.4rem);
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-  max-width: 480px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.32);
+  max-width: 540px;
+  width: 90%;
   transform: rotate(-0.5deg);
+  box-sizing: border-box;
+  position: relative;
 }
 
 .success-stamp-circle {
-  width: 70px;
-  height: 70px;
+  width: 68px;
+  height: 68px;
   background: var(--school-green-light);
   color: var(--stamp-green);
   border: 3px solid var(--stamp-green);
@@ -1344,8 +1844,106 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
-  margin: 0 auto 0.8rem;
+  font-size: 2.1rem;
+  margin: 0 auto 0.6rem;
+  box-shadow: 0 4px 12px rgba(45, 90, 70, 0.2);
+}
+
+.success-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1.5px solid #FCD34D;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  margin-bottom: 0.6rem;
+}
+
+.success-criterion-highlight {
+  background: #F0FDF4;
+  border: 1.5px solid #86EFAC;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  text-align: left;
+}
+
+.success-criterion-header {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.success-explanation-text {
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  line-height: 1.48;
+  color: #334155;
+  margin: 0;
+}
+
+.success-modal-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.2rem;
+}
+
+.btn-modal-continue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+  color: #FFFFFF;
+  border: 2px solid #86EFAC;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.btn-modal-continue:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+}
+
+.btn-modal-review {
+  background: transparent;
+  border: 1.5px solid #CBD5E1;
+  color: #64748B;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 5px 16px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.btn-modal-review:hover {
+  background: #F1F5F9;
+  color: #1E293B;
+  border-color: #94A3B8;
 }
 
 /* ==========================================================================

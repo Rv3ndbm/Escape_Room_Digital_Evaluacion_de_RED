@@ -53,49 +53,45 @@
   }
 }
 
-/* 6. Centelleo de estrellitas de colores */
+/* 6. Centelleo suave de estrellitas de colores (Sin parpadeo de glifos) */
 @keyframes sparkleTwinkle {
   0%, 100% {
-    opacity: 0.2;
-    transform: scale(0.8) rotate(0deg);
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0);
   }
   50% {
     opacity: 0.95;
-    transform: scale(1.3) rotate(25deg);
+    transform: translate3d(0, -4px, 0);
   }
 }
 
-/* 6b. Flotación mágica del solecito con gafas */
+/* 6b. Flotación mágica del solecito con gafas (100% GPU, sin parpadeo) */
 @keyframes floatingSun {
   0%, 100% {
-    transform: translateY(0px) rotate(-2deg);
-    filter: drop-shadow(0 6px 14px rgba(245, 158, 11, 0.25));
+    transform: translate3d(0, 0, 0) rotate(-2deg);
   }
   50% {
-    transform: translateY(-10px) rotate(3deg);
-    filter: drop-shadow(0 10px 22px rgba(245, 158, 11, 0.4));
+    transform: translate3d(0, -10px, 0) rotate(3deg);
   }
 }
 
 /* 6c. Flotación orbital del planeta Tierra sonriente */
 @keyframes floatingEarth {
   0%, 100% {
-    transform: translateY(0px) rotate(3deg);
-    filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.22));
+    transform: translate3d(0, 0, 0) rotate(3deg);
   }
   50% {
-    transform: translateY(-8px) rotate(-3deg);
-    filter: drop-shadow(0 10px 20px rgba(2, 132, 199, 0.35));
+    transform: translate3d(0, -8px, 0) rotate(-3deg);
   }
 }
 
 /* 6d. Desplazamiento suave de la nubecita */
 @keyframes floatingCloud {
   0%, 100% {
-    transform: translate(0px, 0px) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translate(8px, -6px) rotate(2deg);
+    transform: translate3d(8px, -6px, 0) rotate(2deg);
   }
 }
 
@@ -103,11 +99,11 @@
 @keyframes ambientAuraPulse {
   0%, 100% {
     opacity: 0.55;
-    transform: scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
     opacity: 0.85;
-    transform: scale(1.05);
+    transform: translate3d(0, 0, 0) scale(1.04);
   }
 }
 
@@ -232,9 +228,8 @@
 
 /* 17. Pulsación cromática de auras */
 @keyframes chromaticAuraBreathe {
-  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.65; }
-  33% { transform: scale(1.08) translate(10px, -8px); opacity: 0.9; }
-  66% { transform: scale(0.96) translate(-8px, 12px); opacity: 0.7; }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.65; }
+  50% { transform: translate3d(6px, -6px, 0) scale(1.04); opacity: 0.85; }
 }
 
 /* 18. Giro suave del átomo científico */
@@ -246,24 +241,27 @@
 .atom-spinning {
   display: inline-block;
   animation: atomSpin 12s linear infinite;
+  will-change: transform;
 }
 
 /* 19. Pulso de cinta o insignia de título */
 @keyframes badgePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, 0, 0) scale(1.04); }
 }
 
 .badge-pulsing {
   animation: badgePulse 3s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* 20. Respiración de salpicaduras de acuarela */
 @keyframes splatBreathe {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.75; }
-  50% { transform: scale(1.07) rotate(4deg); opacity: 0.95; }
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.8; }
+  50% { transform: translate3d(0, -3px, 0) rotate(2deg); opacity: 0.95; }
 }
 
 .splat-pulsing {
   animation: splatBreathe 5s ease-in-out infinite;
+  will-change: transform;
 }
