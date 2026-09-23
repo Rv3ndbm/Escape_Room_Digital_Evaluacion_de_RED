@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sala 1: El Volcán | Escape room Educación</title>
-  
+
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!-- Font Awesome 6 Icons -->
@@ -176,6 +177,32 @@
       box-shadow: 0 6px 14px rgba(239, 68, 68, 0.45);
     }
 
+    .btn-open-youtube {
+      background: #FFFFFF;
+      color: #DC2626;
+      border: 1.5px solid #FCA5A5;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-hand);
+      font-size: 0.95rem;
+      font-weight: bold;
+      padding: 6px 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.15s, background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-open-youtube:hover {
+      transform: translateY(-2px);
+      background: #FEF2F2;
+      border-color: #EF4444;
+      color: #B91C1C;
+    }
+
     /* Barra de Fases Didácticas */
     .volcano-stepper-bar {
       display: grid;
@@ -256,8 +283,15 @@
     }
 
     @keyframes skyPulsation {
-      0% { opacity: 0.75; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.05); }
+      0% {
+        opacity: 0.75;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
     }
 
     /* Canvas de Efectos Visuales 60 FPS (Lava balística, chispas, humo, relámpagos) */
@@ -273,26 +307,71 @@
 
     /* Vibraciones Sísmicas Graduales de la Montaña */
     @keyframes tremorSubtle {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(-1px, 0.5px); }
-      75% { transform: translate(1px, -0.5px); }
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(-1px, 0.5px);
+      }
+
+      75% {
+        transform: translate(1px, -0.5px);
+      }
     }
 
     @keyframes tremorMedium {
-      0%, 100% { transform: translate(0, 0); }
-      20% { transform: translate(-2px, 1.5px) rotate(-0.3deg); }
-      40% { transform: translate(2px, -1px) rotate(0.3deg); }
-      60% { transform: translate(-1.5px, -1px); }
-      80% { transform: translate(1.5px, 1px); }
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      20% {
+        transform: translate(-2px, 1.5px) rotate(-0.3deg);
+      }
+
+      40% {
+        transform: translate(2px, -1px) rotate(0.3deg);
+      }
+
+      60% {
+        transform: translate(-1.5px, -1px);
+      }
+
+      80% {
+        transform: translate(1.5px, 1px);
+      }
     }
 
     @keyframes tremorExplosive {
-      0%, 100% { transform: translate(0, 0); }
-      10% { transform: translate(-4px, 3px) rotate(-0.7deg); }
-      30% { transform: translate(4px, -3px) rotate(0.6deg); }
-      50% { transform: translate(-3.5px, -2px) rotate(-0.4deg); }
-      70% { transform: translate(3px, 3.5px) rotate(0.5deg); }
-      90% { transform: translate(-2px, 2px); }
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      10% {
+        transform: translate(-4px, 3px) rotate(-0.7deg);
+      }
+
+      30% {
+        transform: translate(4px, -3px) rotate(0.6deg);
+      }
+
+      50% {
+        transform: translate(-3.5px, -2px) rotate(-0.4deg);
+      }
+
+      70% {
+        transform: translate(3px, 3.5px) rotate(0.5deg);
+      }
+
+      90% {
+        transform: translate(-2px, 2px);
+      }
     }
 
     .tremor-subtle {
@@ -309,8 +388,13 @@
 
     /* Ríos de Lava con Gradientes Vivos y Animación Continua */
     @keyframes lavaFlowAnimation {
-      0% { stroke-dashoffset: 200; }
-      100% { stroke-dashoffset: 0; }
+      0% {
+        stroke-dashoffset: 200;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+      }
     }
 
     .lava-stream-active {
@@ -437,11 +521,12 @@
       padding: 2px 7px;
       z-index: 8;
       pointer-events: none;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
       transition: all 0.3s ease;
     }
   </style>
 </head>
+
 <body>
 
   <!-- Fondo Mágico con Auras y Elementos Animados -->
@@ -469,11 +554,29 @@
     <img src="../media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
 
     <!-- Destellos mágicos y estrellitas en SVG vectorial (Cero parpadeo o jitter de fuentes) -->
-    <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="bottom: 22%; right: 22%; width: 24px; height: 24px; fill: #F59E0B; animation-delay: 0.5s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="top: 50%; left: 8%; width: 20px; height: 20px; fill: #DC2626; animation-delay: 1.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;"
+      viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+    <svg class="decor-sparkle"
+      style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;"
+      viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+    <svg class="decor-sparkle"
+      style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;"
+      viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+    <svg class="decor-sparkle"
+      style="bottom: 22%; right: 22%; width: 24px; height: 24px; fill: #F59E0B; animation-delay: 0.5s;"
+      viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+    <svg class="decor-sparkle"
+      style="top: 50%; left: 8%; width: 20px; height: 20px; fill: #DC2626; animation-delay: 1.8s;" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
 
     <!-- Útiles escolares -->
     <img src="../media/pencil.svg" alt="Lápiz escolar" class="decor-pencil">
@@ -482,7 +585,7 @@
   </div>
 
   <div class="escape-room-screen">
-    
+
     <!-- Barra Superior HUD -->
     <header class="top-hud animate__animated animate__fadeInDown">
       <div class="mission-logo">
@@ -490,7 +593,9 @@
       </div>
 
       <nav class="mission-progress" aria-label="Progreso de las salas">
-        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
+        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Inicio</a>
+        <a href="historia.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Historia</a>
+        <a href="instrucciones.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Guía</a>
         <div class="step-badge active"><i class="fa-solid fa-fire"></i> Reto 1</div>
         <a href="sala2-tsunami.html" class="step-badge"><i class="fa-solid fa-water"></i> Reto 2</a>
         <a href="sala3-terremoto.html" class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</a>
@@ -499,7 +604,8 @@
 
       <div class="hud-actions">
         <!-- Botón de Accesibilidad de Tamaño de Texto -->
-        <button class="accessibility-toggle-btn" type="button" title="Ajustar tamaño de texto (Normal / Grande / Extra Grande)" aria-label="Ajustar tamaño de texto">
+        <button class="accessibility-toggle-btn" type="button"
+          title="Ajustar tamaño de texto (Normal / Grande / Extra Grande)" aria-label="Ajustar tamaño de texto">
           <i class="fa-solid fa-text-height"></i>
           <span class="text-size-tag">A</span>
         </button>
@@ -512,13 +618,14 @@
 
     <!-- Contenido Principal: Dos Hojas Escolares Responsivas -->
     <main class="room-content-grid">
-      
+
       <!-- Columna Izquierda: SIMULADOR CIENTÍFICO DE ERUPCIÓN VOLCÁNICA -->
       <section class="paper-card resource-column animate__animated animate__fadeInLeft">
         <div class="resource-header">
           <div class="mode-tabs-container">
             <!-- Modalidad 1: Video Educativo (ACTIVO POR DEFECTO) -->
-            <button id="tabBtnVideo" class="mode-tab-btn active-video" type="button" title="Ver Video Educativo primero">
+            <button id="tabBtnVideo" class="mode-tab-btn active-video" type="button"
+              title="Ver Video Educativo primero">
               <span class="tab-badge-number">1</span>
               <i class="fa-solid fa-circle-play"></i>
               <span>Video Educativo</span>
@@ -538,15 +645,15 @@
         </div>
 
         <div class="resource-body" style="padding: 0;">
-          
+
           <!-- Vista 1: Video de YouTube Educativo (ACTIVO PRIMERO POR DEFECTO) -->
-          <div id="viewVolcanoVideo" style="width: 100%; height: 100%; background: #0F172A; border-radius: var(--radius-paper); overflow: hidden; display: flex; flex-direction: column;">
+          <div id="viewVolcanoVideo"
+            style="width: 100%; height: 100%; background: #0F172A; border-radius: var(--radius-paper); overflow: hidden; display: flex; flex-direction: column;">
             <div style="flex: 1; min-height: 0; width: 100%;">
-              <iframe 
-                src="https://www.youtube-nocookie.com/embed/5cQ_qKqU_pU?rel=0" 
-                title="Video explicativo sobre los volcanes"
+              <iframe src="https://www.youtube-nocookie.com/embed/Swn1nJEGogI?rel=0&amp;modestbranding=1" title="Video explicativo: ¿Qué es un Volcán? - GuerrerosPlanet"
                 style="width: 100%; height: 100%; border: none;"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen>
               </iframe>
             </div>
@@ -559,20 +666,27 @@
                   <p style="margin: 0; font-size: 0.85rem; color: #475569;">Aprende cómo la presión subterránea crea las erupciones volcánicas.</p>
                 </div>
               </div>
-              <button id="btnGoToSimFromVideo" type="button" class="btn-goto-sim">
-                <i class="fa-solid fa-volcano"></i>
-                <span>¡Ir al Simulador en 4 Fases!</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <a href="https://www.youtube.com/watch?v=Swn1nJEGogI" target="_blank" rel="noopener noreferrer" class="btn-open-youtube" title="Abrir video en YouTube en una nueva pestaña">
+                  <i class="fa-brands fa-youtube" style="color: #EF4444; font-size: 1.15rem;"></i>
+                  <span>Abrir en YouTube</span>
+                </a>
+                <button id="btnGoToSimFromVideo" type="button" class="btn-goto-sim">
+                  <i class="fa-solid fa-volcano"></i>
+                  <span>¡Ir al Simulador en 4 Fases!</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
             </div>
           </div>
 
           <!-- Vista 2: SIMULADOR REAL DE ERUPCIÓN VOLCÁNICA (OPCIONAL) -->
           <div id="viewVolcanoSim" class="volcano-sim-stage" style="display: none;">
-            
+
             <!-- Barra Superior: Stepper de 4 Fases Científicas con 9.5 Segundos cada una (Lectura Cómoda y Pausada) -->
             <div class="volcano-stepper-bar">
-              <div id="stepBadge1" class="volcano-step-badge" data-phase="1" title="Fase 1: Presión subterránea acumulada">
+              <div id="stepBadge1" class="volcano-step-badge" data-phase="1"
+                title="Fase 1: Presión subterránea acumulada">
                 <span>1. Presión</span>
                 <small style="opacity: 0.9; color: #FDE047;">(9.5s)</small>
               </div>
@@ -580,31 +694,37 @@
                 <span>2. Ascenso</span>
                 <small style="opacity: 0.9; color: #FDE047;">(9.5s)</small>
               </div>
-              <div id="stepBadge3" class="volcano-step-badge" data-phase="3" title="Fase 3: Gran explosión piroclástica">
+              <div id="stepBadge3" class="volcano-step-badge" data-phase="3"
+                title="Fase 3: Gran explosión piroclástica">
                 <span>3. Explosión</span>
                 <small style="opacity: 0.9; color: #FDE047;">(9.5s)</small>
               </div>
-              <div id="stepBadge4" class="volcano-step-badge" data-phase="4" title="Fase 4: Ríos de lava y nueva corteza">
+              <div id="stepBadge4" class="volcano-step-badge" data-phase="4"
+                title="Fase 4: Ríos de lava y nueva corteza">
                 <span>4. Ríos Lava</span>
                 <small style="opacity: 0.9; color: #FDE047;">(9.5s)</small>
               </div>
             </div>
 
             <!-- Botones de Acción del Simulador -->
-            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; z-index: 20; padding: 2px 4px;">
-              <button id="btnTriggerVolcanoSim" class="btn-sim-action btn-sim-volcano" type="button" style="font-size: 1.15rem; padding: 0.45rem 1.3rem;">
+            <div
+              style="display: flex; justify-content: space-between; align-items: center; gap: 8px; z-index: 20; padding: 2px 4px;">
+              <button id="btnTriggerVolcanoSim" class="btn-sim-action btn-sim-volcano" type="button"
+                style="font-size: 1.15rem; padding: 0.45rem 1.3rem;">
                 <i class="fa-solid fa-play"></i>
                 <span id="btnVolcanoText">¡Iniciar Erupción Completa!</span>
               </button>
 
-              <button id="btnResetVolcano" type="button" class="btn-preset" style="background: rgba(255,255,255,0.92); font-size: 0.88rem; padding: 5px 12px; font-weight: bold; color: #1E293B;">
+              <button id="btnResetVolcano" type="button" class="btn-preset"
+                style="background: rgba(255,255,255,0.92); font-size: 0.88rem; padding: 5px 12px; font-weight: bold; color: #1E293B;">
                 <i class="fa-solid fa-rotate-left"></i> Restablecer
               </button>
             </div>
 
             <!-- Escenario Gráfico de la Montaña Volcánica con Canvas de Partículas 60 FPS -->
-            <div id="volcanoMountainBox" style="flex: 1; position: relative; display: flex; align-items: flex-end; justify-content: center; min-height: 190px; overflow: hidden; border-radius: 10px;">
-              
+            <div id="volcanoMountainBox"
+              style="flex: 1; position: relative; display: flex; align-items: flex-end; justify-content: center; min-height: 190px; overflow: hidden; border-radius: 10px;">
+
               <!-- Resplandor dinámico del cielo crepuscular -->
               <div id="volcanoSkyGlow" class="volcano-sky-glow"></div>
 
@@ -612,85 +732,107 @@
               <canvas id="volcanoVfxCanvas" class="volcano-canvas-layer"></canvas>
 
               <!-- SVG del Volcán con Corte Transversal Científico y Ríos de Lava Ramificados -->
-              <svg id="volcanoSvg" viewBox="0 0 340 210" style="width: 95%; max-height: 230px; z-index: 5; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));">
+              <svg id="volcanoSvg" viewBox="0 0 340 210"
+                style="width: 95%; max-height: 230px; z-index: 5; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));">
                 <defs>
                   <!-- Gradiente para el cuerpo rocoso del volcán -->
                   <linearGradient id="volcanoConeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#381E11"/>
-                    <stop offset="50%" stop-color="#451A03"/>
-                    <stop offset="100%" stop-color="#240D02"/>
+                    <stop offset="0%" stop-color="#381E11" />
+                    <stop offset="50%" stop-color="#451A03" />
+                    <stop offset="100%" stop-color="#240D02" />
                   </linearGradient>
 
                   <!-- Gradiente para el núcleo ardiente de la cámara magmática -->
                   <radialGradient id="magmaChamberGrad" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#FFFBEB"/>
-                    <stop offset="35%" stop-color="#FBBF24"/>
-                    <stop offset="70%" stop-color="#EA580C"/>
-                    <stop offset="100%" stop-color="#991B1B"/>
+                    <stop offset="0%" stop-color="#FFFBEB" />
+                    <stop offset="35%" stop-color="#FBBF24" />
+                    <stop offset="70%" stop-color="#EA580C" />
+                    <stop offset="100%" stop-color="#991B1B" />
                   </radialGradient>
 
                   <!-- Gradiente del ascenso de lava en la chimenea -->
                   <linearGradient id="chimneyGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                    <stop offset="0%" stop-color="#EA580C"/>
-                    <stop offset="60%" stop-color="#F59E0B"/>
-                    <stop offset="100%" stop-color="#FEF08A"/>
+                    <stop offset="0%" stop-color="#EA580C" />
+                    <stop offset="60%" stop-color="#F59E0B" />
+                    <stop offset="100%" stop-color="#FEF08A" />
                   </linearGradient>
 
                   <!-- Sombra suave para rótulos -->
                   <filter id="labelShadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#000000" flood-opacity="0.9"/>
+                    <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#000000" flood-opacity="0.9" />
                   </filter>
                 </defs>
 
                 <!-- Fondo del cono volcánico exterior con corte estratificado -->
-                <polygon points="170,44 28,206 312,206" fill="url(#volcanoConeGrad)" stroke="#1C0A02" stroke-width="3.5" />
+                <polygon points="170,44 28,206 312,206" fill="url(#volcanoConeGrad)" stroke="#1C0A02"
+                  stroke-width="3.5" />
                 <!-- Estrato geológico interno (capas de ceniza y basalto antiguo) -->
                 <polygon points="170,44 75,206 265,206" fill="#582406" opacity="0.65" />
-                <path d="M 90 150 Q 170 142 250 150" stroke="#78350F" stroke-width="2" fill="none" opacity="0.5"/>
-                <path d="M 60 180 Q 170 172 280 180" stroke="#78350F" stroke-width="2.5" fill="none" opacity="0.5"/>
+                <path d="M 90 150 Q 170 142 250 150" stroke="#78350F" stroke-width="2" fill="none" opacity="0.5" />
+                <path d="M 60 180 Q 170 172 280 180" stroke="#78350F" stroke-width="2.5" fill="none" opacity="0.5" />
 
                 <!-- Lagos de Lava basales en enfriamiento -->
-                <ellipse id="lavaPoolLeft" cx="50" cy="204" rx="26" ry="4.5" fill="#240D02" opacity="0.8" style="transition: all 1s ease;" />
-                <ellipse id="lavaPoolRight" cx="290" cy="204" rx="26" ry="4.5" fill="#240D02" opacity="0.8" style="transition: all 1s ease;" />
+                <ellipse id="lavaPoolLeft" cx="50" cy="204" rx="26" ry="4.5" fill="#240D02" opacity="0.8"
+                  style="transition: all 1s ease;" />
+                <ellipse id="lavaPoolRight" cx="290" cy="204" rx="26" ry="4.5" fill="#240D02" opacity="0.8"
+                  style="transition: all 1s ease;" />
 
                 <!-- Cráter superior exterior -->
-                <ellipse id="volcanoCraterRim" cx="170" cy="44" rx="30" ry="9" fill="#1C1917" stroke="#78350F" stroke-width="3" />
+                <ellipse id="volcanoCraterRim" cx="170" cy="44" rx="30" ry="9" fill="#1C1917" stroke="#78350F"
+                  stroke-width="3" />
                 <!-- Interior incandescente del cráter -->
-                <ellipse id="volcanoCrater" cx="170" cy="44" rx="25" ry="7.5" fill="#1C1917" stroke="#EF4444" stroke-width="2" style="transition: fill 0.8s ease, stroke 0.8s ease;" />
+                <ellipse id="volcanoCrater" cx="170" cy="44" rx="25" ry="7.5" fill="#1C1917" stroke="#EF4444"
+                  stroke-width="2" style="transition: fill 0.8s ease, stroke 0.8s ease;" />
 
                 <!-- Chimenea central interior por donde sube el magma -->
                 <rect id="chimneyBase" x="161" y="44" width="18" height="114" fill="#1C0A02" rx="3" />
-                <rect id="chimneyLava" x="162" y="158" width="16" height="0" fill="url(#chimneyGrad)" rx="3" style="transition: height 7s cubic-bezier(0.2, 0.8, 0.3, 1), y 7s cubic-bezier(0.2, 0.8, 0.3, 1), fill 0.8s;" />
+                <rect id="chimneyLava" x="162" y="158" width="16" height="0" fill="url(#chimneyGrad)" rx="3"
+                  style="transition: height 7s cubic-bezier(0.2, 0.8, 0.3, 1), y 7s cubic-bezier(0.2, 0.8, 0.3, 1), fill 0.8s;" />
 
                 <!-- Red Ramificada de Ríos de Lava (Ladera Izquierda) -->
-                <path id="lavaLeft" d="M 154 46 Q 130 95 105 140 Q 80 175 48 205" stroke="#78350F" stroke-width="6" fill="none" stroke-linecap="round" style="transition: all 0.8s;" />
-                <path id="lavaLeftBranch" d="M 112 130 Q 132 165 116 205" stroke="#78350F" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" style="transition: opacity 1s, stroke 1s;" />
+                <path id="lavaLeft" d="M 154 46 Q 130 95 105 140 Q 80 175 48 205" stroke="#78350F" stroke-width="6"
+                  fill="none" stroke-linecap="round" style="transition: all 0.8s;" />
+                <path id="lavaLeftBranch" d="M 112 130 Q 132 165 116 205" stroke="#78350F" stroke-width="4" fill="none"
+                  stroke-linecap="round" opacity="0" style="transition: opacity 1s, stroke 1s;" />
 
                 <!-- Red Ramificada de Ríos de Lava (Ladera Derecha) -->
-                <path id="lavaRight" d="M 186 46 Q 210 95 235 140 Q 260 175 292 205" stroke="#78350F" stroke-width="6" fill="none" stroke-linecap="round" style="transition: all 0.8s;" />
-                <path id="lavaRightBranch" d="M 228 130 Q 208 165 224 205" stroke="#78350F" stroke-width="4" fill="none" stroke-linecap="round" opacity="0" style="transition: opacity 1s, stroke 1s;" />
+                <path id="lavaRight" d="M 186 46 Q 210 95 235 140 Q 260 175 292 205" stroke="#78350F" stroke-width="6"
+                  fill="none" stroke-linecap="round" style="transition: all 0.8s;" />
+                <path id="lavaRightBranch" d="M 228 130 Q 208 165 224 205" stroke="#78350F" stroke-width="4" fill="none"
+                  stroke-linecap="round" opacity="0" style="transition: opacity 1s, stroke 1s;" />
 
                 <!-- Grietas laterales (Fisuras de escape con calor activo) -->
-                <path id="fissureLeft1" d="M 161 95 L 120 110" stroke="#991B1B" stroke-width="2.5" opacity="0.3" style="transition: all 0.6s;" />
-                <path id="fissureLeft2" d="M 161 125 L 135 138" stroke="#991B1B" stroke-width="2" opacity="0.2" style="transition: all 0.6s;" />
-                <path id="fissureRight1" d="M 179 105 L 220 120" stroke="#991B1B" stroke-width="2.5" opacity="0.3" style="transition: all 0.6s;" />
-                <path id="fissureRight2" d="M 179 135 L 205 145" stroke="#991B1B" stroke-width="2" opacity="0.2" style="transition: all 0.6s;" />
+                <path id="fissureLeft1" d="M 161 95 L 120 110" stroke="#991B1B" stroke-width="2.5" opacity="0.3"
+                  style="transition: all 0.6s;" />
+                <path id="fissureLeft2" d="M 161 125 L 135 138" stroke="#991B1B" stroke-width="2" opacity="0.2"
+                  style="transition: all 0.6s;" />
+                <path id="fissureRight1" d="M 179 105 L 220 120" stroke="#991B1B" stroke-width="2.5" opacity="0.3"
+                  style="transition: all 0.6s;" />
+                <path id="fissureRight2" d="M 179 135 L 205 145" stroke="#991B1B" stroke-width="2" opacity="0.2"
+                  style="transition: all 0.6s;" />
 
                 <!-- Cámara Magmática Subterránea con Núcleo Convectivo -->
-                <ellipse id="magmaChamberCircle" cx="170" cy="165" rx="60" ry="33" fill="url(#magmaChamberGrad)" stroke="#EF4444" stroke-width="3.5" style="transition: fill 0.6s, transform 0.4s, filter 0.6s;" />
+                <ellipse id="magmaChamberCircle" cx="170" cy="165" rx="60" ry="33" fill="url(#magmaChamberGrad)"
+                  stroke="#EF4444" stroke-width="3.5" style="transition: fill 0.6s, transform 0.4s, filter 0.6s;" />
 
                 <!-- Burbujas incandescentes dentro de la cámara magmática -->
                 <circle id="bubble1" cx="142" cy="162" r="5" fill="#FFFBEB" opacity="0.9" class="magma-bubbling" />
-                <circle id="bubble2" cx="172" cy="173" r="7.5" fill="#FEF08A" opacity="0.95" class="magma-bubbling" style="animation-delay: 0.3s;" />
-                <circle id="bubble3" cx="198" cy="160" r="4.5" fill="#FFFBEB" opacity="0.85" class="magma-bubbling" style="animation-delay: 0.7s;" />
-                <circle id="bubble4" cx="158" cy="178" r="6" fill="#FDE047" opacity="0.9" class="magma-bubbling" style="animation-delay: 0.5s;" />
+                <circle id="bubble2" cx="172" cy="173" r="7.5" fill="#FEF08A" opacity="0.95" class="magma-bubbling"
+                  style="animation-delay: 0.3s;" />
+                <circle id="bubble3" cx="198" cy="160" r="4.5" fill="#FFFBEB" opacity="0.85" class="magma-bubbling"
+                  style="animation-delay: 0.7s;" />
+                <circle id="bubble4" cx="158" cy="178" r="6" fill="#FDE047" opacity="0.9" class="magma-bubbling"
+                  style="animation-delay: 0.5s;" />
 
                 <!-- Rótulo Científico en la Cámara Magmática -->
-                <text x="170" y="170" font-family="'Patrick Hand', cursive" font-size="14.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle" filter="url(#labelShadow)">Cámara Magmática</text>
+                <text x="170" y="170" font-family="'Patrick Hand', cursive" font-size="14.5" font-weight="bold"
+                  fill="#FFFFFF" text-anchor="middle" filter="url(#labelShadow)">Cámara Magmática</text>
 
                 <!-- Flechas y Rótulos Explicativos Geológicos -->
-                <text x="80" y="58" font-family="'Patrick Hand', cursive" font-size="12.5" font-weight="bold" fill="#FDE047" filter="url(#labelShadow)">Cráter ⬆️</text>
-                <text x="70" y="112" font-family="'Patrick Hand', cursive" font-size="12.5" font-weight="bold" fill="#FDE047" filter="url(#labelShadow)">Chimenea ➡️</text>
+                <text x="80" y="58" font-family="'Patrick Hand', cursive" font-size="12.5" font-weight="bold"
+                  fill="#FDE047" filter="url(#labelShadow)">Cráter ⬆️</text>
+                <text x="70" y="112" font-family="'Patrick Hand', cursive" font-size="12.5" font-weight="bold"
+                  fill="#FDE047" filter="url(#labelShadow)">Chimenea ➡️</text>
               </svg>
 
             </div>
@@ -701,7 +843,8 @@
                 <span>🌋 Modo Laboratorio Científico</span>
               </div>
               <div class="banner-body-text">
-                Presiona <strong>"¡Iniciar Erupción Completa!"</strong> para observar las 4 etapas con pausas de 9.5 segundos y lectura guiada suave.
+                Presiona <strong>"¡Iniciar Erupción Completa!"</strong> para observar las 4 etapas con pausas de 9.5
+                segundos y lectura guiada suave.
               </div>
               <div class="banner-reading-progress">
                 <div id="karaokeProgressBar" class="reading-progress-fill"></div>
@@ -720,7 +863,8 @@
         </div>
 
         <h2 class="question-title">
-          Misión 1: Nuestro objetivo es aprender cómo funciona un volcán. Después de probar este simulador y ver sus 4 fases, ¿crees que la información nos sirve de verdad para entender por qué hacen erupción los volcanes?
+          Misión 1: Nuestro objetivo es aprender cómo funciona un volcán. Después de probar este simulador y ver sus 4
+          fases, ¿crees que la información nos sirve de verdad para entender por qué hacen erupción los volcanes?
         </h2>
 
         <div class="question-options-box">
@@ -729,7 +873,8 @@
             <div class="option-letter">A</div>
             <div>
               <strong style="color: var(--school-green-title);">¡Sí, es totalmente pertinente!</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Explica con rigor cómo la cámara magmática y los gases causan la erupción volcánica real.</p>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Explica con rigor cómo la cámara
+                magmática y los gases causan la erupción volcánica real.</p>
             </div>
           </div>
 
@@ -738,7 +883,8 @@
             <div class="option-letter">B</div>
             <div>
               <strong>Entendí parcialmente...</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Vi la lava salir, pero no me queda claro por qué se acumula tanta presión de gases.</p>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Vi la lava salir, pero no me queda
+                claro por qué se acumula tanta presión de gases.</p>
             </div>
           </div>
 
@@ -747,7 +893,8 @@
             <div class="option-letter">C</div>
             <div>
               <strong>No entendí cómo funciona.</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me pareció confuso y necesito una guía paso a paso para saber qué mirar en el volcán.</p>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me pareció confuso y necesito una guía
+                paso a paso para saber qué mirar en el volcán.</p>
             </div>
           </div>
         </div>
@@ -766,7 +913,8 @@
     <footer class="bottom-bar animate__animated animate__fadeInUp">
       <div class="hint-pill">
         <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
-        <span>Pista del Profesor: Observa las 4 fases en el simulador y pulsa directamente la opción que mejor responde la pregunta.</span>
+        <span>Pista del Profesor: Observa las 4 fases en el simulador y pulsa directamente la opción que mejor responde
+          la pregunta.</span>
       </div>
       <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
         <i class="fa-solid fa-pencil"></i> Cuaderno de Ciencias Naturales
@@ -781,7 +929,8 @@
       <div class="success-stamp-circle">
         <i class="fa-solid fa-check"></i>
       </div>
-      <h3 style="font-family: var(--font-script); font-size: 2rem; color: var(--school-green-title); margin-bottom: 0.4rem;">
+      <h3
+        style="font-family: var(--font-script); font-size: 2rem; color: var(--school-green-title); margin-bottom: 0.4rem;">
         ¡Insignia de Pertinencia Desbloqueada!
       </h3>
       <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
@@ -1365,7 +1514,7 @@
 
         const totalChars = charCounter;
         const progressBar = document.getElementById('karaokeProgressBar');
-        
+
         // Tiempo reservado para la lectura activa: dejamos 1.6s libres al final de la fase
         // para que el estudiante disfrute observando el efecto visual de la fase
         const activeReadingMs = Math.max(durationMs - 1600, 4000);
@@ -1656,12 +1805,12 @@
 
       // Permite hacer clic en cualquier insignia de fase para probarla individualmente
       stepBadges.forEach((badge, idx) => {
-        badge.addEventListener('click', function(e) {
+        badge.addEventListener('click', function (e) {
           e.stopPropagation();
           clearAllPhaseTimers();
           isSimulating = false;
           btnVolcanoText.textContent = '¡Iniciar Erupción Completa!';
-          
+
           if (idx === 0) runPhase1();
           else if (idx === 1) { runPhase1(); runPhase2(); }
           else if (idx === 2) { runPhase2(); runPhase3(); }
@@ -1673,4 +1822,5 @@
     });
   </script>
 </body>
+
 </html>

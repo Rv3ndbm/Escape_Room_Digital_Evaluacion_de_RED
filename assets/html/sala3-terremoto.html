@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sala 3: El Terremoto | Escape room Educación</title>
+  <title>Sala 3: El Terremoto | Escape Room Educación</title>
   
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -16,53 +16,212 @@
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/animations.css">
   <style>
-    .phone-mockup-advanced {
-      width: 100%;
-      max-width: 375px;
+    /* Estructura del Laboratorio Sísmico Integrado */
+    .seismic-station-wrapper {
+      padding: 0;
+      background: transparent;
+      border: none;
       height: 100%;
-      max-height: 565px;
-      background: #0F172A;
-      border-radius: 40px;
-      padding: 12px;
-      box-shadow: 0 20px 48px rgba(0,0,0,0.28), 0 0 0 3.5px #334155;
+      min-height: 0;
       display: flex;
       flex-direction: column;
-      margin: auto;
+    }
+
+    .seismic-lab-layout {
+      display: grid;
+      grid-template-columns: minmax(310px, 345px) 1fr;
+      gap: 12px;
+      height: 100%;
+      min-height: 0;
+      background: radial-gradient(circle at 10% 20%, #F8FAFC 0%, #EFF6FF 100%);
+      border-radius: var(--radius-card);
+      border: 1.5px solid #E2E8F0;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1200px) {
+      .seismic-lab-layout {
+        grid-template-columns: minmax(290px, 320px) 1fr;
+        gap: 10px;
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .seismic-lab-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow-y: visible;
+      }
+    }
+
+    /* Columna Izquierda: Celular SismoKids 24/7 */
+    .seismic-phone-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .phone-mockup-advanced {
+      width: 100%;
+      max-width: 345px;
+      height: 100%;
+      max-height: 550px;
+      background: #0F172A;
+      border-radius: 36px;
+      padding: 10px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28), 0 0 0 3px #334155;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
       transition: transform 0.2s;
       box-sizing: border-box;
+      position: relative;
     }
-    .backpack-item-btn {
-      background: white;
-      border: 2px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 8px 12px;
+
+    /* Barra Superior del Sistema Operativo */
+    .phone-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 14px 4px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #94A3B8;
+      background: #0F172A;
+      border-radius: 28px 28px 0 0;
+    }
+
+    .phone-island-notch {
+      width: 72px;
+      height: 14px;
+      background: #020617;
+      border-radius: 0 0 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .phone-speaker-slot {
+      width: 22px;
+      height: 3px;
+      background: #334155;
+      border-radius: 2px;
+    }
+
+    .phone-camera-lens {
+      width: 6px;
+      height: 6px;
+      background: #1E293B;
+      border: 1px solid #475569;
+      border-radius: 50%;
+    }
+
+    /* Pantalla del Celular */
+    .phone-screen {
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #F8FAFC;
+      flex: 1;
+      position: relative;
+      min-height: 0;
+    }
+
+    .phone-app-header {
+      padding: 0.5rem 0.8rem;
+      background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      cursor: pointer;
-      font-family: var(--font-hand);
-      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .phone-siren-btn {
+      background: #FEE2E2;
+      border: none;
+      border-radius: 9999px;
+      font-size: 0.8rem;
       font-weight: bold;
+      color: #B91C1C;
+      padding: 3px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       transition: all 0.2s;
     }
-    .backpack-item-btn:hover {
-      border-color: #3B82F6;
-      transform: translateY(-2px);
+    .phone-siren-btn:hover {
+      background: #FEF2F2;
+      transform: scale(1.05);
     }
-    .backpack-item-btn.packed {
-      background: #DCFCE7;
-      border-color: #86EFAC;
-      color: #166534;
-      text-decoration: line-through;
-      opacity: 0.85;
+
+    .phone-nav-tabs {
+      display: flex;
+      background: #E2E8F0;
+      padding: 3px;
+      gap: 3px;
+      flex-shrink: 0;
     }
+
+    .phone-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      padding: 5px 2px;
+      font-family: var(--font-hand);
+      font-size: 0.86rem;
+      font-weight: bold;
+      color: #64748B;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .phone-tab-btn.active {
+      background: white;
+      color: #0F172A;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .phone-app-body {
+      padding: 0.5rem 0.65rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    .phone-magnitude-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .phone-mag-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
     .app-magnitude-btn {
       font-family: var(--font-hand);
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: bold;
       border: 1.5px solid #CBD5E1;
       border-radius: 9999px;
-      padding: 3px 10px;
+      padding: 2px 8px;
       background: white;
       cursor: pointer;
       transition: all 0.2s;
@@ -72,6 +231,412 @@
       color: white;
       border-color: #DC2626;
       box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+    }
+
+    /* Aula Escolar */
+    .classroom-stage-box {
+      background: #FEF3C7;
+      border: 2px solid #FCD34D;
+      border-radius: 12px;
+      padding: 6px;
+      position: relative;
+      height: 98px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .classroom-chalkboard {
+      position: absolute;
+      top: 4px;
+      left: 6px;
+      right: 6px;
+      background: #14532D;
+      border: 1px solid #166534;
+      border-radius: 4px;
+      color: #DCFCE7;
+      font-family: var(--font-hand);
+      font-size: 0.68rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 1px 4px;
+      opacity: 0.85;
+      letter-spacing: 0.3px;
+    }
+
+    .classroom-ceiling {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .classroom-lamp {
+      font-size: 1.55rem;
+      transform-origin: top center;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .classroom-status-banner {
+      font-family: var(--font-hand);
+      font-size: 0.84rem;
+      font-weight: bold;
+      color: #92400E;
+      background: rgba(255,255,255,0.92);
+      border-radius: 6px;
+      padding: 2px 6px;
+      text-align: center;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .classroom-students-scene {
+      display: flex;
+      justify-content: center;
+    }
+
+    .classroom-desk-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.45rem;
+    }
+
+    /* Sismógrafo con Canvas Activo */
+    .seismograph-wrapper {
+      background: #0F172A;
+      border-radius: 10px;
+      padding: 5px 8px;
+      margin-top: 4px;
+    }
+
+    .seismograph-header-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-hand);
+      font-size: 0.78rem;
+      font-weight: bold;
+      color: #94A3B8;
+      margin-bottom: 2px;
+    }
+
+    .mag-indicator-badge {
+      background: #EF4444;
+      color: white;
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .seismic-canvas-container {
+      width: 100%;
+      height: 48px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #seismicCanvas {
+      width: 100%;
+      height: 48px;
+      display: block;
+      border-radius: 6px;
+    }
+
+    /* Mochila 72 Horas Minijuego */
+    .backpack-header-box {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .backpack-progress-track {
+      height: 7px;
+      background: #E2E8F0;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 4px 0 2px 0;
+    }
+
+    .backpack-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10B981, #059669);
+      transition: width 0.3s ease;
+    }
+
+    .backpack-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .backpack-item-btn {
+      background: white;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-family: var(--font-hand);
+      font-size: 0.92rem;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    .backpack-item-btn:hover {
+      border-color: #3B82F6;
+      transform: translateY(-1px);
+    }
+    .backpack-item-btn.packed {
+      background: #DCFCE7;
+      border-color: #86EFAC;
+      color: #166534;
+      text-decoration: line-through;
+      opacity: 0.9;
+    }
+
+    /* Consejos Lista */
+    .scientific-tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phone-card {
+      background: white;
+      border-left: 4px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 6px 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .phone-card-title {
+      font-family: var(--font-hand);
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .phone-card-text {
+      font-size: 0.78rem;
+      color: #475569;
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+
+    /* Barra Inferior del Celular */
+    .phone-bottom-nav {
+      background: white;
+      border-top: 1px solid #E2E8F0;
+      padding: 5px 14px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* Subcolumna Derecha: Dashboard de Monitoreo Geofísico */
+    .seismic-telemetry-dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 100%;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .seismic-telemetry-dashboard::-webkit-scrollbar {
+      width: 4px;
+    }
+    .seismic-telemetry-dashboard::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    /* Sello Oficial de Rigor */
+    .scientific-rigor-seal {
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      border: 1.5px solid #F59E0B;
+      border-radius: 12px;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .scientific-rigor-seal:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+
+    /* Escala Richter Interactiva */
+    .richter-scale-container {
+      background: white;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 8px 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+    .richter-scale-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .richter-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .richter-scale-card {
+      background: #F8FAFC;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 5px 6px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .richter-scale-card:hover {
+      transform: translateY(-1.5px);
+      border-color: #94A3B8;
+    }
+    .richter-scale-card.active {
+      border-color: #DC2626;
+      background: #FEF2F2;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
+    }
+    .richter-scale-card.mag-4.active {
+      border-color: #10B981;
+      background: #F0FDF4;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+    }
+    .richter-scale-card.mag-6.active {
+      border-color: #F59E0B;
+      background: #FFFBEB;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+    }
+
+    /* Protocolo D.C.H. (Drop, Cover, Hold) */
+    .dch-protocol-box {
+      background: white;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 8px 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+    .dch-steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 5px;
+    }
+    .dch-step-pill {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 6px 4px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+    .dch-step-pill.highlight-step {
+      background: #FEF3C7;
+      border-color: #F59E0B;
+      transform: scale(1.04);
+      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Checklist de Rigor Científico */
+    .scientific-checklist-box {
+      background: #F0FDF4;
+      border: 1.5px solid #BBF7D0;
+      border-radius: 12px;
+      padding: 7px 10px;
+      flex-shrink: 0;
+    }
+
+    /* Post-It Escolar */
+    .seismic-postit-note {
+      background: #FEF9C3;
+      border: 1.5px solid #FDE047;
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-family: var(--font-hand);
+      font-size: 0.88rem;
+      color: #713F12;
+      box-shadow: 2px 3px 6px rgba(0,0,0,0.06);
+      transform: rotate(-0.5deg);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .seismic-postit-pin {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.95rem;
+    }
+
+    /* Modal Educativo de Certificación */
+    .custom-edu-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .custom-edu-modal-card {
+      background: white;
+      border-radius: 24px;
+      padding: 20px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+      border: 3px solid #F59E0B;
+    }
+
+    .telemetry-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #DCFCE7;
+      color: #166534;
+      font-family: var(--font-hand);
+      font-weight: bold;
+      font-size: 0.82rem;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      border: 1px solid #86EFAC;
+    }
+
+    .telemetry-live-dot {
+      width: 7px;
+      height: 7px;
+      background: #22C55E;
+      border-radius: 50%;
+      animation: pulseDot 1.2s infinite alternate;
+    }
+
+    @keyframes pulseDot {
+      from { transform: scale(0.85); opacity: 0.7; }
+      to { transform: scale(1.3); opacity: 1; }
     }
   </style>
 </head>
@@ -101,7 +666,7 @@
     <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
     <img src="../media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
 
-    <!-- Destellos mágicos y estrellitas en SVG vectorial (Cero parpadeo o jitter de fuentes) -->
+    <!-- Destellos mágicos y estrellitas en SVG vectorial -->
     <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
     <svg class="decor-sparkle" style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
     <svg class="decor-sparkle" style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -122,7 +687,9 @@
       </div>
 
       <nav class="mission-progress" aria-label="Progreso de las salas">
-        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
+        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Inicio</a>
+        <a href="historia.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Historia</a>
+        <a href="instrucciones.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Guía</a>
         <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
         <a href="sala2-tsunami.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 2</a>
         <div class="step-badge active"><i class="fa-solid fa-house-crack"></i> Reto 3</div>
@@ -148,201 +715,379 @@
       <!-- Columna Izquierda: Smartphone App Educativa y Simulador de Sismos -->
       <section class="paper-card resource-column animate__animated animate__fadeInLeft">
         <div class="resource-header">
-          <span class="resource-badge" style="color: #DC2626;">
-            <i class="fa-solid fa-mobile-screen-button" style="color: #EF4444;"></i> App Oficial SismoKids 24/7
-          </span>
-          <span class="badge rounded-pill bg-danger" style="font-family: var(--font-hand); font-size: 0.92rem; padding: 0.35rem 0.8rem;">
-            Protocolos de Calidad
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="resource-badge" style="color: #DC2626;">
+              <i class="fa-solid fa-mobile-screen-button" style="color: #EF4444;"></i> App Oficial SismoKids 24/7
+            </span>
+            <span class="telemetry-live-pill">
+              <span class="telemetry-live-dot"></span> SENSOR 24/7 EN LÍNEA
+            </span>
+          </div>
+          <span class="badge rounded-pill bg-danger" style="font-family: var(--font-hand); font-size: 0.92rem; padding: 0.35rem 0.8rem; box-shadow: 0 2px 6px rgba(220,38,38,0.25);">
+            <i class="fa-solid fa-certificate"></i> Protocolos de Calidad
           </span>
         </div>
 
-        <div class="resource-body" style="padding: 0; background: #F8FAFC; border: none;">
-          
-          <!-- Smartphone Mockup Ampliado -->
-          <div id="phoneDevice" class="phone-mockup-advanced">
+        <div class="resource-body seismic-station-wrapper">
+          <div class="seismic-lab-layout">
             
-            <!-- Isla Dinámica / Cámara y Altavoz -->
-            <div style="width: 85px; height: 16px; background: #0F172A; border-radius: 0 0 12px 12px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 6px;">
-              <div style="width: 24px; height: 3px; background: #334155; border-radius: 2px;"></div>
-              <div style="width: 7px; height: 7px; background: #1E293B; border: 1.5px solid #334155; border-radius: 50%;"></div>
-            </div>
-
-            <!-- Pantalla del Celular -->
-            <div class="phone-screen" style="border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; background: #F8FAFC; flex: 1; position: relative;">
-              
-              <!-- Cabecera de la App -->
-              <div class="phone-app-header" style="padding: 0.55rem 0.85rem; background: #DC2626; color: white; display: flex; align-items: center; justify-content: space-between;">
-                <span style="font-family: var(--font-hand); font-size: 1.15rem; font-weight: bold;">
-                  <i class="fa-solid fa-shield-halved"></i> SismoKids 24/7
-                </span>
-                <button id="btnPhoneSiren" style="background: #FEE2E2; border: none; border-radius: 14px; font-size: 0.82rem; font-weight: bold; color: #B91C1C; padding: 3px 10px; cursor: pointer;">
-                  🚨 Alarma
-                </button>
-              </div>
-
-              <!-- Pestañas de la App (Simulador activo primero) -->
-              <div style="display: flex; background: #E2E8F0; padding: 4px; gap: 4px;">
-                <button id="tabBtnSismo" class="btn btn-sm btn-light flex-fill" style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; border-radius: 8px;">
-                  📈 Sismógrafo & Drill
-                </button>
-                <button id="tabBtnMochila" class="btn btn-sm btn-outline-secondary flex-fill" style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; border-radius: 8px;">
-                  🎒 Mochila (<span id="packCounter">0/5</span>)
-                </button>
-                <button id="tabBtnConsejos" class="btn btn-sm btn-outline-secondary flex-fill" style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; border-radius: 8px;">
-                  📋 Consejos
-                </button>
-              </div>
-
-              <!-- Vista 1: Sismógrafo y Simulador de Temblor Escolar (ACTIVO POR DEFECTO) -->
-              <div id="phoneViewSismo" class="phone-app-body" style="padding: 0.65rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
+            <!-- Subcolumna Izquierda: Celular SismoKids 24/7 -->
+            <div class="seismic-phone-column">
+              <div id="phoneDevice" class="phone-mockup-advanced">
                 
-                <!-- Selector de Magnitud -->
-                <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
-                  <span style="font-family: var(--font-hand); font-size: 0.9rem; font-weight: bold; color: #475569;">Magnitud:</span>
-                  <button class="app-magnitude-btn" data-mag="4">4.0 (Leve)</button>
-                  <button class="app-magnitude-btn active" data-mag="6">6.5 (Fuerte)</button>
-                  <button class="app-magnitude-btn" data-mag="8">8.0 (Mayor)</button>
+                <!-- Barra de Estado del SO del Celular (Hora, Wifi, Batería) -->
+                <div class="phone-status-bar">
+                  <span id="phoneClock">10:42</span>
+                  <div class="phone-island-notch">
+                    <div class="phone-speaker-slot"></div>
+                    <div class="phone-camera-lens"></div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-wifi" style="font-size: 0.65rem;"></i>
+                    <i class="fa-solid fa-battery-full" style="font-size: 0.72rem; color: #22C55E;"></i>
+                  </div>
                 </div>
 
-                <!-- Gráfico del Aula Escolar con Lámpara y Alumno -->
-                <div id="classroomStage" style="background: #FEF3C7; border: 2px solid #FCD34D; border-radius: 14px; padding: 8px; position: relative; height: 110px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
-                  <!-- Lámpara oscilante -->
-                  <div style="display: flex; justify-content: center;">
-                    <div id="hangingLamp" style="font-size: 1.7rem; transform-origin: top center; transition: transform 0.2s;">
-                      💡
+                <!-- Pantalla del Celular -->
+                <div class="phone-screen">
+                  
+                  <!-- Cabecera de la App -->
+                  <div class="phone-app-header">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                      <i class="fa-solid fa-shield-halved" style="color: #FEE2E2;"></i>
+                      <span style="font-family: var(--font-hand); font-size: 1.1rem; font-weight: bold;">SismoKids 24/7</span>
+                    </div>
+                    <button id="btnPhoneSiren" class="phone-siren-btn" type="button" title="Activar Alarma de Emergencia">
+                      <i class="fa-solid fa-bell animate__animated animate__swing animate__infinite"></i> Alarma
+                    </button>
+                  </div>
+
+                  <!-- Pestañas de la App -->
+                  <div class="phone-nav-tabs">
+                    <button id="tabBtnSismo" class="phone-tab-btn active" type="button">
+                      📈 Sismógrafo & Drill
+                    </button>
+                    <button id="tabBtnMochila" class="phone-tab-btn" type="button">
+                      🎒 Mochila (<span id="packCounter">0/5</span>)
+                    </button>
+                    <button id="tabBtnConsejos" class="phone-tab-btn" type="button">
+                      📋 Consejos
+                    </button>
+                  </div>
+
+                  <!-- Vista 1: Sismógrafo y Simulador Escolar -->
+                  <div id="phoneViewSismo" class="phone-app-body">
+                    
+                    <!-- Selector de Magnitud -->
+                    <div class="phone-magnitude-row">
+                      <span style="font-family: var(--font-hand); font-size: 0.86rem; font-weight: bold; color: #475569;">Magnitud:</span>
+                      <div class="phone-mag-buttons">
+                        <button class="app-magnitude-btn" data-mag="4" type="button">4.0 Leve</button>
+                        <button class="app-magnitude-btn active" data-mag="6" type="button">6.5 Fuerte</button>
+                        <button class="app-magnitude-btn" data-mag="8" type="button">8.0 Mayor</button>
+                      </div>
+                    </div>
+
+                    <!-- Escenario del Aula Escolar con Animación -->
+                    <div id="classroomStage" class="classroom-stage-box">
+                      <!-- Pizarra escolar -->
+                      <div class="classroom-chalkboard">
+                        <span>🏫 REGLA DE ORO: ¡AGÁCHATE, CÚBRETE Y SUJÉTATE!</span>
+                      </div>
+
+                      <!-- Lámpara Colgante del Aula -->
+                      <div class="classroom-ceiling">
+                        <div id="hangingLamp" class="classroom-lamp">
+                          <span class="lamp-bulb">💡</span>
+                        </div>
+                      </div>
+
+                      <!-- Alerta Flotante -->
+                      <div id="sismoAlertBanner" class="classroom-status-banner">
+                        🟢 Monitoreo sísmico 24/7 activo • Aula segura
+                      </div>
+
+                      <!-- Alumno y Pupitre Escolar -->
+                      <div id="classroomKid" class="classroom-students-scene">
+                        <div class="classroom-desk-wrapper">
+                          <span id="studentEmoji" class="student-char">🧑‍🎓</span>
+                          <span class="desk-char">🪑</span>
+                          <span class="backpack-char">🎒</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Sismógrafo Digital en Tiempo Real -->
+                    <div class="seismograph-wrapper">
+                      <div class="seismograph-header-labels">
+                        <span><i class="fa-solid fa-wave-square" style="color: #22C55E;"></i> Ondas P</span>
+                        <span id="magDisplayTag" class="mag-indicator-badge">6.5 Richter</span>
+                        <span>Ondas S <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i></span>
+                      </div>
+                      <div class="seismic-canvas-container">
+                        <canvas id="seismicCanvas" width="280" height="48"></canvas>
+                      </div>
+                    </div>
+
+                    <!-- Botón de Acción Simulacro -->
+                    <button id="btnRunEarthquakeDrill" class="btn-sim-action btn-sim-sismo" type="button" style="width: 100%; font-size: 1.08rem; padding: 0.45rem; margin-top: 2px;">
+                      <i class="fa-solid fa-house-crack"></i>
+                      <span id="btnSismoText">¡Iniciar Simulacro Escolar!</span>
+                    </button>
+                  </div>
+
+                  <!-- Vista 2: Minijuego de la Mochila de 72 Horas -->
+                  <div id="phoneViewMochila" class="phone-app-body" style="display: none;">
+                    <div class="backpack-header-box">
+                      <div style="font-family: var(--font-hand); font-size: 0.95rem; font-weight: bold; color: #1E293B;">
+                        🎒 Mochila de Emergencia 72 Horas
+                      </div>
+                      <div class="backpack-progress-track">
+                        <div id="backpackProgressBar" class="backpack-progress-fill" style="width: 0%;"></div>
+                      </div>
+                      <span id="backpackProgressLabel" style="font-size: 0.78rem; font-weight: bold; color: #64748B;">0 de 5 artículos empacados (0%)</span>
+                    </div>
+
+                    <div class="backpack-items-list">
+                      <button class="backpack-item-btn" data-item="1" type="button">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-size: 1.15rem;">🔦</span>
+                          <div style="text-align: left; line-height: 1.15;">
+                            <strong>Linterna potente LED</strong>
+                            <small style="display: block; font-size: 0.72rem; color: #64748B;">Para cortes de luz nocturnos</small>
+                          </div>
+                        </div>
+                        <span class="pack-status-icon">➕</span>
+                      </button>
+
+                      <button class="backpack-item-btn" data-item="2" type="button">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-size: 1.15rem;">💧</span>
+                          <div style="text-align: left; line-height: 1.15;">
+                            <strong>Agua potable (2 Litros)</strong>
+                            <small style="display: block; font-size: 0.72rem; color: #64748B;">Vital para hidratación segura</small>
+                          </div>
+                        </div>
+                        <span class="pack-status-icon">➕</span>
+                      </button>
+
+                      <button class="backpack-item-btn" data-item="3" type="button">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-size: 1.15rem;">🩹</span>
+                          <div style="text-align: left; line-height: 1.15;">
+                            <strong>Botiquín 1.º auxilios</strong>
+                            <small style="display: block; font-size: 0.72rem; color: #64748B;">Gasas, alcohol y vendas</small>
+                          </div>
+                        </div>
+                        <span class="pack-status-icon">➕</span>
+                      </button>
+
+                      <button class="backpack-item-btn" data-item="4" type="button">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-size: 1.15rem;">📢</span>
+                          <div style="text-align: left; line-height: 1.15;">
+                            <strong>Silbato de rescate</strong>
+                            <small style="display: block; font-size: 0.72rem; color: #64748B;">Pide auxilio sin gastar aire</small>
+                          </div>
+                        </div>
+                        <span class="pack-status-icon">➕</span>
+                      </button>
+
+                      <button class="backpack-item-btn" data-item="5" type="button">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="font-size: 1.15rem;">📻</span>
+                          <div style="text-align: left; line-height: 1.15;">
+                            <strong>Radio a pilas AM/FM</strong>
+                            <small style="display: block; font-size: 0.72rem; color: #64748B;">Avisos oficiales sin internet</small>
+                          </div>
+                        </div>
+                        <span class="pack-status-icon">➕</span>
+                      </button>
                     </div>
                   </div>
-                  
-                  <!-- Banner de Estado de la Alerta -->
-                  <div id="sismoAlertBanner" style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; color: #92400E; background: rgba(255,255,255,0.92); border-radius: 8px; padding: 2px 6px;">
-                    🟢 Monitoreo sísmico escolar 24/7 activo
+
+                  <!-- Vista 3: Protocolos de Rigor Científico -->
+                  <div id="phoneViewConsejos" class="phone-app-body" style="display: none;">
+                    <div class="scientific-tips-list">
+                      <div class="phone-card" style="border-left-color: #3B82F6;">
+                        <div class="phone-card-title"><span>🧘</span> 1. Antes: Prevención y Calma</div>
+                        <div class="phone-card-text">Identifica salidas despejadas, prepara la mochila 72h y mantén despejados los pasillos.</div>
+                      </div>
+
+                      <div class="phone-card" style="border-left-color: #F59E0B;">
+                        <div class="phone-card-title"><span>🪑</span> 2. Durante: Agáchate y Cúbrete</div>
+                        <div class="phone-card-text">Ponte bajo un pupitre firme y sujeta sus patas con las dos manos protegiendo tu nuca.</div>
+                      </div>
+
+                      <div class="phone-card" style="border-left-color: #10B981;">
+                        <div class="phone-card-title"><span>🚪</span> 3. Después: Evacuación Segura</div>
+                        <div class="phone-card-text">Al calmarse la sacudida, dirígete al punto de encuentro exterior sin usar ascensores.</div>
+                      </div>
+
+                      <div class="phone-card" style="border-left-color: #DC2626; background: #FEF2F2;">
+                        <div class="phone-card-title" style="color: #991B1B;"><span>🔬</span> Rigor Científico Comprobado</div>
+                        <div class="phone-card-text" style="color: #7F1D1D;">Normas avaladas por geofísicos del USGS y organismos de Protección Civil.</div>
+                      </div>
+                    </div>
                   </div>
 
-                  <!-- Alumno bajo el pupitre -->
-                  <div id="classroomKid" style="display: flex; justify-content: center; gap: 10px; font-size: 1.6rem;">
-                    <span>🙇‍♂️</span> <span>🪑</span> <span>🎒</span>
+                  <!-- Barra Inferior de Navegación del Celular -->
+                  <div class="phone-bottom-nav">
+                    <i class="fa-solid fa-house" style="color: #DC2626;"></i>
+                    <i class="fa-solid fa-phone" style="color: #64748B;"></i>
+                    <i class="fa-solid fa-gear" style="color: #64748B;"></i>
                   </div>
                 </div>
 
-                <!-- Trazado de Ondas Sísmicas en Vivo (Sismógrafo) -->
-                <div>
-                  <div style="display: flex; justify-content: space-between; font-family: var(--font-hand); font-size: 0.84rem; font-weight: bold; color: #64748B;">
-                    <span>Ondas Primarias (P)</span>
-                    <span>Ondas Secundarias (S)</span>
+              </div>
+            </div>
+
+            <!-- Subcolumna Derecha: Estación de Monitoreo Geofísico & Rigor Científico -->
+            <div class="seismic-telemetry-dashboard">
+              
+              <!-- Tarjeta de Acreditación Oficial / Sello de Rigor -->
+              <div id="btnScientificSeal" class="scientific-rigor-seal" title="Toca para ver el certificado de rigor científico">
+                <div style="font-size: 1.8rem; filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));">🏅</div>
+                <div style="flex: 1; line-height: 1.2;">
+                  <div style="font-family: var(--font-hand); font-size: 1rem; font-weight: bold; color: #92400E;">
+                    Avalado por Instituto Geofísico & Protección Civil
                   </div>
-                  <svg viewBox="0 0 240 55" style="width: 100%; height: 55px; background: #0F172A; border-radius: 10px; margin-top: 3px;">
-                    <line x1="0" y1="27" x2="240" y2="27" stroke="#334155" stroke-dasharray="3,3" />
-                    <polyline id="seismicLine" fill="none" stroke="#22C55E" stroke-width="2.5" points="0,27 20,27 40,26 60,28 80,27 100,20 110,36 120,18 130,34 140,27 160,27 180,27 200,27 220,27 240,27" />
-                  </svg>
+                  <div style="font-size: 0.78rem; color: #B45309;">
+                    Criterio: Calidad y Rigor de la Información Científica
+                  </div>
                 </div>
-
-                <!-- BOTÓN EXCLUSIVO DE SIMULACRO -->
-                <button id="btnRunEarthquakeDrill" class="btn-sim-action btn-sim-sismo" type="button" style="width: 100%; font-size: 1.15rem; padding: 0.5rem; margin-top: 4px;">
-                  <i class="fa-solid fa-house-crack"></i>
-                  <span id="btnSismoText">¡Iniciar Simulacro Escolar!</span>
-                </button>
-
+                <span class="badge bg-warning text-dark" style="font-family: var(--font-hand); font-size: 0.8rem; padding: 3px 7px;">
+                  Verificado
+                </span>
               </div>
 
-              <!-- Vista 2: Minijuego de la Mochila de 72 Horas -->
-              <div id="phoneViewMochila" class="phone-app-body" style="display: none; padding: 0.6rem; gap: 0.45rem; flex: 1; flex-direction: column;">
-                <div style="font-family: var(--font-hand); font-size: 0.95rem; color: #475569; text-align: center; font-weight: bold;">
-                  🎒 Toca para guardar 5 elementos vitales:
+              <!-- Escala Richter Interactiva (3 Niveles con Visualizador de Daños) -->
+              <div class="richter-scale-container">
+                <div class="richter-scale-header">
+                  <span style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: #1E293B;">
+                    <i class="fa-solid fa-ruler-combined" style="color: #2563EB;"></i> Escala de Intensidad Sísmica
+                  </span>
+                  <span style="font-size: 0.75rem; color: #64748B; font-weight: bold;">(Toca un nivel)</span>
                 </div>
 
-                <div class="backpack-item-btn" data-item="1">
-                  <span>🔦 Linterna potente LED</span> <span>➕</span>
-                </div>
-                <div class="backpack-item-btn" data-item="2">
-                  <span>💧 Botella de agua potable</span> <span>➕</span>
-                </div>
-                <div class="backpack-item-btn" data-item="3">
-                  <span>🩹 Botiquín de primeros auxilios</span> <span>➕</span>
-                </div>
-                <div class="backpack-item-btn" data-item="4">
-                  <span>📢 Silbato de rescate</span> <span>➕</span>
-                </div>
-                <div class="backpack-item-btn" data-item="5">
-                  <span>📻 Radio a pilas FM</span> <span>➕</span>
-                </div>
-              </div>
+                <div class="richter-cards-grid">
+                  <!-- 4.0 Leve -->
+                  <div class="richter-scale-card mag-4" data-mag="4">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                      <span class="badge bg-success" style="font-size: 0.7rem;">4.0 Leve</span>
+                      <span style="font-size: 0.95rem;">🍃</span>
+                    </div>
+                    <strong style="display: block; font-size: 0.8rem; color: #166534; font-family: var(--font-hand);">Vibración Ligera</strong>
+                    <p style="font-size: 0.7rem; color: #475569; margin: 0; line-height: 1.2;">Lámparas se mueven levemente. Sin daño estructural.</p>
+                  </div>
 
-              <!-- Vista 3: Protocolos de Calidad y Autoprotección -->
-              <div id="phoneViewConsejos" class="phone-app-body" style="display: none; padding: 0.6rem; gap: 0.5rem; flex: 1; flex-direction: column;">
-                <div class="phone-card" style="border-left-color: #3B82F6; padding: 8px 10px;">
-                  <div class="phone-card-title"><span>🧘</span> 1. Mantén la calma</div>
-                  <div class="phone-card-text">No corras en el aula ni empujes en las escaleras hacia el patio exterior.</div>
-                </div>
+                  <!-- 6.5 Fuerte -->
+                  <div class="richter-scale-card mag-6 active" data-mag="6">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                      <span class="badge bg-warning text-dark" style="font-size: 0.7rem;">6.5 Fuerte</span>
+                      <span style="font-size: 0.95rem;">⚠️</span>
+                    </div>
+                    <strong style="display: block; font-size: 0.8rem; color: #92400E; font-family: var(--font-hand);">Sacudida Fuerte</strong>
+                    <p style="font-size: 0.7rem; color: #475569; margin: 0; line-height: 1.2;">Caen libros y útiles. ¡Agacharse bajo pupitre!</p>
+                  </div>
 
-                <div class="phone-card" style="border-left-color: #F59E0B; padding: 8px 10px;">
-                  <div class="phone-card-title"><span>🪑</span> 2. Agáchate y cúbrete</div>
-                  <div class="phone-card-text">Ponte bajo un pupitre firme y protege tu cabeza y nuca con tus brazos.</div>
-                </div>
-
-                <div class="phone-card" style="border-left-color: #10B981; padding: 8px 10px;">
-                  <div class="phone-card-title"><span>🚪</span> 3. Aléjate de ventanas</div>
-                  <div class="phone-card-text">Evita vidrios, pizarras o estanterías pesadas que puedan tambalearse.</div>
+                  <!-- 8.0 Mayor -->
+                  <div class="richter-scale-card mag-8" data-mag="8">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                      <span class="badge bg-danger" style="font-size: 0.7rem;">8.0 Mayor</span>
+                      <span style="font-size: 0.95rem;">🚨</span>
+                    </div>
+                    <strong style="display: block; font-size: 0.8rem; color: #991B1B; font-family: var(--font-hand);">Terremoto Mayor</strong>
+                    <p style="font-size: 0.7rem; color: #475569; margin: 0; line-height: 1.2;">Gran energía sísmica. Alarma y evacuación total.</p>
+                  </div>
                 </div>
               </div>
 
-              <!-- Barra Inferior de la App -->
-              <div style="background: white; border-top: 1px solid #E2E8F0; padding: 6px 14px; display: flex; justify-content: space-around; font-size: 1.05rem; color: #64748B;">
-                <i class="fa-solid fa-house" style="color: #DC2626;"></i>
-                <i class="fa-solid fa-phone"></i>
-                <i class="fa-solid fa-gear"></i>
+              <!-- Protocolo Vital D.C.H. ("Agacharse, Cubrirse, Sujetarse") -->
+              <div class="dch-protocol-box">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: #1E293B;">
+                    <i class="fa-solid fa-child-reaching" style="color: #10B981;"></i> Protocolo Escolar: Triángulo D.C.H.
+                  </span>
+                  <span id="dchLiveStatus" class="badge bg-primary" style="font-size: 0.7rem;">Norma Internacional</span>
+                </div>
+
+                <div class="dch-steps-row">
+                  <!-- Paso 1 -->
+                  <div id="stepDch1" class="dch-step-pill">
+                    <div style="font-size: 1.25rem;">🙇‍♂️</div>
+                    <strong style="font-family: var(--font-hand); font-size: 0.84rem; color: #1E293B; display: block;">1. Agáchate</strong>
+                    <span style="font-size: 0.68rem; color: #64748B; display: block; line-height: 1.15;">Baja tu centro de gravedad para no caer.</span>
+                  </div>
+
+                  <!-- Paso 2 -->
+                  <div id="stepDch2" class="dch-step-pill">
+                    <div style="font-size: 1.25rem;">🪑</div>
+                    <strong style="font-family: var(--font-hand); font-size: 0.84rem; color: #1E293B; display: block;">2. Cúbrete</strong>
+                    <span style="font-size: 0.68rem; color: #64748B; display: block; line-height: 1.15;">Cabeza y nuca bajo el pupitre firme.</span>
+                  </div>
+
+                  <!-- Paso 3 -->
+                  <div id="stepDch3" class="dch-step-pill">
+                    <div style="font-size: 1.25rem;">🤝</div>
+                    <strong style="font-family: var(--font-hand); font-size: 0.84rem; color: #1E293B; display: block;">3. Sujétate</strong>
+                    <span style="font-size: 0.68rem; color: #64748B; display: block; line-height: 1.15;">Aférrate a las patas hasta que pase el sismo.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Checklist de Verificación de Calidad Científica -->
+              <div class="scientific-checklist-box">
+                <div style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; color: #166534; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                  <i class="fa-solid fa-list-check"></i> Checklist: ¿Por qué este recurso tiene Calidad y Rigor?
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.74rem; color: #14532D;">
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
+                    <span><strong>Fuentes Verificadas:</strong> Basado en geofísica oficial.</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
+                    <span><strong>Cero Mitos:</strong> Los sismos no se predicen por hora.</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
+                    <span><strong>Mochila 72h:</strong> Artículos justificados para sobrevivir.</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-circle-check" style="color: #16A34A;"></i>
+                    <span><strong>Sin Peligro:</strong> Desaconseja usar ascensores o correr.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Post-it Escolar del Sismólogo -->
+              <div class="seismic-postit-note">
+                <div class="seismic-postit-pin">📌</div>
+                <strong>¡Pista de Calidad Científica para tu Misión!</strong>
+                <p style="margin: 2px 0 0 0; font-size: 0.82rem; line-height: 1.25;">
+                  Para evaluar si un recurso digital tiene <em>Calidad</em>, fíjate en quién lo respalda. Si la información coincide con geofísicos y organismos de emergencias certificados, ¡garantiza la máxima seguridad y aprendizaje real!
+                </p>
               </div>
 
             </div>
 
           </div>
-
         </div>
       </section>
 
-      <!-- Columna Derecha: Pregunta Pedagógica y Botones Directos de Respuesta -->
+      <!-- Columna Derecha: Preguntas Pedagógicas (Gestionadas por validation.js) -->
       <section class="paper-card question-column animate__animated animate__fadeInRight">
         <div class="question-badge">
-          <i class="fa-solid fa-circle-check"></i> Criterio Pedagógico: Calidad
+          <i class="fa-solid fa-circle-check"></i> Criterio Pedagógico: Calidad y Rigor Científico
         </div>
 
         <h2 class="question-title">
-          Misión 3: Explora esta aplicación sobre terremotos. ¿Sientes que los datos, los consejos y los simulacros están bien explicados y dicen la verdad para aprender a protegernos en una emergencia?
+          Cargando misión y preguntas pedagógicas...
         </h2>
 
-        <div class="question-options-box">
-          <!-- Opción A: Correcta / Dominio Total -->
-          <div class="option-card" data-correct="true" data-feedback="correct">
-            <div class="option-letter">A</div>
-            <div>
-              <strong style="color: var(--school-green-title);">¡Sí, tiene máxima calidad y rigor!</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Los protocolos y recomendaciones coinciden con organismos oficiales de Protección Civil.</p>
-            </div>
-          </div>
-
-          <!-- Opción B: Comprensión Parcial / Duda -->
-          <div class="option-card" data-correct="false" data-feedback="partial">
-            <div class="option-letter">B</div>
-            <div>
-              <strong>Entendí parcialmente...</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Sé que tiembla el suelo, pero no me queda claro cómo saber si los datos son confiables.</p>
-            </div>
-          </div>
-
-          <!-- Opción C: No entendí / Necesito Ayuda -->
-          <div class="option-card" data-correct="false" data-feedback="help">
-            <div class="option-letter">C</div>
-            <div>
-              <strong>No entendí nada.</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe cómo probar la alerta sísmica en la app ni qué significa calidad científica.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="direct-select-hint">
-          <i class="fa-solid fa-hand-pointer" style="color: #2563EB;"></i>
-          <span>Toca directamente una opción para validar tu respuesta</span>
-        </div>
-
+        <div class="question-options-box"></div>
+        <div class="direct-select-hint"></div>
         <div class="feedback-msg"></div>
       </section>
 
@@ -352,7 +1097,7 @@
     <footer class="bottom-bar animate__animated animate__fadeInUp">
       <div class="hint-pill">
         <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
-        <span>Pista de Calidad: Revisa las recomendaciones en el celular interactivo y pulsa directamente la opción que consideres correcta.</span>
+        <span>Pista de Calidad: Revisa las recomendaciones en el celular interactivo y la estación sismológica para evaluar si la información es rigurosa.</span>
       </div>
       <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
         <i class="fa-solid fa-clipboard-check"></i> Plan Escolar de Autoprotección
@@ -376,15 +1121,33 @@
     </div>
   </div>
 
+  <!-- Modal Educativo de Certificación Científica -->
+  <div id="scientificSealModal" class="custom-edu-modal" style="display: none;">
+    <div class="custom-edu-modal-card animate__animated animate__zoomIn">
+      <div style="font-size: 2.8rem; margin-bottom: 4px;">🏅</div>
+      <h3 style="font-family: var(--font-script); font-size: 1.85rem; color: #B45309; margin: 0 0 6px 0;">
+        Certificado de Calidad y Rigor Científico
+      </h3>
+      <div style="background: #FEF3C7; border: 1.5px solid #FDE68A; border-radius: 12px; padding: 10px 14px; text-align: left; margin: 10px 0; font-size: 0.85rem; color: #78350F; line-height: 1.35;">
+        <p style="margin: 0 0 6px 0;"><strong>🏛️ Entidades Científicas:</strong> Red Sismológica Nacional, USGS y Protección Civil Escolar.</p>
+        <p style="margin: 0 0 6px 0;"><strong>📚 Criterio Pedagógico:</strong> Los consejos, magnitudes en escala de Richter y simulacros de la app no son inventados; cumplen normas oficiales para salvar vidas.</p>
+        <p style="margin: 0;"><strong>🎯 Valoración de Calidad:</strong> ¡Máximo Rigor! La información es veraz, confiable y segura para estudiantes de primaria.</p>
+      </div>
+      <button id="btnCloseSealModal" type="button" class="btn btn-warning" style="font-family: var(--font-hand); font-size: 1.05rem; font-weight: bold; border-radius: 9999px; padding: 5px 20px;">
+        ¡Entendido, sigamos investigando! ✨
+      </button>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="../js/main.js"></script>
   <script src="../js/validation.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Inicializar validación exclusiva del botón Desbloquear
+      // 1. Inicializar validación exclusiva de 2 rondas de preguntas
       initRoomValidation('sala3');
 
-      // 2. Control de Pestañas de la App
+      // 2. Control de Pestañas de la App Móvil
       const tabSismo = document.getElementById('tabBtnSismo');
       const tabMochila = document.getElementById('tabBtnMochila');
       const tabConsejos = document.getElementById('tabBtnConsejos');
@@ -394,14 +1157,14 @@
       const phoneDevice = document.getElementById('phoneDevice');
       const hangingLamp = document.getElementById('hangingLamp');
       const alertBanner = document.getElementById('sismoAlertBanner');
-      const seismicLine = document.getElementById('seismicLine');
+      const studentEmoji = document.getElementById('studentEmoji');
       const magButtons = document.querySelectorAll('.app-magnitude-btn');
+      const richterCards = document.querySelectorAll('.richter-scale-card');
+      const magDisplayTag = document.getElementById('magDisplayTag');
 
       function switchPhoneTab(activeBtn, activeView) {
-        [tabSismo, tabMochila, tabConsejos].forEach(b => {
-          b.className = 'btn btn-sm btn-outline-secondary flex-fill';
-        });
-        activeBtn.className = 'btn btn-sm btn-light flex-fill';
+        [tabSismo, tabMochila, tabConsejos].forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
 
         [viewSismo, viewMochila, viewConsejos].forEach(v => v.style.display = 'none');
         activeView.style.display = 'flex';
@@ -412,21 +1175,58 @@
       tabMochila.addEventListener('click', () => switchPhoneTab(tabMochila, viewMochila));
       tabConsejos.addEventListener('click', () => switchPhoneTab(tabConsejos, viewConsejos));
 
-      // 3. Selección de Magnitud
+      // 3. Selección Sincronizada de Magnitud (Celular y Tablero Geofísico)
       let selectedMag = 6;
+
+      function updateMagnitude(mag) {
+        selectedMag = mag;
+        
+        // Actualizar botones del celular
+        magButtons.forEach(btn => {
+          if (parseInt(btn.getAttribute('data-mag')) === selectedMag) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Actualizar tarjetas del tablero de telemetría
+        richterCards.forEach(card => {
+          if (parseInt(card.getAttribute('data-mag')) === selectedMag) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+
+        // Actualizar badge en el sismógrafo
+        const labelText = selectedMag === 4 ? '4.0 Leve' : (selectedMag === 6 ? '6.5 Fuerte' : '8.0 Mayor');
+        if (magDisplayTag) magDisplayTag.textContent = `${labelText} Richter`;
+
+        if (window.escapeSound) window.escapeSound.playPop();
+      }
+
       magButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
-          magButtons.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          selectedMag = parseInt(this.getAttribute('data-mag'));
-          if (window.escapeSound) window.escapeSound.playPop();
+          const mag = parseInt(this.getAttribute('data-mag'));
+          updateMagnitude(mag);
+        });
+      });
+
+      richterCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const mag = parseInt(this.getAttribute('data-mag'));
+          updateMagnitude(mag);
         });
       });
 
       // 4. Minijuego Interactivo de la Mochila de 72 Horas
       let packedCount = 0;
       const packCounter = document.getElementById('packCounter');
+      const backpackProgressBar = document.getElementById('backpackProgressBar');
+      const backpackProgressLabel = document.getElementById('backpackProgressLabel');
       const backpackButtons = document.querySelectorAll('.backpack-item-btn');
 
       backpackButtons.forEach(btn => {
@@ -434,84 +1234,236 @@
           e.stopPropagation();
           if (!this.classList.contains('packed')) {
             this.classList.add('packed');
-            this.querySelector('span:last-child').textContent = '✅';
+            const icon = this.querySelector('.pack-status-icon');
+            if (icon) icon.textContent = '✅';
+            
             packedCount++;
             packCounter.textContent = `${packedCount}/5`;
+            
+            const pct = Math.round((packedCount / 5) * 100);
+            if (backpackProgressBar) backpackProgressBar.style.width = `${pct}%`;
+            if (backpackProgressLabel) {
+              if (packedCount === 5) {
+                backpackProgressLabel.textContent = '🏆 ¡Mochila de 72h 100% lista y certificada!';
+                backpackProgressLabel.style.color = '#15803D';
+              } else {
+                backpackProgressLabel.textContent = `${packedCount} de 5 artículos empacados (${pct}%)`;
+              }
+            }
+
             if (window.escapeSound) window.escapeSound.playPop();
 
             if (packedCount === 5) {
               if (window.escapeSound) window.escapeSound.playSuccess();
               if (typeof confetti === 'function') {
-                confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+                confetti({ particleCount: 75, spread: 65, origin: { y: 0.65 } });
               }
             }
           }
         });
       });
 
-      // 5. LÓGICA EXCLUSIVA DEL SIMULACRO SÍSMICO (100% INDEPENDIENTE DE DESBLOQUEAR)
+      // 5. Animación Continua de Ondas Sísmicas en Canvas en Tiempo Real
+      const canvas = document.getElementById('seismicCanvas');
+      const ctx = canvas ? canvas.getContext('2d') : null;
+      let waveOffset = 0;
+      let isDrilling = false;
+
+      function renderSeismographFrame() {
+        if (!ctx || !canvas) return;
+        const w = canvas.width;
+        const h = canvas.height;
+        const midY = h / 2;
+
+        // Limpiar fondo
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(0, 0, w, h);
+
+        // Cuadrícula milimétrica
+        ctx.strokeStyle = '#1E293B';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < w; x += 25) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+          ctx.stroke();
+        }
+
+        // Línea neutra base
+        ctx.strokeStyle = '#334155';
+        ctx.setLineDash([2, 3]);
+        ctx.beginPath();
+        ctx.moveTo(0, midY);
+        ctx.lineTo(w, midY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Trazar onda continua
+        waveOffset += isDrilling ? 4.5 : 1.6;
+        ctx.beginPath();
+        ctx.lineWidth = isDrilling ? 2.5 : 2;
+
+        let strokeColor = '#22C55E';
+        if (isDrilling) {
+          strokeColor = selectedMag >= 8 ? '#EF4444' : (selectedMag >= 6 ? '#F59E0B' : '#22C55E');
+        } else if (selectedMag >= 8) {
+          strokeColor = '#EF4444';
+        } else if (selectedMag >= 6) {
+          strokeColor = '#F59E0B';
+        }
+        ctx.strokeStyle = strokeColor;
+
+        let ampMultiplier = 1;
+        if (selectedMag === 4) ampMultiplier = 1.1;
+        if (selectedMag === 6) ampMultiplier = 2.2;
+        if (selectedMag === 8) ampMultiplier = 3.6;
+        if (isDrilling) ampMultiplier *= 2.0;
+
+        for (let x = 0; x < w; x++) {
+          const t = (x + waveOffset) * 0.055;
+          let y = Math.sin(t * 1.5) * 2.2 * ampMultiplier;
+          y += Math.sin(t * 3.8) * 1.6 * ampMultiplier;
+          if (Math.sin(t * 0.35) > 0.55) {
+            y += (Math.random() - 0.5) * 5 * ampMultiplier;
+          }
+          const finalY = Math.max(3, Math.min(h - 3, midY + y));
+          if (x === 0) ctx.moveTo(x, finalY);
+          else ctx.lineTo(x, finalY);
+        }
+        ctx.stroke();
+
+        requestAnimationFrame(renderSeismographFrame);
+      }
+      requestAnimationFrame(renderSeismographFrame);
+
+      // 6. Lógica del Simulacro Escolar y Secuencia Didáctica D.C.H.
       const btnDrill = document.getElementById('btnRunEarthquakeDrill');
       const btnSiren = document.getElementById('btnPhoneSiren');
-      let isDrilling = false;
+      const stepDch1 = document.getElementById('stepDch1');
+      const stepDch2 = document.getElementById('stepDch2');
+      const stepDch3 = document.getElementById('stepDch3');
+      const dchLiveStatus = document.getElementById('dchLiveStatus');
 
       function triggerSeismicSimulation() {
         if (isDrilling) return;
         isDrilling = true;
 
-        btnDrill.querySelector('span').textContent = '¡Sismo en Curso! Cúbrete...';
+        if (btnDrill) btnDrill.querySelector('span').textContent = '¡Sismo en Curso! Cúbrete...';
 
-        // Sonidos de sirena escolar y estruendo sísmico
+        // Sonidos de sirena y estruendo sísmico
         if (window.escapeSound) {
-          window.escapeSound.playSiren(2);
-          window.escapeSound.playRumble(3.5);
+          window.escapeSound.playSiren(2.2);
+          window.escapeSound.playRumble(3.8);
         }
 
         // Animación de temblor en el teléfono y en la lámpara
-        phoneDevice.classList.add('phone-shaking');
-        hangingLamp.classList.add('lamp-swaying');
+        if (phoneDevice) phoneDevice.classList.add('phone-shaking');
+        if (hangingLamp) hangingLamp.classList.add('lamp-swaying');
+        if (studentEmoji) studentEmoji.textContent = '🙇‍♂️';
 
-        // Línea sísmica violenta según la magnitud
-        if (selectedMag >= 8) {
-          seismicLine.setAttribute('stroke', '#EF4444');
-          seismicLine.setAttribute('points', '0,27 15,27 30,10 45,45 60,5 75,50 90,2 105,52 120,4 135,48 150,27 170,27 200,27 240,27');
-        } else if (selectedMag >= 6) {
-          seismicLine.setAttribute('stroke', '#F59E0B');
-          seismicLine.setAttribute('points', '0,27 20,27 35,16 50,38 65,12 80,42 95,14 110,40 125,18 140,36 160,27 200,27 240,27');
-        } else {
-          seismicLine.setAttribute('stroke', '#22C55E');
-          seismicLine.setAttribute('points', '0,27 30,27 45,20 60,34 75,18 90,36 105,22 120,32 140,27 200,27 240,27');
+        // Banner en el celular
+        if (alertBanner) {
+          alertBanner.style.background = '#EF4444';
+          alertBanner.style.color = '#FFFFFF';
+          alertBanner.innerHTML = '🚨 <strong>¡ALERTA SÍSMICA!</strong> ¡Agáchate, cúbrete y sujétate!';
         }
 
-        // Fases de la Alerta en Pantalla
-        alertBanner.style.background = '#EF4444';
-        alertBanner.style.color = '#FFFFFF';
-        alertBanner.innerHTML = '🚨 <strong>¡ALERTA SÍSMICA!</strong> 1. Mantén la calma 2. Agáchate 3. Sujétate';
+        // Fases D.C.H. en la Estación Geofísica
+        // Fase 1: Agáchate (0s - 1.2s)
+        if (stepDch1) stepDch1.classList.add('highlight-step');
+        if (dchLiveStatus) {
+          dchLiveStatus.textContent = 'Paso 1: ¡Agáchate!';
+          dchLiveStatus.className = 'badge bg-warning text-dark';
+        }
 
-        // Calma post-simulacro
+        // Fase 2: Cúbrete (1.2s - 2.4s)
         setTimeout(() => {
-          phoneDevice.classList.remove('phone-shaking');
-          hangingLamp.classList.remove('lamp-swaying');
-          seismicLine.setAttribute('stroke', '#22C55E');
-          seismicLine.setAttribute('points', '0,27 20,27 40,26 60,28 80,27 100,20 110,36 120,18 130,34 140,27 160,27 180,27 200,27 220,27 240,27');
-          alertBanner.style.background = '#DCFCE7';
-          alertBanner.style.color = '#166534';
-          alertBanner.innerHTML = '✅ <strong>¡Simulacro completado!</strong> Protocolos dominados con éxito.';
-          btnDrill.querySelector('span').textContent = '¡Iniciar Simulacro Escolar!';
+          if (!isDrilling) return;
+          if (stepDch1) stepDch1.classList.remove('highlight-step');
+          if (stepDch2) stepDch2.classList.add('highlight-step');
+          if (dchLiveStatus) {
+            dchLiveStatus.textContent = 'Paso 2: ¡Cúbrete!';
+            dchLiveStatus.className = 'badge bg-info text-dark';
+          }
+        }, 1200);
+
+        // Fase 3: Sujétate (2.4s - 3.6s)
+        setTimeout(() => {
+          if (!isDrilling) return;
+          if (stepDch2) stepDch2.classList.remove('highlight-step');
+          if (stepDch3) stepDch3.classList.add('highlight-step');
+          if (dchLiveStatus) {
+            dchLiveStatus.textContent = 'Paso 3: ¡Sujétate!';
+            dchLiveStatus.className = 'badge bg-success';
+          }
+        }, 2400);
+
+        // Conclusión del simulacro (3.8s)
+        setTimeout(() => {
+          if (phoneDevice) phoneDevice.classList.remove('phone-shaking');
+          if (hangingLamp) hangingLamp.classList.remove('lamp-swaying');
+          if (studentEmoji) studentEmoji.textContent = '🧑‍🎓';
+
+          [stepDch1, stepDch2, stepDch3].forEach(s => s && s.classList.remove('highlight-step'));
+          if (dchLiveStatus) {
+            dchLiveStatus.textContent = 'Norma Internacional';
+            dchLiveStatus.className = 'badge bg-primary';
+          }
+
+          if (alertBanner) {
+            alertBanner.style.background = '#DCFCE7';
+            alertBanner.style.color = '#166534';
+            alertBanner.innerHTML = '✅ <strong>¡Simulacro completado!</strong> Protocolos aprendidos con éxito.';
+          }
+
+          if (btnDrill) btnDrill.querySelector('span').textContent = '¡Iniciar Simulacro Escolar!';
           isDrilling = false;
-        }, 3500);
+
+          if (window.escapeSound) window.escapeSound.playSuccess();
+          if (typeof confetti === 'function') {
+            confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+          }
+        }, 3800);
       }
 
-      btnDrill.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        triggerSeismicSimulation();
-      });
+      if (btnDrill) {
+        btnDrill.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          triggerSeismicSimulation();
+        });
+      }
 
-      btnSiren.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        triggerSeismicSimulation();
-      });
+      if (btnSiren) {
+        btnSiren.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          triggerSeismicSimulation();
+        });
+      }
+
+      // 7. Modal Educativo del Sello de Rigor Científico
+      const btnScientificSeal = document.getElementById('btnScientificSeal');
+      const scientificSealModal = document.getElementById('scientificSealModal');
+      const btnCloseSealModal = document.getElementById('btnCloseSealModal');
+
+      if (btnScientificSeal && scientificSealModal && btnCloseSealModal) {
+        btnScientificSeal.addEventListener('click', () => {
+          scientificSealModal.style.display = 'flex';
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+
+        btnCloseSealModal.addEventListener('click', () => {
+          scientificSealModal.style.display = 'none';
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+
+        scientificSealModal.addEventListener('click', (e) => {
+          if (e.target === scientificSealModal) {
+            scientificSealModal.style.display = 'none';
+          }
+        });
+      }
     });
   </script>
 </body>

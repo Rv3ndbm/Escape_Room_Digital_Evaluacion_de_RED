@@ -15,6 +15,142 @@
   <!-- Estilos propios (Estética Escolar Genially) -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .resource-body-full {
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      flex: 1 !important;
+      min-height: 0 !important;
+      height: 100% !important;
+      width: 100% !important;
+      overflow: hidden !important;
+    }
+
+    .educaplay-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+      border: 2px solid #FCD34D;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .accessibility-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 100%);
+      border-bottom: 2px solid #FDE047;
+      padding: 6px 14px;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .accessibility-toolbar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-hand);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #854D0E;
+    }
+
+    .acc-buttons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .acc-btn {
+      background: #FFFFFF;
+      border: 1.5px solid #F59E0B;
+      border-radius: var(--radius-pill);
+      color: #92400E;
+      font-family: var(--font-hand);
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.15);
+    }
+
+    .acc-btn:hover {
+      background: #FEF3C7;
+      border-color: #D97706;
+      transform: translateY(-1px);
+    }
+
+    .acc-btn.active {
+      background: #D97706;
+      color: #FFFFFF;
+      border-color: #B45309;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+    }
+
+    .btn-open-external-edu {
+      background: #2563EB;
+      border: 1.5px solid #1D4ED8;
+      color: #FFFFFF;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-hand);
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-open-external-edu:hover {
+      background: #1D4ED8;
+      color: #FFFFFF;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .educaplay-frame-box {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: clamp(420px, 60vh, 720px);
+      position: relative;
+      background: #F8FAFC;
+      overflow: hidden;
+    }
+
+    @media (min-width: 993px) {
+      .educaplay-frame-box {
+        min-height: 0;
+      }
+    }
+
+    .educaplay-frame-box iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
@@ -64,7 +200,9 @@
       </div>
 
       <nav class="mission-progress" aria-label="Progreso de las salas">
-        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
+        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Inicio</a>
+        <a href="historia.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Historia</a>
+        <a href="instrucciones.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Guía</a>
         <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
         <a href="sala2-tsunami.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 2</a>
         <a href="sala3-terremoto.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 3</a>
@@ -98,30 +236,37 @@
           </span>
         </div>
 
-        <div class="resource-body" style="padding: 0;">
+        <div class="resource-body resource-body-full">
           <div class="educaplay-container">
             
             <!-- Barra Superior de Herramientas de Inclusión -->
-            <div class="accessibility-toolbar" style="background: #FEF9C3; border-bottom: 2px solid #FDE047;">
-              <span style="font-family: var(--font-hand); font-size: 0.95rem; font-weight: bold; color: #854D0E;">
+            <div class="accessibility-toolbar">
+              <div class="accessibility-toolbar-title">
                 <i class="fa-solid fa-universal-access"></i> Herramientas de Inclusión:
-              </span>
+              </div>
               <div class="acc-buttons">
-                <button id="btnFontToggle" class="acc-btn">
+                <button id="btnFontToggle" class="acc-btn" type="button" title="Aumentar tamaño de letra para facilitar la lectura">
                   <i class="fa-solid fa-text-height"></i> Letra Grande
                 </button>
-                <button id="btnContrastToggle" class="acc-btn">
+                <button id="btnContrastToggle" class="acc-btn" type="button" title="Activar modo de alto contraste visual">
                   <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
                 </button>
+                <button id="btnFullscreenToggle" class="acc-btn" type="button" title="Ver juego en pantalla completa">
+                  <i class="fa-solid fa-expand"></i> Pantalla Completa
+                </button>
+                <a href="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" target="_blank" rel="noopener noreferrer" class="btn-open-external-edu" title="Abrir Educaplay en pestaña completa">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir en otra pestaña
+                </a>
               </div>
             </div>
 
-            <!-- Marco del Iframe Educaplay -->
+            <!-- Marco del Iframe Educaplay que abarca el 100% de la pantalla -->
             <div class="educaplay-frame-box" id="educaplayWrapper">
               <iframe 
+                id="educaplayIframe"
                 src="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" 
                 title="Actividad educativa sobre el calor y la atmósfera"
-                style="width: 100%; height: 100%; border: none;"
+                allow="autoplay; fullscreen"
                 allowfullscreen>
               </iframe>
             </div>
@@ -130,50 +275,18 @@
         </div>
       </section>
 
-      <!-- Columna Derecha: Pregunta Pedagógica y Botones Directos de Respuesta -->
+      <!-- Columna Derecha: Preguntas Pedagógicas (Gestionadas dinámicamente por validation.js) -->
       <section class="paper-card question-column animate__animated animate__fadeInRight">
         <div class="question-badge">
           <i class="fa-solid fa-universal-access"></i> Criterio Pedagógico: Accesibilidad
         </div>
 
         <h2 class="question-title">
-          Misión 4: Revisa este juego sobre el calor. Piensa en tus compañeros: ¿Crees que el juego tiene colores claros, letras grandes y sonidos para que CUALQUIER niño pueda jugar, incluso si usa gafas o le cuesta escuchar?
+          Cargando misión y preguntas pedagógicas...
         </h2>
 
-        <div class="question-options-box">
-          <!-- Opción A: Correcta / Dominio Total -->
-          <div class="option-card" data-correct="true" data-feedback="correct">
-            <div class="option-letter">A</div>
-            <div>
-              <strong style="color: var(--school-green-title);">¡Sí, es accesible e inclusivo!</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Tiene colores nítidos, letras claras y adaptaciones para que nadie quede fuera.</p>
-            </div>
-          </div>
-
-          <!-- Opción B: Comprensión Parcial / Duda -->
-          <div class="option-card" data-correct="false" data-feedback="partial">
-            <div class="option-letter">B</div>
-            <div>
-              <strong>Entendí parcialmente...</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me gusta cómo se ve, pero no sabía para qué servían los botones de accesibilidad e inclusión.</p>
-            </div>
-          </div>
-
-          <!-- Opción C: No entendí / Necesito Ayuda -->
-          <div class="option-card" data-correct="false" data-feedback="help">
-            <div class="option-letter">C</div>
-            <div>
-              <strong>No entendí nada.</strong>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe cómo probar las opciones ni qué significa accesibilidad escolar.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="direct-select-hint">
-          <i class="fa-solid fa-hand-pointer" style="color: #2563EB;"></i>
-          <span>Toca directamente una opción para validar tu respuesta</span>
-        </div>
-
+        <div class="question-options-box"></div>
+        <div class="direct-select-hint"></div>
         <div class="feedback-msg"></div>
       </section>
 
@@ -183,7 +296,7 @@
     <footer class="bottom-bar animate__animated animate__fadeInUp">
       <div class="hint-pill">
         <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
-        <span>Pista de Accesibilidad: Prueba las herramientas de accesibilidad en pantalla y pulsa directamente la opción correcta para tu Diploma.</span>
+        <span>Pista de Accesibilidad: Prueba las herramientas de inclusión en pantalla y pulsa directamente la opción correcta para tu Diploma.</span>
       </div>
       <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
         <i class="fa-solid fa-heart" style="color: #EF4444;"></i> Escuela Inclusiva y Universal
@@ -216,24 +329,56 @@
 
       const btnFont = document.getElementById('btnFontToggle');
       const btnContrast = document.getElementById('btnContrastToggle');
+      const btnFullscreen = document.getElementById('btnFullscreenToggle');
       const wrapper = document.getElementById('educaplayWrapper');
 
       let bigFont = false;
       let contrast = false;
 
-      btnFont.addEventListener('click', () => {
-        bigFont = !bigFont;
-        document.body.style.fontSize = bigFont ? '1.12rem' : '1rem';
-        btnFont.classList.toggle('active', bigFont);
-        if (window.escapeSound) window.escapeSound.playPop();
-      });
+      if (btnFont) {
+        btnFont.addEventListener('click', () => {
+          bigFont = !bigFont;
+          document.body.style.fontSize = bigFont ? '1.14rem' : '1rem';
+          btnFont.classList.toggle('active', bigFont);
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      }
 
-      btnContrast.addEventListener('click', () => {
-        contrast = !contrast;
-        wrapper.style.filter = contrast ? 'contrast(140%) brightness(90%)' : 'none';
-        btnContrast.classList.toggle('active', contrast);
-        if (window.escapeSound) window.escapeSound.playPop();
-      });
+      if (btnContrast) {
+        btnContrast.addEventListener('click', () => {
+          contrast = !contrast;
+          if (wrapper) {
+            wrapper.style.filter = contrast ? 'contrast(140%) brightness(95%) saturate(120%)' : 'none';
+          }
+          btnContrast.classList.toggle('active', contrast);
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      }
+
+      if (btnFullscreen) {
+        btnFullscreen.addEventListener('click', () => {
+          if (!document.fullscreenElement) {
+            if (wrapper.requestFullscreen) {
+              wrapper.requestFullscreen();
+            } else if (wrapper.webkitRequestFullscreen) {
+              wrapper.webkitRequestFullscreen();
+            }
+            btnFullscreen.innerHTML = '<i class="fa-solid fa-compress"></i> Salir Pantalla Completa';
+          } else {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            }
+            btnFullscreen.innerHTML = '<i class="fa-solid fa-expand"></i> Pantalla Completa';
+          }
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+          if (!document.fullscreenElement) {
+            btnFullscreen.innerHTML = '<i class="fa-solid fa-expand"></i> Pantalla Completa';
+          }
+        });
+      }
     });
   </script>
 </body>

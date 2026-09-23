@@ -272,3 +272,134 @@
   animation: splatBreathe 5s ease-in-out infinite;
   will-change: transform;
 }
+
+/* ==========================================================================
+   21. TRANSICIONES Y ANIMACIONES TIPO PRESENTACIÓN DIDÁCTICA (UI/UX)
+   ========================================================================== */
+
+/* Entrada suave de la página al cargar (Presentation Slide Enter) */
+@keyframes presentationPageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.page-presentation-enter {
+  animation: presentationPageEnter 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Salida suave al navegar entre páginas */
+.page-transition-exit {
+  opacity: 0 !important;
+  transform: translateY(-8px) scale(0.99) !important;
+  filter: blur(1px) !important;
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 1, 1), transform 0.22s cubic-bezier(0.4, 0, 1, 1), filter 0.22s ease !important;
+  pointer-events: none !important;
+}
+
+/* Entrada sutil de diapositiva superior (HUD) */
+@keyframes presentationSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Entrada sutil desde la izquierda (Zona de recursos/diapositiva) */
+@keyframes presentationSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Entrada sutil desde la derecha (Zona de preguntas) */
+@keyframes presentationSlideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Entrada sutil en zoom suave */
+@keyframes presentationZoomSoft {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Aplicación escalonada (Staggered presentation) */
+.top-hud {
+  animation: presentationSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.resource-container,
+.instructions-panel,
+.story-board-card {
+  animation: presentationSlideRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+}
+
+.questions-container,
+.instructions-steps-panel {
+  animation: presentationSlideLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.bottom-bar {
+  animation: presentationPageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+/* Efecto de selección visual pop en opciones */
+@keyframes optionCardSelected {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.04); }
+  100% { transform: scale(1.015); }
+}
+
+.option-pill-btn.selected,
+.option-pill-btn.correct-highlight,
+.option-card.selected {
+  animation: optionCardSelected 0.24s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Estrellitas mágicas flotantes al hacer clic */
+@keyframes starFloatUp {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0px), var(--ty, -38px)) scale(1.15) rotate(var(--rot, 35deg));
+  }
+}
+
+.spark-star {
+  position: absolute;
+  pointer-events: none;
+  font-size: 13px;
+  line-height: 1;
+  user-select: none;
+  animation: starFloatUp 0.5s ease-out forwards;
+}

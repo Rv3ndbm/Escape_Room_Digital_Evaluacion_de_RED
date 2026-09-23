@@ -522,4 +522,50 @@ document.addEventListener('DOMContentLoaded', () => {
   // Activar comprobación y navegación protegida de Escape Room
   checkCurrentPageAccess();
   setupEscapeRoomNavigation();
+
+  // Activar efecto global de rayitas y chispas al hacer clic
+  initCursorSparkEffect();
 });
+
+// Efecto interactivo de rayitas y chispas estilo videojuego/laboratorio al hacer clic en cualquier lugar
+function initCursorSparkEffect() {
+  const sparkColors = ['#EF4444', '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4'];
+
+  window.addEventListener('pointerdown', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    const burst = document.createElement('div');
+    burst.className = 'click-spark-burst';
+    burst.style.left = `${x}px`;
+    burst.style.top = `${y}px`;
+
+    // Círculo de onda expansiva
+    const circle = document.createElement('div');
+    circle.className = 'spark-circle';
+    circle.style.borderColor = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+    burst.appendChild(circle);
+
+    // 8 Rayitas dinámicas en abanico 360 grados
+    const count = 8;
+    for (let i = 0; i < count; i++) {
+      const ray = document.createElement('div');
+      ray.className = 'spark-ray';
+      const angle = (360 / count) * i + (Math.random() * 14 - 7);
+      ray.style.setProperty('--angle', `${angle}deg`);
+      ray.style.backgroundColor = sparkColors[i % sparkColors.length];
+      ray.style.height = `${12 + Math.floor(Math.random() * 8)}px`;
+      ray.style.width = `${2.5 + Math.random() * 1.5}px`;
+      burst.appendChild(ray);
+    }
+
+    document.body.appendChild(burst);
+
+    setTimeout(() => {
+      if (burst && burst.parentNode) {
+        burst.parentNode.removeChild(burst);
+      }
+    }, 450);
+  }, { passive: true });
+}
+

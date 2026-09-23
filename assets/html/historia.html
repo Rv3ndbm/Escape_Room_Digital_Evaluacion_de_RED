@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Historia: Alerta de Emergencia 2050 | Escape room Educación</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="scrollable-screen-body">
+
+  <!-- Fondo Decorativo Escolar y Auras -->
+  <div class="desk-decorations">
+    <div class="desk-ambient-auras">
+      <div class="aura-orb-red"></div>
+      <div class="aura-orb-blue"></div>
+      <div class="aura-orb-gold"></div>
+    </div>
+    <div class="bg-tilted-sheet"></div>
+    <div class="washi-tape washi-red"></div>
+    <div class="washi-tape washi-blue"></div>
+    <img src="../media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="Estación de Investigación">
+    <img src="../media/cloud-thunder.svg" alt="Rayo" class="decor-cloud">
+  </div>
+
+  <div class="escape-room-screen" style="min-height: 100vh; height: auto;">
+    
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="mission-logo">
+        <i class="fa-solid fa-satellite-dish" style="color: #EF4444;"></i>
+        <span>Estación Científica 2050</span>
+      </div>
+
+      <nav class="mission-progress" aria-label="Progreso">
+        <a href="../../index.html" class="step-badge"><i class="fa-solid fa-home"></i> Inicio</a>
+        <div class="step-badge active"><i class="fa-solid fa-book-open"></i> La Historia</div>
+        <a href="instrucciones.html" class="step-badge"><i class="fa-solid fa-list-check"></i> Instrucciones</a>
+        <a href="sala1-volcan.html" class="step-badge"><i class="fa-solid fa-fire"></i> Reto 1</a>
+        <a href="sala2-tsunami.html" class="step-badge"><i class="fa-solid fa-water"></i> Reto 2</a>
+        <a href="sala3-terremoto.html" class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</a>
+        <a href="sala4-calor.html" class="step-badge"><i class="fa-solid fa-sun"></i> Reto 4</a>
+      </nav>
+
+      <div class="hud-actions">
+        <button id="btnTextSize" class="accessibility-toggle-btn" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de texto">
+          <i class="fa-solid fa-text-height"></i>
+          <span class="text-size-tag">A</span>
+        </button>
+        <button class="sound-toggle-btn" type="button" title="Activar/Silenciar sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenedor Principal Amplio y Responsivo -->
+    <main class="content-page-wrapper animate__animated animate__fadeIn">
+      <div class="story-wrapper">
+        
+        <div class="story-board-card animate__animated animate__zoomIn">
+          <!-- Cabecera de Alerta -->
+          <div class="story-emergency-header">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <div class="emergency-pill">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>ALERTA DE EMERGENCIA</span>
+              </div>
+              <div class="story-year-tag">
+                <i class="fa-solid fa-clock-rotate-left"></i> AÑO 2050...
+              </div>
+            </div>
+
+            <div id="playerBadgeDisplay" style="background: rgba(255,255,255,0.12); padding: 6px 16px; border-radius: var(--radius-pill); font-family: var(--font-hand); font-size: 1.15rem; color: #FDE047; display: flex; align-items: center; gap: 8px;">
+              <span id="playerAvatar">🧑‍🔬</span> <span id="playerName">Explorador Científico</span>
+            </div>
+          </div>
+
+          <!-- Título Principal -->
+          <h1 style="font-family: var(--font-script); font-size: clamp(2.4rem, 3.8vw, 3.4rem); color: #60A5FA; margin: 0 0 0.8rem; line-height: 1.15; text-align: center;">
+            La Historia de la Estación
+          </h1>
+
+          <!-- Texto Narrativo Sintético y Claro -->
+          <p class="story-narrative-text" style="text-align: center; max-width: 1040px; margin: 0 auto 0.8rem;">
+            Una estación científica de alta tecnología encargada de estudiar los fenómenos naturales ha activado accidentalmente su <strong>sistema de seguridad global</strong>.
+            <span style="color: #F87171; font-weight: bold;">¡Las puertas de salida están bloqueadas!</span> Para recuperar el control deberán superar cuatro salas evaluando Recursos Educativos Digitales (RED) sobre volcanes, tsunamis, terremotos y olas de calor.
+          </p>
+
+          <!-- Condición de la Misión -->
+          <div class="story-mission-condition">
+            <p style="margin: 0; color: #FDE047; font-family: var(--font-hand); font-size: 1.3rem; font-weight: bold;">
+              ⚠️ Condición Crucial para Escapar:
+            </p>
+            <p style="margin: 0.35rem 0 0; color: #FFFFFF; font-size: 1.05rem; line-height: 1.5;">
+              No basta con encontrar la respuesta por azar. Deberás demostrar que sabes reconocer si un recurso educativo cumple los tres criterios esenciales:
+            </p>
+          </div>
+
+          <!-- Cuadrícula de 3 Criterios RED en una sola fila equilibrada -->
+          <div class="story-criteria-grid">
+            <div class="story-criterion-box crit-calidad">
+              <div class="story-criterion-title">
+                <i class="fa-solid fa-award" style="color: #34D399;"></i>
+                <span>1. De Calidad</span>
+              </div>
+              <p class="story-criterion-desc">
+                Se refiere a la confiabilidad, rigor científico, exactitud y veracidad del contenido presentado.
+              </p>
+            </div>
+
+            <div class="story-criterion-box crit-pertinencia">
+              <div class="story-criterion-title">
+                <i class="fa-solid fa-bullseye" style="color: #60A5FA;"></i>
+                <span>2. Pertinente</span>
+              </div>
+              <p class="story-criterion-desc">
+                Se adapta a tus necesidades específicas y al contexto educativo y edad en el que lo vas a utilizar.
+              </p>
+            </div>
+
+            <div class="story-criterion-box crit-usabilidad">
+              <div class="story-criterion-title">
+                <i class="fa-solid fa-hand-pointer" style="color: #FBBF24;"></i>
+                <span>3. Fácil de Utilizar</span>
+              </div>
+              <p class="story-criterion-desc">
+                Define qué tan cómoda, intuitiva, clara y accesible es la interacción con los controles del recurso.
+              </p>
+            </div>
+          </div>
+
+          <!-- Conclusión y Botón de Avance Directo -->
+          <div class="story-bottom-action-row">
+            <div style="font-family: var(--font-hand); font-size: 1.35rem; color: #93C5FD;">
+              🔑 Cada desafío entregará una parte del código secreto. <strong style="color: #FDE047; font-size: 1.45rem;">¿LOGRARÁN ESCAPAR?</strong>
+            </div>
+
+            <a href="instrucciones.html" class="btn-advance-story" id="btnGoToInstructions">
+              <span>¡Aceptar el Desafío y Ver Instrucciones!</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Barra Inferior -->
+    <footer class="bottom-bar animate__animated animate__fadeInUp">
+      <div class="hint-pill">
+        <i class="fa-solid fa-shield-halved" style="color: #EF4444;"></i>
+        <span>Protocolo de Emergencia Escolar | Año 2050</span>
+      </div>
+      <div style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: var(--text-muted);">
+        <i class="fa-solid fa-user-astronaut" style="color: var(--pencil-blue);"></i> Misión: Salvar la Tierra
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Cargar avatar y nombre del usuario
+      const savedName = localStorage.getItem('explorer_name') || 'Explorador Científico';
+      const savedAvatar = localStorage.getItem('explorer_avatar') || '🧑‍🔬';
+      
+      const nameEl = document.getElementById('playerName');
+      const avatarEl = document.getElementById('playerAvatar');
+      if (nameEl) nameEl.textContent = savedName;
+      if (avatarEl) avatarEl.textContent = savedAvatar;
+
+      const advanceBtn = document.getElementById('btnGoToInstructions');
+      if (advanceBtn) {
+        advanceBtn.addEventListener('click', () => {
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

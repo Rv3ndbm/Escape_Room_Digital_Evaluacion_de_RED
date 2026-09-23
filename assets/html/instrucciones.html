@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrucciones de la Misión | Escape room Educación</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="scrollable-screen-body">
+
+  <!-- Elementos de Papelería Escolar y Fondo Mágico -->
+  <div class="desk-decorations">
+    <div class="desk-ambient-auras">
+      <div class="aura-orb-blue"></div>
+      <div class="aura-orb-green"></div>
+      <div class="aura-orb-gold"></div>
+    </div>
+    <div class="bg-tilted-sheet"></div>
+    <div class="washi-tape washi-green"></div>
+    <div class="washi-tape washi-gold"></div>
+    <img src="../media/pencil.svg" alt="Lápiz" class="decor-pencil">
+    <img src="../media/eraser.svg" alt="Borrador" class="decor-eraser">
+    <img src="../media/protractor.svg" alt="Transportador" class="decor-protractor">
+  </div>
+
+  <div class="escape-room-screen" style="min-height: 100vh; height: auto;">
+    
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="mission-logo">
+        <i class="fa-solid fa-list-check" style="color: var(--pencil-blue);"></i>
+        <span>Guía de la Misión</span>
+      </div>
+
+      <nav class="mission-progress" aria-label="Progreso">
+        <a href="../../index.html" class="step-badge"><i class="fa-solid fa-home"></i> Inicio</a>
+        <a href="historia.html" class="step-badge"><i class="fa-solid fa-book-open"></i> La Historia</a>
+        <div class="step-badge active"><i class="fa-solid fa-list-check"></i> Instrucciones</div>
+        <a href="sala1-volcan.html" class="step-badge"><i class="fa-solid fa-fire"></i> Reto 1</a>
+        <a href="sala2-tsunami.html" class="step-badge"><i class="fa-solid fa-water"></i> Reto 2</a>
+        <a href="sala3-terremoto.html" class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</a>
+        <a href="sala4-calor.html" class="step-badge"><i class="fa-solid fa-sun"></i> Reto 4</a>
+      </nav>
+
+      <div class="hud-actions">
+        <button id="btnTextSize" class="accessibility-toggle-btn" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de texto">
+          <i class="fa-solid fa-text-height"></i>
+          <span class="text-size-tag">A</span>
+        </button>
+        <button class="sound-toggle-btn" type="button" title="Activar/Silenciar sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenedor Principal Amplio, Responsivo y Equilibrado en 2 Columnas -->
+    <main class="content-page-wrapper animate__animated animate__fadeIn">
+      <div class="instructions-wrapper">
+        
+        <div class="instructions-board-card animate__animated animate__zoomIn">
+          <span class="box-pin box-pin-tl">📌</span>
+          <span class="box-pin box-pin-tr">📌</span>
+
+          <!-- Cabecera de la Tarjeta -->
+          <div class="instructions-card-header">
+            <h1 style="font-family: var(--font-script); font-size: clamp(2.3rem, 3.2vw, 3.1rem); color: var(--school-green-title); margin: 0; line-height: 1.15;">
+              Instrucciones de la Misión
+            </h1>
+            <span style="font-family: var(--font-hand); font-size: 1.15rem; font-weight: bold; color: #1D4ED8; background: #DBEAFE; padding: 6px 16px; border-radius: var(--radius-pill); border: 1.5px solid #BFDBFE;">
+              🧭 ¿Cómo funciona la actividad?
+            </span>
+          </div>
+
+          <!-- Distribución en 2 Columnas para Máximo Aprovechamiento Horizontal -->
+          <div class="instructions-columns-grid">
+            
+            <!-- COLUMNA 1 (Izquierda): Mapa de Pantalla Dividida + Botón de Inicio -->
+            <div class="instructions-panel">
+              <div>
+                <p class="instructions-panel-title">
+                  🖥️ Así está organizada cada sala en tu pantalla:
+                </p>
+
+                <div class="layout-preview-mockup">
+                  <!-- Lado Izquierdo: Contenido -->
+                  <div class="layout-zone-preview zone-left">
+                    <div class="layout-zone-tag" style="color: #2563EB;">
+                      <i class="fa-solid fa-display"></i>
+                      <span>IZQUIERDA: Recurso (RED)</span>
+                    </div>
+                    <div style="background: #0F172A; color: #93C5FD; border-radius: 8px; padding: 0.55rem; font-size: 0.88rem; font-family: monospace; display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center;">
+                      <span>🎬 Video</span> | <span>🔬 Simulador 3D</span> | <span>🎮 Juego</span>
+                    </div>
+                    <p style="font-size: 0.92rem; color: #475569; margin: 0; line-height: 1.45;">
+                      Observas y experimentas con las fases, botones y controles interactivos del fenómeno.
+                    </p>
+                  </div>
+
+                  <!-- Lado Derecho: Preguntas -->
+                  <div class="layout-zone-preview zone-right">
+                    <div class="layout-zone-tag" style="color: #16A34A;">
+                      <i class="fa-solid fa-clipboard-question"></i>
+                      <span>DERECHA: Preguntas</span>
+                    </div>
+                    <div style="background: #F0FDF4; border: 1.5px solid #86EFAC; color: #166534; border-radius: 8px; padding: 0.55rem; font-size: 0.88rem; font-weight: bold; text-align: center;">
+                      ❓ 2 Preguntas por Ronda (1/2 y 2/2)
+                    </div>
+                    <p style="font-size: 0.92rem; color: #475569; margin: 0; line-height: 1.45;">
+                      Respondes evaluando el recurso. Si te equivocas, podrás pulsar <em>"Volver a aprender"</em> para reintentar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Caja de Llamado de Acción y Botón de Inicio -->
+              <div class="instructions-cta-box">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span style="font-size: 2.5rem;" class="animate__animated animate__pulse animate__infinite">👉</span>
+                  <div>
+                    <strong style="font-family: var(--font-hand); font-size: 1.4rem; color: #1D4ED8; display: block; line-height: 1.1;">¡La salida está en tus manos!</strong>
+                    <span style="font-size: 0.95rem; color: #475569;">¿Listo para ingresar a la primera sala?</span>
+                  </div>
+                </div>
+
+                <a href="sala1-volcan.html" class="btn-advance-story" id="btnGoToRoom1">
+                  <span>¡Ir al Reto 1: El Volcán! 🌋</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- COLUMNA 2 (Derecha): Los 7 Pasos de la Misión -->
+            <div class="instructions-steps-panel">
+              <p class="instructions-steps-panel-header">
+                <span>📋 Los 7 Pasos para Superar el Escape Room:</span>
+              </p>
+              
+              <ul class="mission-steps-list">
+                <li class="mission-step-item">
+                  <span class="mission-step-num">1</span>
+                  <span><strong>Lee cuidadosamente</strong> cada desafío que plantea la estación.</span>
+                </li>
+                <li class="mission-step-item">
+                  <span class="mission-step-num">2</span>
+                  <span><strong>Observa y explora</strong> el Recurso Educativo Digital a la izquierda.</span>
+                </li>
+                <li class="mission-step-item">
+                  <span class="mission-step-num">3</span>
+                  <span><strong>Analiza su calidad, pertinencia y usabilidad</strong> según los criterios.</span>
+                </li>
+                <li class="mission-step-item">
+                  <span class="mission-step-num">4</span>
+                  <span><strong>Responde las 2 preguntas</strong> de evaluación en cada ronda.</span>
+                </li>
+                <li class="mission-step-item">
+                  <span class="mission-step-num">5</span>
+                  <span><strong>Justifica tus decisiones</strong> leyendo la retroalimentación didáctica.</span>
+                </li>
+                <li class="mission-step-item">
+                  <span class="mission-step-num">6</span>
+                  <span><strong>Guarda las claves secretas</strong> que desbloquearás al final de cada sala.</span>
+                </li>
+                <li class="mission-step-item">
+                  <span class="mission-step-num">7</span>
+                  <span>Al finalizar las cuatro salas, <strong>utiliza las claves</strong> para escapar.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Barra Inferior -->
+    <footer class="bottom-bar animate__animated animate__fadeInUp">
+      <div class="hint-pill">
+        <i class="fa-solid fa-compass" style="color: var(--school-green-title);"></i>
+        <span>Paso 2 de 2: Preparación Completada</span>
+      </div>
+      <div style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: var(--text-muted);">
+        <i class="fa-solid fa-graduation-cap" style="color: var(--pencil-blue);"></i> Guía Metodológica de RED
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('btnGoToRoom1');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
