@@ -130,69 +130,51 @@
         </div>
       </section>
 
-      <!-- Columna Derecha: Pregunta Pedagógica y Clave Final -->
+      <!-- Columna Derecha: Pregunta Pedagógica y Botones Directos de Respuesta -->
       <section class="paper-card question-column animate__animated animate__fadeInRight">
-        <div>
-          <div class="question-badge">
-            <i class="fa-solid fa-universal-access"></i> Criterio Pedagógico: Accesibilidad
+        <div class="question-badge">
+          <i class="fa-solid fa-universal-access"></i> Criterio Pedagógico: Accesibilidad
+        </div>
+
+        <h2 class="question-title">
+          Misión 4: Revisa este juego sobre el calor. Piensa en tus compañeros: ¿Crees que el juego tiene colores claros, letras grandes y sonidos para que CUALQUIER niño pueda jugar, incluso si usa gafas o le cuesta escuchar?
+        </h2>
+
+        <div class="question-options-box">
+          <!-- Opción A: Correcta / Dominio Total -->
+          <div class="option-card" data-correct="true" data-feedback="correct">
+            <div class="option-letter">A</div>
+            <div>
+              <strong style="color: var(--school-green-title);">¡Sí, es accesible e inclusivo!</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Tiene colores nítidos, letras claras y adaptaciones para que nadie quede fuera.</p>
+            </div>
           </div>
 
-          <h2 class="question-title">
-            Misión 4: Revisa este juego sobre el calor. Piensa en tus compañeros: ¿Crees que el juego tiene colores claros, letras grandes y sonidos para que CUALQUIER niño pueda jugar, incluso si usa gafas o le cuesta escuchar?
-          </h2>
-
-          <div class="question-options-box">
-            <!-- Opción A: Correcta / Dominio Total -->
-            <div class="option-card" data-correct="true" data-feedback="correct">
-              <div class="option-letter">A</div>
-              <div>
-                <strong style="color: var(--school-green-title);">¡Sí, es accesible e inclusivo!</strong>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Tiene colores nítidos, letras claras y opciones para que nadie quede fuera. (Clave: <strong>624</strong>)</p>
-              </div>
+          <!-- Opción B: Comprensión Parcial / Duda -->
+          <div class="option-card" data-correct="false" data-feedback="partial">
+            <div class="option-letter">B</div>
+            <div>
+              <strong>Entendí parcialmente...</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me gusta cómo se ve, pero no sabía para qué servían los botones de accesibilidad e inclusión.</p>
             </div>
+          </div>
 
-            <!-- Opción B: Comprensión Parcial / Duda -->
-            <div class="option-card" data-correct="false" data-feedback="partial">
-              <div class="option-letter">B</div>
-              <div>
-                <strong>Entendí parcialmente...</strong>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me gusta cómo se ve, pero no sabía para qué servían los botones de accesibilidad.</p>
-              </div>
-            </div>
-
-            <!-- Opción C: No entendí / Necesito Ayuda -->
-            <div class="option-card" data-correct="false" data-feedback="help">
-              <div class="option-letter">C</div>
-              <div>
-                <strong>No entendí nada.</strong>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe cómo probar las opciones ni qué significa inclusión escolar.</p>
-              </div>
+          <!-- Opción C: No entendí / Necesito Ayuda -->
+          <div class="option-card" data-correct="false" data-feedback="help">
+            <div class="option-letter">C</div>
+            <div>
+              <strong>No entendí nada.</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe cómo probar las opciones ni qué significa accesibilidad escolar.</p>
             </div>
           </div>
         </div>
 
-        <!-- Área de Desbloqueo Fiable -->
-        <div class="unlock-box">
-          <div class="unlock-label">
-            <i class="fa-solid fa-key" style="color: var(--btn-gold-dark);"></i>
-            <span>Introduce la última clave para recibir tu Diploma:</span>
-          </div>
-          <div class="unlock-inputs-row">
-            <input 
-              type="text" 
-              class="passcode-input" 
-              placeholder="624" 
-              maxlength="6" 
-              autocomplete="off" 
-              aria-label="Código secreto">
-            <!-- BOTÓN EXCLUSIVO DE DESBLOQUEO -->
-            <button id="btnUnlockRoom" class="unlock-btn" type="button">
-              <span>Desbloquear</span>
-              <i class="fa-solid fa-lock-open"></i>
-            </button>
-          </div>
-          <div class="feedback-msg"></div>
+        <div class="direct-select-hint">
+          <i class="fa-solid fa-hand-pointer" style="color: #2563EB;"></i>
+          <span>Toca directamente una opción para validar tu respuesta</span>
         </div>
+
+        <div class="feedback-msg"></div>
       </section>
 
     </main>
@@ -201,7 +183,7 @@
     <footer class="bottom-bar animate__animated animate__fadeInUp">
       <div class="hint-pill">
         <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
-        <span>Pista de Accesibilidad: Selecciona la <strong>Opción A</strong> para obtener la clave (<strong>624</strong>) y pulsa Desbloquear.</span>
+        <span>Pista de Accesibilidad: Prueba las herramientas de accesibilidad en pantalla y pulsa directamente la opción correcta para tu Diploma.</span>
       </div>
       <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
         <i class="fa-solid fa-heart" style="color: #EF4444;"></i> Escuela Inclusiva y Universal

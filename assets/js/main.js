@@ -503,19 +503,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Manejo de Selección de Opciones de Pregunta
+  // Manejo de Selección Visual de Opciones de Pregunta (la validación principal corre en validation.js)
   const optionCards = document.querySelectorAll('.option-card');
   optionCards.forEach(card => {
     card.addEventListener('click', function() {
       optionCards.forEach(c => c.classList.remove('selected'));
       this.classList.add('selected');
-
-      const suggestedCode = this.getAttribute('data-suggest-code');
-      const passInput = document.querySelector('.passcode-input');
-      if (suggestedCode && passInput && !passInput.value) {
-        passInput.value = suggestedCode;
-        passInput.focus();
-      }
     });
   });
 

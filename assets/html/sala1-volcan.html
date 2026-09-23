@@ -713,69 +713,51 @@
         </div>
       </section>
 
-      <!-- Columna Derecha: Pregunta Pedagógica y Clave Exclusiva de Desbloqueo -->
+      <!-- Columna Derecha: Pregunta Pedagógica y Botones Directos de Respuesta -->
       <section class="paper-card question-column animate__animated animate__fadeInRight">
-        <div>
-          <div class="question-badge">
-            <i class="fa-solid fa-compass"></i> Criterio Pedagógico: Pertinencia
+        <div class="question-badge">
+          <i class="fa-solid fa-compass"></i> Criterio Pedagógico: Pertinencia
+        </div>
+
+        <h2 class="question-title">
+          Misión 1: Nuestro objetivo es aprender cómo funciona un volcán. Después de probar este simulador y ver sus 4 fases, ¿crees que la información nos sirve de verdad para entender por qué hacen erupción los volcanes?
+        </h2>
+
+        <div class="question-options-box">
+          <!-- Opción A: Correcta / Dominio Total -->
+          <div class="option-card" data-correct="true" data-feedback="correct">
+            <div class="option-letter">A</div>
+            <div>
+              <strong style="color: var(--school-green-title);">¡Sí, es totalmente pertinente!</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Explica con rigor cómo la cámara magmática y los gases causan la erupción volcánica real.</p>
+            </div>
           </div>
 
-          <h2 class="question-title">
-            Misión 1: Nuestro objetivo es aprender cómo funciona un volcán. Después de probar este simulador y ver sus 4 fases, ¿crees que la información nos sirve de verdad para entender por qué hacen erupción los volcanes?
-          </h2>
-
-          <div class="question-options-box">
-            <!-- Opción A: Correcta / Dominio Total -->
-            <div class="option-card" data-correct="true" data-feedback="correct">
-              <div class="option-letter">A</div>
-              <div>
-                <strong style="color: var(--school-green-title);">¡Sí, es totalmente pertinente!</strong>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Explica cómo la cámara magmática y los gases causan la erupción real. (Clave: <strong>312</strong>)</p>
-              </div>
+          <!-- Opción B: Comprensión Parcial / Duda -->
+          <div class="option-card" data-correct="false" data-feedback="partial">
+            <div class="option-letter">B</div>
+            <div>
+              <strong>Entendí parcialmente...</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Vi la lava salir, pero no me queda claro por qué se acumula tanta presión de gases.</p>
             </div>
+          </div>
 
-            <!-- Opción B: Comprensión Parcial / Duda -->
-            <div class="option-card" data-correct="false" data-feedback="partial">
-              <div class="option-letter">B</div>
-              <div>
-                <strong>Entendí parcialmente...</strong>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Vi la lava explotar, pero no me queda claro por qué se acumula tanta presión.</p>
-              </div>
-            </div>
-
-            <!-- Opción C: No entendí / Necesito Ayuda -->
-            <div class="option-card" data-correct="false" data-feedback="help">
-              <div class="option-letter">C</div>
-              <div>
-                <strong>No entendí cómo funciona.</strong>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me pareció confuso y no supe qué mirar en las 4 fases del volcán.</p>
-              </div>
+          <!-- Opción C: No entendí / Necesito Ayuda -->
+          <div class="option-card" data-correct="false" data-feedback="help">
+            <div class="option-letter">C</div>
+            <div>
+              <strong>No entendí cómo funciona.</strong>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me pareció confuso y necesito una guía paso a paso para saber qué mirar en el volcán.</p>
             </div>
           </div>
         </div>
 
-        <!-- Área de Desbloqueo Fiable (EXCLUSIVA PARA DESBLOQUEAR Y PASAR DE SALA) -->
-        <div class="unlock-box">
-          <div class="unlock-label">
-            <i class="fa-solid fa-key" style="color: var(--btn-gold-dark);"></i>
-            <span>Introduce la clave para desbloquear el Reto 2:</span>
-          </div>
-          <div class="unlock-inputs-row">
-            <input 
-              type="text" 
-              class="passcode-input" 
-              placeholder="312" 
-              maxlength="6" 
-              autocomplete="off" 
-              aria-label="Código secreto">
-            <!-- BOTÓN EXCLUSIVO DE DESBLOQUEO -->
-            <button id="btnUnlockRoom" class="unlock-btn" type="button">
-              <span>Desbloquear</span>
-              <i class="fa-solid fa-lock-open"></i>
-            </button>
-          </div>
-          <div class="feedback-msg"></div>
+        <div class="direct-select-hint">
+          <i class="fa-solid fa-hand-pointer" style="color: #2563EB;"></i>
+          <span>Toca directamente una opción para validar tu respuesta</span>
         </div>
+
+        <div class="feedback-msg"></div>
       </section>
 
     </main>
@@ -784,7 +766,7 @@
     <footer class="bottom-bar animate__animated animate__fadeInUp">
       <div class="hint-pill">
         <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
-        <span>Pista del Profesor: Selecciona la <strong>Opción A</strong> para obtener la clave científica (<strong>312</strong>) y pulsa Desbloquear.</span>
+        <span>Pista del Profesor: Observa las 4 fases en el simulador y pulsa directamente la opción que mejor responde la pregunta.</span>
       </div>
       <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
         <i class="fa-solid fa-pencil"></i> Cuaderno de Ciencias Naturales
