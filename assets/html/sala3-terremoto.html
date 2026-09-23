@@ -311,21 +311,30 @@
           </h2>
 
           <div class="question-options-box">
-            <!-- Opción A: Correcta -->
-            <div class="option-card" data-correct="true">
+            <!-- Opción A: Correcta / Dominio Total -->
+            <div class="option-card" data-correct="true" data-feedback="correct">
               <div class="option-letter">A</div>
               <div>
-                <strong style="color: var(--school-green-title);">¡Sí, tiene máxima calidad y rigor científico!</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Los consejos coinciden con los protocolos de Protección Civil y salvan vidas de verdad en la escuela. (Clave: <strong>985</strong>)</p>
+                <strong style="color: var(--school-green-title);">¡Sí, tiene máxima calidad y rigor!</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Los protocolos coinciden con organismos oficiales de Protección Civil. (Clave: <strong>985</strong>)</p>
               </div>
             </div>
 
-            <!-- Opción B: Incorrecta -->
-            <div class="option-card" data-correct="false">
+            <!-- Opción B: Comprensión Parcial / Duda -->
+            <div class="option-card" data-correct="false" data-feedback="partial">
               <div class="option-letter">B</div>
               <div>
-                <strong>No, la información no tiene calidad.</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Parece inventada y no ofrece explicaciones serias ni seguras.</p>
+                <strong>Entendí parcialmente...</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Sé que tiembla el suelo, pero no me queda claro cómo saber si los datos son confiables.</p>
+              </div>
+            </div>
+
+            <!-- Opción C: No entendí / Necesito Ayuda -->
+            <div class="option-card" data-correct="false" data-feedback="help">
+              <div class="option-letter">C</div>
+              <div>
+                <strong>No entendí nada.</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe cómo probar la alerta sísmica en la app ni qué significa calidad científica.</p>
               </div>
             </div>
           </div>

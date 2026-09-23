@@ -725,21 +725,30 @@
           </h2>
 
           <div class="question-options-box">
-            <!-- Opción A: Correcta -->
-            <div class="option-card" data-correct="true">
+            <!-- Opción A: Correcta / Dominio Total -->
+            <div class="option-card" data-correct="true" data-feedback="correct">
               <div class="option-letter">A</div>
               <div>
                 <strong style="color: var(--school-green-title);">¡Sí, es totalmente pertinente!</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Explica con animaciones la cámara magmática, el cráter y cómo la presión impulsa la lava paso a paso. (Clave: <strong>312</strong>)</p>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Explica cómo la cámara magmática y los gases causan la erupción real. (Clave: <strong>312</strong>)</p>
               </div>
             </div>
 
-            <!-- Opción B: Incorrecta -->
-            <div class="option-card" data-correct="false">
+            <!-- Opción B: Comprensión Parcial / Duda -->
+            <div class="option-card" data-correct="false" data-feedback="partial">
               <div class="option-letter">B</div>
               <div>
-                <strong>No, no es pertinente.</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Solo muestra fotos de paisajes y no explica nada sobre las causas científicas.</p>
+                <strong>Entendí parcialmente...</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Vi la lava explotar, pero no me queda claro por qué se acumula tanta presión.</p>
+              </div>
+            </div>
+
+            <!-- Opción C: No entendí / Necesito Ayuda -->
+            <div class="option-card" data-correct="false" data-feedback="help">
+              <div class="option-letter">C</div>
+              <div>
+                <strong>No entendí cómo funciona.</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me pareció confuso y no supe qué mirar en las 4 fases del volcán.</p>
               </div>
             </div>
           </div>

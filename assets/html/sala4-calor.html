@@ -142,21 +142,30 @@
           </h2>
 
           <div class="question-options-box">
-            <!-- Opción A: Correcta -->
-            <div class="option-card" data-correct="true">
+            <!-- Opción A: Correcta / Dominio Total -->
+            <div class="option-card" data-correct="true" data-feedback="correct">
               <div class="option-letter">A</div>
               <div>
-                <strong style="color: var(--school-green-title);">¡Sí, es completamente accesible e inclusivo!</strong>
-                <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Tiene botones cómodos, letras nítidas y opciones para que ningún niño se quede fuera de la diversión. (Clave: <strong>624</strong>)</p>
+                <strong style="color: var(--school-green-title);">¡Sí, es accesible e inclusivo!</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Tiene colores nítidos, letras claras y opciones para que nadie quede fuera. (Clave: <strong>624</strong>)</p>
               </div>
             </div>
 
-            <!-- Opción B: Incorrecta -->
-            <div class="option-card" data-correct="false">
+            <!-- Opción B: Comprensión Parcial / Duda -->
+            <div class="option-card" data-correct="false" data-feedback="partial">
               <div class="option-letter">B</div>
               <div>
-                <strong>No es accesible para todos.</strong>
-                <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Tiene letras muy pequeñas y no ofrece facilidades para niños con necesidades visuales o auditivas.</p>
+                <strong>Entendí parcialmente...</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Me gusta cómo se ve, pero no sabía para qué servían los botones de accesibilidad.</p>
+              </div>
+            </div>
+
+            <!-- Opción C: No entendí / Necesito Ayuda -->
+            <div class="option-card" data-correct="false" data-feedback="help">
+              <div class="option-letter">C</div>
+              <div>
+                <strong>No entendí nada.</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe cómo probar las opciones ni qué significa inclusión escolar.</p>
               </div>
             </div>
           </div>

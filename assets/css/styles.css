@@ -1431,12 +1431,18 @@ html[data-text-scale="xlarge"] {
    ========================================================================== */
 .room-content-grid {
   display: grid;
-  grid-template-columns: 1.18fr 0.82fr;
-  gap: clamp(0.7rem, 1.3vw, 1.3rem);
+  grid-template-columns: 1.55fr 0.45fr;
+  gap: clamp(0.5rem, 1vw, 1rem);
   flex: 1;
-  margin: clamp(0.3rem, 0.8vh, 0.6rem) 0;
+  margin: clamp(0.2rem, 0.6vh, 0.45rem) 0;
   min-height: 0;
-  height: calc(100vh - clamp(90px, 12vh, 116px));
+  height: calc(100vh - clamp(85px, 11vh, 108px));
+}
+
+@media (max-width: 1200px) {
+  .room-content-grid {
+    grid-template-columns: 1.42fr 0.58fr;
+  }
 }
 
 @media (max-width: 992px) {
@@ -1452,7 +1458,7 @@ html[data-text-scale="xlarge"] {
   border: 2px solid var(--paper-border);
   border-radius: var(--radius-card);
   box-shadow: var(--paper-shadow);
-  padding: clamp(0.6rem, 1.2vh, 1rem);
+  padding: clamp(0.55rem, 1.1vh, 0.95rem);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1469,7 +1475,7 @@ html[data-text-scale="xlarge"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   flex-shrink: 0;
 }
 
@@ -1478,11 +1484,11 @@ html[data-text-scale="xlarge"] {
   align-items: center;
   gap: 0.4rem;
   background: #F1F5F9;
-  padding: 0.3rem 0.8rem;
+  padding: 0.25rem 0.75rem;
   border-radius: var(--radius-pill);
   font-family: var(--font-hand);
   font-weight: 700;
-  font-size: clamp(0.88rem, 1.05vw, 1rem);
+  font-size: clamp(0.85rem, 1vw, 0.98rem);
 }
 
 .resource-body {
@@ -1500,70 +1506,73 @@ html[data-text-scale="xlarge"] {
   padding: 0.4rem;
 }
 
-/* Columna Derecha: Pregunta y Desbloqueo */
+/* Columna Derecha: Pregunta y Desbloqueo (Compacta a la derecha) */
 .question-column {
   border-top: 6px solid var(--btn-gold);
   justify-content: space-between;
+  padding: clamp(0.45rem, 1vh, 0.75rem) clamp(0.55rem, 0.85vw, 0.85rem) !important;
 }
 
 .question-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   background: var(--school-green-light);
   color: var(--school-green-title);
-  padding: 0.3rem 0.9rem;
+  padding: 0.2rem 0.75rem;
   border-radius: var(--radius-pill);
   font-family: var(--font-hand);
   font-weight: 700;
-  font-size: clamp(0.88rem, 1vw, 1rem);
-  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
 }
 
 .question-title {
   font-family: var(--font-script);
-  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem) !important;
   font-weight: 700;
   color: var(--school-green-title);
-  line-height: 1.25;
-  margin-bottom: 0.6rem;
+  line-height: 1.22;
+  margin-bottom: 0.4rem;
 }
 
 /* Opciones de Selección */
 .question-options-box {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.4rem, 0.8vh, 0.65rem);
-  margin-bottom: 0.6rem;
+  gap: 0.38rem;
+  margin-bottom: 0.4rem;
   flex: 1;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
 .option-card {
   background: #FFFFFF;
-  border: 2.5px solid #E2E8F0;
-  border-radius: var(--radius-paper);
-  padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.7rem, 1vw, 1rem);
+  border: 1.5px solid #CBD5E1;
+  border-radius: 10px;
+  padding: 0.38rem 0.58rem;
   display: flex;
-  align-items: center;
-  gap: 0.7rem;
+  align-items: flex-start;
+  gap: 0.5rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: clamp(0.85rem, 0.98vw, 0.96rem);
+  transition: all 0.18s ease;
+  font-size: 0.86rem;
   font-weight: 600;
   position: relative;
+  line-height: 1.22;
 }
 
 .option-card:hover {
   border-color: var(--pencil-blue);
   background: #F0F7FF;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .option-card.selected-correct {
   border-color: var(--stamp-green) !important;
   background: #F0FDF4 !important;
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2) !important;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.15) !important;
 }
 
 .option-card.selected-incorrect {
@@ -1572,8 +1581,9 @@ html[data-text-scale="xlarge"] {
 }
 
 .option-letter {
-  width: clamp(30px, 3.8vh, 36px);
-  height: clamp(30px, 3.8vh, 36px);
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
   background: #E2E8F0;
   color: var(--text-main);
   border-radius: 50%;
@@ -1582,8 +1592,9 @@ html[data-text-scale="xlarge"] {
   justify-content: center;
   font-family: var(--font-hand);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 0.88rem;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .option-card.selected-correct .option-letter {

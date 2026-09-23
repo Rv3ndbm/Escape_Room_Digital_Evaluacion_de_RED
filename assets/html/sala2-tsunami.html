@@ -425,21 +425,30 @@
           </h2>
 
           <div class="question-options-box">
-            <!-- Opción A: Correcta -->
-            <div class="option-card" data-correct="true">
+            <!-- Opción A: Correcta / Dominio Total -->
+            <div class="option-card" data-correct="true" data-feedback="correct">
               <div class="option-letter">A</div>
               <div>
                 <strong style="color: var(--school-green-title);">¡Sí, la usabilidad es excelente!</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">El medidor de altura es muy fácil de usar, responde al instante y se comprende todo sin dificultad. (Clave: <strong>741</strong>)</p>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Los botones de cámara y el medidor de altura responden de inmediato sin frustración. (Clave: <strong>741</strong>)</p>
               </div>
             </div>
 
-            <!-- Opción B: Incorrecta -->
-            <div class="option-card" data-correct="false">
+            <!-- Opción B: Comprensión Parcial / Duda -->
+            <div class="option-card" data-correct="false" data-feedback="partial">
               <div class="option-letter">B</div>
               <div>
-                <strong>No, fue difícil y confuso.</strong>
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Los controles no se entienden y no queda claro qué hace la ola.</p>
+                <strong>Entendí parcialmente...</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Pude mover la altura, pero me costó entender cómo mover la cámara panorámica.</p>
+              </div>
+            </div>
+
+            <!-- Opción C: No entendí / Necesito Ayuda -->
+            <div class="option-card" data-correct="false" data-feedback="help">
+              <div class="option-letter">C</div>
+              <div>
+                <strong>No entendí cómo se usa.</strong>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">No supe dónde hacer clic para iniciar el tsunami ni cómo ver la colina segura.</p>
               </div>
             </div>
           </div>
