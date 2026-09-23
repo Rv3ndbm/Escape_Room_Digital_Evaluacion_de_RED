@@ -29,7 +29,7 @@
 
     .seismic-lab-layout {
       display: grid;
-      grid-template-columns: minmax(340px, 400px) 1fr;
+      grid-template-columns: minmax(360px, 420px) 1fr;
       gap: 14px;
       height: 100%;
       min-height: 0;
@@ -43,7 +43,7 @@
 
     @media (max-width: 1200px) {
       .seismic-lab-layout {
-        grid-template-columns: minmax(320px, 360px) 1fr;
+        grid-template-columns: minmax(340px, 390px) 1fr;
         gap: 10px;
         padding: 8px;
       }
@@ -70,19 +70,47 @@
 
     .phone-mockup-advanced {
       width: 100%;
-      max-width: 395px;
+      max-width: 412px;
       height: 100%;
-      max-height: 560px;
-      background: #0F172A;
-      border-radius: 36px;
-      padding: 10px;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28), 0 0 0 3px #334155;
+      max-height: 585px;
+      background: #0B0F19;
+      border-radius: 40px;
+      padding: 10px 10px 8px 10px;
+      box-shadow: 
+        0 0 0 2px #334155, 
+        0 0 0 4px #0F172A, 
+        0 20px 45px -10px rgba(15, 23, 42, 0.45),
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.08);
       display: flex;
       flex-direction: column;
       margin: 0 auto;
       transition: transform 0.2s;
       box-sizing: border-box;
       position: relative;
+    }
+
+    /* Botones físicos laterales del smartphone */
+    .phone-mockup-advanced::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 85px;
+      width: 4px;
+      height: 38px;
+      background: #334155;
+      border-radius: 3px 0 0 3px;
+      box-shadow: 0 46px 0 #334155, 0 -36px 0 0 #475569; /* Botón Acción/Silencio + Vol- / Vol+ */
+    }
+
+    .phone-mockup-advanced::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 105px;
+      width: 4px;
+      height: 52px;
+      background: #334155;
+      border-radius: 0 3px 3px 0;
     }
 
     /* Guía Rápida de la App */
@@ -133,37 +161,49 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2px 14px 4px 14px;
+      padding: 3px 16px 4px 16px;
       font-size: 0.72rem;
       font-weight: 700;
       color: #94A3B8;
-      background: #0F172A;
-      border-radius: 28px 28px 0 0;
+      background: #0B0F19;
+      border-radius: 30px 30px 0 0;
     }
 
     .phone-island-notch {
-      width: 72px;
-      height: 14px;
+      width: 82px;
+      height: 16px;
       background: #020617;
-      border-radius: 0 0 10px 10px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 5px;
+      justify-content: space-between;
+      padding: 0 8px;
+      box-shadow: inset 0 0 0 1px #1E293B;
     }
 
     .phone-speaker-slot {
-      width: 22px;
-      height: 3px;
+      width: 26px;
+      height: 3.5px;
       background: #334155;
       border-radius: 2px;
     }
 
     .phone-camera-lens {
-      width: 6px;
-      height: 6px;
-      background: #1E293B;
-      border: 1px solid #475569;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle at 35% 35%, #38BDF8 0%, #1E1B4B 60%, #020617 100%);
+      border: 1px solid #334155;
+      border-radius: 50%;
+      position: relative;
+    }
+    .phone-camera-lens::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.85);
       border-radius: 50%;
     }
 
@@ -280,73 +320,84 @@
     .classroom-stage-box {
       background: #FEF3C7;
       border: 2px solid #FCD34D;
-      border-radius: 12px;
-      padding: 6px;
+      border-radius: 14px;
+      padding: 7px 8px;
       position: relative;
-      height: 98px;
-      overflow: hidden;
+      min-height: 124px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
+      gap: 5px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.04);
+      overflow: hidden;
     }
 
     .classroom-chalkboard {
-      position: absolute;
-      top: 4px;
-      left: 6px;
-      right: 6px;
+      width: 100%;
       background: #14532D;
-      border: 1px solid #166534;
-      border-radius: 4px;
-      color: #DCFCE7;
+      border: 1.5px solid #166534;
+      border-radius: 6px;
+      color: #FEF08A;
       font-family: var(--font-hand);
-      font-size: 0.68rem;
-      font-weight: bold;
+      font-size: 0.78rem;
+      font-weight: 800;
       text-align: center;
-      padding: 1px 4px;
-      opacity: 0.85;
+      padding: 3px 6px;
       letter-spacing: 0.3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
 
-    .classroom-ceiling {
+    .classroom-middle-row {
       display: flex;
-      justify-content: center;
-      margin-top: 14px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-shrink: 0;
+      margin: 1px 0;
     }
 
     .classroom-lamp {
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       transform-origin: top center;
       transition: transform 0.2s;
       line-height: 1;
+      flex-shrink: 0;
     }
 
     .classroom-status-banner {
       font-family: var(--font-hand);
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: bold;
       color: #92400E;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.96);
       border-radius: 6px;
-      padding: 2px 6px;
+      padding: 3px 6px;
       text-align: center;
       transition: all 0.2s;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      flex: 1;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
     .classroom-students-scene {
       display: flex;
       justify-content: center;
+      margin-top: 1px;
     }
 
     .classroom-desk-wrapper {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
     }
 
     /* Sismógrafo con Canvas Activo */
@@ -478,11 +529,27 @@
     .phone-bottom-nav {
       background: white;
       border-top: 1px solid #E2E8F0;
-      padding: 5px 14px;
+      padding: 5px 14px 2px 14px;
       display: flex;
       justify-content: space-around;
       font-size: 1rem;
       flex-shrink: 0;
+    }
+
+    .phone-home-indicator-bar {
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3px 0 6px 0;
+      flex-shrink: 0;
+    }
+
+    .phone-home-pill {
+      width: 110px;
+      height: 4.5px;
+      background: #94A3B8;
+      border-radius: 9999px;
     }
 
     /* Subcolumna Derecha: Dashboard de Monitoreo Geofísico */
@@ -766,7 +833,7 @@
               <span class="telemetry-live-dot"></span> SENSOR 24/7 EN LÍNEA
             </span>
           </div>
-          <span class="badge rounded-pill bg-danger" style="font-family: var(--font-hand); font-size: 0.92rem; padding: 0.35rem 0.8rem; box-shadow: 0 2px 6px rgba(220,38,38,0.25);">
+          <span class="badge rounded-pill bg-danger" style="margin-left: auto; font-family: var(--font-hand); font-size: 0.92rem; padding: 0.35rem 0.85rem; box-shadow: 0 2px 6px rgba(220,38,38,0.25); display: inline-flex; align-items: center; gap: 6px;">
             <i class="fa-solid fa-certificate"></i> Protocolos de Calidad
           </span>
         </div>
@@ -833,21 +900,20 @@
 
                     <!-- Escenario del Aula Escolar con Animación -->
                     <div id="classroomStage" class="classroom-stage-box">
-                      <!-- Pizarra escolar -->
+                      <!-- Pizarra escolar (Regla de Oro 100% visible y destacada) -->
                       <div class="classroom-chalkboard">
-                        <span>🏫 REGLA DE ORO: ¡AGÁCHATE, CÚBRETE Y SUJÉTATE!</span>
+                        <i class="fa-solid fa-graduation-cap" style="color: #FDE047;"></i>
+                        <span>REGLA DE ORO: ¡AGÁCHATE, CÚBRETE Y SUJÉTATE!</span>
                       </div>
 
-                      <!-- Lámpara Colgante del Aula -->
-                      <div class="classroom-ceiling">
-                        <div id="hangingLamp" class="classroom-lamp">
+                      <!-- Fila Intermedia: Lámpara indicadora + Alerta de estado -->
+                      <div class="classroom-middle-row">
+                        <div id="hangingLamp" class="classroom-lamp" title="Lámpara oscilante del aula">
                           <span class="lamp-bulb">💡</span>
                         </div>
-                      </div>
-
-                      <!-- Alerta Flotante -->
-                      <div id="sismoAlertBanner" class="classroom-status-banner">
-                        🟢 Monitoreo sísmico 24/7 activo • Aula segura
+                        <div id="sismoAlertBanner" class="classroom-status-banner">
+                          🟢 Monitoreo sísmico 24/7 activo • Aula segura
+                        </div>
                       </div>
 
                       <!-- Alumno y Pupitre Escolar -->
@@ -979,6 +1045,11 @@
                     <i class="fa-solid fa-house" style="color: #DC2626;"></i>
                     <i class="fa-solid fa-phone" style="color: #64748B;"></i>
                     <i class="fa-solid fa-gear" style="color: #64748B;"></i>
+                  </div>
+
+                  <!-- Barra de Gestos Home (Diseño Smartphone Moderno) -->
+                  <div class="phone-home-indicator-bar">
+                    <div class="phone-home-pill"></div>
                   </div>
                 </div>
 
@@ -1333,10 +1404,9 @@
 
         if (btnDrill) btnDrill.querySelector('span').textContent = '¡Sismo en Curso! Cúbrete...';
 
-        // Sonidos de sirena y estruendo sísmico
+        // Sonidos de sirena sísmica auténtica continua y estruendo telúrico (3.8s exactos, sin cortes)
         if (window.escapeSound) {
-          window.escapeSound.playSiren(2.2);
-          window.escapeSound.playRumble(3.8);
+          window.escapeSound.playSeismicAlarm(3.8);
         }
 
         // Animación de temblor en el teléfono y en la lámpara

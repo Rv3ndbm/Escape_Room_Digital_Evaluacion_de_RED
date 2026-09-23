@@ -574,6 +574,76 @@ class SoundSystem {
     osc.start(now);
     osc.stop(now + totalDur);
   }
+
+  // Alarma sísmica oficial auténtica continua con sirena modulada y estruendo telúrico profundo
+  playSeismicAlarm(duration = 3.8) {
+    if (!this.soundEnabled) return;
+    this.init();
+    if (!this.audioCtx) return;
+
+    const now = this.audioCtx.currentTime;
+
+    // 1. Sirena modulada ondulante (Alerta sísmica: oscilación suave entre 650Hz y 980Hz con LFO de 2.2Hz)
+    const sirenOsc = this.audioCtx.createOscillator();
+    const sirenGain = this.audioCtx.createGain();
+    const sirenMod = this.audioCtx.createOscillator();
+    const sirenModGain = this.audioCtx.createGain();
+
+    sirenOsc.type = 'sawtooth';
+    sirenOsc.frequency.setValueAtTime(810, now);
+
+    // LFO que modula la frecuencia de la sirena de forma continua
+    sirenMod.frequency.setValueAtTime(2.2, now);
+    sirenModGain.gain.setValueAtTime(170, now); // Oscila +/- 170 Hz (640 Hz a 980 Hz)
+    sirenMod.connect(sirenOsc.frequency);
+
+    // Filtro acústico para resonancia de sirena de emergencia
+    const sirenFilter = this.audioCtx.createBiquadFilter();
+    sirenFilter.type = 'lowpass';
+    sirenFilter.frequency.setValueAtTime(1800, now);
+
+    // Envolvente de volumen continuo: no se corta en la mitad, dura todo el simulacro
+    sirenGain.gain.setValueAtTime(0.001, now);
+    sirenGain.gain.linearRampToValueAtTime(0.16, now + 0.12);
+    sirenGain.gain.setValueAtTime(0.16, now + Math.max(0.2, duration - 0.35));
+    sirenGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    sirenOsc.connect(sirenFilter);
+    sirenFilter.connect(sirenGain);
+    sirenGain.connect(this.audioCtx.destination);
+
+    sirenMod.start(now);
+    sirenOsc.start(now);
+    sirenMod.stop(now + duration + 0.05);
+    sirenOsc.stop(now + duration + 0.05);
+
+    // 2. Estruendo telúrico subterráneo de acompañamiento (ondas sísmicas profundas)
+    const rumbleOsc = this.audioCtx.createOscillator();
+    const rumbleGain = this.audioCtx.createGain();
+    const rumbleFilter = this.audioCtx.createBiquadFilter();
+
+    rumbleOsc.type = 'sawtooth';
+    rumbleOsc.frequency.setValueAtTime(58, now);
+    rumbleOsc.frequency.linearRampToValueAtTime(80, now + duration * 0.45);
+    rumbleOsc.frequency.linearRampToValueAtTime(48, now + duration);
+
+    rumbleFilter.type = 'lowpass';
+    rumbleFilter.frequency.setValueAtTime(130, now);
+    rumbleFilter.frequency.linearRampToValueAtTime(260, now + duration * 0.4);
+    rumbleFilter.frequency.linearRampToValueAtTime(95, now + duration);
+
+    rumbleGain.gain.setValueAtTime(0.001, now);
+    rumbleGain.gain.linearRampToValueAtTime(0.25, now + 0.18);
+    rumbleGain.gain.setValueAtTime(0.25, now + Math.max(0.2, duration - 0.35));
+    rumbleGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    rumbleOsc.connect(rumbleFilter);
+    rumbleFilter.connect(rumbleGain);
+    rumbleGain.connect(this.audioCtx.destination);
+
+    rumbleOsc.start(now);
+    rumbleOsc.stop(now + duration + 0.05);
+  }
 }
 
 // Instancia global del sistema de sonido
