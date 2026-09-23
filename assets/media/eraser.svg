@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80" width="100%" height="100%">
+  <!-- Sombra del borrador -->
+  <rect x="14" y="14" width="112" height="52" rx="14" fill="#DB2777" opacity="0.15" transform="rotate(-5 70 40)"/>
+  <!-- Cuerpo del borrador rosa suave -->
+  <rect x="10" y="10" width="115" height="54" rx="16" fill="#F472B6" stroke="#DB2777" stroke-width="2.5" transform="rotate(-5 70 40)"/>
+  <!-- Bisel / relieve superior -->
+  <rect x="15" y="14" width="105" height="22" rx="10" fill="#FBCFE8" opacity="0.55" transform="rotate(-5 70 40)"/>
+  <!-- Texto "Genially" o "Misión" con fuente manuscrita delicada -->
+  <text x="68" y="44" font-family="'Caveat', cursive, sans-serif" font-size="22" font-weight="bold" fill="#9D174D" text-anchor="middle" transform="rotate(-5 70 40)">Genially</text>
+</svg>

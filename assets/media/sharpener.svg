@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" width="100%" height="100%">
+  <!-- Cuerpo del sacapuntas verde -->
+  <path d="M 20 20 L 100 20 L 90 90 L 10 90 Z" fill="#10B981" stroke="#059669" stroke-width="4" rx="8" />
+  <!-- Cuchilla de metal -->
+  <polygon points="35,30 85,30 75,80 25,80" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" />
+  <!-- Tornillo de la cuchilla -->
+  <circle cx="55" cy="55" r="5" fill="#64748B" />
+  <!-- Ranura de lápiz -->
+  <ellipse cx="55" cy="20" rx="14" ry="7" fill="#064E3B" />
+  <!-- Virutas de lápiz rizadas decorativas -->
+  <path d="M 95 65 Q 120 40 145 60 Q 155 75 140 90 Q 120 100 110 80 Z" fill="#FDE68A" stroke="#F59E0B" stroke-width="2" />
+  <path d="M 120 75 Q 135 60 148 70" fill="none" stroke="#2563EB" stroke-width="3" />
+  <!-- Segunda viruta pequeña -->
+  <path d="M 75 95 Q 90 110 110 100 Q 105 125 80 120 Z" fill="#FEF08A" stroke="#EAB308" stroke-width="2" />
+</svg>

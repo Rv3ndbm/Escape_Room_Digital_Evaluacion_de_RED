@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sala 4: La Ola de Calor | Escape room Educación</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Estilos propios (Estética Escolar Genially) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body>
+
+  <!-- Fondo Mágico con Auras y Elementos Animados -->
+  <div class="desk-decorations">
+    <!-- Resplandores ambientales cromáticos vivos (Rojo, Azul, Verde, Oro) -->
+    <div class="desk-ambient-auras">
+      <div class="aura-orb-gold"></div>
+      <div class="aura-orb-blue"></div>
+      <div class="aura-orb-green"></div>
+      <div class="aura-orb-red"></div>
+    </div>
+
+    <!-- Hoja blanca de cuaderno escolar a la derecha -->
+    <div class="bg-tilted-sheet"></div>
+
+    <!-- Cintas Adhesivas Washi Tape de Colores Vivos -->
+    <div class="washi-tape washi-red"></div>
+    <div class="washi-tape washi-blue"></div>
+    <div class="washi-tape washi-green"></div>
+
+    <!-- Mascotas Tiernas Animadas Flotantes -->
+    <img src="../media/sun-sunglasses.svg" alt="Solecito con gafas" class="decor-sun" title="¡Protección solar e inclusión!">
+    <img src="../media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="¡Cuidemos nuestro clima!">
+    <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
+    <img src="../media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
+
+    <!-- Destellos mágicos, corazones y estrellitas centelleantes -->
+    <div class="decor-sparkle" style="top: 14%; left: 24%; color: #EF4444;">❤️</div>
+    <div class="decor-sparkle" style="top: 22%; right: 24%; color: #2563EB; animation-delay: 0.8s;">⭐</div>
+    <div class="decor-sparkle" style="bottom: 14%; left: 26%; color: #10B981; animation-delay: 1.4s;">🌟</div>
+    <div class="decor-sparkle" style="bottom: 22%; right: 22%; color: #F59E0B; animation-delay: 0.5s;">✨</div>
+    <div class="decor-sparkle" style="top: 50%; left: 8%; color: #DC2626; animation-delay: 1.8s;">🍎</div>
+
+    <!-- Útiles escolares -->
+    <img src="../media/pencil.svg" alt="Lápiz escolar" class="decor-pencil">
+    <img src="../media/protractor.svg" alt="Transportador" class="decor-protractor">
+    <img src="../media/eraser.svg" alt="Borrador" class="decor-eraser">
+  </div>
+
+  <div class="escape-room-screen">
+    
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="mission-logo">
+        <span>☀️ Reto 4: La Ola de Calor</span>
+      </div>
+
+      <div class="mission-progress">
+        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
+        <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
+        <a href="sala2-tsunami.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 2</a>
+        <a href="sala3-terremoto.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 3</a>
+        <div class="step-badge active"><i class="fa-solid fa-sun"></i> Reto 4</div>
+      </div>
+
+      <div class="hud-actions">
+        <button class="sound-toggle-btn" title="Activar/Silenciar sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenido Principal: Dos Hojas Escolares Responsivas -->
+    <main class="room-content-grid">
+      
+      <!-- Columna Izquierda: Minijuego Educaplay con Barra de Accesibilidad -->
+      <section class="paper-card resource-column animate__animated animate__fadeInLeft">
+        <div class="resource-header">
+          <span class="resource-badge" style="color: var(--btn-gold-dark);">
+            <i class="fa-solid fa-puzzle-piece" style="color: var(--btn-gold);"></i> Juego Educaplay: Clima y Calor
+          </span>
+          <span class="badge rounded-pill" style="background: #FEF3C7; color: #92400E; font-family: var(--font-hand); font-size: 0.88rem; border: 1.5px solid #FCD34D;">
+            Diseño Universal Inclusivo
+          </span>
+        </div>
+
+        <div class="resource-body" style="padding: 0;">
+          <div class="educaplay-container">
+            
+            <!-- Barra Superior de Herramientas de Inclusión -->
+            <div class="accessibility-toolbar" style="background: #FEF9C3; border-bottom: 2px solid #FDE047;">
+              <span style="font-family: var(--font-hand); font-size: 0.95rem; font-weight: bold; color: #854D0E;">
+                <i class="fa-solid fa-universal-access"></i> Herramientas de Inclusión:
+              </span>
+              <div class="acc-buttons">
+                <button id="btnFontToggle" class="acc-btn">
+                  <i class="fa-solid fa-text-height"></i> Letra Grande
+                </button>
+                <button id="btnContrastToggle" class="acc-btn">
+                  <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
+                </button>
+              </div>
+            </div>
+
+            <!-- Marco del Iframe Educaplay -->
+            <div class="educaplay-frame-box" id="educaplayWrapper">
+              <iframe 
+                src="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" 
+                title="Actividad educativa sobre el calor y la atmósfera"
+                style="width: 100%; height: 100%; border: none;"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Columna Derecha: Pregunta Pedagógica y Clave Final -->
+      <section class="paper-card question-column animate__animated animate__fadeInRight">
+        <div>
+          <div class="question-badge">
+            <i class="fa-solid fa-universal-access"></i> Criterio Pedagógico: Accesibilidad
+          </div>
+
+          <h2 class="question-title">
+            Misión 4: Revisa este juego sobre el calor. Piensa en tus compañeros: ¿Crees que el juego tiene colores claros, letras grandes y sonidos para que CUALQUIER niño pueda jugar, incluso si usa gafas o le cuesta escuchar?
+          </h2>
+
+          <div class="question-options-box">
+            <!-- Opción A: Correcta -->
+            <div class="option-card" data-correct="true">
+              <div class="option-letter">A</div>
+              <div>
+                <strong style="color: var(--school-green-title);">¡Sí, es completamente accesible e inclusivo!</strong>
+                <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Tiene botones cómodos, letras nítidas y opciones para que ningún niño se quede fuera de la diversión. (Clave: <strong>624</strong>)</p>
+              </div>
+            </div>
+
+            <!-- Opción B: Incorrecta -->
+            <div class="option-card" data-correct="false">
+              <div class="option-letter">B</div>
+              <div>
+                <strong>No es accesible para todos.</strong>
+                <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Tiene letras muy pequeñas y no ofrece facilidades para niños con necesidades visuales o auditivas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área de Desbloqueo Fiable -->
+        <div class="unlock-box">
+          <div class="unlock-label">
+            <i class="fa-solid fa-key" style="color: var(--btn-gold-dark);"></i>
+            <span>Introduce la última clave para recibir tu Diploma:</span>
+          </div>
+          <div class="unlock-inputs-row">
+            <input 
+              type="text" 
+              class="passcode-input" 
+              placeholder="624" 
+              maxlength="6" 
+              autocomplete="off" 
+              aria-label="Código secreto">
+            <!-- BOTÓN EXCLUSIVO DE DESBLOQUEO -->
+            <button id="btnUnlockRoom" class="unlock-btn" type="button">
+              <span>Desbloquear</span>
+              <i class="fa-solid fa-lock-open"></i>
+            </button>
+          </div>
+          <div class="feedback-msg"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Barra Inferior -->
+    <footer class="bottom-bar animate__animated animate__fadeInUp">
+      <div class="hint-pill">
+        <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
+        <span>Pista de Accesibilidad: Selecciona la <strong>Opción A</strong> para obtener la clave (<strong>624</strong>) y pulsa Desbloquear.</span>
+      </div>
+      <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
+        <i class="fa-solid fa-heart" style="color: #EF4444;"></i> Escuela Inclusiva y Universal
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal de Éxito Oficial -->
+  <div class="success-overlay">
+    <div class="success-modal-card animate__animated animate__zoomIn">
+      <div class="success-stamp-circle">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <h3 style="font-family: var(--font-script); font-size: 2rem; color: var(--school-green-title); margin-bottom: 0.4rem;">
+        ¡Insignia de Accesibilidad Desbloqueada!
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
+        ¡Has completado los 4 retos científicos con calificación sobresaliente! Generando tu diploma oficial...
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initRoomValidation('sala4');
+
+      const btnFont = document.getElementById('btnFontToggle');
+      const btnContrast = document.getElementById('btnContrastToggle');
+      const wrapper = document.getElementById('educaplayWrapper');
+
+      let bigFont = false;
+      let contrast = false;
+
+      btnFont.addEventListener('click', () => {
+        bigFont = !bigFont;
+        document.body.style.fontSize = bigFont ? '1.12rem' : '1rem';
+        btnFont.classList.toggle('active', bigFont);
+        if (window.escapeSound) window.escapeSound.playPop();
+      });
+
+      btnContrast.addEventListener('click', () => {
+        contrast = !contrast;
+        wrapper.style.filter = contrast ? 'contrast(140%) brightness(90%)' : 'none';
+        btnContrast.classList.toggle('active', contrast);
+        if (window.escapeSound) window.escapeSound.playPop();
+      });
+    });
+  </script>
+</body>
+</html>

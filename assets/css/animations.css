@@ -1,0 +1,269 @@
+/* ==========================================================================
+   MISIÓN: SALVAR LA TIERRA - ESCAPE ROOM EDUCATIVO
+   animations.css - Keyframes de Stickers Animados, Micro-Interacciones y Olas
+   ========================================================================== */
+
+/* 1. Bamboleo del lápiz sobre el pupitre */
+@keyframes pencilWiggle {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(1.5deg);
+  }
+}
+
+/* 2. Latido y brillo del sello A+ escolar */
+@keyframes stampPulse {
+  0%, 100% {
+    transform: rotate(12deg) scale(1);
+  }
+  50% {
+    transform: rotate(15deg) scale(1.08);
+  }
+}
+
+/* 3. Flotación suave de stickers infantiles (sol, ola, nube) */
+@keyframes stickerFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+/* 4. Rebote tierno del volcancito */
+@keyframes stickerBounce {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) translateY(-6px) rotate(3deg);
+  }
+}
+
+/* 5. Giro juguetón del tornadito con ojos mareados */
+@keyframes stickerSpinSlow {
+  0%, 100% {
+    transform: rotate(-8deg) scale(0.98);
+  }
+  50% {
+    transform: rotate(8deg) scale(1.05);
+  }
+}
+
+/* 6. Centelleo de estrellitas de colores */
+@keyframes sparkleTwinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.3) rotate(25deg);
+  }
+}
+
+/* 6b. Flotación mágica del solecito con gafas */
+@keyframes floatingSun {
+  0%, 100% {
+    transform: translateY(0px) rotate(-2deg);
+    filter: drop-shadow(0 6px 14px rgba(245, 158, 11, 0.25));
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+    filter: drop-shadow(0 10px 22px rgba(245, 158, 11, 0.4));
+  }
+}
+
+/* 6c. Flotación orbital del planeta Tierra sonriente */
+@keyframes floatingEarth {
+  0%, 100% {
+    transform: translateY(0px) rotate(3deg);
+    filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.22));
+  }
+  50% {
+    transform: translateY(-8px) rotate(-3deg);
+    filter: drop-shadow(0 10px 20px rgba(2, 132, 199, 0.35));
+  }
+}
+
+/* 6d. Desplazamiento suave de la nubecita */
+@keyframes floatingCloud {
+  0%, 100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(8px, -6px) rotate(2deg);
+  }
+}
+
+/* 6e. Respiración del resplandor de fondo mágico */
+@keyframes ambientAuraPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+/* 7. Balanceo del barco del tsunami */
+@keyframes boatRocking {
+  0%, 100% {
+    transform: rotate(-6deg) translateY(0);
+  }
+  50% {
+    transform: rotate(7deg) translateY(-8px);
+  }
+}
+
+.boat-floating {
+  animation: boatRocking 2.4s ease-in-out infinite;
+}
+
+/* 8. Ondulación de la marea */
+@keyframes waveUndulationSmooth {
+  0%, 100% {
+    border-radius: 35% 65% 0 0 / 25px 25px 0 0;
+  }
+  50% {
+    border-radius: 65% 35% 0 0 / 30px 20px 0 0;
+  }
+}
+
+.wave-sloshing {
+  animation: waveUndulationSmooth 3s ease-in-out infinite;
+}
+
+/* 9. Temblor sísmico del teléfono móvil (Sala 3) */
+@keyframes phoneQuake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-4px, 4px) rotate(-2deg); }
+  40% { transform: translate(4px, -3px) rotate(2deg); }
+  60% { transform: translate(-3px, 2px) rotate(-1deg); }
+  80% { transform: translate(3px, -2px) rotate(1deg); }
+}
+
+.phone-shaking {
+  animation: phoneQuake 0.25s infinite;
+}
+
+/* 10. Balanceo de lámpara en simulacro escolar (Sala 3) */
+@keyframes lampSwayKeyframe {
+  0%, 100% { transform: rotate(0deg); transform-origin: top center; }
+  25% { transform: rotate(-30deg); transform-origin: top center; }
+  75% { transform: rotate(30deg); transform-origin: top center; }
+}
+
+.lamp-swaying {
+  animation: lampSwayKeyframe 0.6s ease-in-out infinite;
+}
+
+/* 11. Burbujeo de la cámara magmática (Sala 1) */
+@keyframes magmaBubbleRise {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.4; }
+  50% { transform: translateY(-10px) scale(1.2); opacity: 0.9; }
+  100% { transform: translateY(-20px) scale(0.6); opacity: 0; }
+}
+
+.magma-bubbling {
+  animation: magmaBubbleRise 1.2s ease-in-out infinite;
+}
+
+/* 12. Pulso de humo volcánico */
+@keyframes smokeBillow {
+  0% { transform: translateY(0) scale(0.9); opacity: 0.3; }
+  50% { transform: translateY(-15px) scale(1.2); opacity: 0.8; }
+  100% { transform: translateY(-30px) scale(1.4); opacity: 0.1; }
+}
+
+.smoke-billowing {
+  animation: smokeBillow 1.8s ease-out infinite;
+}
+
+/* 13. Temblor montañoso del volcán */
+@keyframes mountainTremorKeyframe {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, 2px); }
+}
+
+.mountain-trembling {
+  animation: mountainTremorKeyframe 0.2s ease-in-out infinite;
+}
+
+/* 14. Brillo ardiente de la colada de lava */
+@keyframes lavaGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px #EF4444);
+    stroke: #EF4444;
+  }
+  50% {
+    filter: drop-shadow(0 0 14px #F59E0B);
+    stroke: #FDE047;
+  }
+}
+
+.lava-flowing-active {
+  animation: lavaGlowPulse 0.8s ease-in-out infinite;
+}
+
+/* 15. Barrido brillante dorado para el botón Empezar */
+@keyframes shimmerGoldenSweep {
+  0% { transform: translateX(-120%) skewX(-25deg); opacity: 0; }
+  40% { opacity: 0.75; }
+  100% { transform: translateX(220%) skewX(-25deg); opacity: 0; }
+}
+
+/* 16. Balanceo juguetón de doodles */
+@keyframes doodleBobble {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50% { transform: translateY(-9px) rotate(4deg); }
+}
+
+.doodle-floating {
+  animation: doodleBobble 4.5s ease-in-out infinite;
+}
+
+/* 17. Pulsación cromática de auras */
+@keyframes chromaticAuraBreathe {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.65; }
+  33% { transform: scale(1.08) translate(10px, -8px); opacity: 0.9; }
+  66% { transform: scale(0.96) translate(-8px, 12px); opacity: 0.7; }
+}
+
+/* 18. Giro suave del átomo científico */
+@keyframes atomSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.atom-spinning {
+  display: inline-block;
+  animation: atomSpin 12s linear infinite;
+}
+
+/* 19. Pulso de cinta o insignia de título */
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.badge-pulsing {
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+/* 20. Respiración de salpicaduras de acuarela */
+@keyframes splatBreathe {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.75; }
+  50% { transform: scale(1.07) rotate(4deg); opacity: 0.95; }
+}
+
+.splat-pulsing {
+  animation: splatBreathe 5s ease-in-out infinite;
+}

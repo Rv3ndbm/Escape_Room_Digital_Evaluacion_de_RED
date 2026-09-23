@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sala 2: El Tsunami | Escape room Educación</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Estilos propios (Estética Escolar Genially) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .slider-presets-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-preset {
+      font-family: var(--font-hand);
+      font-size: 0.85rem;
+      font-weight: bold;
+      background: white;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 9999px;
+      padding: 2px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-preset:hover, .btn-preset.active {
+      background: var(--pencil-blue);
+      color: white;
+      border-color: var(--pencil-blue-dark);
+    }
+    .water-splash-droplet {
+      position: absolute;
+      font-size: 2.4rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2), opacity 0.4s;
+    }
+    .safe-hill-box {
+      position: absolute;
+      bottom: 40px;
+      left: 10px;
+      z-index: 17;
+      background: #84CC16;
+      border: 2px solid #4D7C0F;
+      border-radius: 20px 20px 0 0;
+      padding: 4px 10px;
+      font-family: var(--font-hand);
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #1A2E05;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo Mágico con Auras y Elementos Animados -->
+  <div class="desk-decorations">
+    <!-- Resplandores ambientales cromáticos vivos (Rojo, Azul, Verde, Oro) -->
+    <div class="desk-ambient-auras">
+      <div class="aura-orb-gold"></div>
+      <div class="aura-orb-blue"></div>
+      <div class="aura-orb-green"></div>
+      <div class="aura-orb-red"></div>
+    </div>
+
+    <!-- Hoja blanca de cuaderno escolar a la derecha -->
+    <div class="bg-tilted-sheet"></div>
+
+    <!-- Cintas Adhesivas Washi Tape de Colores Vivos -->
+    <div class="washi-tape washi-red"></div>
+    <div class="washi-tape washi-blue"></div>
+    <div class="washi-tape washi-green"></div>
+
+    <!-- Mascotas Tiernas Animadas Flotantes -->
+    <img src="../media/sun-sunglasses.svg" alt="Solecito con gafas" class="decor-sun" title="¡Solecito radiante!">
+    <img src="../media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="¡Cuidemos los océanos!">
+    <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
+    <img src="../media/volcano-cute.svg" alt="Volcancito" class="decor-volcano-mini">
+
+    <!-- Destellos mágicos y estrellitas centelleantes -->
+    <div class="decor-sparkle" style="top: 14%; left: 24%; color: #EF4444;">❤️</div>
+    <div class="decor-sparkle" style="top: 22%; right: 24%; color: #2563EB; animation-delay: 0.8s;">⭐</div>
+    <div class="decor-sparkle" style="bottom: 14%; left: 26%; color: #10B981; animation-delay: 1.4s;">🌟</div>
+    <div class="decor-sparkle" style="bottom: 22%; right: 22%; color: #F59E0B; animation-delay: 0.5s;">✨</div>
+    <div class="decor-sparkle" style="top: 50%; left: 8%; color: #DC2626; animation-delay: 1.8s;">🍎</div>
+
+    <!-- Útiles escolares -->
+    <img src="../media/protractor.svg" alt="Transportador escolar" class="decor-protractor">
+    <img src="../media/scissors.svg" alt="Tijeras" class="decor-scissors">
+  </div>
+
+  <div class="escape-room-screen">
+    
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="mission-logo">
+        <span>🌊 Reto 2: El Tsunami</span>
+      </div>
+
+      <div class="mission-progress">
+        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
+        <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
+        <div class="step-badge active"><i class="fa-solid fa-water"></i> Reto 2</div>
+        <div class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</div>
+        <div class="step-badge"><i class="fa-solid fa-sun"></i> Reto 4</div>
+      </div>
+
+      <div class="hud-actions">
+        <button class="sound-toggle-btn" title="Activar/Silenciar sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenido Principal: Dos Hojas Escolares Responsivas -->
+    <main class="room-content-grid">
+      
+      <!-- Columna Izquierda: SIMULADOR REAL DE TSUNAMI CON IMPACTO EN LA COSTA -->
+      <section class="paper-card resource-column animate__animated animate__fadeInLeft">
+        <div class="resource-header">
+          <span class="resource-badge" style="color: var(--pencil-blue-dark);">
+            <i class="fa-solid fa-sliders" style="color: var(--pencil-blue);"></i> Simulador de Impacto Costero
+          </span>
+          <span id="tsunamiMetersBadge" class="badge rounded-pill" style="font-family: var(--font-hand); font-size: 0.95rem; padding: 0.35rem 0.9rem; background: #DCFCE7; color: #166534; border: 1.5px solid #86EFAC;">
+            Costa Segura: Mar en calma (1m)
+          </span>
+        </div>
+
+        <div class="resource-body" style="padding: 0;">
+          <div class="tsunami-stage">
+            
+            <!-- Barra Medidora Superior con Slider y Botones de Escenario -->
+            <!-- Barra Medidora Superior con Slider y Botones de Escenario -->
+            <div class="tsunami-top-controls">
+              <div class="tsunami-slider-bar">
+                <span style="font-family: var(--font-hand); font-weight: bold; font-size: 0.95rem; color: #0369A1; white-space: nowrap;">
+                  📏 Altura de Ola:
+                </span>
+                <input type="range" id="tsunamiRangeInput" min="1" max="30" value="1" step="1" aria-label="Altura de la ola">
+                <span id="tsunamiRangeLabel" style="font-family: var(--font-script); font-weight: bold; font-size: 1.35rem; color: #0284C7; width: 55px; text-align: right;">
+                  1 m
+                </span>
+              </div>
+
+              <!-- Presets Rápidos -->
+              <div class="slider-presets-row">
+                <button class="btn-preset active" data-meters="1">1m (Calma)</button>
+                <button class="btn-preset" data-meters="5">5m (Fuerte)</button>
+                <button class="btn-preset" data-meters="15">15m (Tsunami)</button>
+                <button class="btn-preset" data-meters="30">30m (Mega Tsunami)</button>
+              </div>
+            </div>
+
+            <!-- Escenario Central Visual de la Costa - Elevado e Independiente (La playa nunca queda tapada) -->
+            <div class="tsunami-scene-viewport">
+              <!-- Gráfico de la Gran Ola Curva que avanza hacia la izquierda en dirección a la playa -->
+              <div id="waveIllustrationBox" style="position: absolute; bottom: 25px; right: -250px; width: 230px; height: auto; z-index: 19; transform: scaleX(-1); transition: right 1.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s;">
+                <img src="../media/wave-cute.svg" alt="Gran ola de tsunami" style="width: 100%; height: auto; filter: drop-shadow(0 8px 20px rgba(2, 132, 199, 0.55));">
+              </div>
+
+              <!-- Barco que flota en el mar a la derecha y es arrastrado -->
+              <div id="tsunamiBoat" class="boat-element boat-floating" title="Toca el barquito">
+                ⛵
+              </div>
+
+              <!-- Pez que queda a la vista cuando el mar se retira hacia la derecha -->
+              <div id="exposedSeafloorFish" style="position: absolute; bottom: 15px; left: 52%; font-size: 1.6rem; z-index: 12; opacity: 0; transition: opacity 0.4s;">
+                🐟🦀
+              </div>
+
+              <!-- Colina Alta de Evacuación Segura (A la izquierda, zona segura) -->
+              <div id="safeHill" class="safe-hill-box" title="Zona alta segura para evacuación">
+                <span>⛰️ Colina Alta:</span> <span>🏃‍♂️ Refugio</span>
+              </div>
+
+              <!-- Playa a la izquierda con Castillo de Arena, Palmera, Sombrilla y Sirena (Elevada y amplia) -->
+              <div id="coastBeach" class="coast-beach-layer">
+                <span id="itemSandcastle" class="beach-item" title="¡Toca para construir el castillo!">🏰</span>
+                <span id="itemUmbrella" class="beach-item" title="¡Toca para abrir la sombrilla!">🏖️</span>
+                <span id="itemPalm" class="beach-item" title="¡Toca para sacudir la palmera!">🌴</span>
+                <span id="itemSiren" class="beach-item" title="¡Alerta sísmica y de tsunami!">🏮</span>
+              </div>
+
+              <!-- Capa de Agua Marina que inunda la arena hacia la izquierda -->
+              <div id="tsunamiWater" class="tsunami-water-sheet wave-sloshing">
+                <div class="tsunami-foam">
+                  <span>🫧</span><span>🌊</span><span>💧</span><span>🫧</span><span>🌊</span><span>💧</span>
+                </div>
+              </div>
+
+              <!-- Salpicaduras de impacto gigante en la playa izquierda -->
+              <div id="splashDroplet" class="water-splash-droplet" style="bottom: 75px; left: 24%; z-index: 22;">
+                💦🌊💦
+              </div>
+            </div>
+
+            <!-- Panel de Control con BOTÓN EXCLUSIVO DE SIMULACIÓN - Debajo de la escena sin superponerse -->
+            <div class="tsunami-control-panel">
+              <span id="consequenceNotice" style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: #15803D;">
+                ✅ Costa Segura: Mar en calma. Toca los objetos o presiona ¡Simular Impacto!
+              </span>
+              <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
+                <button id="btnResetBeach" type="button" class="btn-preset" style="padding: 4px 10px; font-size: 0.85rem;">
+                  <i class="fa-solid fa-rotate-left"></i> Restablecer
+                </button>
+                <!-- BOTÓN EXCLUSIVO DEL SIMULADOR -->
+                <button id="btnSimulateTsunamiImpact" class="btn-sim-action btn-sim-tsunami" type="button" style="font-size: 1.15rem; padding: 0.4rem 1.2rem;">
+                  <i class="fa-solid fa-play"></i>
+                  <span id="btnSimTsunamiText">¡Simular Impacto!</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Columna Derecha: Pregunta Pedagógica y Clave Exclusiva de Desbloqueo -->
+      <section class="paper-card question-column animate__animated animate__fadeInRight">
+        <div>
+          <div class="question-badge">
+            <i class="fa-solid fa-hand-pointer"></i> Criterio Pedagógico: Usabilidad
+          </div>
+
+          <h2 class="question-title">
+            Misión 2: Acabas de probar el simulador para detener y estudiar el tsunami. ¿Te pareció fácil saber dónde hacer clic, mover el medidor de altura y entender cómo se juega sin pedirle ayuda a un adulto?
+          </h2>
+
+          <div class="question-options-box">
+            <!-- Opción A: Correcta -->
+            <div class="option-card" data-correct="true">
+              <div class="option-letter">A</div>
+              <div>
+                <strong style="color: var(--school-green-title);">¡Sí, la usabilidad es excelente!</strong>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">El medidor de altura es muy fácil de usar, responde al instante y se comprende todo sin dificultad. (Clave: <strong>741</strong>)</p>
+              </div>
+            </div>
+
+            <!-- Opción B: Incorrecta -->
+            <div class="option-card" data-correct="false">
+              <div class="option-letter">B</div>
+              <div>
+                <strong>No, fue difícil y confuso.</strong>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Los controles no se entienden y no queda claro qué hace la ola.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área de Desbloqueo Fiable (EXCLUSIVA PARA DESBLOQUEAR) -->
+        <div class="unlock-box">
+          <div class="unlock-label">
+            <i class="fa-solid fa-key" style="color: var(--btn-gold-dark);"></i>
+            <span>Introduce la clave para desbloquear el Reto 3:</span>
+          </div>
+          <div class="unlock-inputs-row">
+            <input 
+              type="text" 
+              class="passcode-input" 
+              placeholder="741" 
+              maxlength="6" 
+              autocomplete="off" 
+              aria-label="Código secreto">
+            <!-- BOTÓN EXCLUSIVO DE DESBLOQUEO -->
+            <button id="btnUnlockRoom" class="unlock-btn" type="button">
+              <span>Desbloquear</span>
+              <i class="fa-solid fa-lock-open"></i>
+            </button>
+          </div>
+          <div class="feedback-msg"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Barra Inferior -->
+    <footer class="bottom-bar animate__animated animate__fadeInUp">
+      <div class="hint-pill">
+        <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
+        <span>Pista de Usabilidad: Selecciona la <strong>Opción A</strong> para obtener la clave (<strong>741</strong>) y pulsa Desbloquear.</span>
+      </div>
+      <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
+        <i class="fa-solid fa-water"></i> Laboratorio de Ciencias del Océano
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal de Éxito Oficial -->
+  <div class="success-overlay">
+    <div class="success-modal-card animate__animated animate__zoomIn">
+      <div class="success-stamp-circle">
+        <i class="fa-solid fa-award"></i>
+      </div>
+      <h3 style="font-family: var(--font-script); font-size: 2rem; color: var(--school-green-title); margin-bottom: 0.4rem;">
+        ¡Insignia de Usabilidad Desbloqueada!
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
+        ¡Demostraste que los controles sencillos e intuitivos permiten aprender jugando! Pasando a la Sala 3...
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializar validación exclusiva del botón Desbloquear
+      initRoomValidation('sala2');
+
+      // 2. Control del Slider y Presets en Metros
+      const rangeInput = document.getElementById('tsunamiRangeInput');
+      const rangeLabel = document.getElementById('tsunamiRangeLabel');
+      const metersBadge = document.getElementById('tsunamiMetersBadge');
+      const waterEl = document.getElementById('tsunamiWater');
+      const boatEl = document.getElementById('tsunamiBoat');
+      const sandcastleEl = document.getElementById('itemSandcastle');
+      const umbrellaEl = document.getElementById('itemUmbrella');
+      const palmEl = document.getElementById('itemPalm');
+      const sirenEl = document.getElementById('itemSiren');
+      const fishEl = document.getElementById('exposedSeafloorFish');
+      const safeHill = document.getElementById('safeHill');
+      const waveBox = document.getElementById('waveIllustrationBox');
+      const splashEl = document.getElementById('splashDroplet');
+      const noticeEl = document.getElementById('consequenceNotice');
+      const presetBtns = document.querySelectorAll('.btn-preset');
+      const btnResetBeach = document.getElementById('btnResetBeach');
+
+      let currentMeters = 1;
+
+      function updateMetersDisplay(m) {
+        currentMeters = m;
+        rangeInput.value = m;
+        rangeLabel.textContent = m + ' m';
+
+        presetBtns.forEach(btn => {
+          btn.classList.toggle('active', parseInt(btn.getAttribute('data-meters')) === m);
+        });
+
+        // Altura del agua marina en reposo dentro del viewport de la escena
+        const minH = 55;
+        const maxH = 150;
+        const h = minH + ((m - 1) / 29) * (maxH - minH);
+        waterEl.style.height = h + 'px';
+        boatEl.style.bottom = (h + 8) + 'px';
+
+        if (m <= 3) {
+          metersBadge.style.background = '#DCFCE7';
+          metersBadge.style.color = '#166534';
+          metersBadge.style.borderColor = '#86EFAC';
+          metersBadge.textContent = `Costa Segura (${m}m)`;
+          noticeEl.style.color = '#15803D';
+          noticeEl.textContent = '✅ Costa Segura: Mar en calma sin peligro. Toca la arena para jugar.';
+        } else if (m <= 8) {
+          metersBadge.style.background = '#FEF9C3';
+          metersBadge.style.color = '#854D0E';
+          metersBadge.style.borderColor = '#FDE047';
+          metersBadge.textContent = `Marea Fuerte (${m}m)`;
+          noticeEl.style.color = '#B45309';
+          noticeEl.textContent = '⚠️ ¡Marea alta! El agua se acerca al castillo de arena.';
+        } else if (m <= 18) {
+          metersBadge.style.background = '#FEE2E2';
+          metersBadge.style.color = '#991B1B';
+          metersBadge.style.borderColor = '#F87171';
+          metersBadge.textContent = `¡Tsunami Destructivo! (${m}m)`;
+          noticeEl.style.color = '#B91C1C';
+          noticeEl.textContent = '🌊 ¡ALERTA DE TSUNAMI! Evacuar hacia la colina alta a la izquierda.';
+        } else {
+          metersBadge.style.background = '#F3E8FF';
+          metersBadge.style.color = '#6B21A8';
+          metersBadge.style.borderColor = '#C084FC';
+          metersBadge.textContent = `¡Mega Tsunami! (${m}m)`;
+          noticeEl.style.color = '#7E22CE';
+          noticeEl.textContent = '🌊 ¡IMPACTO MASIVO! Ola colosal avanza hacia la costa.';
+        }
+      }
+
+      rangeInput.addEventListener('input', (e) => updateMetersDisplay(parseInt(e.target.value)));
+      presetBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          updateMetersDisplay(parseInt(this.getAttribute('data-meters')));
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      });
+
+      // 3. INTERACTIVIDAD DE ELEMENTOS DE LA PLAYA (Para que los niños exploren y jueguen)
+      sandcastleEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sandcastleEl.style.transform = 'scale(1.3) rotate(-8deg)';
+        sandcastleEl.style.opacity = '1';
+        noticeEl.innerHTML = '🏰 <strong>¡Construiste el castillo!</strong> Las torres de arena quedaron firmes.';
+        if (window.escapeSound) window.escapeSound.playPop();
+        setTimeout(() => { sandcastleEl.style.transform = 'scale(1)'; }, 300);
+      });
+
+      umbrellaEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        umbrellaEl.style.transform = 'scale(1.3) rotate(15deg)';
+        umbrellaEl.style.opacity = '1';
+        umbrellaEl.textContent = umbrellaEl.textContent === '🏖️' ? '⛱️' : '🏖️';
+        noticeEl.innerHTML = '⛱️ <strong>¡Sombrilla ajustada!</strong> Protegiendo del sol playero.';
+        if (window.escapeSound) window.escapeSound.playPop();
+        setTimeout(() => { umbrellaEl.style.transform = 'scale(1)'; }, 300);
+      });
+
+      palmEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        palmEl.style.transform = 'rotate(-15deg) scale(1.2)';
+        noticeEl.innerHTML = '🌴 <strong>¡Palmera sacudida!</strong> Cayeron cocos en la arena.';
+        if (window.escapeSound) window.escapeSound.playPop();
+        setTimeout(() => { palmEl.style.transform = 'rotate(0deg) scale(1)'; }, 400);
+      });
+
+      sirenEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.escapeSound) window.escapeSound.playPop();
+        sirenEl.textContent = '🚨';
+        noticeEl.innerHTML = '🚨 <strong>¡Baliza de Alerta Costera!</strong> La señal luminosa advierte a los bañistas.';
+        setTimeout(() => { sirenEl.textContent = '🏮'; }, 1500);
+      });
+
+      boatEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        boatEl.style.transform = 'rotate(-20deg) translateY(-15px) scale(1.15)';
+        if (window.escapeSound) window.escapeSound.playPop();
+        setTimeout(() => { boatEl.style.transform = 'none'; }, 400);
+      });
+
+      // 4. LÓGICA DEL SIMULADOR: OLA QUE AVANZA HACIA LA IZQUIERDA Y ARRASTRA LA PLAYA
+      const btnSimTsunami = document.getElementById('btnSimulateTsunamiImpact');
+      const btnSimText = document.getElementById('btnSimTsunamiText');
+      let isSimulating = false;
+      let tsunamiTimeouts = [];
+
+      function clearTsunamiTimers() {
+        tsunamiTimeouts.forEach(t => clearTimeout(t));
+        tsunamiTimeouts = [];
+      }
+
+      function resetBeachState() {
+        clearTsunamiTimers();
+        isSimulating = false;
+        btnSimText.textContent = '¡Simular Impacto!';
+        btnSimTsunami.style.background = '#0284C7';
+        
+        // Regresar la ola a la derecha fuera de pantalla
+        waveBox.style.right = '-250px';
+        waveBox.style.transform = 'scaleX(-1) scale(1)';
+
+        // Regresar agua
+        waterEl.style.transform = 'none';
+        waterEl.style.height = '55px';
+        
+        // Elementos restaurados
+        splashEl.style.opacity = '0';
+        splashEl.style.transform = 'scale(0.5)';
+        fishEl.style.opacity = '0';
+
+        sandcastleEl.style.opacity = '1';
+        sandcastleEl.style.transform = 'none';
+
+        umbrellaEl.style.opacity = '1';
+        umbrellaEl.style.transform = 'none';
+
+        palmEl.style.transform = 'none';
+        boatEl.style.transform = 'none';
+        boatEl.style.left = '64%';
+        boatEl.style.bottom = '63px';
+
+        sirenEl.textContent = '🏮';
+
+        safeHill.style.transform = 'none';
+        safeHill.style.background = '#84CC16';
+
+        updateMetersDisplay(1);
+      }
+
+      btnResetBeach.addEventListener('click', (e) => {
+        e.stopPropagation();
+        resetBeachState();
+        if (window.escapeSound) window.escapeSound.playPop();
+      });
+
+      btnSimTsunami.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (isSimulating) {
+          resetBeachState();
+          if (window.escapeSound) window.escapeSound.playPop();
+          return;
+        }
+
+        isSimulating = true;
+        btnSimText.textContent = 'Tsunami en curso...';
+        btnSimTsunami.style.background = '#991B1B';
+
+        const waveHeightMeters = Math.max(currentMeters, 15);
+        updateMetersDisplay(waveHeightMeters);
+
+        // Sonido de agua marina realista al iniciar la simulación (NADA DE SIRENAS O TERREMOTOS)
+        if (window.escapeSound) window.escapeSound.playWave();
+
+        // FASE 1: Retirada súbita del mar hacia la derecha (Señal natural de alerta)
+        noticeEl.innerHTML = '🌊 <strong>Fase 1 (0 a 3.5s): Retirada del Océano.</strong> El mar retrocede velozmente mar adentro dejando peces a la vista. ¡Señal natural de alerta!';
+        waterEl.style.transform = 'translateX(130px) scaleY(0.6)';
+        boatEl.style.bottom = '28px';
+        fishEl.style.opacity = '1';
+        sirenEl.textContent = '🚨';
+
+        // FASE 2: Avance veloz de la gran ola HACIA LA IZQUIERDA (Sonido de ola oceánica)
+        tsunamiTimeouts.push(setTimeout(() => {
+          if (!isSimulating) return;
+          if (window.escapeSound) window.escapeSound.playWave();
+          
+          noticeEl.innerHTML = '🌊 <strong>Fase 2 (3.5s a 7.5s): ¡La Gran Ola Avanza hacia la Costa!</strong> Una colosal masa de agua se desplaza velozmente hacia la playa...';
+          const scaleVal = 1 + (waveHeightMeters / 25);
+          waveBox.style.transform = `scaleX(-1) scale(${scaleVal})`;
+          // Avanza hacia el centro
+          waveBox.style.right = '40%';
+        }, 3500));
+
+        // FASE 3: ¡IMPACTO TOTAL EN LA PLAYITA A LA IZQUIERDA Y ARRASTRE!
+        tsunamiTimeouts.push(setTimeout(() => {
+          if (!isSimulating) return;
+          if (window.escapeSound) window.escapeSound.playWave();
+
+          noticeEl.innerHTML = '💥 <strong>Fase 3 (7.5s a 11.5s): ¡IMPACTO EN LA PLAYA!</strong> La ola cubre la orilla de arena y arrastra los objetos.';
+          
+          // La ola llega a la playa izquierda
+          waveBox.style.right = '75%';
+          
+          // El agua inunda la costa
+          waterEl.style.transform = 'translateX(0)';
+          waterEl.style.height = '185px';
+
+          // Efectos en la playa
+          sandcastleEl.style.transform = 'scale(0.2) rotate(45deg)';
+          sandcastleEl.style.opacity = '0';
+          
+          umbrellaEl.style.transform = 'translate(-60px, -30px) rotate(-110deg)';
+          umbrellaEl.style.opacity = '0.3';
+
+          palmEl.style.transform = 'rotate(-38deg) translateY(14px)';
+          boatEl.style.transform = 'translate(-120px, -45px) rotate(35deg)';
+
+          // Salpicaduras violentas
+          splashEl.style.opacity = '1';
+          splashEl.style.transform = 'scale(2) translateY(-30px)';
+        }, 7500));
+
+        // FASE 4: Evacuación Segura en la Colina Alta
+        tsunamiTimeouts.push(setTimeout(() => {
+          if (!isSimulating) return;
+          splashEl.style.opacity = '0';
+          safeHill.style.transform = 'scale(1.15)';
+          safeHill.style.background = '#FDE047';
+          noticeEl.innerHTML = '🛡️ <strong>Fase 4: ¡Evacuación Exitosa!</strong> Toda la población se refugió a salvo en la colina alta izquierda.';
+          btnSimText.textContent = '¡Repetir Simulación!';
+          isSimulating = false;
+          if (window.escapeSound) window.escapeSound.playSuccess();
+        }, 11500));
+      });
+    });
+  </script>
+</body>
+</html>

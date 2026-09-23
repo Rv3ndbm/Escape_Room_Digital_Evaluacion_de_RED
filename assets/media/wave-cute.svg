@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente de profundidad marina -->
+    <linearGradient id="oceanDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="aquaLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <filter id="waveShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0284C7" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Capa trasera de agua más oscura -->
+  <path d="M 20 170 Q 50 160 90 165 C 150 170 195 130 190 75 C 185 35 140 25 125 55 C 115 75 125 95 105 100 C 85 105 70 85 50 115 C 30 145 20 170 20 170 Z" fill="#0284C7" opacity="0.4" filter="url(#waveShadow)"/>
+
+  <!-- Cuerpo principal de la gran ola curva -->
+  <g filter="url(#waveShadow)">
+    <path d="M 15 175 C 35 155 55 120 75 100 C 95 80 115 65 140 50 C 170 32 195 48 185 85 C 178 112 150 135 120 140 C 85 146 55 160 15 175 Z" fill="url(#oceanDeep)" stroke="#0369A1" stroke-width="3"/>
+    
+    <!-- Capa interior translúcida turquesa -->
+    <path d="M 28 174 C 55 140 85 105 125 80 C 152 63 172 75 165 98 C 158 120 130 135 100 145 C 65 155 42 166 28 174 Z" fill="url(#aquaLight)" opacity="0.65"/>
+  </g>
+
+  <!-- Cresta de espuma blanca curva estilo japonés / caricatura -->
+  <g fill="#FFFFFF" stroke="#BAE6FD" stroke-width="1.5">
+    <circle cx="145" cy="48" r="14"/>
+    <circle cx="165" cy="40" r="13"/>
+    <circle cx="184" cy="46" r="12"/>
+    <circle cx="195" cy="62" r="11"/>
+    <circle cx="190" cy="78" r="10"/>
+    <circle cx="178" cy="92" r="9"/>
+    <circle cx="160" cy="100" r="8"/>
+    <!-- Dedos de espuma rizados -->
+    <path d="M 135 55 Q 125 45 130 35 Q 140 40 142 50 Z" fill="#FFFFFF"/>
+    <path d="M 155 42 Q 150 30 160 25 Q 166 32 165 42 Z" fill="#FFFFFF"/>
+    <path d="M 175 38 Q 175 22 186 22 Q 188 32 182 40 Z" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Gotas de agua alegres saltando en el aire -->
+  <g fill="#38BDF8" stroke="#0284C7" stroke-width="1">
+    <circle cx="120" cy="22" r="5"/>
+    <circle cx="102" cy="38" r="4"/>
+    <circle cx="150" cy="12" r="3.5"/>
+    <circle cx="205" cy="40" r="4"/>
+    <circle cx="212" cy="65" r="3"/>
+  </g>
+
+  <!-- Carita tierna kawaii en el centro de la ola -->
+  <g>
+    <!-- Ojos alegres -->
+    <circle cx="85" cy="130" r="6" fill="#0C4A6E"/>
+    <circle cx="115" cy="126" r="6" fill="#0C4A6E"/>
+    <!-- Reflejos blancos en los ojos -->
+    <circle cx="83.5" cy="128" r="2" fill="#FFFFFF"/>
+    <circle cx="113.5" cy="124" r="2" fill="#FFFFFF"/>
+    <!-- Mejillas rosadas -->
+    <circle cx="76" cy="137" r="5.5" fill="#F472B6" opacity="0.8"/>
+    <circle cx="124" cy="133" r="5.5" fill="#F472B6" opacity="0.8"/>
+    <!-- Sonrisa dulce -->
+    <path d="M 94 135 Q 100 144 107 134" fill="none" stroke="#0C4A6E" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

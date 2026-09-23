@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sala 1: El Volcán | Escape room Educación</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Estilos propios (Estética Escolar Genially) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    .volcano-sim-stage {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #1E293B 0%, #0F172A 70%, #451A03 100%);
+      border-radius: var(--radius-paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(0.5rem, 1.2vh, 0.85rem);
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    /* Contenedor de Pestañas de Modalidad de Alto Impacto */
+    .mode-tabs-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E2E8F0;
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    .mode-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-hand);
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: 2px solid transparent;
+      background: transparent;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .mode-tab-btn:hover {
+      color: #0F172A;
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .tab-badge-number {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .tab-tag-first {
+      background: #2563EB;
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: var(--font-body);
+      font-weight: 700;
+    }
+
+    .tab-tag-sim {
+      background: #EF4444;
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: var(--font-body);
+      font-weight: 700;
+    }
+
+    /* Estado activo para la pestaña de Video */
+    .mode-tab-btn.active-video {
+      background: #2563EB !important;
+      color: #FFFFFF !important;
+      border-color: #93C5FD !important;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    .mode-tab-btn.active-video .tab-badge-number {
+      background: #FFFFFF;
+      color: #2563EB;
+    }
+
+    /* Estado activo para la pestaña de Simulador */
+    .mode-tab-btn.active-sim {
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%) !important;
+      color: #FFFFFF !important;
+      border-color: #FCA5A5 !important;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+    }
+
+    .mode-tab-btn.active-sim .tab-badge-number {
+      background: #FFFFFF;
+      color: #DC2626;
+    }
+
+    .mode-info-badge {
+      font-family: var(--font-hand);
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #1E40AF;
+      background: #DBEAFE;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #BFDBFE;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Barra Inferior del Video que invita a probar el simulador */
+    .video-helper-bar {
+      background: #EFF6FF;
+      border-top: 2px solid #BFDBFE;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+
+    .btn-goto-sim {
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+      color: #FFFFFF;
+      border: 1.5px solid #F87171;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-hand);
+      font-size: 1.05rem;
+      font-weight: bold;
+      padding: 6px 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-goto-sim:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 14px rgba(239, 68, 68, 0.45);
+    }
+
+    /* Barra de Fases Didácticas */
+    .volcano-stepper-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      z-index: 20;
+      width: 100%;
+    }
+
+    .volcano-step-badge {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #E2E8F0;
+      font-family: var(--font-hand);
+      font-size: 0.88rem;
+      font-weight: bold;
+      padding: 4px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.15;
+    }
+
+    .volcano-step-badge:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .volcano-step-badge.active {
+      background: #EF4444;
+      border-color: #F87171;
+      color: #FFFFFF;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.7);
+      transform: scale(1.03);
+    }
+
+    .volcano-step-badge.completed {
+      background: #15803D;
+      border-color: #86EFAC;
+      color: #DCFCE7;
+    }
+
+    .flying-rock {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s;
+      z-index: 8;
+    }
+
+    /* Animación de flujo de lava continua */
+    @keyframes lavaFlowAnimation {
+      0% { stroke-dashoffset: 160; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .lava-stream-active {
+      stroke: #EF4444 !important;
+      stroke-width: 9 !important;
+      filter: drop-shadow(0 0 8px #F59E0B) !important;
+      stroke-dasharray: 160;
+      animation: lavaFlowAnimation 2.5s ease-out forwards;
+    }
+
+    /* Banner de Explicación con Texto Grande y Efecto Karaoke */
+    #volcanoStatusBanner {
+      text-align: left;
+      color: #FED7AA;
+      font-family: var(--font-hand);
+      z-index: 15;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid rgba(251, 191, 36, 0.55);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      padding: clamp(0.55rem, 1.2vh, 0.85rem) clamp(0.9rem, 2vw, 1.4rem);
+      border-radius: 14px;
+      min-height: 84px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .banner-title-line {
+      font-size: clamp(1.05rem, 1.3vw, 1.22rem);
+      font-weight: 700;
+      color: #FDE047;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    .banner-body-text {
+      font-size: clamp(1.15rem, 1.45vw, 1.38rem);
+      line-height: 1.36;
+      color: #FFFFFF;
+    }
+
+    .banner-reading-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .reading-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #F59E0B, #EF4444, #10B981);
+      box-shadow: 0 0 8px #F59E0B;
+      transition: width 0.08s linear;
+    }
+
+    /* Efecto Karaoke de Lectura Progresiva */
+    .karaoke-word {
+      display: inline-block;
+      padding: 0 3px;
+      border-radius: 5px;
+      color: rgba(254, 215, 170, 0.42);
+      transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+      margin: 0 1px;
+    }
+
+    .karaoke-word.karaoke-read {
+      color: #FFFFFF;
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .karaoke-word.karaoke-active {
+      color: #451A03 !important;
+      background: #FBBF24 !important;
+      font-weight: 700 !important;
+      transform: scale(1.12);
+      box-shadow: 0 2px 8px rgba(251, 191, 36, 0.6);
+      text-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo Mágico con Auras y Elementos Animados -->
+  <div class="desk-decorations">
+    <!-- Resplandores ambientales cromáticos vivos (Rojo, Azul, Verde, Oro) -->
+    <div class="desk-ambient-auras">
+      <div class="aura-orb-gold"></div>
+      <div class="aura-orb-blue"></div>
+      <div class="aura-orb-green"></div>
+      <div class="aura-orb-red"></div>
+    </div>
+
+    <!-- Hoja blanca de cuaderno escolar a la derecha -->
+    <div class="bg-tilted-sheet"></div>
+
+    <!-- Cintas Adhesivas Washi Tape de Colores Vivos -->
+    <div class="washi-tape washi-red"></div>
+    <div class="washi-tape washi-blue"></div>
+    <div class="washi-tape washi-green"></div>
+
+    <!-- Mascotas Tiernas Animadas Flotantes -->
+    <img src="../media/sun-sunglasses.svg" alt="Solecito con gafas" class="decor-sun" title="¡Solecito radiante!">
+    <img src="../media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="¡Cuidemos la Tierra!">
+    <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
+    <img src="../media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
+
+    <!-- Destellos mágicos, corazones y estrellitas de colores puros -->
+    <div class="decor-sparkle" style="top: 14%; left: 24%; color: #EF4444;">❤️</div>
+    <div class="decor-sparkle" style="top: 22%; right: 24%; color: #2563EB; animation-delay: 0.8s;">⭐</div>
+    <div class="decor-sparkle" style="bottom: 14%; left: 26%; color: #10B981; animation-delay: 1.4s;">🌟</div>
+    <div class="decor-sparkle" style="bottom: 22%; right: 22%; color: #F59E0B; animation-delay: 0.5s;">✨</div>
+    <div class="decor-sparkle" style="top: 50%; left: 8%; color: #DC2626; animation-delay: 1.8s;">🍎</div>
+
+    <!-- Útiles escolares -->
+    <img src="../media/pencil.svg" alt="Lápiz escolar" class="decor-pencil">
+    <img src="../media/eraser.svg" alt="Goma" class="decor-eraser">
+    <img src="../media/stamp-a-plus.svg" alt="Sello A+" class="decor-stamp">
+  </div>
+
+  <div class="escape-room-screen">
+    
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="mission-logo">
+        <span>🌋 Reto 1: El Volcán</span>
+      </div>
+
+      <div class="mission-progress">
+        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Portada</a>
+        <div class="step-badge active"><i class="fa-solid fa-fire"></i> Reto 1</div>
+        <div class="step-badge"><i class="fa-solid fa-water"></i> Reto 2</div>
+        <div class="step-badge"><i class="fa-solid fa-house-crack"></i> Reto 3</div>
+        <div class="step-badge"><i class="fa-solid fa-sun"></i> Reto 4</div>
+      </div>
+
+      <div class="hud-actions">
+        <button class="sound-toggle-btn" title="Activar/Silenciar sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenido Principal: Dos Hojas Escolares Responsivas -->
+    <main class="room-content-grid">
+      
+      <!-- Columna Izquierda: SIMULADOR CIENTÍFICO DE ERUPCIÓN VOLCÁNICA -->
+      <section class="paper-card resource-column animate__animated animate__fadeInLeft">
+        <div class="resource-header">
+          <div class="mode-tabs-container">
+            <!-- Modalidad 1: Video Educativo (ACTIVO POR DEFECTO) -->
+            <button id="tabBtnVideo" class="mode-tab-btn active-video" type="button" title="Ver Video Educativo primero">
+              <span class="tab-badge-number">1</span>
+              <i class="fa-solid fa-circle-play"></i>
+              <span>Video Educativo</span>
+              <span class="tab-tag-first">Ver primero</span>
+            </button>
+            <!-- Modalidad 2: Simulador de Erupción (OPCIONAL) -->
+            <button id="tabBtnSim" class="mode-tab-btn" type="button" title="Experimentar en el Simulador 3D">
+              <span class="tab-badge-number">2</span>
+              <i class="fa-solid fa-volcano"></i>
+              <span>Simulador 4 Fases</span>
+              <span class="tab-tag-sim">Interactivo</span>
+            </button>
+          </div>
+          <span id="volcanoTimerBadge" class="mode-info-badge">
+            <i class="fa-solid fa-video"></i> <span>Video Didáctico (3 min)</span>
+          </span>
+        </div>
+
+        <div class="resource-body" style="padding: 0;">
+          
+          <!-- Vista 1: Video de YouTube Educativo (ACTIVO PRIMERO POR DEFECTO) -->
+          <div id="viewVolcanoVideo" style="width: 100%; height: 100%; background: #0F172A; border-radius: var(--radius-paper); overflow: hidden; display: flex; flex-direction: column;">
+            <div style="flex: 1; min-height: 0; width: 100%;">
+              <iframe 
+                src="https://www.youtube-nocookie.com/embed/5cQ_qKqU_pU?rel=0" 
+                title="Video explicativo sobre los volcanes"
+                style="width: 100%; height: 100%; border: none;"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <!-- Barra de invitación al Simulador -->
+            <div class="video-helper-bar">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.4rem;">📺</span>
+                <div>
+                  <strong style="color: #1E3A8A; font-family: var(--font-hand); font-size: 1.05rem;">Paso 1: Mira el video educativo</strong>
+                  <p style="margin: 0; font-size: 0.85rem; color: #475569;">Aprende cómo la presión subterránea crea las erupciones volcánicas.</p>
+                </div>
+              </div>
+              <button id="btnGoToSimFromVideo" type="button" class="btn-goto-sim">
+                <i class="fa-solid fa-volcano"></i>
+                <span>¡Ir al Simulador en 4 Fases!</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Vista 2: SIMULADOR REAL DE ERUPCIÓN VOLCÁNICA (OPCIONAL) -->
+          <div id="viewVolcanoSim" class="volcano-sim-stage" style="display: none;">
+            
+            <!-- Barra Superior: Stepper de 4 Fases Científicas con 6 Segundos cada una -->
+            <div class="volcano-stepper-bar">
+              <div id="stepBadge1" class="volcano-step-badge" data-phase="1">
+                <span>1. Presión</span>
+                <small style="opacity: 0.85;">(6.0s)</small>
+              </div>
+              <div id="stepBadge2" class="volcano-step-badge" data-phase="2">
+                <span>2. Ascenso</span>
+                <small style="opacity: 0.85;">(6.0s)</small>
+              </div>
+              <div id="stepBadge3" class="volcano-step-badge" data-phase="3">
+                <span>3. Explosión</span>
+                <small style="opacity: 0.85;">(6.0s)</small>
+              </div>
+              <div id="stepBadge4" class="volcano-step-badge" data-phase="4">
+                <span>4. Ríos Lava</span>
+                <small style="opacity: 0.85;">(6.0s)</small>
+              </div>
+            </div>
+
+            <!-- Botones de Acción del Simulador -->
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; z-index: 20; padding: 2px 4px;">
+              <button id="btnTriggerVolcanoSim" class="btn-sim-action btn-sim-volcano" type="button" style="font-size: 1.15rem; padding: 0.4rem 1.2rem;">
+                <i class="fa-solid fa-play"></i>
+                <span id="btnVolcanoText">¡Iniciar Erupción Completa!</span>
+              </button>
+
+              <button id="btnResetVolcano" type="button" class="btn-preset" style="background: rgba(255,255,255,0.9); font-size: 0.85rem; padding: 4px 10px;">
+                <i class="fa-solid fa-rotate-left"></i> Restablecer
+              </button>
+            </div>
+
+            <!-- Gráfico del Cono Volcánico y Corte Transversal en SVG Interactivo -->
+            <div id="volcanoMountainBox" style="flex: 1; position: relative; display: flex; align-items: flex-end; justify-content: center; min-height: 180px;">
+              
+              <!-- Rocas Volcánicas y Bombas Piroclásticas Proyectadas -->
+              <div id="rock1" class="flying-rock" style="bottom: 125px; left: 47%;">🪨</div>
+              <div id="rock2" class="flying-rock" style="bottom: 125px; left: 51%;">🔥</div>
+              <div id="rock3" class="flying-rock" style="bottom: 125px; left: 49%;">💥</div>
+              <div id="rock4" class="flying-rock" style="bottom: 125px; left: 48%;">🪨</div>
+
+              <!-- Nube de Cenizas y Gases Volcánicos -->
+              <div id="volcanoSmokeBox" style="position: absolute; top: 10px; font-size: 3rem; opacity: 0.2; transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.2), opacity 0.8s; z-index: 7;">
+                ☁️🌋☁️
+              </div>
+
+              <!-- SVG del Volcán con Corte Transversal -->
+              <svg id="volcanoSvg" viewBox="0 0 340 210" style="width: 95%; max-height: 230px; z-index: 5;">
+                <!-- Fondo del cono volcánico exterior -->
+                <polygon points="170,46 35,205 305,205" fill="#451A03" stroke="#291102" stroke-width="4" />
+                <polygon points="170,46 85,205 255,205" fill="#582406" opacity="0.6" />
+                
+                <!-- Cráter superior -->
+                <ellipse id="volcanoCrater" cx="170" cy="46" rx="28" ry="9" fill="#1C1917" stroke="#EF4444" stroke-width="2.5" />
+                
+                <!-- Chimenea central interior por donde sube el magma -->
+                <rect id="chimneyBase" x="162" y="46" width="16" height="110" fill="#291102" rx="2" />
+                <rect id="chimneyLava" x="163" y="156" width="14" height="0" fill="#F97316" rx="2" style="transition: height 5s ease-out, y 5s ease-out, fill 0.8s;" />
+                
+                <!-- Ríos de lava fluyendo por las laderas exteriores -->
+                <path id="lavaLeft" d="M 158 48 Q 135 95 115 140 Q 95 175 70 205" stroke="#78350F" stroke-width="6" fill="none" stroke-linecap="round" style="transition: all 0.8s;" />
+                <path id="lavaRight" d="M 182 48 Q 205 95 225 140 Q 245 175 270 205" stroke="#78350F" stroke-width="6" fill="none" stroke-linecap="round" style="transition: all 0.8s;" />
+
+                <!-- Grietas laterales (Fisuras de escape de magma) -->
+                <path id="fissureLeft" d="M 162 100 L 125 115" stroke="#991B1B" stroke-width="2" opacity="0.3" />
+                <path id="fissureRight" d="M 178 110 L 215 125" stroke="#991B1B" stroke-width="2" opacity="0.3" />
+
+                <!-- Cámara Magmática Subterránea -->
+                <ellipse id="magmaChamberCircle" cx="170" cy="165" rx="58" ry="32" fill="#EA580C" stroke="#EF4444" stroke-width="3.5" style="transition: fill 0.6s, transform 0.4s;" />
+                
+                <!-- Burbujas incandescentes en la cámara magmática -->
+                <circle id="bubble1" cx="145" cy="162" r="5" fill="#FEF08A" opacity="0.8" class="magma-bubbling" />
+                <circle id="bubble2" cx="172" cy="172" r="7" fill="#FDE047" opacity="0.9" class="magma-bubbling" style="animation-delay: 0.3s;" />
+                <circle id="bubble3" cx="195" cy="160" r="4.5" fill="#FED7AA" opacity="0.75" class="magma-bubbling" style="animation-delay: 0.7s;" />
+                <circle id="bubble4" cx="160" cy="176" r="6" fill="#FDE047" opacity="0.85" class="magma-bubbling" style="animation-delay: 0.5s;" />
+
+                <!-- Rótulo Científico en la Cámara -->
+                <text x="170" y="170" font-family="'Patrick Hand', cursive" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.8))">Cámara Magmática</text>
+                
+                <!-- Flechas y Rótulos Explicativos -->
+                <text x="82" y="60" font-family="'Patrick Hand', cursive" font-size="12" font-weight="bold" fill="#FDE047">Cráter ⬆️</text>
+                <text x="72" y="110" font-family="'Patrick Hand', cursive" font-size="12" font-weight="bold" fill="#FDE047">Chimenea ➡️</text>
+              </svg>
+
+            </div>
+
+            <!-- Panel Informativo de Fases Didácticas con Texto Grande y Efecto Karaoke -->
+            <div id="volcanoStatusBanner">
+              <div class="banner-title-line">
+                <span>🌋 Modo Laboratorio Científico</span>
+              </div>
+              <div class="banner-body-text">
+                Presiona <strong>"¡Iniciar Erupción Completa!"</strong> para observar las 4 etapas con pausas de 6 segundos y lectura guiada.
+              </div>
+              <div class="banner-reading-progress">
+                <div id="karaokeProgressBar" class="reading-progress-fill"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Columna Derecha: Pregunta Pedagógica y Clave Exclusiva de Desbloqueo -->
+      <section class="paper-card question-column animate__animated animate__fadeInRight">
+        <div>
+          <div class="question-badge">
+            <i class="fa-solid fa-compass"></i> Criterio Pedagógico: Pertinencia
+          </div>
+
+          <h2 class="question-title">
+            Misión 1: Nuestro objetivo es aprender cómo funciona un volcán. Después de probar este simulador y ver sus 4 fases, ¿crees que la información nos sirve de verdad para entender por qué hacen erupción los volcanes?
+          </h2>
+
+          <div class="question-options-box">
+            <!-- Opción A: Correcta -->
+            <div class="option-card" data-correct="true">
+              <div class="option-letter">A</div>
+              <div>
+                <strong style="color: var(--school-green-title);">¡Sí, es totalmente pertinente!</strong>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Explica con animaciones la cámara magmática, el cráter y cómo la presión impulsa la lava paso a paso. (Clave: <strong>312</strong>)</p>
+              </div>
+            </div>
+
+            <!-- Opción B: Incorrecta -->
+            <div class="option-card" data-correct="false">
+              <div class="option-letter">B</div>
+              <div>
+                <strong>No, no es pertinente.</strong>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Solo muestra fotos de paisajes y no explica nada sobre las causas científicas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área de Desbloqueo Fiable (EXCLUSIVA PARA DESBLOQUEAR Y PASAR DE SALA) -->
+        <div class="unlock-box">
+          <div class="unlock-label">
+            <i class="fa-solid fa-key" style="color: var(--btn-gold-dark);"></i>
+            <span>Introduce la clave para desbloquear el Reto 2:</span>
+          </div>
+          <div class="unlock-inputs-row">
+            <input 
+              type="text" 
+              class="passcode-input" 
+              placeholder="312" 
+              maxlength="6" 
+              autocomplete="off" 
+              aria-label="Código secreto">
+            <!-- BOTÓN EXCLUSIVO DE DESBLOQUEO -->
+            <button id="btnUnlockRoom" class="unlock-btn" type="button">
+              <span>Desbloquear</span>
+              <i class="fa-solid fa-lock-open"></i>
+            </button>
+          </div>
+          <div class="feedback-msg"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Barra Inferior -->
+    <footer class="bottom-bar animate__animated animate__fadeInUp">
+      <div class="hint-pill">
+        <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
+        <span>Pista del Profesor: Selecciona la <strong>Opción A</strong> para obtener la clave científica (<strong>312</strong>) y pulsa Desbloquear.</span>
+      </div>
+      <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
+        <i class="fa-solid fa-pencil"></i> Cuaderno de Ciencias Naturales
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal de Éxito Oficial -->
+  <div class="success-overlay">
+    <div class="success-modal-card animate__animated animate__zoomIn">
+      <div class="success-stamp-circle">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 style="font-family: var(--font-script); font-size: 2rem; color: var(--school-green-title); margin-bottom: 0.4rem;">
+        ¡Insignia de Pertinencia Desbloqueada!
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
+        ¡Has demostrado que el recurso sí cumple el objetivo científico! Pasando a la Sala 2...
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/validation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializar validación del botón Desbloquear
+      initRoomValidation('sala1');
+
+      // 2. Control de Pestañas Video / Simulador (VIDEO PRIMERO POR DEFECTO)
+      const tabSim = document.getElementById('tabBtnSim');
+      const tabVideo = document.getElementById('tabBtnVideo');
+      const viewSim = document.getElementById('viewVolcanoSim');
+      const viewVideo = document.getElementById('viewVolcanoVideo');
+      const volcanoTimerBadge = document.getElementById('volcanoTimerBadge');
+      const btnGoToSimFromVideo = document.getElementById('btnGoToSimFromVideo');
+
+      function switchToVideo() {
+        tabVideo.classList.add('active-video');
+        tabSim.classList.remove('active-sim');
+        viewVideo.style.display = 'flex';
+        viewSim.style.display = 'none';
+        volcanoTimerBadge.innerHTML = '<i class="fa-solid fa-video"></i> <span>Video Didáctico (3 min)</span>';
+        volcanoTimerBadge.style.color = '#1E40AF';
+        volcanoTimerBadge.style.background = '#DBEAFE';
+        volcanoTimerBadge.style.borderColor = '#BFDBFE';
+        resetVolcanoToRest();
+        if (window.escapeSound) window.escapeSound.playPop();
+      }
+
+      function switchToSim() {
+        tabSim.classList.add('active-sim');
+        tabVideo.classList.remove('active-video');
+        viewSim.style.display = 'flex';
+        viewVideo.style.display = 'none';
+        volcanoTimerBadge.innerHTML = '<i class="fa-solid fa-stopwatch"></i> <span>Duración: 24s (4 fases de 6s)</span>';
+        volcanoTimerBadge.style.color = '#DC2626';
+        volcanoTimerBadge.style.background = '#FEE2E2';
+        volcanoTimerBadge.style.borderColor = '#FCA5A5';
+        if (window.escapeSound) window.escapeSound.playPop();
+      }
+
+      tabVideo.addEventListener('click', switchToVideo);
+      tabSim.addEventListener('click', switchToSim);
+      if (btnGoToSimFromVideo) {
+        btnGoToSimFromVideo.addEventListener('click', switchToSim);
+      }
+
+      // 3. MOTOR DEL SIMULADOR DE ERUPCIÓN VOLCÁNICA (6 SEGUNDOS POR FASE CON EFECTO KARAOKE)
+      const btnSimVolcano = document.getElementById('btnTriggerVolcanoSim');
+      const btnVolcanoText = document.getElementById('btnVolcanoText');
+      const btnResetVolcano = document.getElementById('btnResetVolcano');
+      const mountainBox = document.getElementById('volcanoMountainBox');
+      const smokeBox = document.getElementById('volcanoSmokeBox');
+      const chimney = document.getElementById('chimneyLava');
+      const magmaChamber = document.getElementById('magmaChamberCircle');
+      const crater = document.getElementById('volcanoCrater');
+      const lavaLeft = document.getElementById('lavaLeft');
+      const lavaRight = document.getElementById('lavaRight');
+      const fissureLeft = document.getElementById('fissureLeft');
+      const fissureRight = document.getElementById('fissureRight');
+      const banner = document.getElementById('volcanoStatusBanner');
+      const rock1 = document.getElementById('rock1');
+      const rock2 = document.getElementById('rock2');
+      const rock3 = document.getElementById('rock3');
+      const rock4 = document.getElementById('rock4');
+      const stepBadges = [
+        document.getElementById('stepBadge1'),
+        document.getElementById('stepBadge2'),
+        document.getElementById('stepBadge3'),
+        document.getElementById('stepBadge4')
+      ];
+
+      let isSimulating = false;
+      let phaseTimeouts = [];
+      let karaokeTimer = null;
+      let progressBarInterval = null;
+
+      function clearAllPhaseTimers() {
+        phaseTimeouts.forEach(t => clearTimeout(t));
+        phaseTimeouts = [];
+        if (karaokeTimer) {
+          clearInterval(karaokeTimer);
+          karaokeTimer = null;
+        }
+        if (progressBarInterval) {
+          clearInterval(progressBarInterval);
+          progressBarInterval = null;
+        }
+      }
+
+      // MOTOR DE LECTURA PROGRESIVA / EFECTO KARAOKE
+      function renderKaraokeText(titleHtml, fullText, durationMs) {
+        if (karaokeTimer) {
+          clearInterval(karaokeTimer);
+          karaokeTimer = null;
+        }
+        if (progressBarInterval) {
+          clearInterval(progressBarInterval);
+          progressBarInterval = null;
+        }
+
+        const words = fullText.trim().split(/\s+/);
+        const wordsHtml = words.map((w, idx) => `<span class="karaoke-word" id="kWord-${idx}">${w}</span>`).join(' ');
+
+        banner.innerHTML = `
+          <div class="banner-title-line">${titleHtml}</div>
+          <div class="banner-body-text">${wordsHtml}</div>
+          <div class="banner-reading-progress"><div id="karaokeProgressBar" class="reading-progress-fill"></div></div>
+        `;
+
+        const totalWords = words.length;
+        // Tiempo reservado para leer cómodamente al ritmo promedio de 4.º de primaria
+        const activeDuration = Math.max(durationMs - 900, 2600);
+        const msPerWord = activeDuration / totalWords;
+        let currentWordIdx = 0;
+        const startTime = Date.now();
+
+        // Barra de progreso de lectura inferior
+        const progressBar = document.getElementById('karaokeProgressBar');
+        progressBarInterval = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          const pct = Math.min((elapsed / durationMs) * 100, 100);
+          if (progressBar) progressBar.style.width = pct + '%';
+          if (elapsed >= durationMs) {
+            clearInterval(progressBarInterval);
+            progressBarInterval = null;
+          }
+        }, 40);
+
+        // Iluminación palabra por palabra
+        setTimeout(() => {
+          karaokeTimer = setInterval(() => {
+            if (currentWordIdx < totalWords) {
+              if (currentWordIdx > 0) {
+                const prev = document.getElementById(`kWord-${currentWordIdx - 1}`);
+                if (prev) {
+                  prev.classList.remove('karaoke-active');
+                  prev.classList.add('karaoke-read');
+                }
+              }
+              const curr = document.getElementById(`kWord-${currentWordIdx}`);
+              if (curr) {
+                curr.classList.add('karaoke-active');
+              }
+              currentWordIdx++;
+            } else {
+              if (totalWords > 0) {
+                const last = document.getElementById(`kWord-${totalWords - 1}`);
+                if (last) {
+                  last.classList.remove('karaoke-active');
+                  last.classList.add('karaoke-read');
+                }
+              }
+              clearInterval(karaokeTimer);
+              karaokeTimer = null;
+            }
+          }, msPerWord);
+        }, 180);
+      }
+
+      function updateActiveBadge(phaseNum) {
+        stepBadges.forEach((b, idx) => {
+          b.classList.remove('active');
+          if (idx + 1 < phaseNum) {
+            b.classList.add('completed');
+          } else {
+            b.classList.remove('completed');
+          }
+        });
+        if (phaseNum >= 1 && phaseNum <= 4) {
+          stepBadges[phaseNum - 1].classList.add('active');
+        }
+      }
+
+      function resetVolcanoToRest() {
+        clearAllPhaseTimers();
+        isSimulating = false;
+        btnVolcanoText.textContent = '¡Iniciar Erupción Completa!';
+        btnSimVolcano.style.background = '#DC2626';
+
+        // Restablecer estilos visuales
+        mountainBox.classList.remove('mountain-trembling');
+        magmaChamber.style.fill = '#EA580C';
+        chimney.style.height = '0px';
+        chimney.style.y = '156px';
+        chimney.style.fill = '#F97316';
+        crater.style.fill = '#1C1917';
+        smokeBox.style.opacity = '0.2';
+        smokeBox.style.transform = 'translateY(0) scale(1)';
+        smokeBox.classList.remove('smoke-billowing');
+        
+        lavaLeft.classList.remove('lava-stream-active');
+        lavaLeft.style.stroke = '#78350F';
+        lavaLeft.style.strokeWidth = '6';
+
+        lavaRight.classList.remove('lava-stream-active');
+        lavaRight.style.stroke = '#78350F';
+        lavaRight.style.strokeWidth = '6';
+
+        fissureLeft.style.opacity = '0.3';
+        fissureRight.style.opacity = '0.3';
+
+        [rock1, rock2, rock3, rock4].forEach(r => {
+          r.style.opacity = '0';
+          r.style.transform = 'none';
+        });
+
+        stepBadges.forEach(b => b.classList.remove('active', 'completed'));
+        banner.innerHTML = `
+          <div class="banner-title-line">
+            <span>🌋 Modo Laboratorio Científico</span>
+          </div>
+          <div class="banner-body-text">
+            Presiona <strong>"¡Iniciar Erupción Completa!"</strong> para observar las 4 etapas con pausas de 6 segundos y lectura guiada.
+          </div>
+          <div class="banner-reading-progress">
+            <div id="karaokeProgressBar" class="reading-progress-fill"></div>
+          </div>
+        `;
+      }
+
+      // FASE 1: 6 SEGUNDOS
+      function runPhase1() {
+        updateActiveBadge(1);
+        mountainBox.classList.add('mountain-trembling');
+        magmaChamber.style.fill = '#FEF08A';
+        renderKaraokeText(
+          '🌋 <strong>Fase 1 (0 a 6s): Aumento de Presión Subterránea</strong>',
+          'A más de 1.000 grados de temperatura, el magma fundido y los gases hierven dentro de la cámara magmática. La presión aumenta sin parar y hace temblar toda la montaña.',
+          6000
+        );
+        if (window.escapeSound) window.escapeSound.playRumble(5.5);
+      }
+
+      // FASE 2: 6 SEGUNDOS
+      function runPhase2() {
+        updateActiveBadge(2);
+        chimney.style.y = '46px';
+        chimney.style.height = '110px';
+        chimney.style.fill = '#FEF08A';
+        crater.style.fill = '#F97316';
+        fissureLeft.style.opacity = '0.9';
+        fissureRight.style.opacity = '0.9';
+        fissureLeft.setAttribute('stroke', '#EF4444');
+        fissureRight.setAttribute('stroke', '#EF4444');
+        smokeBox.style.opacity = '0.75';
+        smokeBox.style.transform = 'translateY(-14px) scale(1.18)';
+        smokeBox.classList.add('smoke-billowing');
+        renderKaraokeText(
+          '⬆️ <strong>Fase 2 (6s a 12s): Ascenso por la Chimenea Central</strong>',
+          'La gigantesca presión acumulada empuja el magma líquido hacia arriba a través del conducto. La roca se fractura y densas fumarolas de vapor y azufre escapan por el cráter.',
+          6000
+        );
+      }
+
+      // FASE 3: 6 SEGUNDOS
+      function runPhase3() {
+        updateActiveBadge(3);
+        crater.style.fill = '#EF4444';
+        smokeBox.style.opacity = '1';
+        smokeBox.style.transform = 'translateY(-34px) scale(1.65)';
+        
+        // Bombas volcánicas disparadas en arcos altos
+        rock1.style.opacity = '1';
+        rock1.style.transform = 'translate(-85px, -110px) rotate(-65deg)';
+        rock2.style.opacity = '1';
+        rock2.style.transform = 'translate(15px, -135px) rotate(25deg)';
+        rock3.style.opacity = '1';
+        rock3.style.transform = 'translate(95px, -100px) rotate(75deg)';
+        rock4.style.opacity = '1';
+        rock4.style.transform = 'translate(-40px, -120px) rotate(-30deg)';
+
+        renderKaraokeText(
+          '💥 <strong>Fase 3 (12s a 18s): ¡Explosión Piroclástica en el Cráter!</strong>',
+          '¡El tapón del cráter revienta con un estruendo! Grandes columnas de ceniza oscura, gases ardientes y bombas de roca incandescente salen disparadas a cientos de metros al cielo.',
+          6000
+        );
+        if (window.escapeSound) window.escapeSound.playRumble(5.5);
+      }
+
+      // FASE 4: 6 SEGUNDOS
+      function runPhase4() {
+        updateActiveBadge(4);
+        lavaLeft.classList.add('lava-stream-active');
+        lavaRight.classList.add('lava-stream-active');
+        renderKaraokeText(
+          '🌊 <strong>Fase 4 (18s a 24s): Coladas de Lava y Nueva Roca</strong>',
+          'Ríos de lava roja brillante desbordan los bordes del cráter y bajan por las laderas. Al enfriarse lentamente con el aire, la lava se solidifica formando nueva corteza terrestre.',
+          6000
+        );
+        if (window.escapeSound) window.escapeSound.playWave();
+      }
+
+      // CONCLUSIÓN: 24 SEGUNDOS
+      function runPhaseConclusion() {
+        stepBadges.forEach(b => b.classList.add('completed'));
+        mountainBox.classList.remove('mountain-trembling');
+        renderKaraokeText(
+          '🎉 <strong>¡Simulación Completa! (24 Segundos)</strong>',
+          '¡Excelente trabajo, explorador científico! Has descubierto las cuatro etapas geológicas de una erupción volcánica real. Ahora puedes responder la pregunta con total seguridad.',
+          6000
+        );
+        btnVolcanoText.textContent = '¡Repetir Erupción!';
+        isSimulating = false;
+        if (window.escapeSound) window.escapeSound.playSuccess();
+      }
+
+      // Secuencia completa automatizada con 6 segundos por etapa (Total: 24 segundos)
+      function startFullEruption() {
+        resetVolcanoToRest();
+        isSimulating = true;
+        btnVolcanoText.textContent = 'Erupción en curso (24s)...';
+        btnSimVolcano.style.background = '#991B1B';
+
+        // Fase 1: 0s
+        runPhase1();
+
+        // Fase 2: 6.0s
+        phaseTimeouts.push(setTimeout(() => {
+          if (isSimulating) runPhase2();
+        }, 6000));
+
+        // Fase 3: 12.0s
+        phaseTimeouts.push(setTimeout(() => {
+          if (isSimulating) runPhase3();
+        }, 12000));
+
+        // Fase 4: 18.0s
+        phaseTimeouts.push(setTimeout(() => {
+          if (isSimulating) runPhase4();
+        }, 18000));
+
+        // Conclusión: 24.0s
+        phaseTimeouts.push(setTimeout(() => {
+          if (isSimulating) runPhaseConclusion();
+        }, 24000));
+      }
+
+      btnSimVolcano.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isSimulating) {
+          resetVolcanoToRest();
+          if (window.escapeSound) window.escapeSound.playPop();
+        } else {
+          startFullEruption();
+        }
+      });
+
+      btnResetVolcano.addEventListener('click', (e) => {
+        e.stopPropagation();
+        resetVolcanoToRest();
+        if (window.escapeSound) window.escapeSound.playPop();
+      });
+
+      // Permite hacer clic en cualquier insignia de fase para probarla individualmente
+      stepBadges.forEach((badge, idx) => {
+        badge.addEventListener('click', function(e) {
+          e.stopPropagation();
+          clearAllPhaseTimers();
+          isSimulating = false;
+          btnVolcanoText.textContent = '¡Iniciar Erupción Completa!';
+          
+          if (idx === 0) runPhase1();
+          else if (idx === 1) { runPhase1(); runPhase2(); }
+          else if (idx === 2) { runPhase2(); runPhase3(); }
+          else if (idx === 3) { runPhase3(); runPhase4(); }
+
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

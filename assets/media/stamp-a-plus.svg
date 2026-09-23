@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <!-- Círculo dibujado a mano alzada verde -->
+  <path d="M 60 10 C 95 8 115 35 110 70 C 105 105 75 115 45 110 C 15 105 8 75 14 45 C 18 20 40 10 60 10" fill="none" stroke="#16A34A" stroke-width="4" stroke-linecap="round" stroke-dasharray="400" />
+  <!-- Letra A manuscrita -->
+  <path d="M 32 82 L 48 35 L 64 82" fill="none" stroke="#16A34A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="38" y1="64" x2="58" y2="64" stroke="#16A34A" stroke-width="5" stroke-linecap="round" />
+  <!-- Signo + -->
+  <line x1="82" y1="44" x2="82" y2="66" stroke="#16A34A" stroke-width="6" stroke-linecap="round" />
+  <line x1="71" y1="55" x2="93" y2="55" stroke="#16A34A" stroke-width="6" stroke-linecap="round" />
+</svg>

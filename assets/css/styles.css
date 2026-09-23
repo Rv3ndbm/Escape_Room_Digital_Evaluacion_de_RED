@@ -1,0 +1,1376 @@
+/* ==========================================================================
+   MISIÓN: SALVAR LA TIERRA - ESCAPE ROOM EDUCATIVO (4.º DE PRIMARIA)
+   styles.css - Estética Escolar Genially Fiel a la Imagen de Referencia
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Quicksand:wght@500;600;700&display=swap');
+
+:root {
+  /* Paleta Escolar Genially Cálida y Limpia */
+  --desk-bg: #F7F4EA;
+  --paper-white: #FFFFFF;
+  --paper-cream: #FAF8F2;
+  --paper-border: #E8E2D2;
+  --paper-shadow: 0 10px 28px rgba(92, 79, 58, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  /* Colores de Útiles Escolares */
+  --school-green-title: #2D5A46;
+  --school-green-light: #E8F5EE;
+  --school-green-accent: #3E6B56;
+  --btn-gold: #F2B705;
+  --btn-gold-dark: #C89400;
+  --btn-gold-text: #422D00;
+  --eraser-pink: #F472B6;
+  --pencil-blue: #3B82F6;
+  --pencil-blue-dark: #1D4ED8;
+  --stamp-green: #16A34A;
+  --text-main: #334155;
+  --text-muted: #64748B;
+
+  /* Colores Puros y Vivos de Alto Impacto */
+  --pure-red: #EF4444;
+  --pure-red-deep: #DC2626;
+  --pure-blue: #2563EB;
+  --pure-blue-deep: #1D4ED8;
+  --pure-green: #10B981;
+  --pure-green-deep: #059669;
+  --pure-gold: #F59E0B;
+  --pure-amber: #D97706;
+
+  /* Tipografías */
+  --font-script: 'Caveat', cursive;
+  --font-hand: 'Patrick Hand', cursive;
+  --font-body: 'Quicksand', sans-serif;
+
+  /* Radios */
+  --radius-pill: 9999px;
+  --radius-card: 22px;
+  --radius-paper: 14px;
+}
+
+/* ==========================================================================
+   RESET & LAYOUT BASE
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+html, body {
+  width: 100vw;
+  min-height: 100vh;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--desk-bg);
+  background-image: 
+    radial-gradient(#E8E1CE 1.3px, transparent 1.3px),
+    linear-gradient(135deg, #FCFAF4 0%, #F5F0E1 100%);
+  background-size: 26px 26px, 100% 100%;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  position: relative;
+}
+
+@media (min-width: 993px) and (min-height: 660px) {
+  body {
+    overflow: hidden;
+    height: 100vh;
+  }
+  .escape-room-screen {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 992px), (max-height: 659px) {
+  body {
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  .escape-room-screen {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-y: visible !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* ==========================================================================
+   ELEMENTOS DE PAPELERÍA DEL PUPITRE (EXACTOS A LA IMAGEN DE GENIALLY)
+   ========================================================================== */
+.desk-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Hoja blanca inclinada estilo cuaderno escolar (a la derecha) con cuadrícula azul y margen rojo */
+.bg-tilted-sheet {
+  position: absolute;
+  top: 5%;
+  right: -3%;
+  width: 45vw;
+  height: 88vh;
+  transform: rotate(4.5deg);
+  background-color: #FFFFFF;
+  background-image: 
+    /* Línea de margen escolar en rojo puro */
+    linear-gradient(90deg, transparent 48px, rgba(239, 68, 68, 0.55) 49px, rgba(239, 68, 68, 0.55) 51px, transparent 52px),
+    /* Rayado horizontal de cuaderno en azul escolar */
+    repeating-linear-gradient(transparent, transparent 27px, rgba(59, 130, 246, 0.15) 28px);
+  background-size: 100% 100%, 100% 28px;
+  border: 2px solid rgba(203, 213, 225, 0.8);
+  box-shadow: 0 20px 45px rgba(51, 65, 85, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Cintas Adhesivas Washi Tape de Colores Vivos (Rojo, Azul, Verde, Dorado) */
+.washi-tape {
+  position: absolute;
+  height: 28px;
+  border-radius: 3px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+.washi-red {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(220, 38, 38, 0.85));
+  width: 100px;
+  top: 14px;
+  right: 36vw;
+  transform: rotate(-22deg);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+.washi-blue {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.85));
+  width: 95px;
+  top: 12px;
+  right: 2%;
+  transform: rotate(26deg);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+.washi-green {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.85), rgba(5, 150, 105, 0.85));
+  width: 90px;
+  bottom: 18px;
+  right: 1%;
+  transform: rotate(-16deg);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+.washi-gold {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.85), rgba(217, 119, 6, 0.85));
+  width: 85px;
+  bottom: 22px;
+  right: 34vw;
+  transform: rotate(18deg);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+/* Doodles y Notas Coloridas en la Hoja Escolar */
+.sheet-doodle {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-hand);
+}
+
+.doodle-icon {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+}
+
+.doodle-caption {
+  font-size: 0.95rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.doodle-rocket {
+  top: 15%;
+  right: 18%;
+  transform: rotate(-15deg);
+  animation: doodleBobble 4s ease-in-out infinite;
+}
+
+.doodle-flask {
+  top: 48%;
+  right: 12%;
+  transform: rotate(8deg);
+  animation: doodleBobble 5s ease-in-out infinite 1s;
+}
+
+.doodle-atom {
+  bottom: 24%;
+  right: 22%;
+  animation: doodleBobble 4.5s ease-in-out infinite 0.5s;
+}
+
+.doodle-rainbow {
+  top: 32%;
+  right: 26%;
+  transform: rotate(-5deg);
+  animation: doodleBobble 6s ease-in-out infinite 2s;
+}
+
+/* Nota Post-It Colorida */
+.sheet-postit {
+  position: absolute;
+  top: 66%;
+  right: 20%;
+  width: 130px;
+  padding: 10px 12px;
+  background: #FEF08A;
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(180, 83, 9, 0.16);
+  transform: rotate(-4deg);
+  font-family: var(--font-hand);
+  color: #854D0E;
+  z-index: 2;
+  pointer-events: none;
+  animation: doodleBobble 5.5s ease-in-out infinite 1.5s;
+}
+
+.sheet-postit .postit-pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+}
+
+.sheet-postit .postit-text {
+  font-size: 1.05rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 0;
+  text-align: center;
+}
+
+/* Salpicaduras de Pintura Artística Escolar (Rojo, Azul, Verde, Oro) */
+.paint-splat {
+  position: absolute;
+  width: min(65px, 6vw);
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.paint-splat-red {
+  top: 14%;
+  left: 17%;
+  filter: drop-shadow(0 4px 10px rgba(239, 68, 68, 0.35));
+}
+
+.paint-splat-blue {
+  bottom: 12%;
+  right: 26%;
+  filter: drop-shadow(0 4px 10px rgba(37, 99, 235, 0.35));
+}
+
+.paint-splat-green {
+  top: 56%;
+  left: 2%;
+  filter: drop-shadow(0 4px 10px rgba(16, 185, 129, 0.35));
+}
+
+/* 1. Lápiz horizontal ubicado arriba a la izquierda para NO tapar el HUD */
+.decor-pencil {
+  position: absolute;
+  top: 16px;
+  left: 6%;
+  transform: rotate(-10deg);
+  width: min(250px, 22vw);
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(37, 99, 235, 0.22));
+  animation: pencilWiggle 6s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 2. Goma de borrar rosa */
+.decor-eraser {
+  position: absolute;
+  top: 72px;
+  left: 3%;
+  width: min(90px, 9vw);
+  height: auto;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 6px 14px rgba(219, 39, 119, 0.25));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 3. Sacapuntas verde en el lado izquierdo */
+.decor-sharpener {
+  position: absolute;
+  top: 40%;
+  left: 2.5%;
+  width: min(85px, 8.5vw);
+  height: auto;
+  transform: rotate(10deg);
+  filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.25));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 4. Transportador amarillo abajo a la izquierda (100% visible, sin cortes) */
+.decor-protractor {
+  position: absolute;
+  bottom: 14px;
+  left: 3%;
+  width: min(160px, 15vw);
+  height: auto;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 8px 18px rgba(217, 119, 6, 0.22));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 5. Tijeras escolares naranjas/rojas a la derecha */
+.decor-scissors {
+  position: absolute;
+  bottom: 8%;
+  right: 3.5%;
+  width: min(140px, 14vw);
+  height: auto;
+  transform: rotate(-14deg);
+  filter: drop-shadow(0 10px 20px rgba(239, 68, 68, 0.24));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 6. Sello verde A+ arriba a la derecha */
+.decor-stamp {
+  position: absolute;
+  top: 42px;
+  right: 5%;
+  width: min(76px, 7.5vw);
+  height: auto;
+  transform: rotate(12deg);
+  filter: drop-shadow(0 6px 16px rgba(16, 185, 129, 0.28));
+  animation: stampPulse 4s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   RESPLANDORES AMBIENTALES CROMÁTICOS VIVOS (ROJO, AZUL, VERDE, ORO)
+   ========================================================================== */
+.desk-ambient-auras {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Aura 1: Oro cálido y radiante arriba a la derecha */
+.aura-orb-1,
+.aura-orb-gold {
+  position: absolute;
+  top: -8%;
+  right: 10%;
+  width: 45vw;
+  height: 45vw;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.26) 0%, rgba(251, 191, 36, 0.12) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(45px);
+  animation: chromaticAuraBreathe 9s ease-in-out infinite;
+}
+
+/* Aura 2: Azul zafiro vivo abajo al centro-derecha */
+.aura-orb-2,
+.aura-orb-blue {
+  position: absolute;
+  bottom: -6%;
+  right: 15%;
+  width: 48vw;
+  height: 48vw;
+  max-width: 520px;
+  max-height: 520px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, rgba(96, 165, 250, 0.1) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(48px);
+  animation: chromaticAuraBreathe 11s ease-in-out infinite 2s;
+}
+
+/* Aura 3: Verde esmeralda vivo en el centro-izquierdo */
+.aura-orb-3,
+.aura-orb-green {
+  position: absolute;
+  top: 35%;
+  left: -6%;
+  width: 42vw;
+  height: 42vw;
+  max-width: 460px;
+  max-height: 460px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(52, 211, 153, 0.1) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(45px);
+  animation: chromaticAuraBreathe 10s ease-in-out infinite 4s;
+}
+
+/* Aura 4: Rojo rubí puro arriba a la izquierda */
+.aura-orb-4,
+.aura-orb-red {
+  position: absolute;
+  top: -6%;
+  left: 2%;
+  width: 40vw;
+  height: 40vw;
+  max-width: 440px;
+  max-height: 440px;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, rgba(244, 63, 94, 0.08) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(45px);
+  animation: chromaticAuraBreathe 8s ease-in-out infinite 1s;
+}
+
+/* Solecito sonriente con gafas de sol */
+.decor-sun {
+  position: absolute;
+  top: 20px;
+  right: 13%;
+  width: min(72px, 7vw);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: floatingSun 5.5s ease-in-out infinite;
+}
+
+/* Planeta Tierra sonriente */
+.decor-earth {
+  position: absolute;
+  bottom: 22px;
+  right: 12%;
+  width: min(68px, 6.8vw);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: floatingEarth 6.5s ease-in-out infinite;
+}
+
+/* Nubecita flotante con rayo */
+.decor-cloud {
+  position: absolute;
+  top: 26px;
+  left: 14%;
+  width: min(72px, 7vw);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: floatingCloud 7s ease-in-out infinite;
+}
+
+/* Tornadito alegre mareado */
+.decor-tornado {
+  position: absolute;
+  top: 66%;
+  left: 3.5%;
+  width: min(56px, 5.8vw);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: stickerSpinSlow 4.5s ease-in-out infinite;
+}
+
+/* Volcancito tierno animado */
+.decor-volcano-mini {
+  position: absolute;
+  bottom: 22px;
+  left: 16%;
+  width: min(64px, 6.5vw);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: stickerBounce 5s ease-in-out infinite;
+}
+
+/* Olita marina sonriente */
+.decor-wave-mini {
+  position: absolute;
+  top: 48%;
+  right: 2.5%;
+  width: min(64px, 6.5vw);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: stickerFloat 6s ease-in-out infinite;
+}
+
+/* Destellos y estrellitas brillantes de fondo */
+.decor-sparkle {
+  position: absolute;
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  animation: sparkleTwinkle 3.2s ease-in-out infinite;
+}
+
+@media (max-width: 900px) {
+  .decor-tornado, .decor-wave-mini, .decor-volcano-mini {
+    display: none;
+  }
+  .decor-sun, .decor-earth, .decor-cloud {
+    transform: scale(0.85);
+  }
+}
+
+/* ==========================================================================
+   PANTALLA PRINCIPAL
+   ========================================================================== */
+.escape-room-screen {
+  position: relative;
+  z-index: 10;
+  width: 100vw;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(0.35rem, 0.9vh, 0.65rem) clamp(0.6rem, 1.4vw, 1.3rem);
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR HUD
+   ========================================================================== */
+.top-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid var(--paper-border);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 1.1rem;
+  box-shadow: var(--paper-shadow);
+  height: clamp(48px, 6.2vh, 56px);
+  flex-shrink: 0;
+  z-index: 25;
+}
+
+.mission-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  color: var(--school-green-title);
+}
+
+.mission-progress {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.25rem, 0.7vw, 0.6rem);
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem clamp(0.45rem, 0.8vw, 0.85rem);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-size: clamp(0.82rem, 1vw, 0.96rem);
+  color: var(--text-muted);
+  background: #F1EFE9;
+  border: 1.5px solid transparent;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.step-badge.active {
+  background: #FFFBEB;
+  color: #B45309;
+  border-color: #FBBF24;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.18);
+  font-weight: bold;
+}
+
+.step-badge.completed {
+  background: var(--school-green-light);
+  color: var(--school-green-title);
+  border-color: #A7F3D0;
+}
+
+.hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sound-toggle-btn {
+  background: #FFFFFF;
+  border: 2px solid var(--paper-border);
+  color: var(--school-green-title);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.sound-toggle-btn:hover {
+  transform: scale(1.1);
+  background: var(--school-green-light);
+}
+
+/* ==========================================================================
+   PORTADA PRINCIPAL (LIMPIA, AMPLIA Y FIEL A LA IMAGEN)
+   ========================================================================== */
+.hero-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(0.4rem, 1.8vh, 1.2rem) 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Caja de Título Punteada con Pines y Cinta */
+.title-dashed-box {
+  position: relative;
+  border: 3px dashed var(--school-green-accent);
+  border-radius: 20px;
+  padding: clamp(0.7rem, 2vh, 1.3rem) clamp(1.6rem, 3.8vw, 3.2rem);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 14px 34px rgba(45, 90, 70, 0.12), 0 3px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: clamp(0.8rem, 2vh, 1.3rem);
+  display: inline-block;
+  transform: rotate(-0.5deg);
+  transition: transform 0.3s ease;
+}
+
+.title-dashed-box:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+/* Chinchetas de Colores en las Esquinas */
+.box-pin {
+  position: absolute;
+  font-size: 1.4rem;
+  z-index: 5;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
+  line-height: 1;
+}
+
+.box-pin-tl { top: -14px; left: -10px; }
+.box-pin-tr { top: -14px; right: -10px; }
+.box-pin-bl { bottom: -14px; left: -10px; }
+.box-pin-br { bottom: -14px; right: -10px; }
+
+/* Cinta / Insignia Superior de la Caja de Título en Rojo Puro */
+.title-ribbon-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: #FFFFFF;
+  font-family: var(--font-hand);
+  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
+  font-weight: bold;
+  padding: 3px 18px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.38);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  border: 1.5px solid #FCA5A5;
+  animation: badgePulse 3.5s ease-in-out infinite;
+  z-index: 6;
+}
+
+.title-dashed-box h1 {
+  font-family: var(--font-script);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  color: var(--school-green-title);
+  line-height: 1.1;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.title-dashed-box h2 {
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: var(--school-green-title);
+  line-height: 1.08;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.hero-subtitle-genially {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.32rem);
+  font-weight: 600;
+  color: #475569;
+  max-width: 600px;
+  line-height: 1.42;
+  margin: 0 auto clamp(0.8rem, 2vh, 1.6rem);
+}
+
+/* Botón "Empezar" Píldora Dorada con Shimmer y Relieve */
+.btn-empezar-genially {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #FFFFFF;
+  font-family: var(--font-script);
+  font-size: clamp(1.7rem, 2.5vw, 2.3rem);
+  font-weight: 700;
+  border: 2.5px solid #FDE68A;
+  border-radius: var(--radius-pill);
+  padding: clamp(0.48rem, 1.3vh, 0.8rem) clamp(2.6rem, 5.2vw, 4.4rem);
+  cursor: pointer;
+  box-shadow: 0 6px 0 #B45309, 0 12px 26px rgba(245, 158, 11, 0.42);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+
+.btn-empezar-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-25deg);
+  animation: shimmerGoldenSweep 3s infinite;
+  pointer-events: none;
+}
+
+.btn-empezar-genially:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 9px 0 #B45309, 0 18px 32px rgba(245, 158, 11, 0.52);
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+}
+
+.btn-empezar-genially:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #B45309;
+}
+
+.student-tag-box {
+  margin-top: clamp(0.8rem, 1.6vh, 1.2rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #FFFFFF;
+  border: 2px solid var(--paper-border);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 1.1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.student-tag-box input {
+  border: none;
+  background: transparent;
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--school-green-title);
+  outline: none;
+  text-align: center;
+  width: 220px;
+}
+
+/* ==========================================================================
+   ÁREA DE JUEGO: DOS HOJAS ESCOLARES RESPONSIVAS
+   ========================================================================== */
+.room-content-grid {
+  display: grid;
+  grid-template-columns: 1.18fr 0.82fr;
+  gap: clamp(0.7rem, 1.3vw, 1.3rem);
+  flex: 1;
+  margin: clamp(0.3rem, 0.8vh, 0.6rem) 0;
+  min-height: 0;
+  height: calc(100vh - clamp(90px, 12vh, 116px));
+}
+
+@media (max-width: 992px) {
+  .room-content-grid {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    gap: 1.2rem;
+  }
+}
+
+.paper-card {
+  background: #FFFFFF;
+  border: 2px solid var(--paper-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--paper-shadow);
+  padding: clamp(0.6rem, 1.2vh, 1rem);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.resource-column {
+  border-top: 6px solid var(--pencil-blue);
+}
+
+.resource-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.resource-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #F1F5F9;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(0.88rem, 1.05vw, 1rem);
+}
+
+.resource-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+  border-radius: var(--radius-paper);
+  background: #FAF8F2;
+  border: 2px dashed #CBD5E1;
+  position: relative;
+  overflow: hidden;
+  padding: 0.4rem;
+}
+
+/* Columna Derecha: Pregunta y Desbloqueo */
+.question-column {
+  border-top: 6px solid var(--btn-gold);
+  justify-content: space-between;
+}
+
+.question-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--school-green-light);
+  color: var(--school-green-title);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(0.88rem, 1vw, 1rem);
+  margin-bottom: 0.4rem;
+}
+
+.question-title {
+  font-family: var(--font-script);
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  font-weight: 700;
+  color: var(--school-green-title);
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
+
+/* Opciones de Selección */
+.question-options-box {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 0.8vh, 0.65rem);
+  margin-bottom: 0.6rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.option-card {
+  background: #FFFFFF;
+  border: 2.5px solid #E2E8F0;
+  border-radius: var(--radius-paper);
+  padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.7rem, 1vw, 1rem);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: clamp(0.85rem, 0.98vw, 0.96rem);
+  font-weight: 600;
+  position: relative;
+}
+
+.option-card:hover {
+  border-color: var(--pencil-blue);
+  background: #F0F7FF;
+  transform: translateY(-2px);
+}
+
+.option-card.selected-correct {
+  border-color: var(--stamp-green) !important;
+  background: #F0FDF4 !important;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2) !important;
+}
+
+.option-card.selected-incorrect {
+  border-color: #EF4444 !important;
+  background: #FEF2F2 !important;
+}
+
+.option-letter {
+  width: clamp(30px, 3.8vh, 36px);
+  height: clamp(30px, 3.8vh, 36px);
+  background: #E2E8F0;
+  color: var(--text-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.option-card.selected-correct .option-letter {
+  background: var(--stamp-green);
+  color: #FFFFFF;
+}
+
+.option-card.selected-incorrect .option-letter {
+  background: #EF4444;
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   ÁREA DE DESBLOQUEO: 100% FIABLE, RESPONSIVE Y VISIBLE
+   ========================================================================== */
+.unlock-box {
+  background: #FAF8F2;
+  border-radius: var(--radius-paper);
+  padding: clamp(0.6rem, 1.2vh, 0.85rem);
+  border: 2px solid var(--paper-border);
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.unlock-label {
+  font-family: var(--font-hand);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.unlock-inputs-row {
+  display: flex;
+  gap: 0.6rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.passcode-input {
+  flex: 1 1 auto;
+  min-width: 120px;
+  height: 48px;
+  font-family: var(--font-hand);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  background: #FFFFFF;
+  border: 2.5px solid #CBD5E1;
+  border-radius: var(--radius-paper);
+  padding: 0 0.6rem;
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.passcode-input:focus {
+  border-color: var(--pencil-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.passcode-input.error {
+  border-color: #EF4444 !important;
+  background: #FEF2F2 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+}
+
+.passcode-input.success {
+  border-color: var(--stamp-green) !important;
+  background: #F0FDF4 !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25) !important;
+}
+
+.unlock-btn {
+  flex: 0 0 auto;
+  height: 48px;
+  font-family: var(--font-script);
+  font-size: clamp(1.3rem, 1.7vw, 1.55rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  border: 1.5px solid #6EE7B7;
+  border-radius: var(--radius-paper);
+  padding: 0 clamp(1.3rem, 2vw, 1.9rem);
+  cursor: pointer;
+  box-shadow: 0 4px 0 #047857, 0 6px 16px rgba(16, 185, 129, 0.3);
+  transition: transform 0.12s, box-shadow 0.12s, background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.unlock-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 0 #047857, 0 10px 22px rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+}
+
+.unlock-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #047857;
+}
+
+/* ==========================================================================
+   BOTONES DE ACCIÓN EXCLUSIVOS DE LOS SIMULADORES (DIFERENTES A DESBLOQUEAR)
+   ========================================================================== */
+.btn-sim-action {
+  font-family: var(--font-script);
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 1.4rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.btn-sim-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-sim-action:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-sim-tsunami {
+  background: #0284C7;
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 #0369A1;
+}
+
+.btn-sim-volcano {
+  background: #DC2626;
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 #991B1B;
+}
+
+.btn-sim-sismo {
+  background: #D97706;
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 #B45309;
+}
+
+.feedback-msg {
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  min-height: 1.1rem;
+  text-align: center;
+}
+.feedback-msg.error-text { color: #DC2626; }
+.feedback-msg.success-text { color: var(--stamp-green); }
+
+/* ==========================================================================
+   SIMULADOR DE TSUNAMI CON SLIDER DE METROS (SALA 2)
+   ========================================================================== */
+.tsunami-stage {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  position: relative;
+  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 40%, #FEF9C3 100%);
+  border-radius: var(--radius-paper);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(0.45rem, 1vh, 0.75rem);
+  box-sizing: border-box;
+  gap: 8px;
+}
+
+.tsunami-top-controls {
+  z-index: 25;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.tsunami-slider-bar {
+  background: rgba(255, 255, 255, 0.94);
+  border: 2px solid var(--paper-border);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.tsunami-slider-bar input[type=range] {
+  flex: 1;
+  accent-color: var(--pencil-blue);
+  cursor: pointer;
+}
+
+/* Escenario Central Visual de la Costa - Elevado y con Altura Amplia */
+.tsunami-scene-viewport {
+  flex: 1;
+  width: 100%;
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #7DD3FC 0%, #BAE6FD 38%, #E0F2FE 68%, #FDE047 100%);
+  border: 1.5px solid rgba(2, 132, 199, 0.25);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.coast-beach-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 96px;
+  background: linear-gradient(135deg, #FEF08A 0%, #F59E0B 100%);
+  border-radius: 0 48px 0 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 0.8rem;
+  box-shadow: 4px 0 16px rgba(217, 119, 6, 0.25);
+  border-top: 3px solid #FEF08A;
+}
+
+.beach-item {
+  font-size: 2.7rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+}
+.beach-item:hover {
+  transform: scale(1.22);
+}
+
+.safe-hill-box {
+  position: absolute;
+  bottom: 88px;
+  left: 12px;
+  z-index: 17;
+  background: #84CC16;
+  border: 2px solid #4D7C0F;
+  border-radius: 20px 20px 0 0;
+  padding: 4px 12px;
+  font-family: var(--font-hand);
+  font-size: 0.92rem;
+  font-weight: bold;
+  color: #1A2E05;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s, background 0.3s;
+  cursor: pointer;
+}
+
+.boat-element {
+  position: absolute;
+  bottom: 60px;
+  left: 65%;
+  font-size: 2.6rem;
+  z-index: 18;
+  cursor: pointer;
+  transition: transform 0.5s ease-out, bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.8s ease;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.tsunami-water-sheet {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 55px;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.92) 0%, rgba(2, 132, 199, 0.98) 100%);
+  border-top: 4px solid rgba(255, 255, 255, 0.9);
+  border-radius: 65% 35% 0 0 / 25px 25px 0 0;
+  z-index: 15;
+  transition: height 0.6s cubic-bezier(0.34, 1.25, 0.64, 1), transform 0.6s ease;
+}
+
+/* Panel Inferior de Control y Noticia - Separado de la Escena */
+.tsunami-control-panel {
+  z-index: 25;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: var(--radius-paper);
+  padding: 0.45rem 0.9rem;
+  border: 1.5px solid var(--paper-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  flex-shrink: 0;
+  min-height: 52px;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   MODAL DE CELEBRACIÓN DE SALA
+   ========================================================================== */
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.success-modal-card {
+  background: #FFFFFF;
+  border: 4px solid var(--btn-gold);
+  border-radius: var(--radius-card);
+  padding: clamp(1.4rem, 3vh, 2.2rem) clamp(1.6rem, 3.5vw, 2.6rem);
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  max-width: 480px;
+  transform: rotate(-0.5deg);
+}
+
+.success-stamp-circle {
+  width: 70px;
+  height: 70px;
+  background: var(--school-green-light);
+  color: var(--stamp-green);
+  border: 3px solid var(--stamp-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin: 0 auto 0.8rem;
+}
+
+/* ==========================================================================
+   BARRA INFERIOR
+   ========================================================================== */
+.bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(36px, 5vh, 46px);
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+  z-index: 20;
+}
+
+.hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFFFFF;
+  border: 1.5px solid var(--paper-border);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: clamp(0.8rem, 0.95vw, 0.9rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
