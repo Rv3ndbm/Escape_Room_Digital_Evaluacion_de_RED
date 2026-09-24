@@ -2431,6 +2431,95 @@ html[data-text-scale="xlarge"] {
   100% { transform: translate(-18px, -8px) rotate(4deg); }
 }
 
+/* Animación de Aves con Aleteo Realista */
+.animated-flying-bird {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.22));
+}
+
+.bird-svg {
+  width: 34px;
+  height: 22px;
+  overflow: visible;
+}
+
+.bird-wing-left {
+  transform-origin: 25px 15px;
+  animation: birdWingLeft 0.42s ease-in-out infinite alternate;
+}
+
+.bird-wing-right {
+  transform-origin: 25px 15px;
+  animation: birdWingRight 0.42s ease-in-out infinite alternate;
+}
+
+@keyframes birdWingLeft {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-42deg) scaleY(0.65); }
+}
+
+@keyframes birdWingRight {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(42deg) scaleY(0.65); }
+}
+
+/* Rutas de Vuelo Panorámicas */
+.bird-sea-1 {
+  top: 15%;
+  left: 30%;
+  animation: birdGlideSea1 14s ease-in-out infinite;
+}
+.bird-sea-2 {
+  top: 24%;
+  left: 68%;
+  transform: scale(0.75);
+  animation: birdGlideSea2 16s ease-in-out infinite;
+  animation-delay: -6s;
+}
+.bird-beach-1 {
+  top: 18%;
+  left: 48%;
+  transform: scale(0.85);
+  animation: birdGlideBeach 11s ease-in-out infinite alternate;
+}
+.bird-hill-1 {
+  top: 10%;
+  left: 28%;
+  transform: scale(0.9);
+  animation: birdSoarHill 9s ease-in-out infinite alternate;
+}
+.bird-hill-2 {
+  top: 20%;
+  left: 64%;
+  transform: scale(0.72);
+  animation: birdSoarHill 12s ease-in-out infinite alternate-reverse;
+  animation-delay: -4s;
+}
+
+@keyframes birdGlideSea1 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(65px, -18px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes birdGlideSea2 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-50px, -12px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes birdGlideBeach {
+  0% { transform: translate(0, 0) rotate(-4deg); }
+  100% { transform: translate(45px, -18px) rotate(6deg); }
+}
+
+@keyframes birdSoarHill {
+  0% { transform: translate(0, 0) scale(0.9) rotate(-3deg); }
+  100% { transform: translate(50px, -15px) scale(0.9) rotate(4deg); }
+}
+
 /* ==========================================================================
    ZONA 1: MAR PROFUNDO Y ORIGEN DEL TSUNAMI (0% A 25%)
    ========================================================================== */
@@ -2448,16 +2537,58 @@ html[data-text-scale="xlarge"] {
   border-top: 4px solid #7DD3FC;
   z-index: 6;
   transition: transform 2.5s ease-out;
+  overflow: visible;
 }
 
+/* Oleaje Ondulante Multicapa y Espuma Marina Realista */
 .ocean-wave-surface {
   position: absolute;
+  left: 0;
+  width: 140%;
+  pointer-events: none;
+}
+
+.wave-surface-back {
+  top: -16px;
+  height: 24px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.75) 0%, transparent 75%);
+  animation: oceanWaveRoll1 3.2s ease-in-out infinite alternate;
+  opacity: 0.8;
+}
+
+.wave-surface-front {
   top: -10px;
+  height: 18px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.9) 0%, rgba(186, 230, 253, 0.5) 50%, transparent 80%);
+  animation: oceanWaveRoll2 2.6s ease-in-out infinite alternate-reverse;
+  opacity: 0.9;
+}
+
+.ocean-wave-foam-crest {
+  position: absolute;
+  top: -4px;
   left: 0;
   width: 100%;
-  height: 14px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, transparent 80%);
-  animation: oceanSurfaceRipples 2s infinite ease-in-out alternate;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, #FFFFFF 0px, #FFFFFF 16px, rgba(255, 255, 255, 0.4) 16px, rgba(255, 255, 255, 0.4) 30px);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 5px #FFFFFF);
+  animation: foamDrift 3.5s linear infinite;
+}
+
+@keyframes oceanWaveRoll1 {
+  0% { transform: translateX(0) scaleY(0.9); }
+  100% { transform: translateX(-45px) scaleY(1.35); }
+}
+
+@keyframes oceanWaveRoll2 {
+  0% { transform: translateX(-35px) scaleY(1.25); }
+  100% { transform: translateX(25px) scaleY(0.8); }
+}
+
+@keyframes foamDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(46px); }
 }
 
 /* Plataforma del lecho oceánico con falla sísmica y pendiente continental */
@@ -2822,106 +2953,121 @@ html[data-text-scale="xlarge"] {
 }
 
 /* ==========================================================================
-   ZONA 4: COLINA ALTA Y REFUGIO (+30m COTA SEGURA) (75% A 100%)
+   ZONA 4: COLINA ALTA Y REFUGIO (+30m COTA SEGURA) - RELIEVE CONTINUO ORGÁNICO
    ========================================================================== */
 .zone-hill {
   background: linear-gradient(180deg, #38BDF8 0%, #7DD3FC 40%, #BAE6FD 75%, #DCFCE7 100%);
+  position: relative;
 }
 
-.mountain-distant-silhouette {
+.distant-mountain-svg {
   position: absolute;
-  top: 12%;
-  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 65%;
-  background: radial-gradient(ellipse at 65% 80%, #6EE7B7 0%, #34D399 45%, transparent 75%);
-  opacity: 0.6;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hill-slope-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
   pointer-events: none;
 }
 
-.hill-mountain-body {
+.hill-slope-vector {
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
   width: 100%;
-  height: 86%;
-  background: linear-gradient(145deg, #4ADE80 0%, #22C55E 35%, #16A34A 70%, #15803D 100%);
-  border-radius: 170px 0 0 0; /* Pendiente ascendente continua hacia la derecha */
-  box-shadow: inset 0 8px 18px rgba(255, 255, 255, 0.38), -8px 0 25px rgba(0, 0, 0, 0.2);
-  border-top: 5px solid #86EFAC;
+  height: 100%;
+  filter: drop-shadow(-4px 0 16px rgba(0, 0, 0, 0.18));
 }
 
-.hill-cliff-layer {
+.hill-cota-markers {
   position: absolute;
   bottom: 0;
-  right: 0;
-  width: 58%;
-  height: 64%;
-  background: linear-gradient(135deg, rgba(71, 85, 105, 0.28) 0%, rgba(30, 41, 59, 0.42) 100%);
-  border-radius: 110px 0 0 0;
-  border-top: 2px dashed rgba(255, 255, 255, 0.35);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
 }
 
-.hill-forest-pines {
+.cota-badge-post {
   position: absolute;
-  top: -24px;
-  left: 18%;
-  display: flex;
-  gap: 12px;
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease;
   user-select: none;
+  z-index: 10;
 }
 
-.hill-hiking-trail {
-  position: absolute;
-  bottom: 25px;
-  left: 20px;
-  width: 180px;
-  height: 145px;
-  pointer-events: none;
+.cota-badge-post:hover {
+  transform: scale(1.12) translateY(-2px);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
 }
 
-.trail-line {
-  position: absolute;
-  bottom: 20px;
-  left: 32px;
-  width: 110px;
-  height: 120px;
-  border-left: 5px dashed #FEF08A;
-  transform: rotate(28deg);
-  opacity: 0.9;
-}
-
-.trail-sign {
-  position: absolute;
-  background: rgba(22, 101, 52, 0.94);
+.cota-flag-tag {
+  background: rgba(15, 23, 42, 0.90);
   color: #FEF08A;
   font-family: var(--font-hand);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 6px;
-  border: 1px solid rgba(254, 240, 138, 0.4);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid rgba(254, 240, 138, 0.6);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
+.cota-flag-tag.safe-tag {
+  background: #15803D;
+  color: #FFFFFF;
+  border-color: #86EFAC;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.65);
+  font-size: 0.76rem;
+}
+
+/* Posiciones sobre la curvatura de la ladera */
+.cota-10m {
+  bottom: 27%;
+  left: 14%;
+}
+
+.cota-20m {
+  bottom: 45%;
+  left: 36%;
+}
+
+.cota-30m {
+  bottom: 69%;
+  left: 64%;
+}
+
+/* Meseta de la Cumbre Segura (Faro + Refugio + Comunidad) */
 .hill-shelter-top {
   position: absolute;
-  bottom: 115px;
-  right: 8%;
+  bottom: 68%;
+  right: 5%;
   z-index: 12;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: auto;
 }
 
 .shelter-building-card {
   background: #FFFBEB;
   border: 2.5px solid #F59E0B;
   border-radius: 12px;
-  padding: 4px 12px;
+  padding: 4px 10px;
   box-shadow: 0 6px 16px rgba(180, 83, 9, 0.25);
   display: flex;
   flex-direction: column;
@@ -2932,12 +3078,12 @@ html[data-text-scale="xlarge"] {
 .shelter-badge-banner {
   color: #92400E;
   font-family: var(--font-hand);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 800;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 /* Faro marítimo en la cumbre con haz giratorio */
@@ -3039,6 +3185,97 @@ html[data-text-scale="xlarge"] {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+/* ==========================================================================
+   BANNER DE LECTURA PEDAGÓGICA GUIADA LETRA POR LETRA (ESTILO VOLCÁN)
+   ========================================================================== */
+#tsunamiStatusBanner {
+  text-align: left;
+  color: #E0F2FE;
+  font-family: var(--font-hand);
+  z-index: 24;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(56, 189, 248, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: clamp(0.55rem, 1.2vh, 0.85rem) clamp(0.85rem, 1.8vw, 1.3rem);
+  border-radius: 14px;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+#tsunamiStatusBanner .banner-title-line {
+  font-size: clamp(0.98rem, 1.2vw, 1.15rem);
+  font-weight: 700;
+  color: #38BDF8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+}
+
+#tsunamiStatusBanner .banner-body-text {
+  font-size: clamp(1.05rem, 1.35vw, 1.24rem);
+  line-height: 1.38;
+  color: #FFFFFF;
+  word-wrap: break-word;
+}
+
+#tsunamiStatusBanner .banner-reading-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4.5px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#tsunamiStatusBanner .reading-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #38BDF8 0%, #0284C7 50%, #22C55E 100%);
+  box-shadow: 0 0 10px #38BDF8;
+  transition: width 0.05s linear;
+}
+
+/* Letras de Lectura Guiada Fluida (Karaoke) */
+#tsunamiStatusBanner .karaoke-word {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 0.3em;
+  position: relative;
+  vertical-align: baseline;
+}
+
+#tsunamiStatusBanner .k-char {
+  display: inline;
+  color: rgba(224, 242, 254, 0.36);
+  font-weight: 500;
+  transition: color 0.22s ease, text-shadow 0.22s ease, transform 0.18s ease;
+}
+
+#tsunamiStatusBanner .k-char.char-read {
+  color: #FFFFFF;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 6px rgba(56, 189, 248, 0.45);
+}
+
+#tsunamiStatusBanner .k-char.char-active {
+  color: #FFF275;
+  font-weight: 800;
+  text-shadow: 0 0 8px #F59E0B, 0 0 16px #38BDF8, 0 0 24px #0284C7;
+  display: inline-block;
+  transform: scale(1.18) translateY(-1px);
 }
 
 /* Panel Inferior de Control y Noticia - Separado de la Escena */
