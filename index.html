@@ -19,17 +19,20 @@
   <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
   <div class="app-screen">
     
-    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo ("Cositas de fondo llamativas") -->
     <div class="ambient-bg">
-      <div class="aura-blob" style="width: 320px; height: 320px; background: #BAE6FD; top: -50px; left: -50px;"></div>
-      <div class="aura-blob" style="width: 350px; height: 350px; background: #FEF08A; bottom: -80px; right: -50px;"></div>
-      <div class="aura-blob" style="width: 260px; height: 260px; background: #BBF7D0; top: 30%; right: 10%;"></div>
+      <div class="aura-blob" style="width: 380px; height: 380px; background: #BAE6FD; top: -60px; left: -60px;"></div>
+      <div class="aura-blob" style="width: 400px; height: 400px; background: #FEF08A; bottom: -80px; right: -60px;"></div>
+      <div class="aura-blob" style="width: 320px; height: 320px; background: #BBF7D0; top: 25%; right: 8%;"></div>
+      <div class="aura-blob" style="width: 300px; height: 300px; background: #FED7AA; bottom: 20%; left: 8%;"></div>
 
-      <!-- Mascotas Tiernas Animadas Flotantes -->
-      <img src="assets/media/sun-sunglasses.svg" alt="Sol" class="ambient-cloud anim-float" style="top: 12%; right: 8%; width: 75px;">
-      <img src="assets/media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float-slow" style="bottom: 12%; left: 7%; width: 78px;">
-      <img src="assets/media/cloud-thunder.svg" alt="Nube" class="ambient-cloud anim-float" style="top: 20%; left: 10%; width: 68px;">
-      <img src="assets/media/tornado-cute.svg" alt="Tornado" class="ambient-cloud anim-float-slow" style="bottom: 16%; right: 12%; width: 64px;">
+      <!-- Stickers Animados de Dibujos Animados (Desastres y Ciencia Amigables) -->
+      <img src="assets/media/sun-sunglasses.svg" alt="Sol alegre" class="ambient-sticker ambient-sticker-sun anim-float" title="¡Día brillante para salvar la Tierra!">
+      <img src="assets/media/cloud-thunder.svg" alt="Nube de tormenta" class="ambient-sticker ambient-sticker-cloud anim-float-slow" title="¡Investigando el clima!">
+      <img src="assets/media/volcano-cute.svg" alt="Volcán animado" class="ambient-sticker ambient-sticker-volcano anim-float" title="¡Estación Volcán!">
+      <img src="assets/media/wave-cute.svg" alt="Ola marina" class="ambient-sticker ambient-sticker-wave anim-float-slow" title="¡Estación Tsunami!">
+      <img src="assets/media/earth-planet.svg" alt="Planeta Tierra sonriente" class="ambient-sticker ambient-sticker-earth anim-float-slow" title="¡Nuestra Misión!">
+      <img src="assets/media/tornado-cute.svg" alt="Tornado curioso" class="ambient-sticker ambient-sticker-tornado anim-float" title="¡Fenómenos naturales!">
     </div>
 
     <!-- Barra Superior HUD -->
@@ -77,56 +80,93 @@
         
         <!-- Fila de Mascotas / Iconos de Bienvenida -->
         <div class="hero-mascot-row">
-          <span style="font-size: 2.8rem;" class="anim-float">🚀</span>
-          <span style="font-size: 3.2rem;" class="anim-star-shine">✨</span>
-          <span style="font-size: 2.8rem;" class="anim-float">🔬</span>
+          <span style="font-size: 2.6rem;" class="hero-mascot-item anim-float" title="Cohete de expedición">🚀</span>
+          <span style="font-size: 3.1rem;" class="hero-mascot-item anim-star-shine" title="Planeta Tierra">🌍</span>
+          <span style="font-size: 2.6rem;" class="hero-mascot-item anim-float" title="Ciencia y exploración">🔬</span>
         </div>
 
         <div class="hero-title-box">
-          <span class="intro-header-badge animate__animated animate__bounceIn">
-            <i class="fa-solid fa-star" style="color: #F59E0B;"></i> ¡Bienvenido, explorador científico! <i class="fa-solid fa-star" style="color: #F59E0B;"></i>
-          </span>
-          <h1 style="margin-top: 6px;">Misión: Salvar la Tierra</h1>
-          <h2>Escape Room Digital Infantil</h2>
+          <div class="hero-welcome-badge animate__animated animate__bounceIn">
+            <i class="fa-solid fa-star" style="color: #F59E0B;"></i>
+            <span>¡Bienvenido/a a la Misión Científica!</span>
+            <i class="fa-solid fa-star" style="color: #F59E0B;"></i>
+          </div>
+          <h1>Misión: Salvar la Tierra</h1>
+          <h2 class="hero-subtitle">Escape Room Digital Infantil • 4.º de Primaria</h2>
         </div>
 
         <p class="hero-desc">
-          Únete a una emocionante aventura científica para explorar desastres naturales y aprender a evaluar herramientas digitales con criterio y diversión.
+          Únete a una emocionante expedición para investigar fenómenos naturales y aprender a evaluar recursos educativos digitales jugando y con criterio científico.
         </p>
 
-        <!-- Formulario amigable de inicio -->
+        <!-- Formulario guiado: Paso 1 y Paso 2 -->
         <div class="hero-form-box">
-          <label for="explorerNameInput" class="hero-input-label">
-            <i class="fa-solid fa-user-astronaut"></i>
-            <span>¿Cómo te llamas, explorador/a?</span>
-          </label>
+          
+          <!-- Paso 1: Selección de Avatar -->
+          <div class="hero-step-block">
+            <div class="hero-step-header">
+              <span class="step-circle-badge">1</span>
+              <span class="hero-step-title">Elige tu personaje o avatar:</span>
+            </div>
 
-          <!-- Chips de Avatar -->
-          <div class="avatar-chips-row" id="avatarChipsRow">
-            <button type="button" class="avatar-chip active" data-avatar="🧑‍🔬" title="Explorador Científico">🧑‍🔬</button>
-            <button type="button" class="avatar-chip" data-avatar="🚀" title="Astronauta">🚀</button>
-            <button type="button" class="avatar-chip" data-avatar="🧪" title="Química">🧪</button>
-            <button type="button" class="avatar-chip" data-avatar="🌋" title="Vulcanología">🌋</button>
-            <button type="button" class="avatar-chip" data-avatar="🌊" title="Oceanografía">🌊</button>
+            <!-- Chips de Avatar con roles educativos -->
+            <div class="avatar-chips-row" id="avatarChipsRow">
+              <button type="button" class="avatar-chip active" data-avatar="🧑‍🔬" data-label="Científico/a 🧑‍🔬" title="Científico/a">
+                <span class="avatar-emoji">🧑‍🔬</span>
+              </button>
+              <button type="button" class="avatar-chip" data-avatar="🚀" data-label="Astronauta 🚀" title="Astronauta">
+                <span class="avatar-emoji">🚀</span>
+              </button>
+              <button type="button" class="avatar-chip" data-avatar="🧪" data-label="Investigador/a 🧪" title="Investigador/a">
+                <span class="avatar-emoji">🧪</span>
+              </button>
+              <button type="button" class="avatar-chip" data-avatar="🌋" data-label="Vulcanólogo/a 🌋" title="Vulcanólogo/a">
+                <span class="avatar-emoji">🌋</span>
+              </button>
+              <button type="button" class="avatar-chip" data-avatar="🌊" data-label="Oceanógrafo/a 🌊" title="Oceanógrafo/a">
+                <span class="avatar-emoji">🌊</span>
+              </button>
+              <button type="button" class="avatar-chip" data-avatar="🌍" data-label="Guardián/a de la Tierra 🌍" title="Guardián/a">
+                <span class="avatar-emoji">🌍</span>
+              </button>
+            </div>
+
+            <!-- Indicador dinámico de confirmación de personaje -->
+            <div class="avatar-selection-feedback">
+              <span>Has elegido:</span>
+              <strong id="selectedAvatarLabel">Científico/a 🧑‍🔬</strong>
+            </div>
           </div>
 
-          <div class="hero-input-row">
-            <input 
-              type="text" 
-              id="explorerNameInput" 
-              class="hero-input" 
-              placeholder="Escribe tu nombre aquí..." 
-              maxlength="26"
-              autocomplete="off"
-            >
+          <div class="hero-form-divider"></div>
+
+          <!-- Paso 2: Escribe tu Nombre -->
+          <div class="hero-step-block">
+            <div class="hero-step-header">
+              <span class="step-circle-badge">2</span>
+              <label for="explorerNameInput" class="hero-step-title">Escribe tu nombre de explorador/a:</label>
+            </div>
+
+            <div class="hero-input-row">
+              <i class="fa-solid fa-user-pen hero-input-icon"></i>
+              <input 
+                type="text" 
+                id="explorerNameInput" 
+                class="hero-input" 
+                placeholder="Escribe tu nombre aquí (ej. Sofía, Mateo, Hilda)..." 
+                maxlength="26"
+                autocomplete="off"
+              >
+            </div>
           </div>
+
         </div>
 
         <!-- Botón Grande "¡Comenzar Aventura!" -->
-        <button id="btnStartAdventure" class="btn-fun btn-fun-primary anim-pulse" style="font-size: 1.25rem; padding: 14px 38px;" type="button">
-          <i class="fa-solid fa-rocket" style="font-size: 1.3rem;"></i>
+        <button id="btnStartAdventure" class="btn-fun btn-fun-primary anim-pulse btn-start-adventure" type="button">
+          <i class="fa-solid fa-rocket"></i>
           <span>¡Comenzar Aventura!</span>
-          <i class="fa-solid fa-arrow-right" style="font-size: 1.1rem;"></i>
+          <i class="fa-solid fa-arrow-right"></i>
         </button>
 
       </div>
@@ -153,6 +193,7 @@
       const nameInput = document.getElementById('explorerNameInput');
       const startBtn = document.getElementById('btnStartAdventure');
       const avatarChips = document.querySelectorAll('.avatar-chip');
+      const avatarLabel = document.getElementById('selectedAvatarLabel');
 
       // Cargar datos previos si existen
       const savedName = localStorage.getItem('explorer_name');
@@ -161,16 +202,25 @@
       }
 
       let selectedAvatar = localStorage.getItem('explorer_avatar') || '🧑‍🔬';
-      avatarChips.forEach(chip => {
-        if (chip.getAttribute('data-avatar') === selectedAvatar) {
-          avatarChips.forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-        }
 
+      // Sincronizar selección de avatar y etiqueta interactiva
+      const updateAvatarUI = (avatarChar) => {
+        avatarChips.forEach(chip => {
+          const isCurrent = chip.getAttribute('data-avatar') === avatarChar;
+          chip.classList.toggle('active', isCurrent);
+          if (isCurrent && avatarLabel) {
+            const labelText = chip.getAttribute('data-label') || `${avatarChar} Explorador/a`;
+            avatarLabel.textContent = labelText;
+          }
+        });
+      };
+
+      updateAvatarUI(selectedAvatar);
+
+      avatarChips.forEach(chip => {
         chip.addEventListener('click', () => {
-          avatarChips.forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
           selectedAvatar = chip.getAttribute('data-avatar');
+          updateAvatarUI(selectedAvatar);
           if (window.escapeSound) window.escapeSound.playPop();
         });
       });

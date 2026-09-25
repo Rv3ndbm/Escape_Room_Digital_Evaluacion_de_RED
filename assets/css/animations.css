@@ -148,3 +148,222 @@
   animation: auraDrift 14s ease-in-out infinite;
   z-index: 0;
 }
+
+/* ==========================================================================
+   MICRO-INTERACCIONES Y EFECTO DE RAYITOS / CHISPAS DE COLOR AL HACER CLIC
+   ========================================================================== */
+
+/* Contenedor flotante para los destellos y rayitos del clic */
+.click-particle-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  user-select: none;
+}
+
+/* Onda expansiva suave al hacer clic */
+.click-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.2);
+  border: 2.5px solid rgba(56, 189, 248, 0.75);
+  animation: rippleExpand 0.48s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes rippleExpand {
+  0% {
+    width: 14px;
+    height: 14px;
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.95;
+  }
+  100% {
+    width: 70px;
+    height: 70px;
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* Partícula individual de estrellita / destello */
+.click-sparkle-item {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1;
+  animation: sparkleFly 0.58s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes sparkleFly {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.2) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.25) rotate(var(--rot));
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(calc(var(--tx) * 1.3), calc(var(--ty) * 1.3)) scale(0) rotate(calc(var(--rot) * 2));
+    opacity: 0;
+  }
+}
+
+/* Rayitos de colores alargados */
+.click-sparkle-ray {
+  position: absolute;
+  width: 3.5px;
+  height: 16px;
+  border-radius: 3px;
+  transform-origin: center bottom;
+  animation: rayShoot 0.52s ease-out forwards;
+}
+
+@keyframes rayShoot {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scaleY(0.4);
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--dist) * -0.85)) scaleY(1.25);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--dist) * -1.25)) scaleY(0);
+    opacity: 0;
+  }
+}
+
+/* Destello brillante que cruza los botones al pasar el cursor (Shine Sweep) */
+.btn-fun {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-fun::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -70%;
+  width: 45%;
+  height: 220%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: rotate(25deg);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.btn-fun:hover::after {
+  opacity: 1;
+  left: 140%;
+  transition: left 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto rebote elástico agradable en botones y tarjetas al hacer clic (:active) */
+.btn-fun:active,
+.btn-hud-pill:active,
+.avatar-chip:active,
+.option-card:active,
+.btn-stepper-item:active {
+  transform: scale(0.93) translateY(1px) !important;
+  transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* Micro-interacción: Tarjetas de opciones de respuesta con hover magnético suave */
+.option-card {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.option-card:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.18) !important;
+}
+
+.option-card:hover .option-letter {
+  transform: scale(1.15) rotate(-3deg);
+  background: #38BDF8;
+  color: white;
+}
+
+/* Micro-interacción: Avatar Chips en la portada */
+.avatar-chip {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.avatar-chip:hover {
+  transform: translateY(-4px) scale(1.18) rotate(-4deg);
+  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.25);
+}
+
+/* Micro-interacción: Insignias y pastillas HUD */
+.btn-hud-pill {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+.btn-hud-pill:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-stepper-item {
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.15s ease !important;
+}
+
+.btn-stepper-item:hover:not(:disabled) {
+  transform: scale(1.18);
+}
+
+/* Micro-interacción: Animación en flechas de botones al pasar el ratón */
+.btn-fun:hover i.fa-arrow-right {
+  transform: translateX(4px);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-fun:hover i.fa-rocket {
+  transform: translateY(-2px) rotate(8deg);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Micro-interacción: Artículos de la Mochila de Emergencia en Sala 3 */
+.backpack-phone-item {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.backpack-phone-item:hover:not(.packed) {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.25) !important;
+  border-color: #38BDF8 !important;
+}
+
+.backpack-phone-item:active {
+  transform: scale(0.92) !important;
+}
+
+/* Micro-interacción: Pestañas de la app del teléfono en Sala 3 */
+.phone-nav-tab {
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.15s ease, background 0.15s ease !important;
+}
+
+.phone-nav-tab:hover:not(.active) {
+  transform: translateY(-2px);
+  color: #0284C7;
+}
+
+/* Micro-interacción: Botones de control del simulador de Tsunami en Sala 2 */
+.sim-ctrl-btn {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease !important;
+}
+
+.sim-ctrl-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.sim-ctrl-btn:active {
+  transform: scale(0.94) !important;
+}
+

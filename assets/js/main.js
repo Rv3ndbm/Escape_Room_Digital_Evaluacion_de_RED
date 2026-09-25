@@ -324,3 +324,114 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+// 4. MICRO-INTERACCIONES VISUALES: RAYITOS DE COLORES Y DESTELLOS AL HACER CLIC
+(function initClickParticles() {
+  const PASTEL_COLORS = [
+    '#38BDF8', // Celeste cielo
+    '#34D399', // Verde menta
+    '#FBBF24', // Amarillo sol
+    '#FB7185', // Rosa coral
+    '#A78BFA', // Violeta pastel
+    '#FB923C', // Naranja cálido
+    '#38E0C4', // Turquesa
+    '#F472B6'  // Rosa chicle
+  ];
+
+  const SPARKLE_SHAPES = ['✦', '★', '✨', '●', '✦', '☀'];
+  let lastBurstTime = 0;
+
+  function createClickSparkleBurst(x, y) {
+    const now = Date.now();
+    // Prevenir saturación en clicks continuos ultra-rápidos (mínimo 45ms)
+    if (now - lastBurstTime < 45) return;
+    lastBurstTime = now;
+
+    const burst = document.createElement('div');
+    burst.className = 'click-particle-burst';
+    burst.style.left = `${x}px`;
+    burst.style.top = `${y}px`;
+
+    // 1. Onda expansiva circular suave (ripple)
+    const ripple = document.createElement('div');
+    ripple.className = 'click-ripple-wave';
+    const rippleColor = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
+    ripple.style.borderColor = rippleColor;
+    burst.appendChild(ripple);
+
+    // 2. Rayitos de colores proyectados en abanico circular (7 rayitos)
+    const rayCount = 7;
+    const baseAngleOffset = Math.random() * 360;
+    for (let i = 0; i < rayCount; i++) {
+      const ray = document.createElement('div');
+      ray.className = 'click-sparkle-ray';
+      const angle = baseAngleOffset + (i * (360 / rayCount)) + (Math.random() * 16 - 8);
+      const dist = 32 + Math.random() * 24; // Distancia 32px a 56px
+      const color = PASTEL_COLORS[(i + Math.floor(Math.random() * 2)) % PASTEL_COLORS.length];
+
+      ray.style.setProperty('--angle', `${angle.toFixed(1)}deg`);
+      ray.style.setProperty('--dist', `${dist.toFixed(1)}px`);
+      ray.style.backgroundColor = color;
+      burst.appendChild(ray);
+    }
+
+    // 3. Destellitos / estrellitas flotantes con rebote (5 unidades)
+    const starCount = 5;
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('span');
+      star.className = 'click-sparkle-item';
+      const char = SPARKLE_SHAPES[Math.floor(Math.random() * SPARKLE_SHAPES.length)];
+      star.textContent = char;
+
+      const rad = ((i * (360 / starCount)) + Math.random() * 30) * (Math.PI / 180);
+      const dist = 22 + Math.random() * 26;
+      const tx = Math.cos(rad) * dist;
+      const ty = Math.sin(rad) * dist;
+      const rot = Math.floor(Math.random() * 360);
+      const color = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
+      const size = 11 + Math.floor(Math.random() * 8);
+
+      star.style.setProperty('--tx', `${tx.toFixed(1)}px`);
+      star.style.setProperty('--ty', `${ty.toFixed(1)}px`);
+      star.style.setProperty('--rot', `${rot}deg`);
+      star.style.color = color;
+      star.style.fontSize = `${size}px`;
+
+      burst.appendChild(star);
+    }
+
+    document.body.appendChild(burst);
+
+    // Limpieza automática tras completar la animación (600ms)
+    setTimeout(() => {
+      if (burst.parentNode) {
+        burst.parentNode.removeChild(burst);
+      }
+    }, 620);
+  }
+
+  // Escuchar eventos táctiles y de puntero globales con passive: true
+  window.addEventListener('pointerdown', (e) => {
+    // Si no tiene coordenadas válidas o es botón secundario, ignorar
+    if (e.clientX === undefined || e.clientY === undefined || (e.button !== undefined && e.button !== 0)) {
+      return;
+    }
+
+    // Generar rayitos y destellos alegres en las coordenadas exactas del clic/toque
+    createClickSparkleBurst(e.clientX, e.clientY);
+
+    // Audio-feedback amigable para elementos interactivos
+    const targetInteractive = e.target.closest(
+      'button, a, input, select, .btn-fun, .option-card, .avatar-chip, .map-station, .btn-hud-pill, .btn-stepper-item, .phone-nav-tab, .backpack-phone-item, .phone-action-btn'
+    );
+
+    if (targetInteractive && window.escapeSound) {
+      if (targetInteractive.classList.contains('avatar-chip') || targetInteractive.classList.contains('btn-stepper-item')) {
+        window.escapeSound.playPop();
+      } else {
+        window.escapeSound.playClick();
+      }
+    }
+  }, { passive: true });
+})();
+
