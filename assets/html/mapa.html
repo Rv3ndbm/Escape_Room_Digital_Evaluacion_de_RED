@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Aventura | Misión: Salvar la Tierra</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Estilos del Escape Room -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body>
+
+  <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
+  <div class="app-screen">
+    
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <div class="ambient-bg">
+      <div class="aura-blob" style="width: 340px; height: 340px; background: #DBEAFE; top: -60px; left: -40px;"></div>
+      <div class="aura-blob" style="width: 320px; height: 320px; background: #DCFCE7; bottom: -50px; right: -40px;"></div>
+
+      <img src="../media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float" style="top: 10%; right: 7%; width: 72px;">
+      <img src="../media/sun-sunglasses.svg" alt="Sol" class="ambient-cloud anim-float-slow" style="bottom: 10%; left: 8%; width: 70px;">
+    </div>
+
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="hud-left">
+        <a href="../../index.html" class="hud-brand">
+          <span style="font-size: 1.3rem;">🌍</span>
+          <span>Misión: Salvar la Tierra</span>
+        </a>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-station-pill">
+          <i class="fa-solid fa-map-location-dot" style="color: #0284C7;"></i>
+          <span>Mapa de Aventura</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Explorador Actual -->
+        <div class="hud-user-pill">
+          <span id="hudUserAvatar">🧑‍🔬</span>
+          <span id="hudUserName">Explorador</span>
+        </div>
+
+        <!-- Botón de Instrucciones -->
+        <a href="introduccion.html" class="btn-hud-icon" title="Ver Guía y Reglas" aria-label="Ver Instrucciones">
+          <i class="fa-solid fa-book-open"></i>
+        </a>
+
+        <!-- Accesibilidad -->
+        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
+          <i class="fa-solid fa-text-height"></i>
+          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
+        </button>
+
+        <!-- Sonido -->
+        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <main class="main-stage">
+      
+      <div class="slide-card animate__animated animate__zoomIn">
+        
+        <div class="map-canvas-container">
+          
+          <!-- Cabecera del Mapa con Progreso -->
+          <div class="map-header">
+            <div>
+              <h2 style="font-family: var(--font-title); font-size: 1.25rem; font-weight: 700; color: #0284C7; margin: 0;">
+                <i class="fa-solid fa-compass" style="color: #F59E0B;"></i> Camino de las 5 Paradas
+              </h2>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">
+                Toca la estación desbloqueada para iniciar tu reto
+              </span>
+            </div>
+
+            <!-- Medidor de Avance -->
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 140px; height: 10px; background: #E2E8F0; border-radius: var(--radius-pill); overflow: hidden;">
+                <div id="mapProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #38BDF8, #10B981); transition: width 0.5s ease;"></div>
+              </div>
+              <span id="mapProgressText" style="font-family: var(--font-title); font-size: 0.88rem; font-weight: 700; color: #059669;">0% Completado</span>
+            </div>
+          </div>
+
+          <!-- Píldora de Aviso Flotante para Estaciones Bloqueadas -->
+          <div id="mapNoticePill" style="display: none; position: absolute; top: 70px; left: 50%; transform: translateX(-50%); z-index: 30; background: #FEF3C7; border: 2px solid #F59E0B; color: #92400E; padding: 6px 18px; border-radius: var(--radius-pill); font-family: var(--font-title); font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 14px rgba(0,0,0,0.1);">
+            Aviso de estación
+          </div>
+
+          <!-- Lienzo del Camino y Estaciones -->
+          <div class="map-track-area">
+            
+            <!-- Trazado de Camino Curvo Serpenteante de Aventura (SVG) -->
+            <svg class="map-path-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
+              <!-- Sombra del camino -->
+              <path d="M 100 200 Q 225 100, 325 200 T 550 200 T 775 200 T 900 200" fill="none" stroke="#CBD5E1" stroke-width="12" stroke-linecap="round" opacity="0.6" />
+              <!-- Línea punteada de mapa de aventura estilo papel -->
+              <path d="M 100 200 Q 225 100, 325 200 T 550 200 T 775 200 T 900 200" fill="none" stroke="#0284C7" stroke-width="5" stroke-dasharray="10, 10" stroke-linecap="round" />
+            </svg>
+
+            <!-- Contenedor Dinámico de las 5 Estaciones (Generadas por navigation.js) -->
+            <div class="map-stations-row" id="mapStationsContainer">
+              <!-- Cargado dinámicamente con lógica de bloqueo/desbloqueo -->
+            </div>
+
+          </div>
+
+          <!-- Pie del Mapa: Leyenda y Control -->
+          <div class="subslide-footer" style="padding: 8px 24px; background: rgba(255, 255, 255, 0.85); margin: 0;">
+            <div style="display: flex; gap: 18px; font-size: 0.82rem; font-weight: 700;">
+              <span style="color: #059669;"><i class="fa-solid fa-circle-check"></i> Superada</span>
+              <span style="color: #0284C7;"><i class="fa-solid fa-location-dot"></i> Parada Actual</span>
+              <span style="color: #64748B;"><i class="fa-solid fa-lock"></i> Por Desbloquear</span>
+            </div>
+
+            <button type="button" class="btn-fun btn-fun-secondary" id="btnResetMapProgress" style="font-size: 0.82rem; padding: 4px 14px;">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>Reiniciar Aventura</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Barra Inferior de Estado -->
+    <footer class="bottom-hud">
+      <div>
+        <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+        <span>Paso a paso: Supera cada reto para abrir el camino hacia la meta</span>
+      </div>
+      <div>
+        <span>Misión: Salvar la Tierra 🌍</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Botón de reinicio con confirmación suave
+      const btnReset = document.getElementById('btnResetMapProgress');
+      if (btnReset) {
+        btnReset.addEventListener('click', () => {
+          if (confirm('¿Deseas reiniciar el mapa para comenzar desde la Sala 1?')) {
+            window.EscapeState.resetAll();
+            if (window.escapeSound) window.escapeSound.playPop();
+            window.location.reload();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sala 3: Sismos (Usabilidad) | Misión: Salvar la Tierra</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Estilos del Escape Room -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body>
+
+  <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
+  <div class="app-screen" id="appScreenContainer">
+    
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <div class="ambient-bg">
+      <div class="aura-blob" style="width: 320px; height: 320px; background: #EDE9FE; top: -50px; right: -40px;"></div>
+      <div class="aura-blob" style="width: 300px; height: 300px; background: #DCFCE7; bottom: -50px; left: -40px;"></div>
+      
+      <img src="../media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float" style="top: 14%; left: 8%; width: 70px;">
+      <img src="../media/cloud-thunder.svg" alt="Nube" class="ambient-cloud anim-float-slow" style="bottom: 12%; right: 8%; width: 68px;">
+    </div>
+
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="hud-left">
+        <a href="mapa.html" class="hud-brand">
+          <span style="font-size: 1.3rem;">🌍</span>
+          <span>Misión: Salvar la Tierra</span>
+        </a>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-station-pill" style="border-color: #A78BFA; color: #6D28D9;">
+          <span>🏚️</span>
+          <span>Parada 3: Desierto de Sismos (Sismos)</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Botón Mapa -->
+        <a href="mapa.html" class="btn-hud-nav" title="Volver al mapa">
+          <i class="fa-solid fa-map"></i>
+          <span>Mapa</span>
+        </a>
+
+        <!-- Explorador Actual -->
+        <div class="hud-user-pill">
+          <span id="hudUserAvatar">🧑‍🔬</span>
+          <span id="hudUserName">Explorador</span>
+        </div>
+
+        <!-- Accesibilidad -->
+        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
+          <i class="fa-solid fa-text-height"></i>
+          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
+        </button>
+
+        <!-- Sonido -->
+        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <main class="main-stage">
+      
+      <div class="slide-card animate__animated animate__fadeIn">
+        <div class="subslide-container">
+
+          <!-- SUB-DIAPOSITIVA 1: MINI-APP INTERACTIVA DE SISMOS -->
+          <div class="subslide-view" id="subslideResource">
+            
+            <div class="subslide-header">
+              <div class="subslide-title">
+                <span style="font-size: 1.5rem;">📱</span>
+                <span>Paso 1: Explora la Mini-App de Sismos y Alerta</span>
+              </div>
+              <span class="hud-station-pill" style="border-color: #38BDF8; color: #0284C7; font-size: 0.85rem;">
+                <i class="fa-solid fa-mobile-screen-button"></i> Criterio: Usabilidad
+              </span>
+            </div>
+
+            <!-- Contenedor de la Mini-App (4 Paneles Limpios) -->
+            <div class="subslide-body">
+              <div class="sismos-app-grid">
+                
+                <!-- Panel 1: ¿Qué es un sismo? -->
+                <div class="sismo-panel-card">
+                  <div class="sismo-card-header" style="color: #0369A1;">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>1. ¿Qué es un Sismo?</span>
+                  </div>
+                  <p class="sismo-card-body-text">
+                    La corteza de la Tierra está formada por placas como un gran rompecabezas. Cuando se mueven y chocan, liberan energía y sentimos un temblor.
+                  </p>
+                  <div class="plates-interactive-box">
+                    <span>🧩</span>
+                    <i class="fa-solid fa-arrows-left-right animate__animated animate__pulse animate__infinite" style="font-size: 1.2rem; color: #0284C7;"></i>
+                    <span>💥</span>
+                    <i class="fa-solid fa-arrows-left-right animate__animated animate__pulse animate__infinite" style="font-size: 1.2rem; color: #0284C7;"></i>
+                    <span>🧩</span>
+                  </div>
+                </div>
+
+                <!-- Panel 2: ¿Qué hacer en caso de emergencia? -->
+                <div class="sismo-panel-card">
+                  <div class="sismo-card-header" style="color: #15803D;">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <span>2. ¿Qué hacer en emergencia?</span>
+                  </div>
+                  <div class="emergency-steps-row">
+                    <div class="emergency-step-item">
+                      <span class="icon">🧘</span>
+                      <span>1. Mantén la calma</span>
+                    </div>
+                    <div class="emergency-step-item">
+                      <span class="icon">🪟</span>
+                      <span>2. Aléjate de ventanas</span>
+                    </div>
+                    <div class="emergency-step-item">
+                      <span class="icon">🟢</span>
+                      <span>3. Ve a zona segura</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Panel 3: Kit / Mochila de Prevención -->
+                <div class="sismo-panel-card">
+                  <div class="sismo-card-header" style="color: #C2410C; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                      <i class="fa-solid fa-kit-medical"></i>
+                      <span>3. Mochila de Prevención</span>
+                    </div>
+                    <span id="backpackCounterBadge" style="font-size: 0.78rem; background: #FFEDD5; color: #9A3412; padding: 2px 8px; border-radius: var(--radius-pill);">
+                      Toca para empacar
+                    </span>
+                  </div>
+                  <div class="backpack-items-row">
+                    <button type="button" class="backpack-item-btn" data-item="linterna">
+                      <span style="font-size: 1.5rem;">🔦</span>
+                      <span>Linterna</span>
+                    </button>
+                    <button type="button" class="backpack-item-btn" data-item="botiquin">
+                      <span style="font-size: 1.5rem;">🩹</span>
+                      <span>Botiquín</span>
+                    </button>
+                    <button type="button" class="backpack-item-btn" data-item="agua">
+                      <span style="font-size: 1.5rem;">💧</span>
+                      <span>Agua</span>
+                    </button>
+                    <button type="button" class="backpack-item-btn" data-item="silbato">
+                      <span style="font-size: 1.5rem;">📢</span>
+                      <span>Silbato</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Panel 4: Simulación de Alarma de Terremoto -->
+                <div class="sismo-panel-card alarm-panel">
+                  <div style="margin-bottom: 8px;">
+                    <span style="font-family: var(--font-title); font-size: 1rem; font-weight: 700; color: #B91C1C;">
+                      🚨 4. Simulacro Sísmico Escolar
+                    </span>
+                    <p style="font-size: 0.84rem; color: #7F1D1D; margin: 2px 0 6px 0;">
+                      Presiona el botón para practicar la alarma preventiva:
+                    </p>
+                  </div>
+                  <button type="button" class="btn-trigger-alarm anim-pulse" id="btnTriggerSismoAlarm">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>¡Simular Alarma de Terremoto!</span>
+                  </button>
+                  <div id="alarmStatusText" style="margin-top: 6px; font-size: 0.82rem; font-weight: 700; color: #DC2626; min-height: 18px;">
+                    Alarma en espera
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Pie con Botón hacia las Preguntas -->
+            <div class="subslide-footer">
+              <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+                <i class="fa-solid fa-hand-pointer" style="color: #0284C7;"></i> Prueba los botones, prepara la mochila y activa la alarma para comprobar qué tan fácil es de usar.
+              </div>
+
+              <button type="button" class="btn-fun btn-goto-questions anim-pulse" id="btnGoToQuestions">
+                <span>¡Ya probé la aplicación! Ir a las Preguntas</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- SUB-DIAPOSITIVA 2: PREGUNTAS Y EVALUACIÓN PEDAGÓGICA (USABILIDAD) -->
+          <div class="subslide-view question-subslide" id="subslideQuestions" style="display: none;">
+            
+            <div style="width: 100%; display: flex; justify-content: flex-start; margin-bottom: 6px;">
+              <button type="button" class="btn-fun btn-fun-secondary" id="btnBackToResource" style="font-size: 0.88rem; padding: 6px 16px;">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Volver a la mini-app</span>
+              </button>
+            </div>
+
+            <div class="question-badge">
+              <i class="fa-solid fa-mobile-screen"></i> Evaluación del Criterio: Usabilidad
+            </div>
+
+            <!-- Enunciado de la Pregunta -->
+            <div class="question-prompt-card animate__animated animate__fadeInUp">
+              <p class="question-prompt-text">
+                ¿La mini-app es fácil de entender y navegar, con botones claros y funciones que puedes usar tú mismo sin necesidad de que un adulto te explique todo el tiempo?
+              </p>
+            </div>
+
+            <!-- Botones de Opción SÍ / NO -->
+            <div class="choices-row" id="choicesRow">
+              <button type="button" class="btn-choice btn-choice-yes" id="btnChoiceYes">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>SÍ</span>
+              </button>
+
+              <button type="button" class="btn-choice btn-choice-no" id="btnChoiceNo">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span>NO</span>
+              </button>
+            </div>
+
+            <!-- Tarjeta de Retroalimentación Interactiva -->
+            <div class="feedback-box" id="feedbackBox">
+              <div class="feedback-title" id="feedbackTitle"></div>
+              <p class="feedback-desc" id="feedbackDesc"></p>
+              <div id="feedbackActionContainer" style="margin-top: 6px;"></div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Barra Inferior de Estado -->
+    <footer class="bottom-hud">
+      <div>
+        <i class="fa-solid fa-house-crack" style="color: #6D28D9;"></i>
+        <span>Estación 3: Desierto de Sismos • Evaluación de Usabilidad e Interfaz Infantil</span>
+      </div>
+      <div>
+        <span>Misión: Salvar la Tierra 🌍</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/feedback.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setupRoomInteractions('sala3');
+
+      // INTERACTIVIDAD DE LA MOCHILA DE PREVENCIÓN
+      const backpackBtns = document.querySelectorAll('.backpack-item-btn');
+      const counterBadge = document.getElementById('backpackCounterBadge');
+      let packedCount = 0;
+
+      backpackBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('packed');
+          if (btn.classList.contains('packed')) {
+            btn.innerHTML = `<span style="font-size: 1.5rem;">✅</span><span>${btn.getAttribute('data-item').toUpperCase()}</span>`;
+            if (window.escapeSound) window.escapeSound.playPop();
+          } else {
+            const item = btn.getAttribute('data-item');
+            const icons = { linterna: '🔦', botiquin: '🩹', agua: '💧', silbato: '📢' };
+            btn.innerHTML = `<span style="font-size: 1.5rem;">${icons[item]}</span><span>${item}</span>`;
+            if (window.escapeSound) window.escapeSound.playClick();
+          }
+
+          packedCount = document.querySelectorAll('.backpack-item-btn.packed').length;
+          if (counterBadge) {
+            counterBadge.textContent = packedCount === 4 ? '¡Mochila lista 4/4! 🎉' : `Empacados: ${packedCount}/4`;
+          }
+        });
+      });
+
+      // SIMULADOR DE ALARMA DE TERREMOTO
+      const btnAlarm = document.getElementById('btnTriggerSismoAlarm');
+      const alarmStatus = document.getElementById('alarmStatusText');
+      const screenContainer = document.getElementById('appScreenContainer');
+
+      if (btnAlarm) {
+        btnAlarm.addEventListener('click', () => {
+          btnAlarm.disabled = true;
+          alarmStatus.textContent = '🔊 ¡ALERTA SÍSMICA SONANDO! ¡ZONA SEGURA!';
+          alarmStatus.style.color = '#B91C1C';
+
+          // Efecto de audio sintetizado
+          if (window.escapeSound) window.escapeSound.playAlarmPulse(3.0);
+
+          // Animación de temblor en la pantalla
+          screenContainer.classList.add('anim-earthquake');
+
+          setTimeout(() => {
+            screenContainer.classList.remove('anim-earthquake');
+            alarmStatus.textContent = '✅ Simulacro completado con calma y orden.';
+            alarmStatus.style.color = '#059669';
+            btnAlarm.disabled = false;
+          }, 3000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

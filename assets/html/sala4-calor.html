@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sala 4: La Ola de Calor | Escape room Educación</title>
+  <title>Sala 4: Olas de Calor (Accesibilidad) | Misión: Salvar la Tierra</title>
   
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -12,372 +12,215 @@
   <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <!-- Estilos propios (Estética Escolar Genially) -->
+  <!-- Estilos del Escape Room -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/animations.css">
-  <style>
-    .resource-body-full {
-      padding: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      flex: 1 !important;
-      min-height: 0 !important;
-      height: 100% !important;
-      width: 100% !important;
-      overflow: hidden !important;
-    }
-
-    .educaplay-container {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-      width: 100%;
-      height: 100%;
-      background: #FFFFFF;
-      border: 2px solid #FCD34D;
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    }
-
-    .accessibility-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 100%);
-      border-bottom: 2px solid #FDE047;
-      padding: 6px 14px;
-      gap: 8px;
-      flex-wrap: wrap;
-      flex-shrink: 0;
-    }
-
-    .accessibility-toolbar-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-hand);
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: #854D0E;
-    }
-
-    .acc-buttons {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .acc-btn {
-      background: #FFFFFF;
-      border: 1.5px solid #F59E0B;
-      border-radius: var(--radius-pill);
-      color: #92400E;
-      font-family: var(--font-hand);
-      font-size: 0.86rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.15);
-    }
-
-    .acc-btn:hover {
-      background: #FEF3C7;
-      border-color: #D97706;
-      transform: translateY(-1px);
-    }
-
-    .acc-btn.active {
-      background: #D97706;
-      color: #FFFFFF;
-      border-color: #B45309;
-      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
-    }
-
-    .btn-open-external-edu {
-      background: #2563EB;
-      border: 1.5px solid #1D4ED8;
-      color: #FFFFFF;
-      border-radius: var(--radius-pill);
-      font-family: var(--font-hand);
-      font-size: 0.86rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
-    }
-
-    .btn-open-external-edu:hover {
-      background: #1D4ED8;
-      color: #FFFFFF;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
-    }
-
-    .educaplay-frame-box {
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      min-height: clamp(420px, 60vh, 720px);
-      position: relative;
-      background: #F8FAFC;
-      overflow: hidden;
-    }
-
-    @media (min-width: 993px) {
-      .educaplay-frame-box {
-        min-height: 0;
-      }
-    }
-
-    .educaplay-frame-box iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Fondo Mágico con Auras y Elementos Animados -->
-  <div class="desk-decorations">
-    <!-- Resplandores ambientales cromáticos vivos (Rojo, Azul, Verde, Oro) -->
-    <div class="desk-ambient-auras">
-      <div class="aura-orb-gold"></div>
-      <div class="aura-orb-blue"></div>
-      <div class="aura-orb-green"></div>
-      <div class="aura-orb-red"></div>
+  <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
+  <div class="app-screen">
+    
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <div class="ambient-bg">
+      <div class="aura-blob" style="width: 320px; height: 320px; background: #FEF08A; top: -50px; right: -40px;"></div>
+      <div class="aura-blob" style="width: 300px; height: 300px; background: #FED7AA; bottom: -50px; left: -40px;"></div>
+      
+      <img src="../media/sun-sunglasses.svg" alt="Sol" class="ambient-cloud anim-float" style="top: 12%; right: 7%; width: 75px;">
+      <img src="../media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float-slow" style="bottom: 12%; left: 8%; width: 68px;">
     </div>
 
-    <!-- Hoja blanca de cuaderno escolar a la derecha -->
-    <div class="bg-tilted-sheet"></div>
-
-    <!-- Cintas Adhesivas Washi Tape de Colores Vivos -->
-    <div class="washi-tape washi-red"></div>
-    <div class="washi-tape washi-blue"></div>
-    <div class="washi-tape washi-green"></div>
-
-    <!-- Mascotas Tiernas Animadas Flotantes -->
-    <img src="../media/sun-sunglasses.svg" alt="Solecito con gafas" class="decor-sun" title="¡Protección solar e inclusión!">
-    <img src="../media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="¡Cuidemos nuestro clima!">
-    <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
-    <img src="../media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
-
-    <!-- Destellos mágicos y estrellitas en SVG vectorial (Cero parpadeo o jitter de fuentes) -->
-    <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="bottom: 22%; right: 22%; width: 24px; height: 24px; fill: #F59E0B; animation-delay: 0.5s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg class="decor-sparkle" style="top: 50%; left: 8%; width: 20px; height: 20px; fill: #DC2626; animation-delay: 1.8s;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-
-    <!-- Útiles escolares -->
-    <img src="../media/pencil.svg" alt="Lápiz escolar" class="decor-pencil">
-    <img src="../media/protractor.svg" alt="Transportador" class="decor-protractor">
-    <img src="../media/eraser.svg" alt="Borrador" class="decor-eraser">
-  </div>
-
-  <div class="escape-room-screen">
-    
     <!-- Barra Superior HUD -->
     <header class="top-hud animate__animated animate__fadeInDown">
-      <div class="mission-logo">
-        <span>☀️ Reto 4: La Ola de Calor</span>
+      <div class="hud-left">
+        <a href="mapa.html" class="hud-brand">
+          <span style="font-size: 1.3rem;">🌍</span>
+          <span>Misión: Salvar la Tierra</span>
+        </a>
       </div>
 
-      <nav class="mission-progress" aria-label="Progreso de las salas">
-        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Inicio</a>
-        <a href="historia.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Historia</a>
-        <a href="instrucciones.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Guía</a>
-        <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
-        <a href="sala2-tsunami.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 2</a>
-        <a href="sala3-terremoto.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 3</a>
-        <div class="step-badge active"><i class="fa-solid fa-sun"></i> Reto 4</div>
-      </nav>
+      <div class="hud-center">
+        <div class="hud-station-pill" style="border-color: #FBBF24; color: #B45309;">
+          <span>☀️</span>
+          <span>Parada 4: Paraíso del Calor (Olas de Calor)</span>
+        </div>
+      </div>
 
-      <div class="hud-actions">
-        <!-- Botón de Accesibilidad de Tamaño de Texto -->
-        <button class="accessibility-toggle-btn" type="button" title="Ajustar tamaño de texto (Normal / Grande / Extra Grande)" aria-label="Ajustar tamaño de texto">
+      <div class="hud-right">
+        <!-- Botón Mapa -->
+        <a href="mapa.html" class="btn-hud-nav" title="Volver al mapa">
+          <i class="fa-solid fa-map"></i>
+          <span>Mapa</span>
+        </a>
+
+        <!-- Explorador Actual -->
+        <div class="hud-user-pill">
+          <span id="hudUserAvatar">🧑‍🔬</span>
+          <span id="hudUserName">Explorador</span>
+        </div>
+
+        <!-- Accesibilidad -->
+        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
           <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag">A</span>
+          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
         </button>
 
-        <button class="sound-toggle-btn" title="Activar/Silenciar sonido" aria-label="Sonido">
+        <!-- Sonido -->
+        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
           <i class="fa-solid fa-volume-high"></i>
         </button>
       </div>
     </header>
 
-    <!-- Contenido Principal: Dos Hojas Escolares Responsivas -->
-    <main class="room-content-grid">
+    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <main class="main-stage">
       
-      <!-- Columna Izquierda: Minijuego Educaplay con Barra de Accesibilidad -->
-      <section class="paper-card resource-column animate__animated animate__fadeInLeft">
-        <div class="resource-header">
-          <span class="resource-badge" style="color: var(--btn-gold-dark);">
-            <i class="fa-solid fa-puzzle-piece" style="color: var(--btn-gold);"></i> Juego Educaplay: Clima y Calor
-          </span>
-          <span class="badge rounded-pill" style="background: #FEF3C7; color: #92400E; font-family: var(--font-hand); font-size: 0.88rem; border: 1.5px solid #FCD34D;">
-            Diseño Universal Inclusivo
-          </span>
-        </div>
+      <div class="slide-card animate__animated animate__fadeIn">
+        <div class="subslide-container">
 
-        <div class="resource-body resource-body-full">
-          <div class="educaplay-container">
+          <!-- SUB-DIAPOSITIVA 1: RECURSO EDUCATIVO (JUEGO EDUCAPLAY) -->
+          <div class="subslide-view" id="subslideResource">
             
-            <!-- Barra Superior de Herramientas de Inclusión -->
-            <div class="accessibility-toolbar">
-              <div class="accessibility-toolbar-title">
-                <i class="fa-solid fa-universal-access"></i> Herramientas de Inclusión:
+            <div class="subslide-header">
+              <div class="subslide-title">
+                <span style="font-size: 1.5rem;">🎮</span>
+                <span>Paso 1: Juega la Actividad Educativa en Educaplay</span>
               </div>
-              <div class="acc-buttons">
-                <button id="btnFontToggle" class="acc-btn" type="button" title="Aumentar tamaño de letra para facilitar la lectura">
-                  <i class="fa-solid fa-text-height"></i> Letra Grande
-                </button>
-                <button id="btnContrastToggle" class="acc-btn" type="button" title="Activar modo de alto contraste visual">
-                  <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
-                </button>
-                <button id="btnFullscreenToggle" class="acc-btn" type="button" title="Ver juego en pantalla completa">
-                  <i class="fa-solid fa-expand"></i> Pantalla Completa
-                </button>
-                <a href="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" target="_blank" rel="noopener noreferrer" class="btn-open-external-edu" title="Abrir Educaplay en pestaña completa">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir en otra pestaña
-                </a>
+              <span class="hud-station-pill" style="border-color: #FBBF24; color: #B45309; font-size: 0.85rem;">
+                <i class="fa-solid fa-universal-access"></i> Criterio: Accesibilidad
+              </span>
+            </div>
+
+            <!-- Contenedor del Juego con Barra de Accesibilidad -->
+            <div class="subslide-body">
+              <div class="educaplay-wrapper">
+                
+                <!-- Barra de Accesibilidad del Juego -->
+                <div class="acc-toolbar">
+                  <div class="acc-toolbar-title">
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span>Herramientas de Inclusión:</span>
+                  </div>
+                  <div class="acc-buttons">
+                    <button type="button" class="btn-acc" id="btnAccHighContrast" title="Activar/desactivar alto contraste">
+                      <i class="fa-solid fa-circle-half-stroke"></i>
+                      <span>Alto Contraste</span>
+                    </button>
+                    <a href="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" target="_blank" rel="noopener noreferrer" class="btn-acc" title="Abrir en ventana grande">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                      <span>Abrir en Pestaña Completa</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Marco del iframe Educaplay -->
+                <div class="educaplay-iframe-container" id="educaplayContainer">
+                  <iframe 
+                    id="educaplayFrame"
+                    src="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" 
+                    title="Juego Educativo sobre el Clima y la Tierra"
+                    loading="lazy"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+
               </div>
             </div>
 
-            <!-- Marco del Iframe Educaplay que abarca el 100% de la pantalla -->
-            <div class="educaplay-frame-box" id="educaplayWrapper">
-              <iframe 
-                id="educaplayIframe"
-                src="https://www.educaplay.com/game/5950150-las_capas_de_la_tierra.html" 
-                title="Actividad educativa sobre el calor y la atmósfera"
-                loading="lazy"
-                allow="autoplay; fullscreen"
-                allowfullscreen>
-              </iframe>
+            <!-- Pie con Botón hacia las Preguntas -->
+            <div class="subslide-footer">
+              <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+                <i class="fa-solid fa-glasses" style="color: #0284C7;"></i> Fíjate si los colores son nítidos, las letras se leen bien y no hay obstáculos para ningún compañero.
+              </div>
+
+              <button type="button" class="btn-fun btn-goto-questions anim-pulse" id="btnGoToQuestions">
+                <span>¡Ya jugué! Ir a las Preguntas</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
 
           </div>
+
+          <!-- SUB-DIAPOSITIVA 2: PREGUNTAS Y EVALUACIÓN PEDAGÓGICA (ACCESIBILIDAD) -->
+          <div class="subslide-view question-subslide" id="subslideQuestions" style="display: none;">
+            
+            <div style="width: 100%; display: flex; justify-content: flex-start; margin-bottom: 6px;">
+              <button type="button" class="btn-fun btn-fun-secondary" id="btnBackToResource" style="font-size: 0.88rem; padding: 6px 16px;">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Volver al juego</span>
+              </button>
+            </div>
+
+            <div class="question-badge">
+              <i class="fa-solid fa-universal-access"></i> Evaluación del Criterio: Accesibilidad e Inclusión
+            </div>
+
+            <!-- Enunciado de la Pregunta -->
+            <div class="question-prompt-card animate__animated animate__fadeInUp">
+              <p class="question-prompt-text">
+                ¿El juego cuenta con colores contrastados, letras legibles y un diseño que permite que todos tus compañeros de clase puedan participar y aprender juntos sin barreras?
+              </p>
+            </div>
+
+            <!-- Botones de Opción SÍ / NO -->
+            <div class="choices-row" id="choicesRow">
+              <button type="button" class="btn-choice btn-choice-yes" id="btnChoiceYes">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>SÍ</span>
+              </button>
+
+              <button type="button" class="btn-choice btn-choice-no" id="btnChoiceNo">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span>NO</span>
+              </button>
+            </div>
+
+            <!-- Tarjeta de Retroalimentación Interactiva -->
+            <div class="feedback-box" id="feedbackBox">
+              <div class="feedback-title" id="feedbackTitle"></div>
+              <p class="feedback-desc" id="feedbackDesc"></p>
+              <div id="feedbackActionContainer" style="margin-top: 6px;"></div>
+            </div>
+
+          </div>
+
         </div>
-      </section>
-
-      <!-- Columna Derecha: Preguntas Pedagógicas (Gestionadas dinámicamente por validation.js) -->
-      <section class="paper-card question-column animate__animated animate__fadeInRight">
-        <div class="question-badge">
-          <i class="fa-solid fa-universal-access"></i> Criterio Pedagógico: Accesibilidad
-        </div>
-
-        <h2 class="question-title">
-          Cargando misión y preguntas pedagógicas...
-        </h2>
-
-        <div class="question-options-box"></div>
-        <div class="direct-select-hint"></div>
-        <div class="feedback-msg"></div>
-      </section>
+      </div>
 
     </main>
 
-    <!-- Barra Inferior -->
-    <footer class="bottom-bar animate__animated animate__fadeInUp">
-      <div class="hint-pill">
-        <i class="fa-solid fa-lightbulb" style="color: var(--btn-gold-dark);"></i>
-        <span>Pista de Accesibilidad: Prueba las herramientas de inclusión en pantalla y pulsa directamente la opción correcta para tu Diploma.</span>
+    <!-- Barra Inferior de Estado -->
+    <footer class="bottom-hud">
+      <div>
+        <i class="fa-solid fa-sun" style="color: #D97706;"></i>
+        <span>Estación 4: Paraíso del Calor • Evaluación de Accesibilidad e Inclusión Digital</span>
       </div>
-      <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);">
-        <i class="fa-solid fa-heart" style="color: #EF4444;"></i> Escuela Inclusiva y Universal
+      <div>
+        <span>Misión: Salvar la Tierra 🌍</span>
       </div>
     </footer>
 
   </div>
 
-  <!-- Modal de Éxito Oficial -->
-  <div class="success-overlay">
-    <div class="success-modal-card animate__animated animate__zoomIn">
-      <div class="success-stamp-circle">
-        <i class="fa-solid fa-trophy"></i>
-      </div>
-      <h3 style="font-family: var(--font-script); font-size: 2rem; color: var(--school-green-title); margin-bottom: 0.4rem;">
-        ¡Insignia de Accesibilidad Desbloqueada!
-      </h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
-        ¡Has completado los 4 retos científicos con calificación sobresaliente! Generando tu diploma oficial...
-      </p>
-    </div>
-  </div>
-
   <!-- Scripts -->
   <script src="../js/main.js"></script>
-  <script src="../js/validation.js"></script>
+  <script src="../js/feedback.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      initRoomValidation('sala4');
+      setupRoomInteractions('sala4');
 
-      const btnFont = document.getElementById('btnFontToggle');
-      const btnContrast = document.getElementById('btnContrastToggle');
-      const btnFullscreen = document.getElementById('btnFullscreenToggle');
-      const wrapper = document.getElementById('educaplayWrapper');
+      // Botón de alto contraste local
+      const btnContrast = document.getElementById('btnAccHighContrast');
+      const container = document.getElementById('educaplayContainer');
+      let isHighContrast = false;
 
-      let bigFont = false;
-      let contrast = false;
-
-      if (btnFont) {
-        btnFont.addEventListener('click', () => {
-          bigFont = !bigFont;
-          document.body.style.fontSize = bigFont ? '1.14rem' : '1rem';
-          btnFont.classList.toggle('active', bigFont);
-          if (window.escapeSound) window.escapeSound.playPop();
-        });
-      }
-
-      if (btnContrast) {
+      if (btnContrast && container) {
         btnContrast.addEventListener('click', () => {
-          contrast = !contrast;
-          if (wrapper) {
-            wrapper.style.filter = contrast ? 'contrast(140%) brightness(95%) saturate(120%)' : 'none';
-          }
-          btnContrast.classList.toggle('active', contrast);
+          isHighContrast = !isHighContrast;
+          btnContrast.classList.toggle('active', isHighContrast);
+          container.style.filter = isHighContrast ? 'contrast(135%) brightness(95%)' : 'none';
           if (window.escapeSound) window.escapeSound.playPop();
-        });
-      }
-
-      if (btnFullscreen) {
-        btnFullscreen.addEventListener('click', () => {
-          if (!document.fullscreenElement) {
-            if (wrapper.requestFullscreen) {
-              wrapper.requestFullscreen();
-            } else if (wrapper.webkitRequestFullscreen) {
-              wrapper.webkitRequestFullscreen();
-            }
-            btnFullscreen.innerHTML = '<i class="fa-solid fa-compress"></i> Salir Pantalla Completa';
-          } else {
-            if (document.exitFullscreen) {
-              document.exitFullscreen();
-            }
-            btnFullscreen.innerHTML = '<i class="fa-solid fa-expand"></i> Pantalla Completa';
-          }
-          if (window.escapeSound) window.escapeSound.playPop();
-        });
-
-        document.addEventListener('fullscreenchange', () => {
-          if (!document.fullscreenElement) {
-            btnFullscreen.innerHTML = '<i class="fa-solid fa-expand"></i> Pantalla Completa';
-          }
         });
       }
     });

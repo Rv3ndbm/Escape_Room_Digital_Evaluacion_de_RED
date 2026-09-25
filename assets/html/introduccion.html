@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducción | Misión: Salvar la Tierra</title>
+  
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Estilos del Escape Room -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body>
+
+  <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
+  <div class="app-screen">
+    
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <div class="ambient-bg">
+      <div class="aura-blob" style="width: 300px; height: 300px; background: #E0F2FE; top: -40px; right: -40px;"></div>
+      <div class="aura-blob" style="width: 320px; height: 320px; background: #DCFCE7; bottom: -60px; left: -40px;"></div>
+      
+      <img src="../media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float" style="top: 15%; right: 6%; width: 70px;">
+      <img src="../media/sun-sunglasses.svg" alt="Sol" class="ambient-cloud anim-float-slow" style="bottom: 12%; right: 8%; width: 68px;">
+    </div>
+
+    <!-- Barra Superior HUD -->
+    <header class="top-hud animate__animated animate__fadeInDown">
+      <div class="hud-left">
+        <a href="../../index.html" class="hud-brand">
+          <span style="font-size: 1.3rem;">🌍</span>
+          <span>Misión: Salvar la Tierra</span>
+        </a>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-station-pill">
+          <i class="fa-solid fa-compass" style="color: #0284C7;"></i>
+          <span>Guía de la Misión</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Explorador Actual -->
+        <div class="hud-user-pill">
+          <span id="hudUserAvatar">🧑‍🔬</span>
+          <span id="hudUserName">Explorador</span>
+        </div>
+
+        <!-- Accesibilidad -->
+        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
+          <i class="fa-solid fa-text-height"></i>
+          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
+        </button>
+
+        <!-- Sonido -->
+        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <main class="main-stage">
+      
+      <div class="slide-card animate__animated animate__fadeIn">
+        <div class="intro-container">
+
+          <!-- Cabecera de la Introducción -->
+          <div style="text-align: center;">
+            <span class="intro-header-badge">
+              <i class="fa-solid fa-book-open"></i> Breve Instrucción de la Aventura
+            </span>
+            <h2 style="font-family: var(--font-title); font-size: clamp(1.4rem, 2.2vw, 1.85rem); color: #0284C7; margin: 4px 0 0 0;">
+              ¡Prepárate para Salvar la Tierra!
+            </h2>
+          </div>
+
+          <!-- Cuadrícula de 2 Tarjetas Limpias e Ilustradas -->
+          <div class="intro-grid">
+            
+            <div class="intro-card animate__animated animate__fadeInLeft">
+              <div class="intro-card-icon">🌋🌊🏚️☀️</div>
+              <h3 class="intro-card-title">1. ¿Qué es este Escape Room?</h3>
+              <p class="intro-card-text">
+                Viajarás por <strong>4 desastres naturales</strong> del planeta. En cada estación probarás un recurso digital genial (videos, simuladores y juegos) para comprobar si es perfecto para aprender.
+              </p>
+            </div>
+
+            <div class="intro-card animate__animated animate__fadeInRight">
+              <div class="intro-card-icon">🗺️🎯🏆</div>
+              <h3 class="intro-card-title">2. ¿Cómo avanzar y ganar?</h3>
+              <p class="intro-card-text">
+                En el <strong>Mapa de Aventura</strong> desbloquearás las estaciones una a una. Al completar las 4 paradas, ¡obtendrás el gran trofeo científico y tu diploma personalizado para imprimir!
+              </p>
+            </div>
+
+          </div>
+
+          <!-- La Regla de Oro (Destacada y Clara) -->
+          <div class="golden-rule-banner animate__animated animate__pulse anim-pulse">
+            <div class="golden-star-icon">🌟</div>
+            <div class="golden-rule-content">
+              <h4>¡La Regla de Oro del Explorador!</h4>
+              <p>
+                <strong>Primero debes explorar y usar cada recurso</strong> antes de responder las preguntas para avanzar. ¡Observa con atención, diviértete y aprende!
+              </p>
+            </div>
+          </div>
+
+          <!-- Botón de Acción Directa al Mapa -->
+          <div style="display: flex; justify-content: center; margin-top: 4px;">
+            <a href="mapa.html" class="btn-fun btn-fun-primary" id="btnGoToMap" style="font-size: 1.15rem; padding: 12px 34px;">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span>¡Ir al Mapa de la Misión!</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Barra Inferior de Estado -->
+    <footer class="bottom-hud">
+      <div>
+        <i class="fa-solid fa-circle-info" style="color: #0284C7;"></i>
+        <span>Paso 2 de la misión: Conoce las reglas y lánzate a explorar</span>
+      </div>
+      <div>
+        <span>Misión: Salvar la Tierra 🌍</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script>
+    document.getElementById('btnGoToMap').addEventListener('click', () => {
+      if (window.escapeSound) window.escapeSound.playPop();
+    });
+  </script>
+</body>
+</html>

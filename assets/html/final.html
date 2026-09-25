@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¡Diploma Oficial de Graduación! | Escape room Educación</title>
-
+  <title>¡Misión Cumplida! Trofeo y Certificado | Misión: Salvar la Tierra</title>
+  
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!-- Font Awesome 6 Icons -->
@@ -13,626 +12,231 @@
   <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <!-- Estilos propios (Estética Escolar Genially) -->
+  <!-- Estilos del Escape Room -->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/animations.css">
-
-  <style>
-    @media print {
-      body {
-        background: white !important;
-      }
-
-      .top-hud,
-      .bottom-bar,
-      .no-print,
-      .desk-decorations,
-      #seccion-registro-evidencias {
-        display: none !important;
-      }
-
-      .escape-room-screen {
-        padding: 0 !important;
-        height: auto !important;
-      }
-
-      .diploma-card {
-        box-shadow: none !important;
-        border: 4px solid #2D5A46 !important;
-      }
-    }
-
-    .diploma-card {
-      background: #FFFFFF;
-      border: 4px dashed var(--school-green-title);
-      border-radius: var(--radius-card);
-      padding: clamp(1.2rem, 2.5vh, 2rem) clamp(1.4rem, 3.5vw, 2.8rem);
-      box-shadow: 0 16px 40px rgba(45, 90, 70, 0.12);
-      position: relative;
-      max-width: 820px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .diploma-stamp {
-      position: absolute;
-      top: 15px;
-      right: 25px;
-      width: 75px;
-      height: auto;
-      transform: rotate(15deg);
-    }
-
-    .diploma-badges-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(0.6rem, 1.2vw, 1rem);
-      margin: 1rem 0;
-    }
-
-    .diploma-badge-box {
-      background: #FAF8F2;
-      border: 2px solid var(--paper-border);
-      border-radius: var(--radius-paper);
-      padding: 0.6rem 0.4rem;
-      text-align: center;
-      transition: transform 0.2s;
-    }
-
-    .diploma-badge-box:hover {
-      transform: translateY(-4px);
-    }
-  </style>
 </head>
-
 <body>
 
-  <!-- Fondo Mágico con Auras Festivas y Elementos Animados -->
-  <div class="desk-decorations">
-    <!-- Resplandores ambientales cromáticos vivos (Rojo, Azul, Verde, Oro) -->
-    <div class="desk-ambient-auras">
-      <div class="aura-orb-gold"></div>
-      <div class="aura-orb-blue"></div>
-      <div class="aura-orb-green"></div>
-      <div class="aura-orb-red"></div>
+  <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
+  <div class="app-screen">
+    
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <div class="ambient-bg">
+      <div class="aura-blob" style="width: 360px; height: 360px; background: #FEF08A; top: -60px; left: -40px;"></div>
+      <div class="aura-blob" style="width: 340px; height: 340px; background: #BAE6FD; bottom: -50px; right: -40px;"></div>
+      
+      <img src="../media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float" style="top: 10%; right: 7%; width: 75px;">
+      <img src="../media/sun-sunglasses.svg" alt="Sol" class="ambient-cloud anim-float-slow" style="bottom: 12%; left: 8%; width: 75px;">
     </div>
-
-    <!-- Hoja blanca de cuaderno escolar a la derecha -->
-    <div class="bg-tilted-sheet"></div>
-
-    <!-- Cintas Adhesivas Washi Tape de Colores Vivos -->
-    <div class="washi-tape washi-red"></div>
-    <div class="washi-tape washi-blue"></div>
-    <div class="washi-tape washi-green"></div>
-
-    <!-- Mascotas Tiernas Animadas Flotantes de Celebración -->
-    <img src="../media/sun-sunglasses.svg" alt="Solecito con gafas" class="decor-sun" title="¡Misión Cumplida!">
-    <img src="../media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="¡Tierra Salvada!">
-    <img src="../media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
-    <img src="../media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
-    <img src="../media/volcano-cute.svg" alt="Volcancito" class="decor-volcano-mini">
-
-    <!-- Destellos mágicos y estrellitas en SVG vectorial (Cero parpadeo o jitter de fuentes) -->
-    <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="bottom: 22%; right: 22%; width: 24px; height: 24px; fill: #F59E0B; animation-delay: 0.5s;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="top: 50%; left: 8%; width: 20px; height: 20px; fill: #DC2626; animation-delay: 1.8s;" viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-
-    <!-- Útiles escolares -->
-    <img src="../media/pencil.svg" alt="Lápiz escolar" class="decor-pencil">
-    <img src="../media/eraser.svg" alt="Goma" class="decor-eraser">
-    <img src="../media/protractor.svg" alt="Transportador" class="decor-protractor">
-    <img src="../media/scissors.svg" alt="Tijeras" class="decor-scissors">
-  </div>
-
-  <div class="escape-room-screen">
 
     <!-- Barra Superior HUD -->
     <header class="top-hud animate__animated animate__fadeInDown">
-      <div class="mission-logo">
-        <span id="hud-mission-title">🚨 Registro de Evidencias</span>
+      <div class="hud-left">
+        <a href="../../index.html" class="hud-brand">
+          <span style="font-size: 1.3rem;">🌍</span>
+          <span>Misión: Salvar la Tierra</span>
+        </a>
       </div>
 
-      <nav class="mission-progress" aria-label="Progreso de las salas">
-        <a href="../../index.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Inicio</a>
-        <a href="historia.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Historia</a>
-        <a href="instrucciones.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Guía</a>
-        <a href="sala1-volcan.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 1</a>
-        <a href="sala2-tsunami.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 2</a>
-        <a href="sala3-terremoto.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 3</a>
-        <a href="sala4-calor.html" class="step-badge completed"><i class="fa-solid fa-check"></i> Reto 4</a>
-        <div id="hud-badge-evidencias" class="step-badge active"><i class="fa-solid fa-clipboard-check"></i> Evidencias
+      <div class="hud-center">
+        <div class="hud-station-pill" style="border-color: #FBBF24; color: #B45309;">
+          <span>🏆</span>
+          <span>¡Gran Meta: Misión Cumplida!</span>
         </div>
-        <div id="hud-badge-diploma" class="step-badge" style="opacity: 0.55;"><i class="fa-solid fa-trophy"></i> Diploma
-        </div>
-      </nav>
+      </div>
 
-      <div class="hud-actions">
-        <!-- Botón de Accesibilidad de Tamaño de Texto -->
-        <button class="accessibility-toggle-btn" type="button"
-          title="Ajustar tamaño de texto (Normal / Grande / Extra Grande)" aria-label="Ajustar tamaño de texto">
+      <div class="hud-right">
+        <!-- Explorador Actual -->
+        <div class="hud-user-pill">
+          <span id="hudUserAvatar">🧑‍🔬</span>
+          <span id="hudUserName">Explorador</span>
+        </div>
+
+        <!-- Accesibilidad -->
+        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
           <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag">A</span>
+          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
         </button>
 
-        <button class="sound-toggle-btn" title="Activar/Silenciar sonido" aria-label="Sonido">
+        <!-- Sonido -->
+        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
           <i class="fa-solid fa-volume-high"></i>
         </button>
       </div>
     </header>
 
-    <!-- Contenido Principal: Registro de Evidencias (Fase 1) y Diploma de Graduación (Fase 2) -->
-    <main class="hero-wrapper" style="max-width: 860px; width: 100%;">
+    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <main class="main-stage">
+      
+      <div class="final-celebration-card animate__animated animate__zoomIn">
+        
+        <!-- Trofeo Dorado Brillante -->
+        <div class="trophy-hero-icon">🏆</div>
 
-      <!-- ========================================================
-           FASE 1: SECCIÓN INTERMEDIA - REGISTRO DE EVIDENCIAS
-           ======================================================== -->
-      <section id="seccion-registro-evidencias" class="evidence-mission-card animate__animated animate__fadeIn">
+        <h1 class="final-title">¡Misión Cumplida con Éxito!</h1>
 
-        <!-- Chinchetas decorativas estilo escolar -->
-        <span class="evidence-pin pin-tl" aria-hidden="true">📌</span>
-        <span class="evidence-pin pin-tr" aria-hidden="true">📌</span>
-
-        <!-- Cinta superior de Alerta de Misión -->
-        <div class="evidence-alert-ribbon">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <span>FASE FINAL: VERIFICACIÓN DE COMANDO</span>
-          <i class="fa-solid fa-satellite-dish"></i>
-        </div>
-
-        <!-- Título Destacado -->
-        <h2 class="evidence-main-title">
-          🚨 REGISTRO DE EVIDENCIAS: CÓDIGO DE ESCAPE FINAL
-        </h2>
-
-        <!-- Subtítulo motivacional para niños de 5.° de primaria -->
-        <p class="evidence-mission-lead">
-          ¡Comandante científico/a! Has llegado al último filtro de seguridad. Para validar que tu equipo evaluó
-          correctamente cada recurso y salvar el planeta Tierra, completa el formulario oficial de evidencias.
+        <!-- Mensaje Personalizado Requerido -->
+        <p class="final-congrats-text" id="finalCongratsMsg">
+          ¡Felicitaciones Explorador, has ganado el escape room y supiste identificar todo muy bien!
         </p>
 
-        <!-- Tarjeta de Instrucciones Destacadas (Caja de Alerta / Importante) -->
-        <div class="mission-instructions-box">
-          <div class="instructions-header">
-            <i class="fa-solid fa-clipboard-list"></i>
-            <span>INSTRUCCIONES DE LA MISIÓN (SIGUE ESTOS PASOS):</span>
+        <!-- Colección de Sellos / Medallas de los 4 Criterios Conquistados -->
+        <div class="badges-earned-row">
+          <div class="badge-earned-pill" style="border-color: #F87171; color: #DC2626; background: #FEF2F2;">
+            <i class="fa-solid fa-star"></i>
+            <span>Calidad</span>
           </div>
-
-          <ol class="mission-steps-list">
-            <li class="step-item">
-              <span class="evidence-step-num step-1">1</span>
-              <div class="step-content">
-                <strong>Abre el formulario:</strong> Haz clic en el botón de abajo para abrir el Google Forms en una
-                pestaña nueva.
-              </div>
-            </li>
-            <li class="step-item">
-              <span class="evidence-step-num step-2">2</span>
-              <div class="step-content">
-                <strong>Responde las preguntas:</strong> Completa las preguntas finales sobre los recursos digitales
-                analizados en las 4 salas.
-              </div>
-            </li>
-            <li class="step-item step-alert-highlight">
-              <span class="evidence-step-num step-3">3</span>
-              <div class="step-content">
-                <strong>¡MUCHA ATENCIÓN!</strong> En la última pantalla del formulario (al darle <em>'Enviar'</em>)
-                aparecerá tu <strong>CÓDIGO FINAL DE ESCAPE</strong>. <u>Cópialo o anótalo muy bien en un papel o en tu
-                  libreta</u>.
-              </div>
-            </li>
-            <li class="step-item">
-              <span class="evidence-step-num step-4">4</span>
-              <div class="step-content">
-                <strong>Vuelve y desbloquea:</strong> Vuelve a esta pestaña e introduce ese código para validar tu
-                misión y generar tu diploma oficial.
-              </div>
-            </li>
-          </ol>
-        </div>
-
-        <!-- Botón Principal: Abrir Google Forms -->
-        <div class="forms-action-wrapper">
-          <!-- ====================================================================
-               ENLACE AL FORMULARIO DE GOOGLE FORMS:
-               Reemplaza la URL dentro de href="..." por el enlace de tu documento o 
-               formulario real de Google Docs / Google Forms.
-               ==================================================================== -->
-          <a href="https://docs.google.com/forms/d/e/TU_ENLACE_DE_FORMULARIO_AQUI/viewform" id="btnAbrirFormulario"
-            target="_blank" rel="noopener noreferrer" class="btn-open-forms"
-            title="Abrir el formulario de evaluación en una pestaña nueva">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            <span>ABRIR FORMULARIO DE EVALUACIÓN</span>
-            <i class="fa-solid fa-clipboard-check"></i>
-          </a>
-          <span class="forms-helper-text">
-            <i class="fa-solid fa-info-circle"></i> Se abrirá de forma segura en una pestaña nueva de tu navegador.
-          </span>
-        </div>
-
-        <!-- Contenedor de Validación de Código de Escape -->
-        <div class="code-unlock-container" id="contenedorValidacion">
-          <div class="unlock-header">
-            <i class="fa-solid fa-key" style="color: var(--pure-gold, #F59E0B);"></i>
-            <span>Introduce tu Código de Escape recibido al enviar el formulario:</span>
+          <div class="badge-earned-pill" style="border-color: #38BDF8; color: #0284C7; background: #F0F9FF;">
+            <i class="fa-solid fa-star"></i>
+            <span>Pertinencia</span>
           </div>
-
-          <div class="unlock-form-row">
-            <div class="input-field-wrapper">
-              <i class="fa-solid fa-terminal input-icon"></i>
-              <input type="text" id="inputCodigoEscape" class="final-passcode-input" placeholder="Ej: ESCAPECODE2026"
-                autocomplete="off" spellcheck="false" maxlength="25" aria-label="Código de escape final">
-            </div>
-
-            <button type="button" id="btnValidarCodigo" class="unlock-btn btn-validate-escape">
-              <i class="fa-solid fa-lock-open"></i>
-              <span>VALIDAR CÓDIGO Y OBTENER CERTIFICADO</span>
-            </button>
+          <div class="badge-earned-pill" style="border-color: #A78BFA; color: #6D28D9; background: #F5F3FF;">
+            <i class="fa-solid fa-star"></i>
+            <span>Usabilidad</span>
           </div>
-
-          <!-- Mensaje de Feedback Visual (Éxito / Error) -->
-          <div id="mensajeFeedback" class="feedback-alert-box" style="display: none;" role="alert" aria-live="polite">
-            <i id="feedbackIcon" class="fa-solid fa-triangle-exclamation"></i>
-            <span id="feedbackTexto"></span>
+          <div class="badge-earned-pill" style="border-color: #FBBF24; color: #B45309; background: #FFFBEB;">
+            <i class="fa-solid fa-star"></i>
+            <span>Accesibilidad</span>
           </div>
         </div>
 
-      </section>
+        <p style="font-size: 0.98rem; color: var(--text-muted); max-width: 650px; margin: 4px auto;">
+          Has evaluado videos, simuladores y juegos educativos como un verdadero especialista en tecnología educativa. ¡La Tierra y la ciencia están a salvo!
+        </p>
 
-      <!-- ========================================================
-           FASE 2: DIPLOMA OFICIAL (BLOQUEADO HASTA VALIDAR CÓDIGO)
-           ======================================================== -->
-      <div id="seccion-certificado" style="display: none; width: 100%;">
-        <div class="diploma-card">
+        <!-- Dos Botones de Acción Solicitados -->
+        <div class="final-buttons-row">
+          
+          <!-- Botón 1: Imprimir Certificado Final -->
+          <button type="button" class="btn-fun btn-fun-warning" id="btnPrintDiploma" style="font-size: 1.15rem; padding: 12px 28px;">
+            <i class="fa-solid fa-print"></i>
+            <span>Imprimir Certificado Final</span>
+          </button>
 
-          <!-- Sello A+ en la esquina del diploma -->
-          <img src="../media/stamp-a-plus.svg" alt="Sello A+"
-            class="diploma-stamp animate__animated animate__pulse animate__infinite">
-
-          <h1
-            style="font-family: var(--font-script); font-size: clamp(2rem, 3.8vw, 2.8rem); color: var(--school-green-title); margin-bottom: 0.2rem; font-weight: 700;">
-            DIPLOMA DE HONOR ESCOLAR
-          </h1>
-
-          <p
-            style="font-family: var(--font-hand); font-size: 1.25rem; color: var(--text-muted); margin-bottom: 0.6rem;">
-            Se certifica con honores que el/la estudiante:
-          </p>
-
-          <!-- Nombre del Alumno -->
-          <div
-            style="background: #FFFBEB; border: 2.5px dashed var(--btn-gold); border-radius: var(--radius-paper); padding: 0.4rem 1.6rem; display: inline-block; margin-bottom: 0.8rem;">
-            <h2 id="explorer-name-target"
-              style="font-family: var(--font-script); font-size: clamp(1.8rem, 3vw, 2.4rem); color: #B45309; margin: 0; font-weight: 700;">
-              Explorador Científico
-            </h2>
-          </div>
-
-          <p
-            style="font-size: clamp(0.9rem, 1.1vw, 1.05rem); color: var(--text-main); line-height: 1.35; max-width: 620px; margin: 0 auto 0.8rem;">
-            Ha superado los 4 retos del <strong>Escape room Educación</strong> y completado el registro oficial de
-            evidencias, demostrando un dominio sobresaliente en la evaluación pedagógica de recursos digitales:
-          </p>
-
-          <!-- Las 4 Insignias Escolares Ganadas con Nuevos SVGs -->
-          <div class="diploma-badges-grid">
-            <div class="diploma-badge-box">
-              <img src="../media/volcano-cute.svg" alt="Volcán"
-                style="width: 44px; height: 44px; display: block; margin: 0 auto 4px;">
-              <strong style="font-family: var(--font-hand); font-size: 1.1rem; color: #EA580C;">Pertinencia y
-                Calidad</strong>
-              <div style="font-size: 0.78rem; color: var(--text-muted);">Video del Volcán</div>
-            </div>
-
-            <div class="diploma-badge-box">
-              <img src="../media/wave-cute.svg" alt="Ola"
-                style="width: 44px; height: 44px; display: block; margin: 0 auto 4px;">
-              <strong
-                style="font-family: var(--font-hand); font-size: 1.1rem; color: var(--pencil-blue);">Interactividad</strong>
-              <div style="font-size: 0.78rem; color: var(--text-muted);">Simulador Marino</div>
-            </div>
-
-            <div class="diploma-badge-box">
-              <span style="font-size: 2rem; display: block;">📱</span>
-              <strong style="font-family: var(--font-hand); font-size: 1.1rem; color: #DC2626;">Calidad y
-                Usabilidad</strong>
-              <div style="font-size: 0.78rem; color: var(--text-muted);">App de Terremotos</div>
-            </div>
-
-            <div class="diploma-badge-box">
-              <span style="font-size: 2rem; display: block;">☀️</span>
-              <strong style="font-family: var(--font-hand); font-size: 1.1rem; color: #D97706;">Pensamiento
-                Crítico</strong>
-              <div style="font-size: 0.78rem; color: var(--text-muted);">Fuentes y Confiabilidad</div>
-            </div>
-          </div>
-
-          <!-- Botones de Acción -->
-          <div class="no-print"
-            style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
-            <button onclick="window.print()" class="unlock-btn"
-              style="background: var(--pencil-blue); box-shadow: 0 4px 0 var(--pencil-blue-dark); color: white;">
-              <i class="fa-solid fa-print"></i>
-              <span>Imprimir Diploma</span>
-            </button>
-
-            <button onclick="window.location.href='../../index.html'" class="unlock-btn">
-              <i class="fa-solid fa-rotate-left"></i>
-              <span>Volver a Jugar</span>
-            </button>
-          </div>
+          <!-- Botón 2: Empezar de nuevo -->
+          <button type="button" class="btn-fun btn-fun-secondary" id="btnRestartAdventure" style="font-size: 1.15rem; padding: 12px 28px;">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Empezar de nuevo</span>
+          </button>
 
         </div>
+
       </div>
 
     </main>
 
-    <!-- Barra Inferior -->
-    <footer class="bottom-bar animate__animated animate__fadeInUp">
-      <div class="hint-pill">
-        <i class="fa-solid fa-shield-halved" id="footer-hint-icon" style="color: var(--pure-gold);"></i>
-        <span id="footer-hint-text">Pista de Misión: Abre el formulario, anota el código final de escape al enviar e
-          introdúcelo para desbloquear tu diploma.</span>
+    <!-- Barra Inferior de Estado -->
+    <footer class="bottom-hud">
+      <div>
+        <i class="fa-solid fa-medal" style="color: #F59E0B;"></i>
+        <span>Meta Alcanzada • Especialización en TIC y Evaluación de Recursos Educativos Digitales</span>
       </div>
-      <div style="font-family: var(--font-hand); font-size: 0.95rem; color: var(--text-muted);" id="footer-badge-text">
-        <i class="fa-solid fa-key"></i> Validación de Seguridad 5.º Primaria
+      <div>
+        <span>Centro de Investigación Escolar 🌍</span>
       </div>
     </footer>
 
+  </div>
+
+  <!-- DIPLOMA IMPRIMIBLE OFICIAL (Visible exclusivamente al imprimir con Ctrl+P o al pulsar el botón) -->
+  <div id="printableDiploma">
+    <div class="diploma-border-frame">
+      
+      <div class="diploma-header">
+        <span style="font-size: 3.5rem;">🌍 🏆 🎓</span>
+        <h1>DIPLOMA DE HONOR CIENTÍFICO</h1>
+        <h2>MISIÓN: SALVAR LA TIERRA • EVALUACIÓN DE RED</h2>
+      </div>
+
+      <div style="margin: 10px 0;">
+        <p style="font-size: 1.2rem; color: #64748B; margin: 0;">Se confiere con orgullo y distinción a:</p>
+        <div class="diploma-student-name" id="diplomaStudentName">Explorador Científico</div>
+      </div>
+
+      <p class="diploma-statement">
+        Por haber completado con excelencia las 4 estaciones del Escape Room Digital, demostrando dominio en la evaluación de Recursos Educativos Digitales bajo los criterios de <strong>Calidad</strong>, <strong>Pertinencia</strong>, <strong>Usabilidad</strong> y <strong>Accesibilidad Universal</strong>.
+      </p>
+
+      <!-- Sellos oficiales de los 4 criterios -->
+      <div class="diploma-seals-row">
+        <div class="diploma-seal-item" style="border-color: #DC2626; color: #DC2626;">
+          <span style="font-size: 1.5rem;">🌋</span>
+          <span>CALIDAD</span>
+        </div>
+        <div class="diploma-seal-item" style="border-color: #0284C7; color: #0284C7;">
+          <span style="font-size: 1.5rem;">🌊</span>
+          <span>PERTINENCIA</span>
+        </div>
+        <div class="diploma-seal-item" style="border-color: #6D28D9; color: #6D28D9;">
+          <span style="font-size: 1.5rem;">📱</span>
+          <span>USABILIDAD</span>
+        </div>
+        <div class="diploma-seal-item" style="border-color: #D97706; color: #D97706;">
+          <span style="font-size: 1.5rem;">☀️</span>
+          <span>ACCESIBILIDAD</span>
+        </div>
+      </div>
+
+      <div class="diploma-footer">
+        <div>
+          <p style="margin: 0; font-weight: bold;" id="diplomaDateText">Fecha: 2026</p>
+          <small>Especialización Docente en TIC</small>
+        </div>
+        <div style="border-top: 1.5px solid #1E293B; width: 220px; padding-top: 4px; text-align: center;">
+          <small style="font-weight: bold;">Docente Evaluador / Centro TIC</small>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- Scripts -->
   <script src="../js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. CONFIGURACIÓN DEL CÓDIGO FINAL DE ESCAPE
-      const CODIGO_FINAL_CORRECTO = 'ESCAPECODE2026';
-      const STORAGE_KEY_VALIDADO = 'escape_final_unlocked';
+      const explorerName = window.EscapeState ? window.EscapeState.getName() : 'Explorador';
+      const congratsEl = document.getElementById('finalCongratsMsg');
+      const diplomaNameEl = document.getElementById('diplomaStudentName');
+      const diplomaDateEl = document.getElementById('diplomaDateText');
 
-      // 2. REFERENCIAS AL DOM
-      const seccionEvidencias = document.getElementById('seccion-registro-evidencias');
-      const seccionCertificado = document.getElementById('seccion-certificado');
-      const inputCodigo = document.getElementById('inputCodigoEscape');
-      const btnValidar = document.getElementById('btnValidarCodigo');
-      const btnAbrirForms = document.getElementById('btnAbrirFormulario');
-      const contenedorValidacion = document.getElementById('contenedorValidacion');
-      const mensajeFeedback = document.getElementById('mensajeFeedback');
-      const feedbackIcon = document.getElementById('feedbackIcon');
-      const feedbackTexto = document.getElementById('feedbackTexto');
-      const explorerTarget = document.getElementById('explorer-name-target');
-      const hudTitle = document.getElementById('hud-mission-title');
-      const hudBadgeEvidencias = document.getElementById('hud-badge-evidencias');
-      const hudBadgeDiploma = document.getElementById('hud-badge-diploma');
-      const footerHintIcon = document.getElementById('footer-hint-icon');
-      const footerHintText = document.getElementById('footer-hint-text');
-      const footerBadgeText = document.getElementById('footer-badge-text');
-
-      // Nombre del alumno en el diploma si existe en localStorage
-      if (explorerTarget) {
-        explorerTarget.textContent = localStorage.getItem('explorer_name') || 'Explorador Científico';
+      // Personalizar mensaje requerido:
+      // "¡Felicitaciones [Nombre], has ganado el escape room y supiste identificar todo muy bien!"
+      if (congratsEl) {
+        congratsEl.textContent = `¡Felicitaciones ${explorerName}, has ganado el escape room y supiste identificar todo muy bien!`;
+      }
+      if (diplomaNameEl) {
+        diplomaNameEl.textContent = explorerName;
+      }
+      if (diplomaDateEl) {
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        diplomaDateEl.textContent = `Fecha: ${today.toLocaleDateString('es-ES', options)}`;
       }
 
-      // 3. COMPROBAR SI YA HABÍA SIDO VALIDADO PREVIAMENTE
-      const yaDesbloqueado = sessionStorage.getItem(STORAGE_KEY_VALIDADO) === 'true' ||
-        localStorage.getItem(STORAGE_KEY_VALIDADO) === 'true';
-
-      if (yaDesbloqueado) {
-        activarPantallaDiploma(false);
-      }
-
-      // 4. MICRO-INTERACCIÓN: AL ABRIR FORMULARIO RESALTAR CONTENEDOR DE CÓDIGO
-      if (btnAbrirForms) {
-        btnAbrirForms.addEventListener('click', () => {
-          if (contenedorValidacion) {
-            contenedorValidacion.classList.add('active-focus');
-          }
-          mostrarFeedback('info', '¡Formulario abierto! Recuerda anotar el código final que verás tras presionar "Enviar".');
+      // Celebración automática al cargar la pantalla final
+      if (window.escapeSound) window.escapeSound.playSuccess();
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.5 }
         });
       }
 
-      // 5. EVENTOS DE VALIDACIÓN (Clic y tecla Enter)
-      if (btnValidar) {
-        btnValidar.addEventListener('click', procesarValidacion);
-      }
+      // Botón 1: Imprimir Certificado Final
+      document.getElementById('btnPrintDiploma').addEventListener('click', () => {
+        if (window.escapeSound) window.escapeSound.playPop();
+        window.print();
+      });
 
-      if (inputCodigo) {
-        inputCodigo.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            procesarValidacion();
-          }
-        });
-
-        // Limpiar errores visuales al escribir
-        inputCodigo.addEventListener('input', () => {
-          inputCodigo.classList.remove('is-invalid');
-          if (mensajeFeedback && mensajeFeedback.classList.contains('error')) {
-            mensajeFeedback.style.display = 'none';
-          }
-        });
-      }
-
-      // 6. FUNCIÓN DE VALIDACIÓN DEL CÓDIGO
-      function procesarValidacion() {
-        if (!inputCodigo) return;
-
-        // Normalización estricta: recortar espacios en blanco y convertir a mayúsculas
-        const valorIngresado = inputCodigo.value.trim().toUpperCase();
-        const codigoEsperado = CODIGO_FINAL_CORRECTO.trim().toUpperCase();
-
-        if (!valorIngresado) {
-          inputCodigo.classList.add('is-invalid');
-          mostrarFeedback('error', 'Por favor, escribe el código de escape recibido al enviar el formulario.');
-          inputCodigo.focus();
-          return;
-        }
-
-        // VALIDACIÓN CORRECTA
-        if (valorIngresado === codigoEsperado) {
-          inputCodigo.classList.remove('is-invalid');
-          inputCodigo.classList.add('is-valid');
-          inputCodigo.disabled = true;
-          btnValidar.disabled = true;
-
-          // Guardar estado desbloqueado
-          sessionStorage.setItem(STORAGE_KEY_VALIDADO, 'true');
-          localStorage.setItem(STORAGE_KEY_VALIDADO, 'true');
-
-          // Sonido de clave secreta desbloqueada
-          if (window.escapeSound && typeof window.escapeSound.playSecretUnlock === 'function') {
-            window.escapeSound.playSecretUnlock();
-          }
-
-          mostrarFeedback('success', '¡Código verificado con éxito! Generando tu Diploma Oficial de Graduación...');
-
-          // Transición hacia el diploma
-          setTimeout(() => {
-            activarPantallaDiploma(true);
-          }, 1200);
-
-        } else {
-          // VALIDACIÓN INCORRECTA
-          inputCodigo.classList.add('is-invalid');
-
-          if (window.escapeSound && typeof window.escapeSound.playError === 'function') {
-            window.escapeSound.playError();
-          }
-
-          mostrarFeedback('error', 'Código incorrecto. Revisa la pantalla final del formulario e inténtalo de nuevo.');
-          inputCodigo.focus();
-          inputCodigo.select();
-        }
-      }
-
-      // 7. MOSTRAR MENSAJE VISUAL DE FEEDBACK
-      function mostrarFeedback(tipo, texto) {
-        if (!mensajeFeedback || !feedbackTexto || !feedbackIcon) return;
-
-        mensajeFeedback.className = 'feedback-alert-box ' + tipo;
-        feedbackTexto.textContent = texto;
-
-        if (tipo === 'success') {
-          feedbackIcon.className = 'fa-solid fa-circle-check';
-        } else if (tipo === 'error') {
-          feedbackIcon.className = 'fa-solid fa-triangle-exclamation';
-        } else {
-          feedbackIcon.className = 'fa-solid fa-circle-info';
-        }
-
-        mensajeFeedback.style.display = 'inline-flex';
-      }
-
-      // 8. TRANSICIÓN Y ACTIVACIÓN DEL DIPLOMA
-      function activarPantallaDiploma(conCelebracion = true) {
-        // Ocultar sección de evidencias
-        if (seccionEvidencias) {
-          if (conCelebracion) {
-            seccionEvidencias.classList.remove('animate__fadeIn');
-            seccionEvidencias.classList.add('animate__fadeOut');
-            setTimeout(() => {
-              seccionEvidencias.style.display = 'none';
-              revelarDiploma(conCelebracion);
-            }, 350);
-          } else {
-            seccionEvidencias.style.display = 'none';
-            revelarDiploma(false);
-          }
-        } else {
-          revelarDiploma(conCelebracion);
-        }
-      }
-
-      function revelarDiploma(conEfectos) {
-        if (seccionCertificado) {
-          seccionCertificado.style.display = 'block';
-          if (conEfectos) {
-            seccionCertificado.classList.add('animate__animated', 'animate__zoomIn');
-          }
-        }
-
-        // Actualizar HUD
-        if (hudTitle) hudTitle.textContent = '🏆 Graduación Científica';
-        if (hudBadgeEvidencias) {
-          hudBadgeEvidencias.classList.remove('active');
-          hudBadgeEvidencias.classList.add('completed');
-          hudBadgeEvidencias.innerHTML = '<i class="fa-solid fa-check"></i> Evidencias';
-        }
-        if (hudBadgeDiploma) {
-          hudBadgeDiploma.classList.add('active');
-          hudBadgeDiploma.style.opacity = '1';
-        }
-
-        // Actualizar Footer
-        if (footerHintIcon) {
-          footerHintIcon.className = 'fa-solid fa-star';
-          footerHintIcon.style.color = 'var(--btn-gold, #F2B705)';
-        }
-        if (footerHintText) {
-          footerHintText.textContent = '¡Enhorabuena! Has salvado la Tierra y demostrado ser un auténtico evaluador educativo.';
-        }
-        if (footerBadgeText) {
-          footerBadgeText.innerHTML = '<i class="fa-solid fa-medal"></i> Certificado de Honor 4.º Primaria';
-        }
-
-        // Celebración sonora y confeti
-        if (conEfectos) {
-          if (window.escapeSound && typeof window.escapeSound.playSuccess === 'function') {
-            window.escapeSound.playSuccess();
-          }
-
-          if (typeof confetti === 'function') {
-            lanzarConfettiGraduacion();
-          }
-        }
-      }
-
-      // Función de confeti continuo
-      function lanzarConfettiGraduacion() {
-        const duration = 3.5 * 1000;
-        const end = Date.now() + duration;
-
-        (function frame() {
-          confetti({
-            particleCount: 7,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#2D5A46', '#F2B705', '#3B82F6', '#EA580C', '#16A34A', '#F472B6']
-          });
-          confetti({
-            particleCount: 7,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#2D5A46', '#F2B705', '#3B82F6', '#EA580C', '#16A34A', '#F472B6']
-          });
-
-          if (Date.now() < end) {
-            requestAnimationFrame(frame);
-          }
-        }());
-      }
+      // Botón 2: Empezar de nuevo
+      document.getElementById('btnRestartAdventure').addEventListener('click', () => {
+        if (window.escapeSound) window.escapeSound.playPop();
+        window.EscapeState.resetAll();
+        window.location.href = '../../index.html';
+      });
     });
   </script>
 </body>
-
 </html>

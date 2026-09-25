@@ -1,351 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escape room: Misión Salvar la Tierra | Educación Primaria</title>
-
+  <title>Misión: Salvar la Tierra | Escape Room Digital Infantil</title>
+  
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Estilos propios (Estética Escolar Genially Limpia y Fiel) -->
+  
+  <!-- Estilos del Escape Room -->
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/animations.css">
 </head>
-
 <body>
 
-  <!-- Elementos de Papelería Escolar y Fondo Mágico Infantil -->
-  <div class="desk-decorations">
-    <!-- Resplandores ambientales cromáticos vivos (Rojo, Azul, Verde, Oro) -->
-    <div class="desk-ambient-auras">
-      <div class="aura-orb-gold"></div>
-      <div class="aura-orb-blue"></div>
-      <div class="aura-orb-green"></div>
-      <div class="aura-orb-red"></div>
+  <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
+  <div class="app-screen">
+    
+    <!-- Elementos Decorativos Flotantes Pastel de Fondo -->
+    <div class="ambient-bg">
+      <div class="aura-blob" style="width: 320px; height: 320px; background: #BAE6FD; top: -50px; left: -50px;"></div>
+      <div class="aura-blob" style="width: 350px; height: 350px; background: #FEF08A; bottom: -80px; right: -50px;"></div>
+      <div class="aura-blob" style="width: 260px; height: 260px; background: #BBF7D0; top: 30%; right: 10%;"></div>
+
+      <!-- Mascotas Tiernas Animadas Flotantes -->
+      <img src="assets/media/sun-sunglasses.svg" alt="Sol" class="ambient-cloud anim-float" style="top: 12%; right: 8%; width: 75px;">
+      <img src="assets/media/earth-planet.svg" alt="Tierra" class="ambient-cloud anim-float-slow" style="bottom: 12%; left: 7%; width: 78px;">
+      <img src="assets/media/cloud-thunder.svg" alt="Nube" class="ambient-cloud anim-float" style="top: 20%; left: 10%; width: 68px;">
+      <img src="assets/media/tornado-cute.svg" alt="Tornado" class="ambient-cloud anim-float-slow" style="bottom: 16%; right: 12%; width: 64px;">
     </div>
 
-    <!-- Hoja blanca de cuaderno escolar a la derecha con margen rojo y rayas azules -->
-    <div class="bg-tilted-sheet"></div>
-
-    <!-- Cintas Adhesivas Washi Tape de Colores Vivos -->
-    <div class="washi-tape washi-red" title="Cinta roja"></div>
-    <div class="washi-tape washi-blue" title="Cinta azul"></div>
-    <div class="washi-tape washi-green" title="Cinta verde"></div>
-    <div class="washi-tape washi-gold" title="Cinta dorada"></div>
-
-    <!-- Stickers Científicos Escolares de Alto Impacto sobre la Hoja Escolar (Vectoriales en SVG puro, CERO Parpadeo) -->
-    <!-- Sticker 1: Cohete Espacial ¡Despegue! -->
-    <div class="science-sticker sticker-rocket" title="¡Despegue de la Aventura Científica!">
-      <svg viewBox="0 0 80 80" class="sticker-svg">
-        <defs>
-          <linearGradient id="rocketBodyGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#EF4444" />
-            <stop offset="100%" stop-color="#B91C1C" />
-          </linearGradient>
-          <linearGradient id="rocketFlameGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FDE047" />
-            <stop offset="100%" stop-color="#EA580C" />
-          </linearGradient>
-        </defs>
-        <!-- Borde blanco de pegatina escolar -->
-        <path d="M40 8 C40 8 58 24 58 48 C58 54 54 58 48 58 L32 58 C26 58 22 54 22 48 C22 24 40 8 40 8 Z" fill="#FFFFFF"
-          stroke="#F1F5F9" stroke-width="4" />
-        <!-- Cuerpo del Cohete -->
-        <path d="M40 10 C40 10 55 25 55 46 L25 46 C25 25 40 10 40 10 Z" fill="url(#rocketBodyGrad)" />
-        <!-- Ventanilla -->
-        <circle cx="40" cy="28" r="7" fill="#BAE6FD" stroke="#FFFFFF" stroke-width="2" />
-        <circle cx="38" cy="26" r="2.5" fill="#FFFFFF" />
-        <!-- Alerones -->
-        <path d="M25 42 L16 52 C15 54 18 56 22 54 L25 48 Z" fill="#3B82F6" />
-        <path d="M55 42 L64 52 C65 54 62 56 58 54 L55 48 Z" fill="#3B82F6" />
-        <!-- Llama propulsora -->
-        <path d="M34 58 Q40 76 40 76 Q40 76 46 58 Z" fill="url(#rocketFlameGrad)" />
-        <path d="M37 58 Q40 68 40 68 Q40 68 43 58 Z" fill="#FEF08A" />
-      </svg>
-      <span class="sticker-badge badge-red">🚀 ¡Despegue!</span>
-    </div>
-
-    <!-- Sticker 2: Matraz de Laboratorio Químico -->
-    <div class="science-sticker sticker-flask" title="Laboratorio de Ciencias">
-      <svg viewBox="0 0 80 80" class="sticker-svg">
-        <defs>
-          <linearGradient id="flaskLiquidGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#34D399" />
-            <stop offset="100%" stop-color="#059669" />
-          </linearGradient>
-        </defs>
-        <!-- Borde de pegatina -->
-        <path d="M33 10 L47 10 L47 28 L62 59 C65 65 61 70 54 70 L26 70 C19 70 15 65 18 59 L33 28 Z" fill="#FFFFFF"
-          stroke="#E2E8F0" stroke-width="4" />
-        <!-- Matraz de vidrio -->
-        <path d="M35 12 L45 12 L45 28 L60 60 C62 64 59 68 54 68 L26 68 C21 68 18 64 20 60 L35 28 Z" fill="#F0FDF4"
-          stroke="#059669" stroke-width="3" stroke-linejoin="round" />
-        <!-- Líquido químico burbujeante -->
-        <path d="M23 58 L30 44 Q40 40 50 44 L57 58 C58 61 56 65 52 65 L28 65 C24 65 22 61 23 58 Z"
-          fill="url(#flaskLiquidGrad)" />
-        <!-- Burbujas -->
-        <circle cx="34" cy="54" r="3.5" fill="#FFFFFF" opacity="0.85" />
-        <circle cx="44" cy="50" r="2.5" fill="#FFFFFF" opacity="0.85" />
-        <circle cx="40" cy="38" r="3" fill="#34D399" opacity="0.9" />
-        <circle cx="43" cy="24" r="2" fill="#34D399" opacity="0.7" />
-        <!-- Marcas de medición -->
-        <line x1="47" y1="56" x2="52" y2="56" stroke="#FFFFFF" stroke-width="2" />
-        <line x1="45" y1="48" x2="49" y2="48" stroke="#FFFFFF" stroke-width="2" />
-      </svg>
-      <span class="sticker-badge badge-green">🧪 Laboratorio</span>
-    </div>
-
-    <!-- Sticker 3: Átomo Científico y Cuántico -->
-    <div class="science-sticker sticker-atom" title="Ciencia y Física">
-      <svg viewBox="0 0 80 80" class="sticker-svg atom-spinning">
-        <ellipse cx="40" cy="40" rx="34" ry="12" fill="none" stroke="#3B82F6" stroke-width="2.8"
-          transform="rotate(30 40 40)" />
-        <ellipse cx="40" cy="40" rx="34" ry="12" fill="none" stroke="#8B5CF6" stroke-width="2.8"
-          transform="rotate(-30 40 40)" />
-        <ellipse cx="40" cy="40" rx="34" ry="12" fill="none" stroke="#06B6D4" stroke-width="2.8"
-          transform="rotate(90 40 40)" />
-        <circle cx="40" cy="40" r="7.5" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2" />
-        <circle cx="15" cy="25" r="3.5" fill="#3B82F6" stroke="#FFFFFF" stroke-width="1.2" />
-        <circle cx="65" cy="25" r="3.5" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1.2" />
-        <circle cx="40" cy="74" r="3.5" fill="#06B6D4" stroke="#FFFFFF" stroke-width="1.2" />
-      </svg>
-      <span class="sticker-badge badge-blue">⚛️ Ciencia</span>
-    </div>
-
-    <!-- Sticker 4: Arcoíris Meteorológico -->
-    <div class="science-sticker sticker-rainbow" title="Meteorología Escolar">
-      <svg viewBox="0 0 82 52" class="sticker-svg">
-        <path d="M10 46 A31 31 0 0 1 72 46" fill="none" stroke="#EF4444" stroke-width="5" stroke-linecap="round" />
-        <path d="M16 46 A25 25 0 0 1 66 46" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round" />
-        <path d="M22 46 A19 19 0 0 1 60 46" fill="none" stroke="#10B981" stroke-width="5" stroke-linecap="round" />
-        <path d="M28 46 A13 13 0 0 1 54 46" fill="none" stroke="#3B82F6" stroke-width="5" stroke-linecap="round" />
-        <path d="M34 46 A7 7 0 0 1 48 46" fill="none" stroke="#8B5CF6" stroke-width="5" stroke-linecap="round" />
-      </svg>
-    </div>
-
-    <!-- Post-It de Cuaderno Escolar Enriquecido con Checklist de Misión -->
-    <div class="sheet-postit">
-      <div class="postit-pin">📌</div>
-      <div class="postit-header">¡Misión: Salvar la Tierra!</div>
-      <ul class="postit-checklist">
-        <li><span>🌋</span> Reto 1: Volcán</li>
-        <li><span>🌊</span> Reto 2: Tsunami</li>
-        <li><span>🏚️</span> Reto 3: Terremoto</li>
-        <li><span>☀️</span> Reto 4: Ola de Calor</li>
-      </ul>
-    </div>
-
-    <!-- Salpicaduras de Pintura Artística Escolar (Rojo puro, Azul vivo, Verde) -->
-    <div class="paint-splat paint-splat-red splat-pulsing" title="Mancha roja pura">
-      <svg viewBox="0 0 100 100" width="100%" height="100%">
-        <path
-          d="M50,15 C65,10 75,25 80,40 C85,55 92,60 85,75 C78,90 60,85 45,90 C30,95 15,85 12,70 C9,55 18,45 25,30 C32,15 35,20 50,15 Z"
-          fill="#EF4444" />
-      </svg>
-    </div>
-    <div class="paint-splat paint-splat-blue splat-pulsing" style="animation-delay: 1.5s;" title="Mancha azul viva">
-      <svg viewBox="0 0 100 100" width="100%" height="100%">
-        <path
-          d="M45,18 C62,12 80,22 84,38 C88,54 75,70 80,82 C85,94 65,92 50,88 C35,84 20,90 14,76 C8,62 14,48 22,34 C30,20 28,24 45,18 Z"
-          fill="#2563EB" />
-      </svg>
-    </div>
-    <div class="paint-splat paint-splat-green splat-pulsing" style="animation-delay: 2.8s;"
-      title="Mancha verde esmeralda">
-      <svg viewBox="0 0 100 100" width="100%" height="100%">
-        <path
-          d="M52,14 C68,16 78,28 82,42 C86,56 94,72 82,84 C70,96 52,86 38,88 C24,90 12,78 14,64 C16,50 24,42 28,28 C32,14 36,12 52,14 Z"
-          fill="#10B981" />
-      </svg>
-    </div>
-
-    <!-- Mascotas Tiernas Animadas Flotantes -->
-    <img src="assets/media/sun-sunglasses.svg" alt="Solecito sonriente" class="decor-sun"
-      title="¡Hola, explorador científico!">
-    <img src="assets/media/earth-planet.svg" alt="Planeta Tierra" class="decor-earth" title="¡Misión Salvar la Tierra!">
-    <img src="assets/media/cloud-thunder.svg" alt="Nubecita tierna" class="decor-cloud">
-    <img src="assets/media/tornado-cute.svg" alt="Tornadito alegre" class="decor-tornado">
-    <img src="assets/media/volcano-cute.svg" alt="Volcancito" class="decor-volcano-mini">
-
-    <!-- Destellos mágicos y estrellitas en SVG vectorial (Cero parpadeo o jitter de fuentes) -->
-    <svg class="decor-sparkle" style="top: 14%; left: 24%; width: 22px; height: 22px; fill: #EF4444;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="top: 22%; right: 24%; width: 26px; height: 26px; fill: #2563EB; animation-delay: 0.8s;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="bottom: 14%; left: 26%; width: 24px; height: 24px; fill: #10B981; animation-delay: 1.4s;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="bottom: 22%; right: 22%; width: 24px; height: 24px; fill: #F59E0B; animation-delay: 0.5s;"
-      viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-    <svg class="decor-sparkle"
-      style="top: 50%; left: 8%; width: 20px; height: 20px; fill: #DC2626; animation-delay: 1.8s;" viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-
-    <!-- Útiles Escolares Fieles a la Imagen (Ubicados sin tapar nada) -->
-    <img src="assets/media/pencil.svg" alt="Lápiz escolar" class="decor-pencil">
-    <img src="assets/media/eraser.svg" alt="Goma de borrar" class="decor-eraser">
-    <img src="assets/media/sharpener.svg" alt="Sacapuntas" class="decor-sharpener">
-    <img src="assets/media/protractor.svg" alt="Transportador escolar" class="decor-protractor">
-    <img src="assets/media/scissors.svg" alt="Tijeras escolares" class="decor-scissors">
-    <img src="assets/media/stamp-a-plus.svg" alt="Sello A+" class="decor-stamp">
-  </div>
-
-  <div class="escape-room-screen">
-
-    <!-- Barra Superior HUD (Visible, Grande y Equilibrada) -->
+    <!-- Barra Superior HUD -->
     <header class="top-hud animate__animated animate__fadeInDown">
-      <div class="mission-logo">
-        <i class="fa-solid fa-pencil" style="color: var(--pencil-blue);"></i>
-        <span>Escape room Educación</span>
+      <div class="hud-left">
+        <a href="index.html" class="hud-brand">
+          <span style="font-size: 1.4rem;">🌍</span>
+          <span>Misión: Salvar la Tierra</span>
+        </a>
+        <span class="hud-brand-badge">4.º Primaria</span>
       </div>
 
-      <nav class="mission-progress" aria-label="Progreso de las salas">
-        <div class="step-badge active"><i class="fa-solid fa-flag"></i> Portada</div>
-        <a href="assets/html/historia.html" class="step-badge"><i class="fa-solid fa-book-open"></i> Historia</a>
-        <a href="assets/html/instrucciones.html" class="step-badge"><i class="fa-solid fa-list-check"></i> Instrucciones</a>
-        <a href="assets/html/sala1-volcan.html" class="step-badge"><i class="fa-solid fa-fire"></i> Volcán</a>
-        <a href="assets/html/sala2-tsunami.html" class="step-badge"><i class="fa-solid fa-water"></i> Tsunami</a>
-        <a href="assets/html/sala3-terremoto.html" class="step-badge"><i class="fa-solid fa-house-crack"></i> Terremoto</a>
-        <a href="assets/html/sala4-calor.html" class="step-badge"><i class="fa-solid fa-sun"></i> Calor</a>
-      </nav>
-
-      <div class="hud-actions">
-        <!-- Botón de Accesibilidad de Tamaño de Texto -->
-        <button id="btnTextSize" class="accessibility-toggle-btn" type="button"
-          title="Ajustar tamaño de texto (Normal / Grande / Extra Grande)" aria-label="Ajustar tamaño de texto">
+      <div class="hud-right">
+        <!-- Accesibilidad: Tamaño de texto -->
+        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
           <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag">A</span>
+          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
         </button>
 
-        <!-- Botón de Audio -->
-        <button class="sound-toggle-btn" type="button" title="Activar/Silenciar sonido" aria-label="Sonido">
+        <!-- Sonido -->
+        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Activar o silenciar sonido">
           <i class="fa-solid fa-volume-high"></i>
         </button>
       </div>
     </header>
 
-    <!-- Contenido Central Limpio, Colorido y con Vida -->
-    <main class="hero-wrapper animate__animated animate__fadeIn">
-
-      <!-- Cuadro de Título con Borde Punteado Escolar, Pines y Cinta Superior -->
-      <div class="title-dashed-box animate__animated animate__zoomIn">
-        <!-- Chinchetas en las esquinas -->
-        <span class="box-pin box-pin-tl" title="Pin escolar">📌</span>
-        <span class="box-pin box-pin-tr" title="Pin escolar">📌</span>
-
-        <!-- Cinta Roja Superior Vibrante -->
-        <div class="title-ribbon-badge">
-          <i class="fa-solid fa-rocket" style="color: #FDE047;"></i> ¡Misión Científica Escolar! <i
-            class="fa-solid fa-star" style="color: #FDE047;"></i>
+    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <main class="main-stage">
+      
+      <div class="hero-card animate__animated animate__zoomIn">
+        
+        <!-- Fila de Mascotas / Iconos de Bienvenida -->
+        <div class="hero-mascot-row">
+          <span style="font-size: 2.8rem;" class="anim-float">🚀</span>
+          <span style="font-size: 3.2rem;" class="anim-star-shine">✨</span>
+          <span style="font-size: 2.8rem;" class="anim-float">🔬</span>
         </div>
 
-        <h1>Escape room</h1>
-        <h2>Educación</h2>
-      </div>
-
-      <!-- Subtítulo Genially Claro y Legible -->
-      <p class="hero-subtitle-genially">
-        ¡Misión: Salvar la Tierra! Explora los 4 retos científicos de 4.º de primaria y aprende a evaluar recursos
-        digitales con diversión, criterio y rigor.
-      </p>
-
-      <!-- Tira Interactiva de los 4 Desafíos Científicos (Con protección secuencial de Escape Room) -->
-      <div class="missions-grid-preview animate__animated animate__fadeInUp">
-        <a href="assets/html/sala1-volcan.html" class="mission-mini-card card-volcano" data-room="sala1"
-          title="Reto 1: El Volcán (Criterio: Pertinencia)">
-          <span class="mini-card-step">Reto 1</span>
-          <span class="mini-card-icon">🌋</span>
-          <span class="mini-card-title">El Volcán</span>
-          <span class="mini-card-tag">Pertinencia</span>
-        </a>
-        <a href="assets/html/sala2-tsunami.html" class="mission-mini-card card-tsunami" data-room="sala2"
-          title="Reto 2: El Tsunami (Criterio: Usabilidad)">
-          <span class="mini-card-step">Reto 2</span>
-          <span class="mini-card-icon">🌊</span>
-          <span class="mini-card-title">El Tsunami</span>
-          <span class="mini-card-tag">Usabilidad</span>
-        </a>
-        <a href="assets/html/sala3-terremoto.html" class="mission-mini-card card-earthquake" data-room="sala3"
-          title="Reto 3: El Terremoto (Criterio: Calidad)">
-          <span class="mini-card-step">Reto 3</span>
-          <span class="mini-card-icon">🏚️</span>
-          <span class="mini-card-title">Terremoto</span>
-          <span class="mini-card-tag">Calidad</span>
-        </a>
-        <a href="assets/html/sala4-calor.html" class="mission-mini-card card-heat" data-room="sala4"
-          title="Reto 4: La Ola de Calor (Criterio: Accesibilidad)">
-          <span class="mini-card-step">Reto 4</span>
-          <span class="mini-card-icon">☀️</span>
-          <span class="mini-card-title">Ola de Calor</span>
-          <span class="mini-card-tag">Inclusión</span>
-        </a>
-      </div>
-
-      <!-- Botón "Empezar" estilo Genially con Animación Fluida y Segura (CERO Bug de Líneas) -->
-      <button id="startMissionBtn" class="btn-empezar-genially" type="button"
-        title="Comenzar el Escape Room Científico">
-        <i class="fa-solid fa-circle-play" style="font-size: 1.45rem; color: #FFF;"></i>
-        <span>¡Empezar Aventura!</span>
-      </button>
-
-      <!-- Identificación del Explorador Científico con Énfasis y Etiqueta Amigable -->
-      <div class="student-tag-box animate__animated animate__fadeInUp">
-
-        <!-- Nudge / Etiqueta de Énfasis Infantil -->
-        <div class="explorer-nudge-badge">
-          <span>✍️</span>
-          <span>¡Ingresa tu nombre, querido/a explorador/a científico/a!</span>
-          <span>✨</span>
+        <div class="hero-title-box">
+          <span class="intro-header-badge animate__animated animate__bounceIn">
+            <i class="fa-solid fa-star" style="color: #F59E0B;"></i> ¡Bienvenido, explorador científico! <i class="fa-solid fa-star" style="color: #F59E0B;"></i>
+          </span>
+          <h1 style="margin-top: 6px;">Misión: Salvar la Tierra</h1>
+          <h2>Escape Room Digital Infantil</h2>
         </div>
 
-        <div class="student-tag-row">
-          <label for="explorerNameInput" class="student-label">
-            <i class="fa-solid fa-user-astronaut" style="color: var(--pencil-blue);"></i> Elige tu Avatar:
+        <p class="hero-desc">
+          Únete a una emocionante aventura científica para explorar desastres naturales y aprender a evaluar herramientas digitales con criterio y diversión.
+        </p>
+
+        <!-- Formulario amigable de inicio -->
+        <div class="hero-form-box">
+          <label for="explorerNameInput" class="hero-input-label">
+            <i class="fa-solid fa-user-astronaut"></i>
+            <span>¿Cómo te llamas, explorador/a?</span>
           </label>
-          <div style="display: flex; gap: 6px;" id="avatarChips">
-            <button type="button" class="avatar-chip active" data-avatar="🧑‍🔬"
-              title="Explorador Científico">🧑‍🔬</button>
+
+          <!-- Chips de Avatar -->
+          <div class="avatar-chips-row" id="avatarChipsRow">
+            <button type="button" class="avatar-chip active" data-avatar="🧑‍🔬" title="Explorador Científico">🧑‍🔬</button>
             <button type="button" class="avatar-chip" data-avatar="🚀" title="Astronauta">🚀</button>
             <button type="button" class="avatar-chip" data-avatar="🧪" title="Química">🧪</button>
             <button type="button" class="avatar-chip" data-avatar="🌋" title="Vulcanología">🌋</button>
-            <button type="button" class="avatar-chip" data-avatar="🌍" title="Planeta Tierra">🌍</button>
+            <button type="button" class="avatar-chip" data-avatar="🌊" title="Oceanografía">🌊</button>
+          </div>
+
+          <div class="hero-input-row">
+            <input 
+              type="text" 
+              id="explorerNameInput" 
+              class="hero-input" 
+              placeholder="Escribe tu nombre aquí..." 
+              maxlength="26"
+              autocomplete="off"
+            >
           </div>
         </div>
 
-        <div class="explorer-input-wrapper">
-          <i class="fa-solid fa-pen-nib input-pen-icon"></i>
-          <input type="text" id="explorerNameInput" class="explorer-name-field"
-            placeholder="Escribe tu nombre aquí, explorador..." value="Explorador Científico" maxlength="28"
-            autocomplete="name">
-        </div>
+        <!-- Botón Grande "¡Comenzar Aventura!" -->
+        <button id="btnStartAdventure" class="btn-fun btn-fun-primary anim-pulse" style="font-size: 1.25rem; padding: 14px 38px;" type="button">
+          <i class="fa-solid fa-rocket" style="font-size: 1.3rem;"></i>
+          <span>¡Comenzar Aventura!</span>
+          <i class="fa-solid fa-arrow-right" style="font-size: 1.1rem;"></i>
+        </button>
 
       </div>
 
     </main>
 
-    <!-- Barra Inferior -->
-    <footer class="bottom-bar animate__animated animate__fadeInUp">
-      <div class="hint-pill">
-        <i class="fa-solid fa-graduation-cap" style="color: var(--school-green-title);"></i>
-        <span>Nivel: <strong>4.º Primaria</strong> | Criterios: Pertinencia, Usabilidad, Calidad y Accesibilidad</span>
+    <!-- Barra Inferior de Estado -->
+    <footer class="bottom-hud">
+      <div>
+        <i class="fa-solid fa-graduation-cap" style="color: #0284C7;"></i>
+        <span>Nivel: <strong>4.º de Primaria</strong> (9-10 años)</span>
       </div>
-      <div style="font-family: var(--font-hand); font-size: 0.98rem; font-weight: bold; color: var(--text-muted);">
-        <i class="fa-solid fa-earth-americas" style="color: var(--pencil-blue);"></i> Centro Científico Escolar
+      <div>
+        <span>Centro de Investigación de Recursos Digitales 🌍</span>
       </div>
     </footer>
 
@@ -354,43 +135,49 @@
   <!-- Scripts -->
   <script src="assets/js/main.js"></script>
   <script>
-    // Avatar chips interactivity
-    let selectedAvatar = localStorage.getItem('explorer_avatar') || '🧑‍🔬';
-    const chips = document.querySelectorAll('.avatar-chip');
-    chips.forEach(chip => {
-      if (chip.getAttribute('data-avatar') === selectedAvatar) {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
+    document.addEventListener('DOMContentLoaded', () => {
+      const nameInput = document.getElementById('explorerNameInput');
+      const startBtn = document.getElementById('btnStartAdventure');
+      const avatarChips = document.querySelectorAll('.avatar-chip');
+
+      // Cargar datos previos si existen
+      const savedName = localStorage.getItem('explorer_name');
+      if (savedName && savedName.trim()) {
+        nameInput.value = savedName;
       }
-      chip.addEventListener('click', (e) => {
-        e.stopPropagation();
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        selectedAvatar = chip.getAttribute('data-avatar');
-        localStorage.setItem('explorer_avatar', selectedAvatar);
-        if (window.escapeSound) window.escapeSound.playPop();
+
+      let selectedAvatar = localStorage.getItem('explorer_avatar') || '🧑‍🔬';
+      avatarChips.forEach(chip => {
+        if (chip.getAttribute('data-avatar') === selectedAvatar) {
+          avatarChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+        }
+
+        chip.addEventListener('click', () => {
+          avatarChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          selectedAvatar = chip.getAttribute('data-avatar');
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
       });
-    });
 
-    // Guardar nombre en tiempo real
-    const nameInput = document.getElementById('explorerNameInput');
-    const savedName = localStorage.getItem('explorer_name');
-    if (savedName && savedName.trim()) {
-      nameInput.value = savedName;
-    }
-    nameInput.addEventListener('input', () => {
-      const val = nameInput.value.trim() || 'Explorador Científico';
-      localStorage.setItem('explorer_name', val);
-    });
+      // Acción de Comenzar Aventura
+      startBtn.addEventListener('click', () => {
+        const val = nameInput.value.trim() || 'Explorador Científico';
+        window.EscapeState.setName(val);
+        window.EscapeState.setAvatar(selectedAvatar);
 
-    document.getElementById('startMissionBtn').addEventListener('click', () => {
-      const val = nameInput.value.trim() || 'Explorador Científico';
-      localStorage.setItem('explorer_name', val);
+        if (window.escapeSound) window.escapeSound.playPop();
+        window.location.href = 'assets/html/introduccion.html';
+      });
 
-      if (window.escapeSound) window.escapeSound.playPop();
-      window.location.href = 'assets/html/historia.html';
+      // Permitir presionar Enter en el input
+      nameInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          startBtn.click();
+        }
+      });
     });
   </script>
 </body>
-
 </html>
