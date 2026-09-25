@@ -10,41 +10,56 @@ const STATIONS_CONFIG = [
     id: 1,
     name: 'Puerta de Fuego',
     sub: 'Volcanes',
+    biome: 'Zona Volcán 🔥',
+    biomeTheme: 'fire',
     criterion: 'Calidad',
     icon: '🌋',
-    url: 'sala1-volcan.html'
+    url: 'sala1-volcan.html',
+    offsetClass: 'station-pos-volcano'
   },
   {
     id: 2,
     name: 'Valle de las Letras',
     sub: 'Tsunamis',
+    biome: 'Costa Tsunami 🌊',
+    biomeTheme: 'ocean',
     criterion: 'Pertinencia',
     icon: '🌊',
-    url: 'sala2-tsunami.html'
+    url: 'sala2-tsunami.html',
+    offsetClass: 'station-pos-beach'
   },
   {
     id: 3,
     name: 'Desierto de Sismos',
     sub: 'Sismos',
+    biome: 'Cañón Sismos 🏚️',
+    biomeTheme: 'quake',
     criterion: 'Usabilidad',
     icon: '🏚️',
-    url: 'sala3-sismos.html'
+    url: 'sala3-sismos.html',
+    offsetClass: 'station-pos-canyon'
   },
   {
     id: 4,
     name: 'Paraíso del Calor',
     sub: 'Olas de Calor',
+    biome: 'Oasis Calor ☀️',
+    biomeTheme: 'heat',
     criterion: 'Accesibilidad',
     icon: '☀️',
-    url: 'sala4-calor.html'
+    url: 'sala4-calor.html',
+    offsetClass: 'station-pos-dunes'
   },
   {
     id: 5,
     name: 'Gran Meta',
     sub: 'Trofeo Final',
+    biome: 'Observatorio 🏆',
+    biomeTheme: 'victory',
     criterion: '¡Victoria!',
     icon: '🏆',
-    url: 'final.html'
+    url: 'final.html',
+    offsetClass: 'station-pos-goal'
   }
 ];
 
@@ -73,31 +88,42 @@ function initAdventureMap() {
     const isLocked = station.id > unlocked;
 
     const stationEl = document.createElement('div');
-    stationEl.className = `map-station ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}`;
+    stationEl.className = `map-station ${station.offsetClass} ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''} theme-${station.biomeTheme}`;
     stationEl.setAttribute('data-id', station.id);
 
     let statusMarkup = '';
     if (isCompleted) {
-      statusMarkup = `<div class="station-check-badge" title="¡Estación completada!"><i class="fa-solid fa-check"></i></div>`;
+      statusMarkup = `<div class="station-check-badge" title="¡Estación completada con éxito!"><i class="fa-solid fa-check"></i></div>`;
     } else if (isLocked) {
-      statusMarkup = `<div class="station-lock-overlay" title="Bloqueado: Completa la estación anterior"><i class="fa-solid fa-lock"></i></div>`;
+      statusMarkup = `<div class="station-lock-overlay" title="Bloqueado: Supera la parada anterior"><i class="fa-solid fa-lock"></i></div>`;
     }
 
     let avatarPointerMarkup = '';
+    let beaconRingMarkup = '';
     if (isCurrent) {
-      avatarPointerMarkup = `<div class="avatar-pointer" title="¡Aquí estás tú, ${name}!">${avatar}</div>`;
+      avatarPointerMarkup = `
+        <div class="avatar-pointer" title="¡Aquí estás tú, ${name}!">
+          <div class="avatar-balloon">${name}</div>
+          <div class="avatar-face">${avatar}</div>
+        </div>`;
+      beaconRingMarkup = `<div class="station-pulse-ring"></div>`;
     }
 
     stationEl.innerHTML = `
       ${avatarPointerMarkup}
       <div class="station-node">
         <span class="station-badge-num">${station.id}</span>
-        <span>${station.icon}</span>
+        <span class="station-icon-emoji">${station.icon}</span>
         ${statusMarkup}
+        ${beaconRingMarkup}
       </div>
       <div class="station-label-card">
+        <div class="station-biome-tag">${station.biome}</div>
         <div class="station-name">${station.name}</div>
-        <div class="station-criterion">${station.criterion}</div>
+        <div class="station-criterion-badge">
+          <i class="fa-solid fa-medal"></i>
+          <span>${station.criterion}</span>
+        </div>
       </div>
     `;
 

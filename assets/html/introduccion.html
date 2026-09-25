@@ -45,21 +45,35 @@
       </div>
 
       <div class="hud-right">
+        <!-- Botón Volver al Mapa -->
+        <a href="mapa.html" class="btn-hud-pill btn-hud-map" title="Volver al Mapa de Aventura" aria-label="Volver al Mapa">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Volver al Mapa</span>
+        </a>
+
         <!-- Explorador Actual -->
-        <div class="hud-user-pill">
+        <div class="hud-user-pill" title="Explorador activo">
           <span id="hudUserAvatar">🧑‍🔬</span>
           <span id="hudUserName">Explorador</span>
         </div>
 
-        <!-- Accesibilidad -->
-        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
-          <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
-        </button>
+        <!-- Control de Tamaño de Letra (Reducir / Aumentar) -->
+        <div class="hud-font-stepper" title="Ajustar tamaño de letra de la página">
+          <i class="fa-solid fa-font hud-font-icon"></i>
+          <span class="hud-font-label">Letra:</span>
+          <button id="btnTextSizeDec" class="btn-stepper-item" type="button" title="Reducir letra" aria-label="Reducir letra">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="hud-font-val" id="textSizeVal">Normal</span>
+          <button id="btnTextSizeInc" class="btn-stepper-item" type="button" title="Aumentar letra" aria-label="Aumentar letra">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
 
-        <!-- Sonido -->
-        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+        <!-- Botón de Sonido -->
+        <button class="sound-toggle-btn btn-hud-pill btn-hud-sound is-on" type="button" title="Sonido: Activado (Clic para silenciar)" aria-label="Activar o desactivar sonido">
           <i class="fa-solid fa-volume-high"></i>
+          <span class="sound-status-text">Sonido: SÍ</span>
         </button>
       </div>
     </header>
@@ -67,15 +81,15 @@
     <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
     <main class="main-stage">
       
-      <div class="slide-card animate__animated animate__fadeIn">
+      <div class="slide-card intro-slide-card animate__animated animate__fadeIn">
         <div class="intro-container">
 
           <!-- Cabecera de la Introducción -->
-          <div style="text-align: center;">
+          <div class="intro-header-block">
             <span class="intro-header-badge">
               <i class="fa-solid fa-book-open"></i> Breve Instrucción de la Aventura
             </span>
-            <h2 style="font-family: var(--font-title); font-size: clamp(1.4rem, 2.2vw, 1.85rem); color: #0284C7; margin: 4px 0 0 0;">
+            <h2 class="intro-header-title">
               ¡Prepárate para Salvar la Tierra!
             </h2>
           </div>
@@ -83,19 +97,36 @@
           <!-- Cuadrícula de 2 Tarjetas Limpias e Ilustradas -->
           <div class="intro-grid">
             
-            <div class="intro-card animate__animated animate__fadeInLeft">
-              <div class="intro-card-icon">🌋🌊🏚️☀️</div>
+            <div class="intro-card intro-card-mission animate__animated animate__fadeInLeft">
+              <div class="intro-card-top-badge">
+                <i class="fa-solid fa-earth-americas"></i> 4 Desastres Naturales
+              </div>
               <h3 class="intro-card-title">1. ¿Qué es este Escape Room?</h3>
+              <div class="intro-disasters-chips">
+                <span class="intro-chip chip-volcan">🌋 Volcán</span>
+                <span class="intro-chip chip-tsunami">🌊 Tsunami</span>
+                <span class="intro-chip chip-sismo">🏚️ Sismo</span>
+                <span class="intro-chip chip-calor">☀️ Calor</span>
+              </div>
               <p class="intro-card-text">
-                Viajarás por <strong>4 desastres naturales</strong> del planeta. En cada estación probarás un recurso digital genial (videos, simuladores y juegos) para comprobar si es perfecto para aprender.
+                Viajarás por <strong>4 estaciones interactivas</strong>. En cada una probarás un recurso digital genial (videos, simuladores y juegos) para evaluar si es perfecto para aprender.
               </p>
             </div>
 
-            <div class="intro-card animate__animated animate__fadeInRight">
-              <div class="intro-card-icon">🗺️🎯🏆</div>
+            <div class="intro-card intro-card-goal animate__animated animate__fadeInRight">
+              <div class="intro-card-top-badge">
+                <i class="fa-solid fa-trophy"></i> Tu Ruta de Éxito
+              </div>
               <h3 class="intro-card-title">2. ¿Cómo avanzar y ganar?</h3>
+              <div class="intro-steps-chips">
+                <span class="intro-chip chip-step">🗺️ Explora</span>
+                <span class="intro-step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                <span class="intro-chip chip-step">🎯 Retos</span>
+                <span class="intro-step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                <span class="intro-chip chip-step-gold">🏆 Diploma</span>
+              </div>
               <p class="intro-card-text">
-                En el <strong>Mapa de Aventura</strong> desbloquearás las estaciones una a una. Al completar las 4 paradas, ¡obtendrás el gran trofeo científico y tu diploma personalizado para imprimir!
+                En el <strong>Mapa de Aventura</strong> desbloquearás las estaciones en orden. Al completar las 4 paradas, ¡obtendrás el gran trofeo científico y tu diploma personalizado para imprimir!
               </p>
             </div>
 
@@ -103,18 +134,20 @@
 
           <!-- La Regla de Oro (Destacada y Clara) -->
           <div class="golden-rule-banner animate__animated animate__pulse anim-pulse">
-            <div class="golden-star-icon">🌟</div>
+            <div class="golden-star-icon">
+              <i class="fa-solid fa-star"></i>
+            </div>
             <div class="golden-rule-content">
               <h4>¡La Regla de Oro del Explorador!</h4>
               <p>
-                <strong>Primero debes explorar y usar cada recurso</strong> antes de responder las preguntas para avanzar. ¡Observa con atención, diviértete y aprende!
+                <strong>Primero debes interactuar y explorar cada recurso</strong> antes de responder las preguntas para avanzar. ¡Observa con atención, diviértete y aprende!
               </p>
             </div>
           </div>
 
           <!-- Botón de Acción Directa al Mapa -->
-          <div style="display: flex; justify-content: center; margin-top: 4px;">
-            <a href="mapa.html" class="btn-fun btn-fun-primary" id="btnGoToMap" style="font-size: 1.15rem; padding: 12px 34px;">
+          <div class="intro-cta-wrap">
+            <a href="mapa.html" class="btn-fun btn-fun-primary btn-intro-start" id="btnGoToMap">
               <i class="fa-solid fa-map-location-dot"></i>
               <span>¡Ir al Mapa de la Misión!</span>
               <i class="fa-solid fa-arrow-right"></i>

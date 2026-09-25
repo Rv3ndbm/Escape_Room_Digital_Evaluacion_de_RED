@@ -107,23 +107,29 @@ html, body {
 /* ==========================================================================
    BARRA SUPERIOR HUD (COMPACTA Y ELEGANTE: 52px)
    ========================================================================== */
+/* ==========================================================================
+   BARRA SUPERIOR HUD (INTUITIVA, ELEGANTE Y ACCESIBLE: 54px)
+   ========================================================================== */
 .top-hud {
-  height: 52px;
-  padding: 6px 18px;
+  height: 54px;
+  padding: 5px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.88);
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
-  border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+  border-bottom: 2px solid rgba(226, 232, 240, 0.85);
   z-index: 50;
   flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
 .hud-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .hud-brand {
@@ -135,6 +141,11 @@ html, body {
   font-size: 1.12rem;
   font-weight: 700;
   color: var(--text-main);
+  transition: opacity 0.2s ease;
+}
+
+.hud-brand:hover {
+  opacity: 0.85;
 }
 
 .hud-brand-badge {
@@ -149,7 +160,9 @@ html, body {
 .hud-center {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .hud-station-pill {
@@ -161,18 +174,201 @@ html, body {
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--pastel-blue);
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--pastel-blue-dark);
   box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .hud-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
+/* Botones Pastilla del Menú HUD Auto-explicativos */
+.btn-hud-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-title);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1.5px solid transparent;
+  user-select: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.btn-hud-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-hud-pill:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Botón Volver al Mapa */
+.btn-hud-map {
+  background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+  border-color: #38BDF8;
+  color: #0369A1;
+}
+
+.btn-hud-map:hover {
+  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+  color: white;
+  border-color: #0284C7;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+}
+
+/* Botón Guía de la Misión */
+.btn-hud-guide {
+  background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+  border-color: #86EFAC;
+  color: #15803D;
+}
+
+.btn-hud-guide:hover {
+  background: linear-gradient(135deg, #34D399 0%, #059669 100%);
+  color: white;
+  border-color: #059669;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+}
+
+/* Pill del Explorador */
+.hud-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pastel-yellow-light);
+  border: 1.5px solid var(--pastel-yellow);
+  padding: 0 12px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--pastel-yellow-dark);
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.1);
+  box-sizing: border-box;
+}
+
+/* Control Ajuste de Letra: Stepper - Reducir / Aumentar */
+.hud-font-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: #F8FAFC;
+  border: 1.5px solid #CBD5E1;
+  border-radius: var(--radius-pill);
+  height: 38px;
+  padding: 0 6px 0 11px;
+  gap: 6px;
+  font-family: var(--font-title);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-main);
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.hud-font-stepper .hud-font-icon {
+  color: #0284C7;
+  font-size: 0.88rem;
+}
+
+.hud-font-stepper .hud-font-label {
+  color: #475569;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.hud-font-stepper .hud-font-val {
+  min-width: 44px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #0369A1;
+  background: #E0F2FE;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+.btn-stepper-item {
+  background: white;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.btn-stepper-item:hover:not(:disabled) {
+  background: #E0F2FE;
+  border-color: #38BDF8;
+  color: #0284C7;
+  transform: scale(1.12);
+}
+
+.btn-stepper-item:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.btn-stepper-item:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Botón de Sonido con Estado Visible */
+.btn-hud-sound {
+  border-width: 1.5px;
+  font-size: 0.84rem;
+}
+
+.btn-hud-sound.is-on {
+  background: #ECFDF5;
+  border-color: #6EE7B7;
+  color: #047857;
+}
+
+.btn-hud-sound.is-on:hover {
+  background: #D1FAE5;
+  border-color: #34D399;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+}
+
+.btn-hud-sound.is-off {
+  background: #FFF1F2;
+  border-color: #FECDD3;
+  color: #BE123C;
+}
+
+.btn-hud-sound.is-off:hover {
+  background: #FFE4E6;
+  border-color: #FB7185;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
+}
+
+/* Compatibilidad con botones circulares si se usan */
 .btn-hud-icon {
   background: white;
   border: 1.5px solid #CBD5E1;
@@ -220,17 +416,33 @@ html, body {
   box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
 }
 
-.hud-user-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--pastel-yellow-light);
-  border: 1.5px solid var(--pastel-yellow);
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--pastel-yellow-dark);
+/* Media queries responsive para el HUD */
+@media (max-width: 1040px) {
+  .top-hud {
+    padding: 4px 12px;
+    gap: 8px;
+  }
+  .hud-station-pill {
+    font-size: 0.84rem;
+    padding: 4px 10px;
+  }
+  .btn-hud-pill {
+    padding: 0 10px;
+    font-size: 0.82rem;
+  }
+  .hud-font-stepper {
+    padding: 0 4px 0 8px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 860px) {
+  .hud-font-label {
+    display: none;
+  }
+  .hud-brand span:not(:first-child) {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -554,17 +766,41 @@ html, body {
 }
 
 /* ==========================================================================
-   PANTALLA 2: INTRODUCCIÓN Y REGLAS
+   PANTALLA 2: INTRODUCCIÓN Y REGLAS (DIAPOSITIVA CENTRADA, AMPLIA Y BALANCEADA)
    ========================================================================== */
+.slide-card.intro-slide-card {
+  width: 100%;
+  max-width: 1020px;
+  height: auto;
+  max-height: calc(100vh - 96px);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(16px, 2.5vh, 28px) clamp(22px, 3.5vw, 44px);
+  box-sizing: border-box;
+}
+
 .intro-container {
   width: 100%;
   max-width: 960px;
-  height: 92%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(16px, 2.5vh, 26px) clamp(20px, 3.5vw, 36px);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vh, 20px);
+  margin: 0 auto;
   box-sizing: border-box;
+}
+
+/* Cabecera */
+.intro-header-block {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
 .intro-header-badge {
@@ -574,111 +810,315 @@ html, body {
   background: var(--pastel-blue-light);
   color: var(--pastel-blue-dark);
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
   font-weight: 700;
-  padding: 4px 14px;
+  padding: 5px 16px;
   border-radius: var(--radius-pill);
-  align-self: center;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
 }
 
+.intro-header-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 2.7vw, 2.25rem);
+  font-weight: 700;
+  color: #0284C7;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Cuadrícula de 2 Tarjetas */
 .intro-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin: 10px 0;
-  flex: 1;
-  min-height: 0;
+  gap: clamp(16px, 2.4vw, 26px);
+  width: 100%;
 }
 
 .intro-card {
   background: white;
-  border: 2px solid #E2E8F0;
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
+  border-radius: var(--radius-xl);
+  padding: clamp(16px, 2.2vh, 24px) clamp(18px, 2.4vw, 28px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(30, 41, 59, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.intro-card-icon {
-  font-size: 2.8rem;
-  margin-bottom: 8px;
+.intro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(30, 41, 59, 0.12);
+}
+
+.intro-card-mission {
+  border: 2.5px solid #BAE6FD;
+  background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 60%);
+}
+
+.intro-card-goal {
+  border: 2.5px solid #BBF7D0;
+  background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 60%);
+}
+
+.intro-card-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-title);
+  font-size: clamp(0.82rem, 1vw, 0.94rem);
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.intro-card-mission .intro-card-top-badge {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.intro-card-goal .intro-card-top-badge {
+  background: #DCFCE7;
+  color: #15803D;
 }
 
 .intro-card-title {
   font-family: var(--font-title);
-  font-size: 1.25rem;
+  font-size: clamp(1.22rem, 1.6vw, 1.45rem);
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 6px;
+  margin: 0;
+}
+
+/* Pastillas temáticas dentro de las tarjetas */
+.intro-disasters-chips,
+.intro-steps-chips {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.intro-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-title);
+  font-size: clamp(0.85rem, 1.05vw, 0.96rem);
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.chip-volcan {
+  background: #FFE4E6;
+  color: #BE123C;
+  border: 1.5px solid #FECDD3;
+}
+
+.chip-tsunami {
+  background: #E0F2FE;
+  color: #0369A1;
+  border: 1.5px solid #BAE6FD;
+}
+
+.chip-sismo {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1.5px solid #FDE68A;
+}
+
+.chip-calor {
+  background: #FFEDD5;
+  color: #C2410C;
+  border: 1.5px solid #FED7AA;
+}
+
+.chip-step {
+  background: #F1F5F9;
+  color: #334155;
+  border: 1.5px solid #E2E8F0;
+}
+
+.chip-step-gold {
+  background: #FEF08A;
+  color: #854D0E;
+  border: 1.5px solid #FDE047;
+  font-weight: 800;
+}
+
+.intro-step-arrow {
+  color: #94A3B8;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .intro-card-text {
-  font-size: 0.98rem;
+  font-size: clamp(0.96rem, 1.2vw, 1.12rem);
   color: var(--text-muted);
   line-height: 1.45;
+  margin: 0;
 }
 
 /* La Regla de Oro */
 .golden-rule-banner {
   background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 100%);
-  border: 2px dashed #F59E0B;
+  border: 2.5px dashed #F59E0B;
   border-radius: var(--radius-lg);
-  padding: 14px 22px;
+  padding: clamp(10px, 1.6vh, 16px) clamp(16px, 2.2vw, 24px);
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15);
+  gap: clamp(12px, 1.8vw, 20px);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .golden-star-icon {
-  font-size: 2.6rem;
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
   color: #D97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(217, 119, 6, 0.3));
+}
+
+.golden-rule-content {
+  text-align: left;
 }
 
 .golden-rule-content h4 {
   font-family: var(--font-title);
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 1.3vw, 1.22rem);
   font-weight: 700;
   color: #92400E;
-  margin: 0 0 2px 0;
+  margin: 0 0 3px 0;
 }
 
 .golden-rule-content p {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.1vw, 1.04rem);
   color: #78350F;
   font-weight: 600;
   margin: 0;
-  line-height: 1.35;
+  line-height: 1.4;
+}
+
+/* Contenedor y Botón de Inicio */
+.intro-cta-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.btn-intro-start {
+  font-size: clamp(1.12rem, 1.45vw, 1.28rem);
+  padding: clamp(12px, 1.8vh, 16px) clamp(28px, 3.6vw, 44px);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.38);
+  animation: introPulse 2.8s infinite ease-in-out;
+}
+
+@keyframes introPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 22px rgba(2, 132, 199, 0.38);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 10px 28px rgba(2, 132, 199, 0.55);
+  }
+}
+
+.btn-intro-start:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Reglas Responsive y Adaptabilidad sin Scroll */
+@media (max-height: 720px) {
+  .slide-card.intro-slide-card {
+    padding: 10px 20px;
+    max-height: calc(100vh - 86px);
+  }
+  .intro-container {
+    gap: 8px;
+  }
+  .intro-card {
+    padding: 10px 14px;
+    gap: 6px;
+  }
+  .intro-card-title {
+    font-size: 1.1rem;
+  }
+  .intro-card-text {
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+  .intro-chip {
+    font-size: 0.78rem;
+    padding: 3px 8px;
+  }
+  .golden-rule-banner {
+    padding: 8px 14px;
+    gap: 12px;
+  }
+  .golden-star-icon {
+    font-size: 1.8rem;
+  }
+  .golden-rule-content h4 {
+    font-size: 0.95rem;
+  }
+  .golden-rule-content p {
+    font-size: 0.82rem;
+  }
+  .btn-intro-start {
+    font-size: 1.02rem;
+    padding: 9px 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .intro-card {
+    padding: 12px 16px;
+  }
+  .slide-card.intro-slide-card {
+    padding: 14px 16px;
+  }
 }
 
 /* ==========================================================================
-   PANTALLA 3: MAPA INTERACTIVO DE AVENTURA (5 ESTACIONES)
+   PANTALLA 3: MAPA INTERACTIVO DE AVENTURA CON RELIEVE Y BIOMAS DE DESASTRES
    ========================================================================== */
 .map-canvas-container {
   width: 100%;
   height: 100%;
   position: relative;
-  background: radial-gradient(circle at 50% 50%, #F0FDF4 0%, #E0F2FE 70%, #DBEAFE 100%);
   border-radius: var(--radius-xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: #38BDF8;
 }
 
 .map-header {
-  padding: 12px 24px;
+  padding: 10px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.85);
-  border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(226, 232, 240, 0.9);
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 20;
 }
 
 .map-track-area {
@@ -687,12 +1127,37 @@ html, body {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 20px 40px;
+  justify-content: center;
+  padding: 10px 24px;
   overflow: hidden;
 }
 
-/* Camino de puntos curvo decorativo (SVG) */
+/* Fondo Ilustrado con Relieve de los 5 Biomas de la Tierra */
+.map-relief-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.map-relief-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  filter: saturate(1.1) brightness(1.02);
+}
+
+.map-relief-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(15, 23, 42, 0.16) 100%);
+  pointer-events: none;
+}
+
+/* Camino SVG curvo iluminado sobre el relieve */
 .map-path-svg {
   position: absolute;
   top: 0;
@@ -700,10 +1165,25 @@ html, body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* Estaciones del Mapa */
+.map-path-glow {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+.map-path-line {
+  stroke-dasharray: 12, 10;
+  animation: trailDash 25s linear infinite;
+}
+
+@keyframes trailDash {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+/* Fila de Estaciones en Perspectiva de Relieve */
 .map-stations-row {
   position: relative;
   z-index: 5;
@@ -711,155 +1191,422 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1040px;
+  max-width: 1100px;
   margin: 0 auto;
+  height: 100%;
 }
 
 .map-station {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   position: relative;
-  transition: transform 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
 }
 
+/* Escalonamiento vertical que calza con el relieve de cada bioma */
+.map-station.station-pos-volcano {
+  transform: translateY(10px);
+}
+.map-station.station-pos-beach {
+  transform: translateY(72px);
+}
+.map-station.station-pos-canyon {
+  transform: translateY(-38px);
+}
+.map-station.station-pos-dunes {
+  transform: translateY(68px);
+}
+.map-station.station-pos-goal {
+  transform: translateY(-24px);
+}
+
+/* Hover al estar desbloqueada */
+.map-station:hover:not(.locked) {
+  z-index: 15;
+}
+
+.map-station.station-pos-volcano:hover:not(.locked) {
+  transform: translateY(2px) scale(1.08);
+}
+.map-station.station-pos-beach:hover:not(.locked) {
+  transform: translateY(64px) scale(1.08);
+}
+.map-station.station-pos-canyon:hover:not(.locked) {
+  transform: translateY(-46px) scale(1.08);
+}
+.map-station.station-pos-dunes:hover:not(.locked) {
+  transform: translateY(60px) scale(1.08);
+}
+.map-station.station-pos-goal:hover:not(.locked) {
+  transform: translateY(-32px) scale(1.08);
+}
+
+/* Pin / Nodo 3D de la Estación */
 .station-node {
-  width: 82px;
-  height: 82px;
+  width: clamp(74px, 6.2vw, 88px);
+  height: clamp(74px, 6.2vw, 88px);
   border-radius: 50%;
   background: white;
-  border: 4px solid #CBD5E1;
+  border: 4.5px solid #CBD5E1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.3rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22), inset 0 2px 4px rgba(255, 255, 255, 0.9);
   position: relative;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.map-station:hover:not(.locked) .station-node {
-  transform: scale(1.15);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+.station-icon-emoji {
+  font-size: clamp(2rem, 2.8vw, 2.6rem);
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));
 }
 
 .station-badge-num {
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 26px;
-  height: 26px;
+  top: -5px;
+  left: -5px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #334155;
+  background: #1E293B;
   color: white;
   font-family: var(--font-title);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 2.5px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Tarjeta de Información bajo el Nodo */
 .station-label-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
   border: 2px solid #E2E8F0;
   border-radius: var(--radius-md);
   padding: 6px 12px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: 160px;
-  transition: all 0.2s;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.16);
+  min-width: 125px;
+  max-width: 175px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.station-biome-tag {
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
 }
 
 .station-name {
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 1.05vw, 1rem);
   font-weight: 700;
   color: var(--text-main);
+  line-height: 1.2;
   white-space: nowrap;
 }
 
-.station-criterion {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--pastel-blue-dark);
+.station-criterion-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-top: 1px;
+}
+
+/* Estilos de Temas según el Bioma */
+/* 1. Volcán (Fuego) */
+.map-station.theme-fire .station-node {
+  border-color: #F97316;
+  background: radial-gradient(circle, #FFF7ED 0%, #FFEDD5 100%);
+}
+.map-station.theme-fire .station-badge-num {
+  background: #EA580C;
+}
+.map-station.theme-fire .station-label-card {
+  border-color: #FDBA74;
+}
+.map-station.theme-fire .station-biome-tag {
+  background: #FFEDD5;
+  color: #C2410C;
+}
+.map-station.theme-fire .station-criterion-badge {
+  background: #FFF1F2;
+  color: #BE123C;
+}
+
+/* 2. Tsunami (Océano) */
+.map-station.theme-ocean .station-node {
+  border-color: #0284C7;
+  background: radial-gradient(circle, #F0F9FF 0%, #E0F2FE 100%);
+}
+.map-station.theme-ocean .station-badge-num {
+  background: #0284C7;
+}
+.map-station.theme-ocean .station-label-card {
+  border-color: #7DD3FC;
+}
+.map-station.theme-ocean .station-biome-tag {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+.map-station.theme-ocean .station-criterion-badge {
+  background: #E0F2FE;
+  color: #0284C7;
+}
+
+/* 3. Sismos (Cañón) */
+.map-station.theme-quake .station-node {
+  border-color: #8B5CF6;
+  background: radial-gradient(circle, #FAF5FF 0%, #EDE9FE 100%);
+}
+.map-station.theme-quake .station-badge-num {
+  background: #7C3AED;
+}
+.map-station.theme-quake .station-label-card {
+  border-color: #C4B5FD;
+}
+.map-station.theme-quake .station-biome-tag {
+  background: #EDE9FE;
+  color: #6D28D9;
+}
+.map-station.theme-quake .station-criterion-badge {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+/* 4. Calor (Dunas / Desierto) */
+.map-station.theme-heat .station-node {
+  border-color: #EAB308;
+  background: radial-gradient(circle, #FEFCE8 0%, #FEF9C3 100%);
+}
+.map-station.theme-heat .station-badge-num {
+  background: #CA8A04;
+}
+.map-station.theme-heat .station-label-card {
+  border-color: #FDE047;
+}
+.map-station.theme-heat .station-biome-tag {
+  background: #FEF9C3;
+  color: #854D0E;
+}
+.map-station.theme-heat .station-criterion-badge {
+  background: #FFEDD5;
+  color: #C2410C;
+}
+
+/* 5. Gran Meta (Observatorio) */
+.map-station.theme-victory .station-node {
+  border-color: #10B981;
+  background: radial-gradient(circle, #F0FDF4 0%, #DCFCE7 100%);
+}
+.map-station.theme-victory .station-badge-num {
+  background: #059669;
+}
+.map-station.theme-victory .station-label-card {
+  border-color: #86EFAC;
+}
+.map-station.theme-victory .station-biome-tag {
+  background: #DCFCE7;
+  color: #15803D;
+}
+.map-station.theme-victory .station-criterion-badge {
+  background: #FEF08A;
+  color: #854D0E;
 }
 
 /* Estados de las Estaciones */
 /* 1. Bloqueada */
 .map-station.locked {
   cursor: not-allowed;
-  opacity: 0.65;
+  opacity: 0.72;
 }
 
 .map-station.locked .station-node {
   background: #F1F5F9;
-  border-color: #CBD5E1;
+  border-color: #94A3B8;
   filter: grayscale(0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .station-lock-overlay {
   position: absolute;
   bottom: -4px;
   right: -4px;
-  width: 28px;
-  height: 28px;
-  background: #64748B;
+  width: 30px;
+  height: 30px;
+  background: #475569;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.82rem;
-  border: 2px solid white;
+  font-size: 0.88rem;
+  border: 2.5px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* 2. Activa / Desbloqueada (Parada actual) */
+.map-station.current {
+  z-index: 20;
+}
+
 .map-station.current .station-node {
-  border-color: #0284C7;
-  background: #F0F9FF;
-  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 0 7px rgba(56, 189, 248, 0.45), 0 10px 28px rgba(2, 132, 199, 0.35);
   animation: stationBeacon 2s infinite;
 }
 
-.map-station.current .station-label-card {
-  border-color: #38BDF8;
-  background: #F0F9FF;
+.station-pulse-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 3px solid #38BDF8;
+  animation: beaconPulse 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  pointer-events: none;
 }
 
+@keyframes beaconPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Puntero del Explorador con globo de texto */
 .avatar-pointer {
   position: absolute;
-  top: -34px;
-  font-size: 1.8rem;
-  animation: softFloat 2.5s ease-in-out infinite;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+  top: -50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 25;
+  pointer-events: none;
+  animation: softFloat 2.4s ease-in-out infinite;
+}
+
+.avatar-balloon {
+  background: #0284C7;
+  color: white;
+  font-family: var(--font-title);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.avatar-face {
+  font-size: 2rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 /* 3. Completada */
 .map-station.completed .station-node {
   border-color: #059669;
-  background: #ECFDF5;
 }
 
 .station-check-badge {
   position: absolute;
   bottom: -4px;
   right: -4px;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   background: #10B981;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
-  border: 2px solid white;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+  font-size: 1rem;
+  border: 2.5px solid white;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.45);
+}
+
+/* Adaptabilidad del Mapa en Pantallas Compactas */
+@media (max-height: 720px) {
+  .map-track-area {
+    padding: 6px 16px;
+  }
+  .map-station.station-pos-volcano {
+    transform: translateY(5px);
+  }
+  .map-station.station-pos-beach {
+    transform: translateY(44px);
+  }
+  .map-station.station-pos-canyon {
+    transform: translateY(-24px);
+  }
+  .map-station.station-pos-dunes {
+    transform: translateY(42px);
+  }
+  .map-station.station-pos-goal {
+    transform: translateY(-16px);
+  }
+  .station-node {
+    width: 66px;
+    height: 66px;
+  }
+  .station-icon-emoji {
+    font-size: 1.85rem;
+  }
+  .station-label-card {
+    padding: 3px 8px;
+    min-width: 105px;
+    max-width: 140px;
+    gap: 1px;
+  }
+  .station-biome-tag {
+    font-size: 0.64rem;
+    padding: 1px 6px;
+  }
+  .station-name {
+    font-size: 0.82rem;
+  }
+  .station-criterion-badge {
+    font-size: 0.65rem;
+    padding: 1px 5px;
+  }
+  .avatar-pointer {
+    top: -42px;
+  }
+  .avatar-face {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .station-label-card {
+    min-width: 95px;
+    max-width: 120px;
+    padding: 3px 6px;
+  }
+  .station-biome-tag {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -1080,154 +1827,528 @@ html, body {
 }
 
 /* ==========================================================================
-   PANTALLA 6: SALA 3 - SISMOS (MINI-APP DE SISMOS Y USABILIDAD)
+   PANTALLA 6: SALA 3 - SISMOS (SMARTPHONE MOCKUP & APP SISMOKIDS 24/7)
    ========================================================================== */
-.sismos-app-grid {
+.sismos-split-layout {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 12px;
-  padding: 2px;
-}
-
-.sismo-panel-card {
-  background: white;
-  border: 2px solid #E2E8F0;
-  border-radius: var(--radius-lg);
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-.sismo-card-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-title);
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-  flex-shrink: 0;
-}
-
-/* Panel 1: Qué es un sismo */
-.sismo-card-body-text {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-  margin: 0;
-}
-
-.plates-interactive-box {
-  flex: 1;
-  background: #F8FAFC;
-  border-radius: var(--radius-md);
-  margin-top: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  font-size: 1.8rem;
-  border: 1px dashed #CBD5E1;
+  gap: clamp(16px, 3.2vw, 38px);
+  padding: 4px 14px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* Panel 2: Pasos de Emergencia */
-.emergency-steps-row {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  align-items: center;
+@media (max-width: 900px) {
+  .sismos-split-layout {
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
+  .sismos-info-side {
+    max-width: 100% !important;
+  }
 }
 
-.emergency-step-item {
-  background: #F0FDF4;
-  border: 1.5px solid #BBF7D0;
-  border-radius: var(--radius-md);
-  padding: 6px 4px;
-  text-align: center;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #166534;
+/* Columna Izquierda: Información y Guía de Usabilidad Centrada */
+.sismos-info-side {
+  width: 100%;
+  max-width: 440px;
+  background: white;
+  border: 2px solid #DDD6FE;
+  border-radius: var(--radius-xl);
+  padding: clamp(16px, 2.4vh, 24px) clamp(18px, 2.5vw, 26px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 10px 25px -5px rgba(109, 40, 217, 0.08), 0 8px 10px -6px rgba(109, 40, 217, 0.04);
+  box-sizing: border-box;
+}
+
+.sismos-info-side h3 {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #6D28D9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.sismos-info-side p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.sismos-tasks-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #F5F3FF;
+  border: 1.5px solid #DDD6FE;
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #5B21B6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.task-item:hover {
+  transform: translateX(3px);
+  border-color: #8B5CF6;
+  background: #FAF5FF;
+}
+
+.task-item.active-task {
+  border-color: #7C3AED;
+  background: #EDE9FE;
+  color: #6D28D9;
+}
+
+.task-item.done-task {
+  border-color: #86EFAC;
+  background: #F0FDF4;
+  color: #15803D;
+}
+
+/* SMARTPHONE MOCKUP CHASSIS (CELULAR REALISTA INFANTIL) */
+.phone-device-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 0;
+  flex-shrink: 0;
+}
+
+.smartphone-frame {
+  width: clamp(320px, 28vw, 365px);
+  height: 100%;
+  max-height: 575px;
+  background: #0F172A;
+  border-radius: 42px;
+  border: 3.5px solid #334155;
+  box-shadow: 
+    0 20px 45px -10px rgba(15, 23, 42, 0.45),
+    0 0 0 2px #1E293B,
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.12);
+  padding: 8px 8px 6px 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Botones laterales físicos */
+.smartphone-frame::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 90px;
+  width: 3px;
+  height: 34px;
+  background: #475569;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 44px 0 #475569; /* Botón Vol+ y Vol- */
+}
+
+.smartphone-frame::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 110px;
+  width: 3px;
+  height: 44px;
+  background: #475569;
+  border-radius: 0 3px 3px 0; /* Botón Power */
+}
+
+/* Barra de Estado del Teléfono (Reloj, Señal, Batería) */
+.phone-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 14px 4px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94A3B8;
+  background: #0F172A;
+  border-radius: 30px 30px 0 0;
+  flex-shrink: 0;
+}
+
+.phone-island-notch {
+  width: 72px;
+  height: 14px;
+  background: #020617;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  box-shadow: inset 0 0 0 1px #1E293B;
+}
+
+.notch-speaker {
+  width: 22px;
+  height: 3px;
+  background: #334155;
+  border-radius: 2px;
+}
+
+.notch-lens {
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #38BDF8 0%, #0F172A 100%);
+  border-radius: 50%;
+}
+
+/* PANTALLA TÁCTIL DEL CELULAR (SCREEN) */
+.phone-touch-screen {
+  flex: 1;
+  min-height: 0;
+  background: #F8FAFC;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Cabecera de la App dentro del Celular */
+.app-header-bar {
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  color: white;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.2);
+}
+
+.app-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.app-live-chip {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-pill);
+  padding: 2px 7px;
+  font-size: 0.68rem;
+  font-weight: bold;
+  display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.emergency-step-item i, .emergency-step-item span.icon {
-  font-size: 1.3rem;
+.app-live-dot {
+  width: 6px;
+  height: 6px;
+  background: #4ADE80;
+  border-radius: 50%;
+  animation: starShine 1.5s infinite;
 }
 
-/* Panel 3: Mochila de Prevención */
-.backpack-items-row {
+/* Contenedor de las Vistas de la App Móvil */
+.app-views-wrapper {
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  align-items: center;
+  min-height: 0;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.backpack-item-btn {
+.app-tab-page {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  animation: slideFadeIn 0.25s ease;
+  overflow: hidden;
+}
+
+.app-tab-page.active-page {
+  display: flex;
+}
+
+/* Tarjetas y componentes dentro de la App */
+.app-card {
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  margin-bottom: 8px;
+}
+
+.app-card-title {
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.app-card-p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Vista 1: Inicio (Placas Tectónicas) */
+.plates-box-mini {
+  background: #EFF6FF;
+  border: 1.5px dashed #93C5FD;
+  border-radius: var(--radius-md);
+  padding: 10px 8px;
+  text-align: center;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.plates-row-interactive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.8rem;
+}
+
+.btn-mini-action {
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: #3B82F6;
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-mini-action:hover {
+  background: #1D4ED8;
+  transform: scale(1.05);
+}
+
+/* Vista 2: Guía de Emergencia */
+.phone-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.phone-step-card {
+  background: #F0FDF4;
+  border: 1.5px solid #BBF7D0;
+  border-radius: var(--radius-md);
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.phone-step-card:hover {
+  transform: translateX(3px);
+  border-color: #86EFAC;
+}
+
+.phone-step-icon {
+  font-size: 1.4rem;
+}
+
+.phone-step-info h5 {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  color: #166534;
+  margin: 0;
+}
+
+.phone-step-info p {
+  font-size: 0.76rem;
+  color: #15803D;
+  margin: 0;
+}
+
+/* Vista 3: Mochila de Prevención */
+.backpack-phone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.backpack-phone-item {
   background: #FFF7ED;
   border: 2px solid #FFEDD5;
   border-radius: var(--radius-md);
-  padding: 8px 4px;
+  padding: 10px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   cursor: pointer;
   transition: all 0.2s;
-  font-size: 0.78rem;
+  font-family: var(--font-title);
+  font-size: 0.8rem;
   font-weight: 700;
   color: #9A3412;
 }
 
-.backpack-item-btn:hover {
-  transform: translateY(-2px);
+.backpack-phone-item:hover {
+  transform: scale(1.04);
   border-color: #FB923C;
 }
 
-.backpack-item-btn.packed {
+.backpack-phone-item.packed {
   background: #ECFDF5;
   border-color: #34D399;
   color: #065F46;
 }
 
-/* Panel 4: Alarma Sísmica */
-.alarm-panel {
+/* Vista 4: Alarma Sísmica en el Teléfono */
+.alarm-phone-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
-  border-color: #FECDD3;
+  gap: 10px;
 }
 
-.btn-trigger-alarm {
-  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+.btn-phone-sos-alarm {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #EF4444 0%, #DC2626 100%);
+  border: 4px solid #FCA5A5;
   color: white;
-  border: 2px solid #F87171;
-  border-radius: var(--radius-pill);
-  padding: 10px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.45);
+  transition: all 0.2s;
   font-family: var(--font-title);
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  gap: 4px;
+}
+
+.btn-phone-sos-alarm:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.6);
+}
+
+.btn-phone-sos-alarm.sounding {
+  animation: pastelPulse 0.4s infinite;
+  border-color: #FEF08A;
+}
+
+/* BARRA DE NAVEGACIÓN INFERIOR DE LA APP (TABS MÓVILES) */
+.phone-bottom-nav {
+  height: 56px;
+  background: white;
+  border-top: 2px solid #EDE9FE;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+  padding: 2px 6px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.phone-nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: transparent;
+  border: 1.5px solid transparent;
+  color: #64748B;
+  font-family: var(--font-title);
+  font-size: 0.74rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
+  padding: 4px 10px;
+  border-radius: 12px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex: 1;
 }
 
-.btn-trigger-alarm:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.45);
+.phone-nav-tab i {
+  font-size: 1.25rem;
+  transition: transform 0.2s;
+}
+
+.phone-nav-tab:hover {
+  color: #7C3AED;
+  background: #FAF5FF;
+}
+
+.phone-nav-tab.active-tab {
+  color: #6D28D9;
+  background: #EDE9FE;
+  border-color: #DDD6FE;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.15);
+}
+
+.phone-nav-tab.active-tab i {
+  transform: scale(1.15);
+  color: #7C3AED;
+}
+
+/* Barra de Gesto Home del Teléfono */
+.phone-home-indicator {
+  width: 90px;
+  height: 4.5px;
+  background: #64748B;
+  border-radius: 3px;
+  margin: 4px auto 2px auto;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================

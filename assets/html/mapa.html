@@ -45,26 +45,35 @@
       </div>
 
       <div class="hud-right">
+        <!-- Botón de Guía / Reglas -->
+        <a href="introduccion.html" class="btn-hud-pill btn-hud-guide" title="Ver Guía y Reglas de la Misión" aria-label="Ver Guía">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Guía de Misión</span>
+        </a>
+
         <!-- Explorador Actual -->
-        <div class="hud-user-pill">
+        <div class="hud-user-pill" title="Explorador activo">
           <span id="hudUserAvatar">🧑‍🔬</span>
           <span id="hudUserName">Explorador</span>
         </div>
 
-        <!-- Botón de Instrucciones -->
-        <a href="introduccion.html" class="btn-hud-icon" title="Ver Guía y Reglas" aria-label="Ver Instrucciones">
-          <i class="fa-solid fa-book-open"></i>
-        </a>
+        <!-- Control de Tamaño de Letra (Reducir / Aumentar) -->
+        <div class="hud-font-stepper" title="Ajustar tamaño de letra de la página">
+          <i class="fa-solid fa-font hud-font-icon"></i>
+          <span class="hud-font-label">Letra:</span>
+          <button id="btnTextSizeDec" class="btn-stepper-item" type="button" title="Reducir letra" aria-label="Reducir letra">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="hud-font-val" id="textSizeVal">Normal</span>
+          <button id="btnTextSizeInc" class="btn-stepper-item" type="button" title="Aumentar letra" aria-label="Aumentar letra">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
 
-        <!-- Accesibilidad -->
-        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
-          <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
-        </button>
-
-        <!-- Sonido -->
-        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+        <!-- Botón de Sonido -->
+        <button class="sound-toggle-btn btn-hud-pill btn-hud-sound is-on" type="button" title="Sonido: Activado (Clic para silenciar)" aria-label="Activar o desactivar sonido">
           <i class="fa-solid fa-volume-high"></i>
+          <span class="sound-status-text">Sonido: SÍ</span>
         </button>
       </div>
     </header>
@@ -101,15 +110,21 @@
             Aviso de estación
           </div>
 
-          <!-- Lienzo del Camino y Estaciones -->
+          <!-- Lienzo del Camino y Estaciones con Relieve Ilustrado -->
           <div class="map-track-area">
             
-            <!-- Trazado de Camino Curvo Serpenteante de Aventura (SVG) -->
+            <!-- Fondo Ilustrado con Relieve de los 5 Biomas de la Tierra -->
+            <div class="map-relief-backdrop">
+              <img src="../media/mapa-aventura-biomas.jpg" alt="Mapa con Relieve de los 5 Biomas de Desastres" class="map-relief-img">
+              <div class="map-relief-overlay"></div>
+            </div>
+
+            <!-- Trazado de Sendero Curvo que une las estaciones a través del relieve -->
             <svg class="map-path-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
-              <!-- Sombra del camino -->
-              <path d="M 100 200 Q 225 100, 325 200 T 550 200 T 775 200 T 900 200" fill="none" stroke="#CBD5E1" stroke-width="12" stroke-linecap="round" opacity="0.6" />
-              <!-- Línea punteada de mapa de aventura estilo papel -->
-              <path d="M 100 200 Q 225 100, 325 200 T 550 200 T 775 200 T 900 200" fill="none" stroke="#0284C7" stroke-width="5" stroke-dasharray="10, 10" stroke-linecap="round" />
+              <!-- Sombra iluminada del camino -->
+              <path class="map-path-glow" d="M 120 220 C 200 130, 240 310, 330 300 C 420 290, 430 150, 520 180 C 610 210, 620 310, 710 300 C 800 290, 810 180, 880 200" fill="none" stroke="rgba(255, 255, 255, 0.85)" stroke-width="12" stroke-linecap="round" />
+              <!-- Línea punteada dorada y azul de aventura -->
+              <path class="map-path-line" d="M 120 220 C 200 130, 240 310, 330 300 C 420 290, 430 150, 520 180 C 610 210, 620 310, 710 300 C 800 290, 810 180, 880 200" fill="none" stroke="#0284C7" stroke-width="5" stroke-dasharray="10, 10" stroke-linecap="round" />
             </svg>
 
             <!-- Contenedor Dinámico de las 5 Estaciones (Generadas por navigation.js) -->

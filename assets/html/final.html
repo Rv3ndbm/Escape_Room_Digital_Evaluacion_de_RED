@@ -47,21 +47,35 @@
       </div>
 
       <div class="hud-right">
+        <!-- Botón Volver al Mapa -->
+        <a href="mapa.html" class="btn-hud-pill btn-hud-map" title="Volver al Mapa de Aventura" aria-label="Volver al Mapa">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Volver al Mapa</span>
+        </a>
+
         <!-- Explorador Actual -->
-        <div class="hud-user-pill">
+        <div class="hud-user-pill" title="Explorador activo">
           <span id="hudUserAvatar">🧑‍🔬</span>
           <span id="hudUserName">Explorador</span>
         </div>
 
-        <!-- Accesibilidad -->
-        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
-          <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
-        </button>
+        <!-- Control de Tamaño de Letra (Reducir / Aumentar) -->
+        <div class="hud-font-stepper" title="Ajustar tamaño de letra de la página">
+          <i class="fa-solid fa-font hud-font-icon"></i>
+          <span class="hud-font-label">Letra:</span>
+          <button id="btnTextSizeDec" class="btn-stepper-item" type="button" title="Reducir letra" aria-label="Reducir letra">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="hud-font-val" id="textSizeVal">Normal</span>
+          <button id="btnTextSizeInc" class="btn-stepper-item" type="button" title="Aumentar letra" aria-label="Aumentar letra">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
 
-        <!-- Sonido -->
-        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+        <!-- Botón de Sonido -->
+        <button class="sound-toggle-btn btn-hud-pill btn-hud-sound is-on" type="button" title="Sonido: Activado (Clic para silenciar)" aria-label="Activar o desactivar sonido">
           <i class="fa-solid fa-volume-high"></i>
+          <span class="sound-status-text">Sonido: SÍ</span>
         </button>
       </div>
     </header>

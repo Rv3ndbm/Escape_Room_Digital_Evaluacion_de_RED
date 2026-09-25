@@ -36,12 +36,21 @@ class SoundSystem {
   updateSoundIcons() {
     const btns = document.querySelectorAll('.sound-toggle-btn');
     btns.forEach(btn => {
-      btn.innerHTML = this.soundEnabled 
+      const iconHtml = this.soundEnabled 
         ? '<i class="fa-solid fa-volume-high"></i>' 
         : '<i class="fa-solid fa-volume-xmark"></i>';
+      const statusText = this.soundEnabled ? 'Sonido: SÍ' : 'Sonido: NO';
+
+      btn.innerHTML = `${iconHtml} <span class="sound-status-text">${statusText}</span>`;
+      btn.classList.toggle('is-on', this.soundEnabled);
+      btn.classList.toggle('is-off', !this.soundEnabled);
+
       btn.setAttribute('title', this.soundEnabled 
         ? 'Sonido: Activado (Clic para silenciar)' 
         : 'Sonido: Silenciado (Clic para activar)');
+      btn.setAttribute('aria-label', this.soundEnabled 
+        ? 'Desactivar sonido' 
+        : 'Activar sonido');
     });
   }
 
@@ -248,26 +257,70 @@ document.addEventListener('DOMContentLoaded', () => {
     hudUserAvatar.textContent = EscapeState.getAvatar();
   }
 
-  // Accesibilidad: Botón de cambio de tamaño de texto
-  const btnTextSize = document.getElementById('btnTextSize');
-  if (btnTextSize) {
-    let sizeIndex = parseInt(localStorage.getItem('escape_text_size_idx') || '0', 10);
-    const fontSizes = ['100%', '112%', '122%'];
-    const fontLabels = ['A', 'A+', 'A++'];
+  // Accesibilidad: Stepper y Botón para cambiar tamaño de texto (Reducir / Aumentar)
+  let sizeIndex = parseInt(localStorage.getItem('escape_text_size_idx') || '0', 10);
+  const fontSizes = ['100%', '114%', '126%'];
+  const fontLabels = ['Normal', 'Grande', 'Máx'];
 
-    const applyTextSize = () => {
-      document.documentElement.style.fontSize = fontSizes[sizeIndex];
-      const tag = btnTextSize.querySelector('.text-size-tag');
+  const applyTextSize = () => {
+    document.documentElement.style.fontSize = fontSizes[sizeIndex];
+
+    const textSizeVal = document.getElementById('textSizeVal');
+    if (textSizeVal) textSizeVal.textContent = fontLabels[sizeIndex];
+
+    const btnDec = document.getElementById('btnTextSizeDec');
+    if (btnDec) btnDec.disabled = (sizeIndex === 0);
+
+    const btnInc = document.getElementById('btnTextSizeInc');
+    if (btnInc) btnInc.disabled = (sizeIndex === fontSizes.length - 1);
+
+    const btnLegacy = document.getElementById('btnTextSize');
+    if (btnLegacy) {
+      const tag = btnLegacy.querySelector('.text-size-tag');
       if (tag) tag.textContent = fontLabels[sizeIndex];
-      localStorage.setItem('escape_text_size_idx', sizeIndex);
-    };
+    }
 
-    applyTextSize();
+    localStorage.setItem('escape_text_size_idx', sizeIndex);
+  };
 
-    btnTextSize.addEventListener('click', () => {
+  applyTextSize();
+
+  const btnDec = document.getElementById('btnTextSizeDec');
+  if (btnDec) {
+    btnDec.addEventListener('click', () => {
+      if (sizeIndex > 0) {
+        sizeIndex--;
+        applyTextSize();
+        if (window.escapeSound) window.escapeSound.playPop();
+      }
+    });
+  }
+
+  const btnInc = document.getElementById('btnTextSizeInc');
+  if (btnInc) {
+    btnInc.addEventListener('click', () => {
+      if (sizeIndex < fontSizes.length - 1) {
+        sizeIndex++;
+        applyTextSize();
+        if (window.escapeSound) window.escapeSound.playPop();
+      }
+    });
+  }
+
+  const btnLegacy = document.getElementById('btnTextSize');
+  if (btnLegacy) {
+    btnLegacy.addEventListener('click', () => {
       sizeIndex = (sizeIndex + 1) % fontSizes.length;
       applyTextSize();
       if (window.escapeSound) window.escapeSound.playPop();
     });
+  }
+
+  // Si existe botón de volver al mapa en home (index.html), mostrarlo si hay partida
+  const hudHomeMapBtn = document.getElementById('hudHomeMapBtn');
+  if (hudHomeMapBtn) {
+    if (localStorage.getItem('explorer_name') || EscapeState.getUnlockedRoom() > 1) {
+      hudHomeMapBtn.style.display = 'inline-flex';
+    }
   }
 });

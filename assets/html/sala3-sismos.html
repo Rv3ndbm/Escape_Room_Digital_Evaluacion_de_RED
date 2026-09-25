@@ -41,33 +41,41 @@
 
       <div class="hud-center">
         <div class="hud-station-pill" style="border-color: #A78BFA; color: #6D28D9;">
-          <span>🏚️</span>
+          <span>📱</span>
           <span>Parada 3: Desierto de Sismos (Sismos)</span>
         </div>
       </div>
 
       <div class="hud-right">
-        <!-- Botón Mapa -->
-        <a href="mapa.html" class="btn-hud-nav" title="Volver al mapa">
-          <i class="fa-solid fa-map"></i>
-          <span>Mapa</span>
+        <!-- Botón Volver al Mapa -->
+        <a href="mapa.html" class="btn-hud-pill btn-hud-map" title="Volver al Mapa de Aventura" aria-label="Volver al Mapa">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Volver al Mapa</span>
         </a>
 
         <!-- Explorador Actual -->
-        <div class="hud-user-pill">
+        <div class="hud-user-pill" title="Explorador activo">
           <span id="hudUserAvatar">🧑‍🔬</span>
           <span id="hudUserName">Explorador</span>
         </div>
 
-        <!-- Accesibilidad -->
-        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
-          <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
-        </button>
+        <!-- Control de Tamaño de Letra (Reducir / Aumentar) -->
+        <div class="hud-font-stepper" title="Ajustar tamaño de letra de la página">
+          <i class="fa-solid fa-font hud-font-icon"></i>
+          <span class="hud-font-label">Letra:</span>
+          <button id="btnTextSizeDec" class="btn-stepper-item" type="button" title="Reducir letra" aria-label="Reducir letra">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="hud-font-val" id="textSizeVal">Normal</span>
+          <button id="btnTextSizeInc" class="btn-stepper-item" type="button" title="Aumentar letra" aria-label="Aumentar letra">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
 
-        <!-- Sonido -->
-        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Sonido">
+        <!-- Botón de Sonido -->
+        <button class="sound-toggle-btn btn-hud-pill btn-hud-sound is-on" type="button" title="Sonido: Activado (Clic para silenciar)" aria-label="Activar o desactivar sonido">
           <i class="fa-solid fa-volume-high"></i>
+          <span class="sound-status-text">Sonido: SÍ</span>
         </button>
       </div>
     </header>
@@ -78,110 +86,277 @@
       <div class="slide-card animate__animated animate__fadeIn">
         <div class="subslide-container">
 
-          <!-- SUB-DIAPOSITIVA 1: MINI-APP INTERACTIVA DE SISMOS -->
+          <!-- SUB-DIAPOSITIVA 1: MINI-APP INTERACTIVA DE SISMOS (FORMATO SMARTPHONE REALISTA) -->
           <div class="subslide-view" id="subslideResource">
             
             <div class="subslide-header">
               <div class="subslide-title">
                 <span style="font-size: 1.5rem;">📱</span>
-                <span>Paso 1: Explora la Mini-App de Sismos y Alerta</span>
+                <span>Paso 1: Explora la App Móvil "SismoKids 24/7" en tu Celular</span>
               </div>
-              <span class="hud-station-pill" style="border-color: #38BDF8; color: #0284C7; font-size: 0.85rem;">
+              <span class="hud-station-pill" style="border-color: #A78BFA; color: #6D28D9; font-size: 0.85rem;">
                 <i class="fa-solid fa-mobile-screen-button"></i> Criterio: Usabilidad
               </span>
             </div>
 
-            <!-- Contenedor de la Mini-App (4 Paneles Limpios) -->
+            <!-- Contenedor Dividido: Guía de Misión + Smartphone Interactivo Centrados -->
             <div class="subslide-body">
-              <div class="sismos-app-grid">
+              <div class="sismos-split-layout">
                 
-                <!-- Panel 1: ¿Qué es un sismo? -->
-                <div class="sismo-panel-card">
-                  <div class="sismo-card-header" style="color: #0369A1;">
-                    <i class="fa-solid fa-earth-americas"></i>
-                    <span>1. ¿Qué es un Sismo?</span>
+                <!-- Columna Izquierda: Información de Usabilidad y Tareas Interactivas -->
+                <div class="sismos-info-side animate__animated animate__fadeInLeft">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>
+                      <i class="fa-solid fa-mobile-screen-button" style="color: #8B5CF6;"></i>
+                      <span>App SismoKids 24/7</span>
+                    </h3>
+                    <span style="background: #EDE9FE; color: #6D28D9; font-size: 0.76rem; font-weight: bold; padding: 3px 10px; border-radius: var(--radius-pill);">
+                      Usabilidad
+                    </span>
                   </div>
-                  <p class="sismo-card-body-text">
-                    La corteza de la Tierra está formada por placas como un gran rompecabezas. Cuando se mueven y chocan, liberan energía y sentimos un temblor.
+
+                  <p>
+                    Usa este <strong>teléfono inteligente</strong> simulado como en la vida real. Toca cualquiera de las <strong>4 tareas</strong> para explorar la app o usa los botones del celular:
                   </p>
-                  <div class="plates-interactive-box">
-                    <span>🧩</span>
-                    <i class="fa-solid fa-arrows-left-right animate__animated animate__pulse animate__infinite" style="font-size: 1.2rem; color: #0284C7;"></i>
-                    <span>💥</span>
-                    <i class="fa-solid fa-arrows-left-right animate__animated animate__pulse animate__infinite" style="font-size: 1.2rem; color: #0284C7;"></i>
-                    <span>🧩</span>
+
+                  <!-- 4 Tareas sincronizadas con el teléfono -->
+                  <div class="sismos-tasks-checklist">
+                    <button type="button" class="task-item active-task" data-target="pageInicio" id="taskInicioCheck">
+                      <span class="task-icon">🔘</span>
+                      <span>1. 🏠 Inicio: Ver placas tectónicas</span>
+                    </button>
+                    <button type="button" class="task-item" data-target="pageGuia" id="taskGuiaCheck">
+                      <span class="task-icon">🔘</span>
+                      <span>2. 🛡️ Guía: 3 Pasos de emergencia</span>
+                    </button>
+                    <button type="button" class="task-item" data-target="pageMochila" id="taskMochilaCheck">
+                      <span class="task-icon">🔘</span>
+                      <span>3. 🎒 Mochila: Empacar 4 objetos</span>
+                    </button>
+                    <button type="button" class="task-item" data-target="pageAlarma" id="taskAlarmaCheck">
+                      <span class="task-icon">🔘</span>
+                      <span>4. 🚨 Alarma: Simular alerta sísmica</span>
+                    </button>
                   </div>
+
+                  <!-- Mini Barra de Progreso de Exploración -->
+                  <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; border-radius: var(--radius-md); padding: 8px 12px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px;">
+                      <span style="color: #6B21A8;">Exploración de la App:</span>
+                      <span id="explorationProgressText" style="color: #7C3AED;">1 de 4 secciones</span>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
+                      <div id="explorationProgressBar" style="width: 25%; height: 100%; background: linear-gradient(90deg, #A78BFA, #10B981); transition: width 0.3s ease;"></div>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 0.84rem; color: #7C3AED; font-weight: 600; margin: 0;">
+                    💡 <em>¿Los botones son grandes y claros? ¿Pudiste usarla sin ayuda? ¡Eso demuestra excelente Usabilidad!</em>
+                  </p>
                 </div>
 
-                <!-- Panel 2: ¿Qué hacer en caso de emergencia? -->
-                <div class="sismo-panel-card">
-                  <div class="sismo-card-header" style="color: #15803D;">
-                    <i class="fa-solid fa-shield-heart"></i>
-                    <span>2. ¿Qué hacer en emergencia?</span>
-                  </div>
-                  <div class="emergency-steps-row">
-                    <div class="emergency-step-item">
-                      <span class="icon">🧘</span>
-                      <span>1. Mantén la calma</span>
+                <!-- Columna Derecha: EL SMARTPHONE CON APP REAL -->
+                <div class="phone-device-column animate__animated animate__fadeInRight">
+                  <div class="smartphone-frame" id="smartphoneFrame">
+                    
+                    <!-- Barra de Estado del Smartphone (Hora, Isla dinámica, Batería) -->
+                    <div class="phone-top-bar">
+                      <span id="phoneClock">10:30 AM</span>
+                      <div class="phone-island-notch">
+                        <div class="notch-speaker"></div>
+                        <div class="notch-lens"></div>
+                      </div>
+                      <div style="display: flex; gap: 4px; align-items: center;">
+                        <i class="fa-solid fa-wifi" style="font-size: 0.65rem;"></i>
+                        <span>100%</span>
+                        <i class="fa-solid fa-battery-full" style="font-size: 0.72rem; color: #4ADE80;"></i>
+                      </div>
                     </div>
-                    <div class="emergency-step-item">
-                      <span class="icon">🪟</span>
-                      <span>2. Aléjate de ventanas</span>
-                    </div>
-                    <div class="emergency-step-item">
-                      <span class="icon">🟢</span>
-                      <span>3. Ve a zona segura</span>
-                    </div>
-                  </div>
-                </div>
 
-                <!-- Panel 3: Kit / Mochila de Prevención -->
-                <div class="sismo-panel-card">
-                  <div class="sismo-card-header" style="color: #C2410C; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                      <i class="fa-solid fa-kit-medical"></i>
-                      <span>3. Mochila de Prevención</span>
-                    </div>
-                    <span id="backpackCounterBadge" style="font-size: 0.78rem; background: #FFEDD5; color: #9A3412; padding: 2px 8px; border-radius: var(--radius-pill);">
-                      Toca para empacar
-                    </span>
-                  </div>
-                  <div class="backpack-items-row">
-                    <button type="button" class="backpack-item-btn" data-item="linterna">
-                      <span style="font-size: 1.5rem;">🔦</span>
-                      <span>Linterna</span>
-                    </button>
-                    <button type="button" class="backpack-item-btn" data-item="botiquin">
-                      <span style="font-size: 1.5rem;">🩹</span>
-                      <span>Botiquín</span>
-                    </button>
-                    <button type="button" class="backpack-item-btn" data-item="agua">
-                      <span style="font-size: 1.5rem;">💧</span>
-                      <span>Agua</span>
-                    </button>
-                    <button type="button" class="backpack-item-btn" data-item="silbato">
-                      <span style="font-size: 1.5rem;">📢</span>
-                      <span>Silbato</span>
-                    </button>
-                  </div>
-                </div>
+                    <!-- PANTALLA TÁCTIL (SCREEN) -->
+                    <div class="phone-touch-screen" id="phoneTouchScreen">
+                      
+                      <!-- Cabecera de la App SismoKids -->
+                      <div class="app-header-bar">
+                        <div class="app-brand-title">
+                          <span>📱</span>
+                          <span>SismoKids 24/7</span>
+                        </div>
+                        <div class="app-live-chip">
+                          <span class="app-live-dot"></span>
+                          <span>EN VIVO</span>
+                        </div>
+                      </div>
 
-                <!-- Panel 4: Simulación de Alarma de Terremoto -->
-                <div class="sismo-panel-card alarm-panel">
-                  <div style="margin-bottom: 8px;">
-                    <span style="font-family: var(--font-title); font-size: 1rem; font-weight: 700; color: #B91C1C;">
-                      🚨 4. Simulacro Sísmico Escolar
-                    </span>
-                    <p style="font-size: 0.84rem; color: #7F1D1D; margin: 2px 0 6px 0;">
-                      Presiona el botón para practicar la alarma preventiva:
-                    </p>
-                  </div>
-                  <button type="button" class="btn-trigger-alarm anim-pulse" id="btnTriggerSismoAlarm">
-                    <i class="fa-solid fa-bullhorn"></i>
-                    <span>¡Simular Alarma de Terremoto!</span>
-                  </button>
-                  <div id="alarmStatusText" style="margin-top: 6px; font-size: 0.82rem; font-weight: 700; color: #DC2626; min-height: 18px;">
-                    Alarma en espera
+                      <!-- Vistas Dinámicas de la App (4 Pestañas) -->
+                      <div class="app-views-wrapper">
+                        
+                        <!-- PESTAÑA 1: INICIO (¿QUÉ ES UN SISMO?) -->
+                        <div class="app-tab-page active-page" id="pageInicio">
+                          <div class="app-card" style="background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%); border-color: #DDD6FE;">
+                            <div class="app-card-title" style="color: #6D28D9;">
+                              <i class="fa-solid fa-earth-americas"></i>
+                              <span>¿Qué es un Sismo?</span>
+                            </div>
+                            <p class="app-card-p">
+                              La Tierra está formada por piezas como un rompecabezas llamadas <strong>placas tectónicas</strong>. Cuando chocan, ¡la Tierra tiembla!
+                            </p>
+                          </div>
+
+                          <div class="plates-box-mini">
+                            <span style="font-size: 0.76rem; font-weight: 700; color: #1E40AF;">Choque de Placas Tectónicas:</span>
+                            <div class="plates-row-interactive" id="platesRowMini" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0;">
+                              <div id="plateLeft" style="background: #FEF3C7; border: 2px solid #F59E0B; border-radius: 10px; padding: 4px 10px; font-weight: bold; font-size: 0.8rem; color: #92400E; transition: transform 0.2s;">
+                                ⛰️ Placa A
+                              </div>
+                              <span id="plateClashIcon" style="font-size: 1.5rem;">💥</span>
+                              <div id="plateRight" style="background: #DCFCE7; border: 2px solid #10B981; border-radius: 10px; padding: 4px 10px; font-weight: bold; font-size: 0.8rem; color: #065F46; transition: transform 0.2s;">
+                                ⛰️ Placa B
+                              </div>
+                            </div>
+                            <button type="button" class="btn-mini-action" id="btnCollidePlates">
+                              <i class="fa-solid fa-arrows-left-right"></i>
+                              <span>¡Simular Choque de Placas!</span>
+                            </button>
+                            <small id="plateAlertNotice" style="font-size: 0.72rem; color: #0284C7; font-weight: bold; min-height: 14px;">
+                              Toca para simular la energía sísmica
+                            </small>
+                          </div>
+
+                          <!-- Sismógrafo Digital con Animación SVG -->
+                          <div class="app-card" style="margin-top: 6px; padding: 6px 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                              <span style="font-size: 0.74rem; font-weight: bold; color: #475569;">
+                                <i class="fa-solid fa-chart-line" style="color: #38BDF8;"></i> Sismógrafo Digital
+                              </span>
+                              <span id="seismographStatus" style="font-size: 0.72rem; color: #10B981; font-weight: bold;">Estable 🟢</span>
+                            </div>
+                            <svg width="100%" height="22" viewBox="0 0 200 22" style="background: #F8FAFC; border-radius: 6px;">
+                              <path d="M 0 11 L 50 11 L 60 4 L 70 18 L 80 5 L 90 15 L 100 11 L 200 11" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" id="seismoPath"/>
+                            </svg>
+                          </div>
+                        </div>
+
+                        <!-- PESTAÑA 2: GUÍA DE EMERGENCIA -->
+                        <div class="app-tab-page" id="pageGuia">
+                          <div class="app-card" style="padding: 6px 10px; margin-bottom: 6px; background: #F0FDF4; border-color: #86EFAC;">
+                            <div class="app-card-title" style="color: #166534; font-size: 0.88rem; margin: 0;">
+                              <i class="fa-solid fa-shield-heart"></i>
+                              <span>3 Pasos Clave de Seguridad</span>
+                            </div>
+                          </div>
+
+                          <div class="phone-steps-list">
+                            <div class="phone-step-card" data-step="1">
+                              <span class="phone-step-icon">🧘</span>
+                              <div class="phone-step-info">
+                                <h5>1. Mantén la calma</h5>
+                                <p>Respira profundo y no corras ni empujes.</p>
+                              </div>
+                            </div>
+
+                            <div class="phone-step-card" data-step="2">
+                              <span class="phone-step-icon">🪟</span>
+                              <div class="phone-step-info">
+                                <h5>2. Aléjate de ventanas</h5>
+                                <p>Cuidado con vidrios y objetos que puedan caer.</p>
+                              </div>
+                            </div>
+
+                            <div class="phone-step-card" data-step="3">
+                              <span class="phone-step-icon">🟢</span>
+                              <div class="phone-step-info">
+                                <h5>3. Ve a la Zona Segura</h5>
+                                <p>Sigue la ruta hacia el punto de reunión escolar.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- PESTAÑA 3: MOCHILA DE PREVENCIÓN -->
+                        <div class="app-tab-page" id="pageMochila">
+                          <div class="app-card" style="padding: 6px 10px; margin-bottom: 4px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                              <span class="app-card-title" style="color: #C2410C; margin: 0; font-size: 0.88rem;">
+                                <i class="fa-solid fa-kit-medical"></i> Mochila 72 Horas
+                              </span>
+                              <span id="phoneBackpackCounter" style="font-size: 0.74rem; background: #FFEDD5; color: #9A3412; padding: 2px 7px; border-radius: var(--radius-pill); font-weight: bold;">
+                                0/4 Empacados
+                              </span>
+                            </div>
+                            <p class="app-card-p" style="font-size: 0.74rem;">Toca cada elemento para guardarlo en la mochila:</p>
+                          </div>
+
+                          <div class="backpack-phone-grid">
+                            <button type="button" class="backpack-phone-item" data-item="linterna">
+                              <span class="item-icon" style="font-size: 1.6rem;">🔦</span>
+                              <span class="item-name">Linterna</span>
+                            </button>
+                            <button type="button" class="backpack-phone-item" data-item="botiquin">
+                              <span class="item-icon" style="font-size: 1.6rem;">🩹</span>
+                              <span class="item-name">Botiquín</span>
+                            </button>
+                            <button type="button" class="backpack-phone-item" data-item="agua">
+                              <span class="item-icon" style="font-size: 1.6rem;">💧</span>
+                              <span class="item-name">Agua</span>
+                            </button>
+                            <button type="button" class="backpack-phone-item" data-item="silbato">
+                              <span class="item-icon" style="font-size: 1.6rem;">📢</span>
+                              <span class="item-name">Silbato</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <!-- PESTAÑA 4: ALARMA SÍSMICA -->
+                        <div class="app-tab-page" id="pageAlarma">
+                          <div class="alarm-phone-container">
+                            <div>
+                              <span style="font-family: var(--font-title); font-size: 0.95rem; font-weight: 700; color: #DC2626;">
+                                🚨 Simulacro Sísmico
+                              </span>
+                              <p style="font-size: 0.75rem; color: #7F1D1D; margin: 2px 0 0 0;">
+                                Prueba la sirena de evacuación escolar:
+                              </p>
+                            </div>
+
+                            <button type="button" class="btn-phone-sos-alarm" id="btnPhoneSosAlarm">
+                              <i class="fa-solid fa-bullhorn" style="font-size: 2rem;"></i>
+                              <span>¡ACTIVAR ALARMA!</span>
+                            </button>
+
+                            <div id="phoneAlarmStatusBadge" style="font-size: 0.75rem; font-weight: 700; color: #64748B; background: #F1F5F9; padding: 4px 12px; border-radius: var(--radius-pill);">
+                              Sistema Listo • Toca para practicar
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <!-- BARRA DE NAVEGACIÓN INFERIOR (TABS DE LA APP) -->
+                      <nav class="phone-bottom-nav">
+                        <button type="button" class="phone-nav-tab active-tab" data-target="pageInicio">
+                          <i class="fa-solid fa-house"></i>
+                          <span>Inicio</span>
+                        </button>
+                        <button type="button" class="phone-nav-tab" data-target="pageGuia">
+                          <i class="fa-solid fa-shield-halved"></i>
+                          <span>Guía</span>
+                        </button>
+                        <button type="button" class="phone-nav-tab" data-target="pageMochila">
+                          <i class="fa-solid fa-bag-shopping"></i>
+                          <span>Mochila</span>
+                        </button>
+                        <button type="button" class="phone-nav-tab" data-target="pageAlarma">
+                          <i class="fa-solid fa-bell"></i>
+                          <span>Alarma</span>
+                        </button>
+                      </nav>
+
+                    </div>
+
+                    <!-- Gesto Home del Celular -->
+                    <div class="phone-home-indicator"></div>
+
                   </div>
                 </div>
 
@@ -191,11 +366,11 @@
             <!-- Pie con Botón hacia las Preguntas -->
             <div class="subslide-footer">
               <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
-                <i class="fa-solid fa-hand-pointer" style="color: #0284C7;"></i> Prueba los botones, prepara la mochila y activa la alarma para comprobar qué tan fácil es de usar.
+                <i class="fa-solid fa-hand-pointer" style="color: #6D28D9;"></i> Usa las 4 pestañas del celular para experimentar su interfaz y verificar si es cómoda para niños.
               </div>
 
               <button type="button" class="btn-fun btn-goto-questions anim-pulse" id="btnGoToQuestions">
-                <span>¡Ya probé la aplicación! Ir a las Preguntas</span>
+                <span>¡Ya probé la app! Ir a las Preguntas</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
@@ -208,7 +383,7 @@
             <div style="width: 100%; display: flex; justify-content: flex-start; margin-bottom: 6px;">
               <button type="button" class="btn-fun btn-fun-secondary" id="btnBackToResource" style="font-size: 0.88rem; padding: 6px 16px;">
                 <i class="fa-solid fa-arrow-left"></i>
-                <span>Volver a la mini-app</span>
+                <span>Volver a la app</span>
               </button>
             </div>
 
@@ -253,7 +428,7 @@
     <!-- Barra Inferior de Estado -->
     <footer class="bottom-hud">
       <div>
-        <i class="fa-solid fa-house-crack" style="color: #6D28D9;"></i>
+        <i class="fa-solid fa-mobile-screen" style="color: #6D28D9;"></i>
         <span>Estación 3: Desierto de Sismos • Evaluación de Usabilidad e Interfaz Infantil</span>
       </div>
       <div>
@@ -270,56 +445,204 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupRoomInteractions('sala3');
 
-      // INTERACTIVIDAD DE LA MOCHILA DE PREVENCIÓN
-      const backpackBtns = document.querySelectorAll('.backpack-item-btn');
-      const counterBadge = document.getElementById('backpackCounterBadge');
-      let packedCount = 0;
+      // 1. NAVEGACIÓN Y SINCRONIZACIÓN DE PESTAÑAS (EN EL CELULAR Y PANEL IZQUIERDO)
+      const navTabs = document.querySelectorAll('.phone-nav-tab');
+      const tabPages = document.querySelectorAll('.app-tab-page');
+      const taskButtons = document.querySelectorAll('.task-item');
+      const progressText = document.getElementById('explorationProgressText');
+      const progressBar = document.getElementById('explorationProgressBar');
 
-      backpackBtns.forEach(btn => {
+      const visitedTabs = new Set(['pageInicio']);
+
+      function updateProgress() {
+        const count = visitedTabs.size;
+        if (progressText) progressText.textContent = `${count} de 4 secciones exploradas`;
+        if (progressBar) progressBar.style.width = `${(count / 4) * 100}%`;
+      }
+
+      function switchPhoneTab(targetId) {
+        navTabs.forEach(t => {
+          if (t.getAttribute('data-target') === targetId) {
+            t.classList.add('active-tab');
+          } else {
+            t.classList.remove('active-tab');
+          }
+        });
+
+        tabPages.forEach(p => {
+          if (p.id === targetId) {
+            p.classList.add('active-page');
+          } else {
+            p.classList.remove('active-page');
+          }
+        });
+
+        // Actualizar estado en el panel izquierdo
+        taskButtons.forEach(btn => {
+          const btnTarget = btn.getAttribute('data-target');
+          if (btnTarget === targetId) {
+            btn.classList.add('active-task');
+          } else {
+            btn.classList.remove('active-task');
+          }
+        });
+
+        visitedTabs.add(targetId);
+        markTaskButtonDone(targetId);
+        updateProgress();
+      }
+
+      function markTaskButtonDone(tabId) {
+        taskButtons.forEach(btn => {
+          if (btn.getAttribute('data-target') === tabId) {
+            btn.classList.add('done-task');
+            const icon = btn.querySelector('.task-icon');
+            if (icon) icon.textContent = '✅';
+          }
+        });
+      }
+
+      // Clics en tabs del celular
+      navTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('data-target');
+          switchPhoneTab(target);
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      });
+
+      // Clics en los botones de tareas del panel izquierdo
+      taskButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-target');
+          switchPhoneTab(target);
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      });
+
+      // 2. SIMULADOR DE CHOQUE DE PLACAS EN INICIO
+      const btnCollide = document.getElementById('btnCollidePlates');
+      const plateLeft = document.getElementById('plateLeft');
+      const plateRight = document.getElementById('plateRight');
+      const notice = document.getElementById('plateAlertNotice');
+      const seismoPath = document.getElementById('seismoPath');
+      const seismoStatus = document.getElementById('seismographStatus');
+
+      if (btnCollide) {
+        btnCollide.addEventListener('click', () => {
+          plateLeft.style.transform = 'translateX(12px) rotate(8deg)';
+          plateRight.style.transform = 'translateX(-12px) rotate(-8deg)';
+          notice.textContent = '💥 ¡Choque! La energía liberada viaja en ondas sísmicas.';
+          notice.style.color = '#DC2626';
+
+          if (seismoStatus) {
+            seismoStatus.textContent = '¡Ondas Activas! ⚠️';
+            seismoStatus.style.color = '#EA580C';
+          }
+
+          if (seismoPath) {
+            seismoPath.setAttribute('stroke', '#EF4444');
+            seismoPath.setAttribute('d', 'M 0 11 L 30 11 L 45 2 L 60 20 L 75 1 L 90 21 L 105 3 L 120 19 L 135 11 L 200 11');
+          }
+
+          if (window.escapeSound) window.escapeSound.playSoftAlert();
+          markTaskButtonDone('pageInicio');
+
+          setTimeout(() => {
+            plateLeft.style.transform = 'none';
+            plateRight.style.transform = 'none';
+          }, 350);
+
+          setTimeout(() => {
+            if (seismoStatus) {
+              seismoStatus.textContent = 'Estable 🟢';
+              seismoStatus.style.color = '#10B981';
+            }
+            if (seismoPath) {
+              seismoPath.setAttribute('stroke', '#38BDF8');
+              seismoPath.setAttribute('d', 'M 0 11 L 50 11 L 60 4 L 70 18 L 80 5 L 90 15 L 100 11 L 200 11');
+            }
+          }, 1800);
+        });
+      }
+
+      // 3. MOCHILA INTERACTIVA DENTRO DEL SMARTPHONE
+      const backpackItems = document.querySelectorAll('.backpack-phone-item');
+      const backpackCounter = document.getElementById('phoneBackpackCounter');
+
+      backpackItems.forEach(btn => {
         btn.addEventListener('click', () => {
           btn.classList.toggle('packed');
-          if (btn.classList.contains('packed')) {
-            btn.innerHTML = `<span style="font-size: 1.5rem;">✅</span><span>${btn.getAttribute('data-item').toUpperCase()}</span>`;
+          const isPacked = btn.classList.contains('packed');
+          const nameSpan = btn.querySelector('.item-name');
+          const iconSpan = btn.querySelector('.item-icon');
+
+          if (isPacked) {
+            iconSpan.textContent = '✅';
+            if (nameSpan) nameSpan.textContent = '¡Listo!';
             if (window.escapeSound) window.escapeSound.playPop();
           } else {
             const item = btn.getAttribute('data-item');
             const icons = { linterna: '🔦', botiquin: '🩹', agua: '💧', silbato: '📢' };
-            btn.innerHTML = `<span style="font-size: 1.5rem;">${icons[item]}</span><span>${item}</span>`;
+            const names = { linterna: 'Linterna', botiquin: 'Botiquín', agua: 'Agua', silbato: 'Silbato' };
+            iconSpan.textContent = icons[item];
+            if (nameSpan) nameSpan.textContent = names[item];
             if (window.escapeSound) window.escapeSound.playClick();
           }
 
-          packedCount = document.querySelectorAll('.backpack-item-btn.packed').length;
-          if (counterBadge) {
-            counterBadge.textContent = packedCount === 4 ? '¡Mochila lista 4/4! 🎉' : `Empacados: ${packedCount}/4`;
+          const packedCount = document.querySelectorAll('.backpack-phone-item.packed').length;
+          if (backpackCounter) {
+            backpackCounter.textContent = packedCount === 4 ? '¡Lista 4/4! 🎉' : `${packedCount}/4 Empacados`;
+            if (packedCount === 4) {
+              backpackCounter.style.background = '#DCFCE7';
+              backpackCounter.style.color = '#15803D';
+              markTaskButtonDone('pageMochila');
+              if (window.escapeSound) window.escapeSound.playSuccess();
+            }
           }
         });
       });
 
-      // SIMULADOR DE ALARMA DE TERREMOTO
-      const btnAlarm = document.getElementById('btnTriggerSismoAlarm');
-      const alarmStatus = document.getElementById('alarmStatusText');
-      const screenContainer = document.getElementById('appScreenContainer');
+      // 4. ALARMA SÍSMICA DENTRO DEL SMARTPHONE
+      const btnSosAlarm = document.getElementById('btnPhoneSosAlarm');
+      const alarmBadge = document.getElementById('phoneAlarmStatusBadge');
+      const phoneFrame = document.getElementById('smartphoneFrame');
 
-      if (btnAlarm) {
-        btnAlarm.addEventListener('click', () => {
-          btnAlarm.disabled = true;
-          alarmStatus.textContent = '🔊 ¡ALERTA SÍSMICA SONANDO! ¡ZONA SEGURA!';
-          alarmStatus.style.color = '#B91C1C';
+      if (btnSosAlarm) {
+        btnSosAlarm.addEventListener('click', () => {
+          btnSosAlarm.disabled = true;
+          btnSosAlarm.classList.add('sounding');
+          alarmBadge.textContent = '🔊 ¡ALERTA SÍSMICA SONANDO! ¡EVACUAR CON CALMA!';
+          alarmBadge.style.color = '#B91C1C';
+          alarmBadge.style.background = '#FEE2E2';
 
-          // Efecto de audio sintetizado
+          // Efecto de sonido sintetizado preventivo
           if (window.escapeSound) window.escapeSound.playAlarmPulse(3.0);
 
-          // Animación de temblor en la pantalla
-          screenContainer.classList.add('anim-earthquake');
+          // Animación de temblor en el teléfono
+          phoneFrame.classList.add('anim-earthquake');
+          markTaskButtonDone('pageAlarma');
 
           setTimeout(() => {
-            screenContainer.classList.remove('anim-earthquake');
-            alarmStatus.textContent = '✅ Simulacro completado con calma y orden.';
-            alarmStatus.style.color = '#059669';
-            btnAlarm.disabled = false;
+            phoneFrame.classList.remove('anim-earthquake');
+            btnSosAlarm.classList.remove('sounding');
+            alarmBadge.textContent = '✅ Simulacro escolar completado exitosamente';
+            alarmBadge.style.color = '#15803D';
+            alarmBadge.style.background = '#DCFCE7';
+            btnSosAlarm.disabled = false;
           }, 3000);
         });
       }
+
+      // Pasos de Guía interactivos con sonido
+      document.querySelectorAll('.phone-step-card').forEach(card => {
+        card.addEventListener('click', () => {
+          if (window.escapeSound) window.escapeSound.playPop();
+          card.classList.add('animate__animated', 'animate__pulse');
+          markTaskButtonDone('pageGuia');
+          setTimeout(() => card.classList.remove('animate__animated', 'animate__pulse'), 500);
+        });
+      });
     });
   </script>
 </body>

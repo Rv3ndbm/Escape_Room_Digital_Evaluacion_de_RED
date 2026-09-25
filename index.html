@@ -43,15 +43,29 @@
       </div>
 
       <div class="hud-right">
-        <!-- Accesibilidad: Tamaño de texto -->
-        <button id="btnTextSize" class="btn-hud-icon" type="button" title="Ajustar tamaño de texto" aria-label="Ajustar tamaño de letra">
-          <i class="fa-solid fa-text-height"></i>
-          <span class="text-size-tag" style="font-size: 0.72rem; font-weight: bold; margin-left: 2px;">A</span>
-        </button>
+        <!-- Ir al Mapa si ya empezó -->
+        <a href="assets/html/mapa.html" class="btn-hud-pill btn-hud-map" id="hudHomeMapBtn" title="Ir al Mapa de Aventura" style="display: none;">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Ir al Mapa</span>
+        </a>
 
-        <!-- Sonido -->
-        <button class="sound-toggle-btn btn-hud-icon" type="button" title="Sonido" aria-label="Activar o silenciar sonido">
+        <!-- Control de Tamaño de Letra (Reducir / Aumentar) -->
+        <div class="hud-font-stepper" title="Ajustar tamaño de letra de la página">
+          <i class="fa-solid fa-font hud-font-icon"></i>
+          <span class="hud-font-label">Letra:</span>
+          <button id="btnTextSizeDec" class="btn-stepper-item" type="button" title="Reducir letra" aria-label="Reducir letra">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="hud-font-val" id="textSizeVal">Normal</span>
+          <button id="btnTextSizeInc" class="btn-stepper-item" type="button" title="Aumentar letra" aria-label="Aumentar letra">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <!-- Botón de Sonido -->
+        <button class="sound-toggle-btn btn-hud-pill btn-hud-sound is-on" type="button" title="Sonido: Activado (Clic para silenciar)" aria-label="Activar o desactivar sonido">
           <i class="fa-solid fa-volume-high"></i>
+          <span class="sound-status-text">Sonido: SÍ</span>
         </button>
       </div>
     </header>
