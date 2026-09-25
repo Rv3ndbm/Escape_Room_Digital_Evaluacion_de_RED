@@ -78,78 +78,72 @@
       </div>
     </header>
 
-    <!-- Escenario Central (Presentación centrada, limpia y sin scroll) -->
+    <!-- Escenario Central (Presentación centrada, limpia, intuitiva y sin scroll) -->
     <main class="main-stage">
       
       <div class="slide-card intro-slide-card animate__animated animate__fadeIn">
         <div class="intro-container">
 
-          <!-- Cabecera de la Introducción -->
+          <!-- Cabecera amigable y personalizada -->
           <div class="intro-header-block">
-            <span class="intro-header-badge">
-              <i class="fa-solid fa-book-open"></i> Breve Instrucción de la Aventura
-            </span>
+            <div class="intro-welcome-badge animate__animated animate__bounceIn">
+              <span id="introGreetingAvatar">🧑‍🔬</span>
+              <span>¡Misión de Exploración Científica!</span>
+            </div>
             <h2 class="intro-header-title">
-              ¡Prepárate para Salvar la Tierra!
+              ¿Listo para la Aventura, <span id="introGreetingName" class="player-highlight-name">Explorador/a</span>?
             </h2>
+            <p class="intro-subtitle-simple">Solo 3 pasos sencillos para salvar el planeta:</p>
           </div>
 
-          <!-- Cuadrícula de 2 Tarjetas Limpias e Ilustradas -->
-          <div class="intro-grid">
+          <!-- Fila de 3 Tarjetas Visuales e Intuitivas -->
+          <div class="intro-steps-row">
             
-            <div class="intro-card intro-card-mission animate__animated animate__fadeInLeft">
-              <div class="intro-card-top-badge">
-                <i class="fa-solid fa-earth-americas"></i> 4 Desastres Naturales
+            <!-- Paso 1: Explora -->
+            <div class="intro-step-card intro-step-explore animate__animated animate__fadeInLeft" id="stepCard1" title="Toca para interactuar">
+              <div class="step-card-num-badge">PASO 1</div>
+              <div class="step-card-emoji-hero">🧭</div>
+              <h3 class="step-card-heading">Viaja por el Mapa</h3>
+              <div class="step-card-stations-pills">
+                <span class="step-station-pill">🌋 Volcán</span>
+                <span class="step-station-pill">🌊 Tsunami</span>
+                <span class="step-station-pill">🏚️ Sismo</span>
+                <span class="step-station-pill">☀️ Calor</span>
               </div>
-              <h3 class="intro-card-title">1. ¿Qué es este Escape Room?</h3>
-              <div class="intro-disasters-chips">
-                <span class="intro-chip chip-volcan">🌋 Volcán</span>
-                <span class="intro-chip chip-tsunami">🌊 Tsunami</span>
-                <span class="intro-chip chip-sismo">🏚️ Sismo</span>
-                <span class="intro-chip chip-calor">☀️ Calor</span>
-              </div>
-              <p class="intro-card-text">
-                Viajarás por <strong>4 estaciones interactivas</strong>. En cada una probarás un recurso digital genial (videos, simuladores y juegos) para evaluar si es perfecto para aprender.
-              </p>
+              <p class="step-card-desc">Visita las 4 estaciones y prueba simuladores interactivos.</p>
             </div>
 
-            <div class="intro-card intro-card-goal animate__animated animate__fadeInRight">
-              <div class="intro-card-top-badge">
-                <i class="fa-solid fa-trophy"></i> Tu Ruta de Éxito
+            <!-- Paso 2: La Regla de Oro (HIGHLIGHTED / HERO CARD) -->
+            <div class="intro-step-card intro-step-golden animate__animated animate__pulse anim-pulse" id="stepCard2" title="¡El secreto para ganar!">
+              <div class="step-card-num-badge gold-badge">⭐ REGLA DE ORO</div>
+              <div class="step-card-emoji-hero">✨ ⭐ ✨</div>
+              <h3 class="step-card-heading golden-heading">¡Primero Juega, Luego Responde!</h3>
+              <div class="step-card-golden-tip">
+                <i class="fa-solid fa-hand-pointer"></i> Experimenta en pantalla
               </div>
-              <h3 class="intro-card-title">2. ¿Cómo avanzar y ganar?</h3>
-              <div class="intro-steps-chips">
-                <span class="intro-chip chip-step">🗺️ Explora</span>
+              <p class="step-card-desc golden-desc">Toca botones y prueba cosas antes de contestar los retos para saber todo.</p>
+            </div>
+
+            <!-- Paso 3: Recompensa -->
+            <div class="intro-step-card intro-step-reward animate__animated animate__fadeInRight" id="stepCard3" title="Toca para interactuar">
+              <div class="step-card-num-badge">PASO 3</div>
+              <div class="step-card-emoji-hero">🏆</div>
+              <h3 class="step-card-heading">Gana tu Diploma</h3>
+              <div class="step-card-stations-pills">
+                <span class="step-station-pill pill-reward">🎯 4 Retos</span>
                 <span class="intro-step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                <span class="intro-chip chip-step">🎯 Retos</span>
-                <span class="intro-step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                <span class="intro-chip chip-step-gold">🏆 Diploma</span>
+                <span class="step-station-pill pill-reward-gold">📜 Diploma</span>
               </div>
-              <p class="intro-card-text">
-                En el <strong>Mapa de Aventura</strong> desbloquearás las estaciones en orden. Al completar las 4 paradas, ¡obtendrás el gran trofeo científico y tu diploma personalizado para imprimir!
-              </p>
+              <p class="step-card-desc">¡Supera las 4 paradas y recibe tu Diploma oficial de Guardián!</p>
             </div>
 
-          </div>
-
-          <!-- La Regla de Oro (Destacada y Clara) -->
-          <div class="golden-rule-banner animate__animated animate__pulse anim-pulse">
-            <div class="golden-star-icon">
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="golden-rule-content">
-              <h4>¡La Regla de Oro del Explorador!</h4>
-              <p>
-                <strong>Primero debes interactuar y explorar cada recurso</strong> antes de responder las preguntas para avanzar. ¡Observa con atención, diviértete y aprende!
-              </p>
-            </div>
           </div>
 
           <!-- Botón de Acción Directa al Mapa -->
           <div class="intro-cta-wrap">
             <a href="mapa.html" class="btn-fun btn-fun-primary btn-intro-start" id="btnGoToMap">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <span>¡Ir al Mapa de la Misión!</span>
+              <i class="fa-solid fa-rocket"></i>
+              <span>¡Entrar al Mapa y Comenzar!</span>
               <i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
@@ -162,8 +156,8 @@
     <!-- Barra Inferior de Estado -->
     <footer class="bottom-hud">
       <div>
-        <i class="fa-solid fa-circle-info" style="color: #0284C7;"></i>
-        <span>Paso 2 de la misión: Conoce las reglas y lánzate a explorar</span>
+        <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+        <span>Tip: Toca las tarjetas para interactuar • Nivel 4.º Primaria (9-10 años)</span>
       </div>
       <div>
         <span>Misión: Salvar la Tierra 🌍</span>
@@ -175,8 +169,37 @@
   <!-- Scripts -->
   <script src="../js/main.js"></script>
   <script>
-    document.getElementById('btnGoToMap').addEventListener('click', () => {
-      if (window.escapeSound) window.escapeSound.playPop();
+    document.addEventListener('DOMContentLoaded', () => {
+      // Sincronizar nombre y avatar elegidos por el niño
+      const name = (window.EscapeState && window.EscapeState.getName()) || localStorage.getItem('explorer_name') || 'Explorador/a';
+      const avatar = (window.EscapeState && window.EscapeState.getAvatar()) || localStorage.getItem('explorer_avatar') || '🧑‍🔬';
+      
+      const greetingNameEl = document.getElementById('introGreetingName');
+      const greetingAvatarEl = document.getElementById('introGreetingAvatar');
+      if (greetingNameEl) greetingNameEl.textContent = name;
+      if (greetingAvatarEl) greetingAvatarEl.textContent = avatar;
+
+      // Efectos táctiles y sonidos en las tarjetas
+      ['stepCard1', 'stepCard2', 'stepCard3'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('click', () => {
+            if (window.escapeSound) window.escapeSound.playPop();
+            el.classList.add('animate__animated', 'animate__rubberBand');
+            setTimeout(() => {
+              el.classList.remove('animate__animated', 'animate__rubberBand');
+            }, 800);
+          });
+        }
+      });
+
+      // Botón Ir al Mapa
+      const btnGo = document.getElementById('btnGoToMap');
+      if (btnGo) {
+        btnGo.addEventListener('click', () => {
+          if (window.escapeSound) window.escapeSound.playPop();
+        });
+      }
     });
   </script>
 </body>

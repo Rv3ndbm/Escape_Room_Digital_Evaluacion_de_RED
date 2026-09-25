@@ -107,16 +107,16 @@
                 <div class="tsunami-controls-bar">
                   <!-- Presets Rápidos -->
                   <div class="tsunami-presets">
-                    <button class="btn-preset active" data-m="1">1m (Calma)</button>
-                    <button class="btn-preset" data-m="5">5m (Fuerte)</button>
-                    <button class="btn-preset" data-m="15">15m (Alerta)</button>
-                    <button class="btn-preset" data-m="30">30m (Mega Tsunami)</button>
+                    <button type="button" class="btn-preset active" data-m="1"><i class="fa-solid fa-water"></i> 1m (Calma)</button>
+                    <button type="button" class="btn-preset" data-m="5"><i class="fa-solid fa-water"></i> 5m (Fuerte)</button>
+                    <button type="button" class="btn-preset" data-m="15"><i class="fa-solid fa-triangle-exclamation"></i> 15m (Alerta)</button>
+                    <button type="button" class="btn-preset" data-m="30"><i class="fa-solid fa-skull-crossbones"></i> 30m (Mega Tsunami)</button>
                   </div>
 
                   <!-- Control Deslizante (Slider) -->
                   <div class="tsunami-slider-wrapper">
                     <span class="tsunami-slider-label">
-                      <i class="fa-solid fa-water"></i> Altura de Ola:
+                      <i class="fa-solid fa-water"></i> Altura:
                     </span>
                     <input 
                       type="range" 
@@ -126,12 +126,18 @@
                       max="30" 
                       value="1" 
                       step="1"
+                      aria-label="Altura de ola del tsunami en metros"
                     >
                     <span id="tsunamiMeterBadge" class="tsunami-meter-badge">1 m</span>
                   </div>
 
+                  <!-- Botón de Simulación de Impacto -->
+                  <button id="btnLaunchTsunami" class="btn-tsunami-launch" type="button" title="Lanzar impacto de ola y observar la física del tsunami">
+                    <i class="fa-solid fa-play"></i> Simular Ola
+                  </button>
+
                   <!-- Severidad -->
-                  <span id="tsunamiSeverityBadge" style="font-family: var(--font-title); font-size: 0.85rem; font-weight: 700; color: #0369A1; background: #E0F2FE; padding: 4px 12px; border-radius: var(--radius-pill);">
+                  <span id="tsunamiSeverityBadge" class="tsunami-severity-badge">
                     Calma 🌊
                   </span>
                 </div>
@@ -139,34 +145,447 @@
                 <!-- Escenario Visual Panorámico Costero -->
                 <div class="tsunami-stage-viewport" id="tsunamiViewport">
                   
-                  <div class="scene-sun">☀️</div>
+                  <!-- Cielo Atmosférico con Sol, Nubes y Gaviotas -->
+                  <div class="scene-sky-backdrop">
+                    <div class="scene-sun" id="tsunamiSun">☀️</div>
+                    <div class="scene-cloud cloud-1">☁️</div>
+                    <div class="scene-cloud cloud-2">⛅</div>
+                    <div class="scene-cloud cloud-3">☁️</div>
+                    <div class="scene-seagull gull-1">🕊️</div>
+                    <div class="scene-seagull gull-2">🕊️</div>
+                  </div>
 
-                  <!-- Colina Alta y Refugio Seguro (+30m) -->
-                  <div class="scene-hill">
-                    <div class="hill-shelter">
-                      <i class="fa-solid fa-person-shelter" style="color: #15803D;"></i>
-                      <span>Zona Segura (+30m)</span>
+                  <!-- Lienzo SVG con Relieve Costero Majestuoso y Geología Realista (viewBox 0 0 1000 500) -->
+                  <svg class="coastal-terrain-svg" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <!-- Gradiente del lecho marino profundo y corteza abisal -->
+                      <linearGradient id="seabedStrataGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#1E293B" />
+                        <stop offset="35%" stop-color="#0F172A" />
+                        <stop offset="100%" stop-color="#020617" />
+                      </linearGradient>
+
+                      <!-- Gradiente de la roca madre y corteza continental continua -->
+                      <linearGradient id="bedrockEarthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#475569" />
+                        <stop offset="25%" stop-color="#334155" />
+                        <stop offset="60%" stop-color="#1E293B" />
+                        <stop offset="100%" stop-color="#0F172A" />
+                      </linearGradient>
+
+                      <!-- Gradiente de cordillera lejana con bruma atmosférica -->
+                      <linearGradient id="distantMountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.7" />
+                        <stop offset="40%" stop-color="#60A5FA" stop-opacity="0.8" />
+                        <stop offset="85%" stop-color="#2563EB" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#1D4ED8" />
+                      </linearGradient>
+
+                      <!-- Gradiente de colina intermedia con bosque frondoso -->
+                      <linearGradient id="midHillForestGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#22C55E" />
+                        <stop offset="30%" stop-color="#16A34A" />
+                        <stop offset="70%" stop-color="#15803D" />
+                        <stop offset="100%" stop-color="#14532D" />
+                      </linearGradient>
+
+                      <!-- Gradiente de la ladera frontal (cubierta vegetal viva) -->
+                      <linearGradient id="frontGrassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4ADE80" />
+                        <stop offset="20%" stop-color="#22C55E" />
+                        <stop offset="65%" stop-color="#16A34A" />
+                        <stop offset="100%" stop-color="#15803D" />
+                      </linearGradient>
+
+                      <!-- Gradiente de arena dorada costera soleada -->
+                      <linearGradient id="goldenSandGrad" x1="0%" y1="0%" x2="100%" y2="40%">
+                        <stop offset="0%" stop-color="#FDE68A" />
+                        <stop offset="35%" stop-color="#F59E0B" />
+                        <stop offset="75%" stop-color="#D97706" />
+                        <stop offset="100%" stop-color="#B45309" />
+                      </linearGradient>
+
+                      <!-- Arena húmeda de orilla y rompiente marea baja -->
+                      <linearGradient id="wetSandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#78350F" />
+                        <stop offset="60%" stop-color="#92400E" />
+                        <stop offset="100%" stop-color="#B45309" />
+                      </linearGradient>
+
+                      <!-- Asfalto de la vía de evacuación -->
+                      <linearGradient id="roadAsphaltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#1E293B" />
+                        <stop offset="45%" stop-color="#334155" />
+                        <stop offset="100%" stop-color="#1E293B" />
+                      </linearGradient>
+
+                      <!-- Estratos de acantilado rocoso calizo -->
+                      <linearGradient id="cliffRockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#CBD5E1" />
+                        <stop offset="50%" stop-color="#94A3B8" />
+                        <stop offset="100%" stop-color="#64748B" />
+                      </linearGradient>
+
+                      <!-- Resplandor de baliza de cumbre -->
+                      <radialGradient id="beaconGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#EF4444" stop-opacity="1" />
+                        <stop offset="60%" stop-color="#EF4444" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="#EF4444" stop-opacity="0" />
+                      </radialGradient>
+                    </defs>
+
+                    <!-- ============================================================== -->
+                    <!-- 1. CORDILLERA LEJANA ATMOSFÉRICA (PERSPECTIVA 3D)              -->
+                    <!-- ============================================================== -->
+                    <path d="M 480 340 
+                             C 560 270, 640 180, 720 120 
+                             C 780 75, 840 50, 920 40 
+                             L 1000 35 L 1000 500 L 480 500 Z" 
+                          fill="url(#distantMountainGrad)" opacity="0.4" />
+
+                    <!-- Segunda cresta montañosa intermedia con niebla -->
+                    <path d="M 520 335 
+                             C 600 280, 670 210, 750 150 
+                             C 810 105, 870 85, 950 70 
+                             L 1000 65 L 1000 500 L 520 500 Z" 
+                          fill="url(#midHillForestGrad)" opacity="0.65" />
+
+                    <!-- Bosques en la cresta intermedia (pinares densos lejanos) -->
+                    <g fill="#14532D" opacity="0.6">
+                      <polygon points="760,148 767,126 774,148" />
+                      <polygon points="772,144 779,120 786,144" />
+                      <polygon points="820,105 827,82 834,105" />
+                      <polygon points="832,100 839,78 846,100" />
+                      <polygon points="880,78 887,58 894,78" />
+                      <polygon points="892,75 898,54 905,75" />
+                    </g>
+
+                    <!-- ============================================================== -->
+                    <!-- 2. BASE GEOLÓGICA Y CORTEZA TERRESTRE CONTINUA (CERO CORTES)   -->
+                    <!-- ============================================================== -->
+                    <!-- Trazado maestro continuo de terreno desde x=0 hasta x=1000 -->
+                    <path d="M 0 440 
+                             C 120 440, 200 440, 260 435 
+                             C 320 430, 360 380, 400 355 
+                             C 450 350, 520 338, 580 320 
+                             C 650 300, 710 240, 770 185 
+                             C 820 145, 850 135, 880 128 
+                             C 920 120, 960 115, 1000 110 
+                             L 1000 500 L 0 500 Z" 
+                          fill="url(#bedrockEarthGrad)" />
+
+                    <!-- Estratos sedimentarios y roca profunda -->
+                    <path d="M 0 465 
+                             C 130 465, 210 465, 270 460 
+                             C 330 455, 370 410, 415 390 
+                             C 465 385, 530 375, 590 355 
+                             C 660 335, 720 280, 780 230 
+                             C 830 190, 860 175, 890 168 
+                             C 930 160, 970 155, 1000 150 
+                             L 1000 500 L 0 500 Z" 
+                          fill="#020617" opacity="0.65" />
+
+                    <!-- ============================================================== -->
+                    <!-- 3. DETALLES DEL LECHO MARINO (FOSA ABISAL Y TALUD)              -->
+                    <!-- ============================================================== -->
+                    <g class="seabed-details" opacity="0.95">
+                      <!-- Rocas abisales pulidas con algas -->
+                      <ellipse cx="50" cy="438" rx="26" ry="8" fill="#1E293B" />
+                      <ellipse cx="130" cy="437" rx="34" ry="9" fill="#0F172A" />
+                      <ellipse cx="220" cy="436" rx="28" ry="8" fill="#1E293B" />
+                      <ellipse cx="310" cy="425" rx="30" ry="8" fill="#334155" />
+                      <ellipse cx="360" cy="385" rx="22" ry="7" fill="#475569" />
+
+                      <!-- Corales tropicales ramificados y estrellas marinas -->
+                      <path d="M 75 438 Q 80 405 88 400 Q 94 412 98 395 Q 104 415 110 438 Z" fill="#F43F5E" />
+                      <path d="M 85 438 Q 90 415 95 410 Q 100 422 105 438 Z" fill="#FB7185" />
+                      <path d="M 175 438 Q 180 410 188 405 Q 196 418 202 400 Q 208 420 214 438 Z" fill="#F59E0B" />
+                      <path d="M 190 438 Q 195 420 200 415 Q 205 425 210 438 Z" fill="#FDE047" />
+
+                      <!-- Algas marinas ondulantes -->
+                      <path d="M 255 435 Q 250 415 256 400 Q 262 388 258 375" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8" />
+                      <path d="M 262 435 Q 268 418 264 402 Q 260 390 266 378" stroke="#059669" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8" />
+
+                      <!-- Peces tropicales animados con siluetas precisas -->
+                      <path d="M 115 415 Q 125 411 133 415 L 140 410 L 138 415 L 140 420 Z" fill="#38BDF8" />
+                      <circle cx="118" cy="414" r="1.2" fill="#0F172A" />
+                      <path d="M 205 420 Q 215 417 221 420 L 227 416 L 225 420 L 227 424 Z" fill="#FBBF24" />
+
+                      <!-- Rótulos técnicos científicos elegantes en el lecho marino -->
+                      <text x="55" y="460" font-family="'Outfit', sans-serif" font-size="10.5" font-weight="700" fill="#94A3B8" letter-spacing="0.5">🌊 Fosa Oceánica (-100m)</text>
+                      <text x="270" y="445" font-family="'Outfit', sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="0.5">Talud Continental</text>
+                    </g>
+
+                    <!-- ============================================================== -->
+                    <!-- 4. PLAYA NATURAL DE ARENA DORADA Y ORILLA DE ROMPIENTE        -->
+                    <!-- ============================================================== -->
+                    <!-- Capa continua de arena dorada suave (de x=380 a x=610) -->
+                    <path d="M 380 365 
+                             C 430 358, 490 348, 550 330 
+                             C 580 322, 600 316, 620 312 
+                             L 620 360 
+                             C 560 375, 490 395, 410 405 
+                             C 390 408, 380 405, 380 405 Z" 
+                          fill="url(#goldenSandGrad)" />
+
+                    <!-- Franja de arena húmeda y brillante de marea -->
+                    <path d="M 380 365 
+                             C 405 362, 435 358, 465 352 
+                             L 465 368 
+                             C 435 375, 405 380, 380 385 Z" 
+                          fill="url(#wetSandGrad)" opacity="0.9" />
+
+                    <!-- Línea de espuma suave de rompiente marina -->
+                    <path d="M 382 366 C 410 363, 440 358, 470 352" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8" />
+                    <path d="M 390 369 C 420 365, 450 360, 480 354" stroke="#FDE68A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" />
+
+                    <text x="460" y="380" font-family="'Outfit', sans-serif" font-size="11" font-weight="800" fill="#92400E" opacity="0.85">🏖️ Playa Costera (0 a +3m)</text>
+
+                    <!-- ============================================================== -->
+                    <!-- 5. LADERA PRINCIPAL FRONDOSA Y ACANTILADOS ROCOSOS            -->
+                    <!-- ============================================================== -->
+                    <!-- Capa de vegetación y hierba verde en toda la montaña -->
+                    <path d="M 570 324 
+                             C 640 304, 705 244, 765 188 
+                             C 815 148, 845 138, 875 130 
+                             C 915 122, 955 117, 1000 112 
+                             L 1000 230 
+                             C 940 240, 870 260, 800 300 
+                             C 720 345, 640 380, 570 395 Z" 
+                          fill="url(#frontGrassGrad)" />
+
+                    <!-- Acantilados rocosos y farallones naturales en la ladera -->
+                    <polygon points="675,282 705,250 735,260 715,292" fill="url(#cliffRockGrad)" />
+                    <polygon points="685,282 705,256 725,264 712,288" fill="#475569" opacity="0.4" />
+                    <polygon points="745,212 775,180 802,190 782,222" fill="url(#cliffRockGrad)" />
+
+                    <!-- Bosques densos y variados en la ladera -->
+                    <g fill="#14532D">
+                      <!-- Grupo superior cerca de la cumbre -->
+                      <polygon points="815,145 824,118 833,145" />
+                      <polygon points="825,140 833,112 841,140" />
+                      <polygon points="835,135 844,105 853,135" />
+                      <polygon points="847,130 855,100 863,130" />
+                      <polygon points="857,126 865,96 873,126" />
+                      <!-- Grupo medio en la ladera -->
+                      <polygon points="725,232 733,206 741,232" />
+                      <polygon points="735,226 743,198 751,226" />
+                      <polygon points="745,220 754,192 763,220" />
+                    </g>
+                    <!-- Capa de copas de pino más claras para volumen 3D -->
+                    <g fill="#22C55E" opacity="0.85">
+                      <polygon points="824,124 828,114 832,124" />
+                      <polygon points="834,118 839,106 844,118" />
+                      <polygon points="845,114 850,102 855,114" />
+                      <polygon points="733,212 737,200 741,212" />
+                      <polygon points="743,205 748,194 753,205" />
+                    </g>
+
+                    <!-- ============================================================== -->
+                    <!-- 6. CARRETERA PANORÁMICA DE EVACUACIÓN                          -->
+                    <!-- ============================================================== -->
+                    <!-- Base de asfalto liso y ancho -->
+                    <path d="M 580 322 
+                             C 648 302, 708 242, 768 186 
+                             C 818 146, 848 136, 878 128 
+                             L 1000 112" 
+                          stroke="url(#roadAsphaltGrad)" stroke-width="14" fill="none" stroke-linecap="round" />
+
+                    <!-- Línea blanca central discontinua reflectiva -->
+                    <path d="M 582 322 
+                             C 649 302, 709 242, 769 186 
+                             C 819 146, 849 136, 879 128 
+                             L 1000 112" 
+                          stroke="#FFFFFF" stroke-width="1.8" stroke-dasharray="7,6" fill="none" opacity="0.9" />
+
+                    <!-- Guardarraíl metálico de seguridad costera -->
+                    <path d="M 580 315 
+                             C 648 295, 708 235, 768 179 
+                             C 818 139, 848 129, 878 121 
+                             L 1000 105" 
+                          stroke="#94A3B8" stroke-width="2.2" fill="none" opacity="0.95" />
+
+                    <!-- Flechas luminosas de evacuación en el asfalto -->
+                    <g fill="#38BDF8" opacity="0.95">
+                      <text x="635" y="302" font-size="10.5" transform="rotate(-18 635 302)">⬆️</text>
+                      <text x="725" y="230" font-size="10.5" transform="rotate(-34 725 230)">⬆️</text>
+                      <text x="815" y="160" font-size="10.5" transform="rotate(-38 815 160)">⬆️</text>
+                    </g>
+
+                    <!-- ============================================================== -->
+                    <!-- 7. PROPS Y ARQUITECTURA ILUSTRADA DE ALTA DEFINICIÓN           -->
+                    <!-- ============================================================== -->
+                    <!-- Prop 1: Sombrilla de playa con toalla y castillo (x=455, y=340) -->
+                    <g id="svgPropUmbrella" transform="translate(455, 340)">
+                      <ellipse cx="16" cy="12" rx="16" ry="4" fill="#78350F" opacity="0.25" />
+                      <line x1="16" y1="2" x2="16" y2="12" stroke="#78350F" stroke-width="2.2" />
+                      <path d="M 2 4 Q 16 -12 30 4 Z" fill="#EF4444" />
+                      <path d="M 9 2 Q 16 -12 23 2 Z" fill="#FFFFFF" />
+                      <rect x="2" y="9" width="12" height="5" rx="1.5" fill="#0284C7" transform="rotate(6 2 9)" />
+                      <!-- Castillo de arena infantil -->
+                      <polygon points="26,12 28,7 32,7 34,12" fill="#D97706" />
+                      <rect x="29" y="5" width="2" height="3" fill="#F59E0B" />
+                    </g>
+
+                    <!-- Prop 2: Casa costera detallada (x=508, y=322) -->
+                    <g id="svgPropHouse" transform="translate(508, 322)">
+                      <ellipse cx="24" cy="24" rx="26" ry="5" fill="#78350F" opacity="0.25" />
+                      <!-- Paredes de estuco cálido -->
+                      <rect x="6" y="8" width="32" height="16" rx="2" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2" />
+                      <!-- Puerta de madera con pomo -->
+                      <rect x="20" y="14" width="7" height="10" rx="1" fill="#92400E" />
+                      <circle cx="25.5" cy="19" r="0.8" fill="#FDE047" />
+                      <!-- Ventanas con cristales y reflejo -->
+                      <rect x="9" y="12" width="7" height="7" rx="1" fill="#BAE6FD" stroke="#0284C7" stroke-width="0.8" />
+                      <line x1="12.5" y1="12" x2="12.5" y2="19" stroke="#0284C7" stroke-width="0.6" />
+                      <!-- Tejado a dos aguas de tejas terracota -->
+                      <polygon points="3,8 22,-3 41,8" fill="#DC2626" />
+                      <polygon points="6,8 22,-0.5 38,8" fill="#EA580C" />
+                      <!-- Chimenea con humo sutil -->
+                      <rect x="30" y="-3" width="5" height="7" rx="0.5" fill="#B91C1C" />
+                    </g>
+
+                    <!-- Prop 3: Palmera tropical majestuosa realista (x=562, y=292) -->
+                    <g id="svgPropPalm" transform="translate(562, 292)">
+                      <ellipse cx="16" cy="42" rx="18" ry="4" fill="#78350F" opacity="0.25" />
+                      <!-- Tronco curvo segmentado -->
+                      <path d="M 14 42 Q 9 22 16 6" stroke="#92400E" stroke-width="5" stroke-linecap="round" fill="none" />
+                      <path d="M 14 38 Q 11 25 15 15" stroke="#B45309" stroke-width="3" stroke-dasharray="2.5,3.5" fill="none" />
+                      <!-- Hojas de palma frondosas con doble sombra -->
+                      <path d="M 16 6 Q 1 4 -6 16" stroke="#15803D" stroke-width="3" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 0 2 -4 14" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 6 -7 -1 -2" stroke="#16A34A" stroke-width="3" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 7 -5 1 -1" stroke="#4ADE80" stroke-width="2" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 24 -7 31 -2" stroke="#16A34A" stroke-width="3" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 23 -5 29 -1" stroke="#4ADE80" stroke-width="2" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 30 5 36 16" stroke="#15803D" stroke-width="3" fill="none" stroke-linecap="round" />
+                      <path d="M 16 6 Q 28 3 34 14" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round" />
+                      <!-- Racimo de cocos maduros -->
+                      <circle cx="15" cy="8" r="2.4" fill="#78350F" />
+                      <circle cx="18" cy="9" r="2.4" fill="#78350F" />
+                      <circle cx="16.5" cy="11" r="2.2" fill="#92400E" />
+                    </g>
+
+                    <!-- Prop 4: Escuela costera con mástil y campana (x=608, y=298) -->
+                    <g id="svgPropSchool" transform="translate(608, 298)">
+                      <ellipse cx="24" cy="24" rx="26" ry="5" fill="#14532D" opacity="0.25" />
+                      <rect x="4" y="6" width="38" height="18" rx="2" fill="#FFFFFF" stroke="#64748B" stroke-width="1.2" />
+                      <polygon points="2,6 23,-4 44,6" fill="#1E40AF" />
+                      <!-- Puerta y ventanas escolares -->
+                      <rect x="19" y="13" width="8" height="11" rx="1" fill="#2563EB" />
+                      <rect x="7" y="10" width="8" height="7" rx="1" fill="#BAE6FD" stroke="#93C5FD" stroke-width="0.8" />
+                      <rect x="31" y="10" width="8" height="7" rx="1" fill="#BAE6FD" stroke="#93C5FD" stroke-width="0.8" />
+                      <!-- Reloj campanario -->
+                      <circle cx="23" cy="2" r="3.2" fill="#FFFFFF" stroke="#1E40AF" stroke-width="0.8" />
+                      <line x1="23" y1="2" x2="23" y2="0.5" stroke="#1E40AF" stroke-width="0.8" />
+                      <!-- Mástil con bandera de evacuación -->
+                      <line x1="4" y1="6" x2="4" y2="-8" stroke="#475569" stroke-width="1.4" />
+                      <polygon points="4,-8 13,-4.5 4,-1" fill="#EF4444" />
+                    </g>
+
+                    <!-- ============================================================== -->
+                    <!-- 8. SEÑALÉTICA VIAL Y HITOS DE ALTITUD ESCALONADOS             -->
+                    <!-- ============================================================== -->
+                    <!-- Hito Cota +5m (x=675, y=250) -->
+                    <g id="svgPole5m" transform="translate(675, 250)">
+                      <line x1="8" y1="20" x2="8" y2="0" stroke="#475569" stroke-width="2.5" stroke-linecap="round" />
+                      <rect x="-10" y="-12" width="60" height="16" rx="8" fill="#DC2626" stroke="#FFFFFF" stroke-width="1.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.35))" />
+                      <text x="20" y="-1" font-family="'Outfit', sans-serif" font-size="8.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">⚠️ COTA +5m</text>
+                    </g>
+
+                    <!-- Hito Cota +15m (x=765, y=175) -->
+                    <g id="svgPole15m" transform="translate(765, 175)">
+                      <line x1="8" y1="20" x2="8" y2="0" stroke="#475569" stroke-width="2.5" stroke-linecap="round" />
+                      <rect x="-10" y="-12" width="62" height="16" rx="8" fill="#EA580C" stroke="#FFFFFF" stroke-width="1.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.35))" />
+                      <text x="21" y="-1" font-family="'Outfit', sans-serif" font-size="8.5" font-weight="800" fill="#FFFFFF" text-anchor="middle">🚨 COTA +15m</text>
+                    </g>
+
+                    <!-- ============================================================== -->
+                    <!-- 9. CUMBRE SEGURA (+30m): ORGANIZACIÓN TOTAL SIN COLISIONES     -->
+                    <!-- ============================================================== -->
+                    <!-- Zona A: Hito de entrada CIMA SEGURA (+30m) a la izquierda (x=845, y=95) -->
+                    <g id="svgPole30m" transform="translate(845, 95)">
+                      <line x1="8" y1="26" x2="8" y2="0" stroke="#15803D" stroke-width="3" stroke-linecap="round" />
+                      <rect x="-16" y="-16" width="108" height="20" rx="10" fill="#15803D" stroke="#FFFFFF" stroke-width="2" filter="drop-shadow(0 3px 6px rgba(0,0,0,0.35))" />
+                      <text x="38" y="-3" font-family="'Outfit', sans-serif" font-size="8.8" font-weight="900" fill="#FFFFFF" text-anchor="middle">🛡️ CIMA SEGURA (+30m)</text>
+                    </g>
+
+                    <!-- Zona B: Campamento médico y carpa de socorro al centro (x=895, y=86) -->
+                    <g id="svgSummitCamp" transform="translate(895, 86)">
+                      <!-- Carpa de campaña canadiense grande -->
+                      <polygon points="0,22 18,2 36,22" fill="#F59E0B" stroke="#D97706" stroke-width="1.2" />
+                      <polygon points="6,22 18,6 30,22" fill="#FEF3C7" />
+                      <!-- Entrada con cremallera y cruz roja de primeros auxilios -->
+                      <polygon points="15,22 18,12 21,22" fill="#78350F" />
+                      <rect x="15.5" y="4" width="5" height="1.8" fill="#DC2626" />
+                      <rect x="17.1" y="2.4" width="1.8" height="5" fill="#DC2626" />
+                      <!-- Caja de suministros de emergencia -->
+                      <rect x="40" y="14" width="10" height="8" rx="1" fill="#0284C7" stroke="#0369A1" stroke-width="0.8" />
+                      <line x1="45" y1="14" x2="45" y2="22" stroke="#FFFFFF" stroke-width="1" />
+                    </g>
+
+                    <!-- Zona C: Torre de Telecomunicaciones con Baliza Roja Activa (x=965, y=55) -->
+                    <g id="svgRadioTower" transform="translate(965, 55)">
+                      <!-- Estructura de celosía metálica -->
+                      <line x1="12" y1="52" x2="16" y2="6" stroke="#475569" stroke-width="1.8" />
+                      <line x1="20" y1="52" x2="16" y2="6" stroke="#475569" stroke-width="1.8" />
+                      <line x1="13" y1="42" x2="19" y2="42" stroke="#64748B" stroke-width="1" />
+                      <line x1="14" y1="30" x2="18" y2="30" stroke="#64748B" stroke-width="1" />
+                      <line x1="15" y1="18" x2="17" y2="18" stroke="#64748B" stroke-width="1" />
+                      <!-- Antena satelital parabólica -->
+                      <path d="M 6 22 Q 12 18 16 26" stroke="#38BDF8" stroke-width="2" fill="none" />
+                      <line x1="10" y1="23" x2="14" y2="20" stroke="#0284C7" stroke-width="1" />
+                      <!-- Baliza roja luminosa de alerta -->
+                      <circle cx="16" cy="6" r="8" fill="url(#beaconGlow)" />
+                      <circle cx="16" cy="6" r="2.8" fill="#EF4444" stroke="#FFFFFF" stroke-width="0.8" />
+                    </g>
+                  </svg>
+
+                  <!-- Capa de Personajes Sobre el Terreno (Sin Solapamientos) -->
+                  <div class="coastal-props-layer">
+                    <!-- Personajes en la Playa (Grounded en la arena) -->
+                    <div class="beach-people-cluster" id="beachPeople">
+                      <span id="beachPeopleIcons">👦👧</span>
                     </div>
-                    <div class="hill-evacuees" id="hillEvacuees">
-                      <span>🧑‍🤝‍🧑</span>
-                      <span>🏕️</span>
+
+                    <!-- Evacuados en Carrera por la Vía de Media Colina (+15m) -->
+                    <div class="mid-hill-evacuees" id="midHillEvacuees" style="display: none;">
+                      <span>🏃‍♂️🏃‍♀️💨</span>
+                    </div>
+
+                    <!-- Cima Segura (+30m): Refugio y Celebración (Mirador Despejado a la Derecha) -->
+                    <div class="summit-safe-zone" id="summitSafeZone">
+                      <div class="summit-people-safe">
+                        <span class="people-safe-icons" id="summitPeople">🧑‍🤝‍🧑</span>
+                        <span class="safe-status-pill" id="summitStatusBadge">Zona Segura</span>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- Playa Arenosa y Población Costera -->
-                  <div class="scene-beach">
-                    <div class="beach-elements" id="beachElements">
-                      <span>🏖️</span>
-                      <span>🏠</span>
-                      <span>🌴</span>
-                      <span>🏫</span>
-                    </div>
-                  </div>
+                  <!-- Lienzo Canvas Hidrodinámico de la Ola (60 FPS) -->
+                  <canvas id="tsunamiWaveCanvas" class="tsunami-wave-canvas"></canvas>
 
-                  <!-- Capa de Agua y Ola Dinámica -->
-                  <div class="scene-water-layer" id="tsunamiWaterLayer" style="height: 25%; width: 35%;">
-                    <div class="water-foam"></div>
-                    <div class="water-crest">🌊</div>
+                  <!-- Telemetría Científica HUD Flotante -->
+                  <div class="tsunami-hud-telemetry" id="tsunamiTelemetry">
+                    <div class="telemetry-item">
+                      <i class="fa-solid fa-arrows-up-down" style="color: #38BDF8;"></i>
+                      <span>Altura: <b id="hudWaveHeight" style="color: #38BDF8;">1.0 m</b></span>
+                    </div>
+                    <div class="telemetry-divider"></div>
+                    <div class="telemetry-item">
+                      <i class="fa-solid fa-gauge-high" style="color: #FCD34D;"></i>
+                      <span>Velocidad: <b id="hudWaveSpeed" style="color: #FCD34D;">25 km/h</b></span>
+                    </div>
+                    <div class="telemetry-divider"></div>
+                    <div class="telemetry-item">
+                      <i class="fa-solid fa-burst" style="color: #F87171;"></i>
+                      <span>Impacto: <b id="hudImpactLevel" style="color: #4ADE80;">Calma / Sin Riesgo</b></span>
+                    </div>
+                    <div class="telemetry-divider"></div>
+                    <div class="telemetry-item">
+                      <i class="fa-solid fa-person-running" style="color: #4ADE80;"></i>
+                      <span>Evacuación: <b id="hudEvacState" style="color: #4ADE80;">Playa Segura</b></span>
+                    </div>
                   </div>
 
                 </div>
@@ -177,7 +596,7 @@
             <!-- Pie con Botón hacia las Preguntas -->
             <div class="subslide-footer">
               <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
-                <i class="fa-solid fa-hand-pointer" style="color: #0284C7;"></i> Mueve la barra para ver cómo la altura de la ola impacta la orilla y evacúa a la colina.
+                <i class="fa-solid fa-hand-pointer" style="color: #0284C7;"></i> Ajusta la altura de ola o pulsa <b>"Simular Ola"</b> para ver la física hidrodinámica del tsunami y la evacuación a la cima segura.
               </div>
 
               <button type="button" class="btn-fun btn-goto-questions anim-pulse" id="btnGoToQuestions">
@@ -256,84 +675,567 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupRoomInteractions('sala2');
 
-      // LÓGICA DEL SIMULADOR DE TSUNAMI ULTRA INTUITIVO
+      // =========================================================================
+      // MOTOR HIDRODINÁMICO DEL SIMULADOR DE TSUNAMI Y OLA (60 FPS CANVAS)
+      // =========================================================================
       const slider = document.getElementById('tsunamiSlider');
       const meterBadge = document.getElementById('tsunamiMeterBadge');
       const severityBadge = document.getElementById('tsunamiSeverityBadge');
-      const waterLayer = document.getElementById('tsunamiWaterLayer');
       const presets = document.querySelectorAll('.btn-preset');
-      const beachElements = document.getElementById('beachElements');
-      const hillEvacuees = document.getElementById('hillEvacuees');
+      const btnLaunch = document.getElementById('btnLaunchTsunami');
 
-      function updateSimulation(meters) {
-        meterBadge.textContent = `${meters} m`;
-        slider.value = meters;
+      // Elementos del HUD y escenario
+      const hudWaveHeight = document.getElementById('hudWaveHeight');
+      const hudWaveSpeed = document.getElementById('hudWaveSpeed');
+      const hudImpactLevel = document.getElementById('hudImpactLevel');
+      const hudEvacState = document.getElementById('hudEvacState');
 
-        // Actualizar presets activos
+      const beachPropsRow = document.getElementById('beachPropsRow');
+      const propUmbrella = document.getElementById('propUmbrella');
+      const propHouse = document.getElementById('propHouse');
+      const propPalm = document.getElementById('propPalm');
+      const propSchool = document.getElementById('propSchool');
+
+      const beachPeople = document.getElementById('beachPeople');
+      const beachPeopleIcons = document.getElementById('beachPeopleIcons');
+      const midHillEvacuees = document.getElementById('midHillEvacuees');
+      const summitPeople = document.getElementById('summitPeople');
+      const summitStatusBadge = document.getElementById('summitStatusBadge');
+
+      const canvas = document.getElementById('tsunamiWaveCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Estado de la física
+      let currentMeters = 1;
+      let targetMeters = 1;
+      let wavePhase = 0;
+      let particles = [];
+      let isSimulating = false;
+      let simPhase = 0; // 0 = idle, 1 = drawback, 2 = surge, 3 = peak impact, 4 = victory
+      let simTimer = 0;
+      let drawbackOffset = 0;
+
+      // Dimensiones de lienzo reactivas
+      let w = 0;
+      let h = 0;
+
+      function resizeCanvas() {
+        if (!canvas) return;
+        const rect = canvas.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = rect.width;
+        h = rect.height;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.resetTransform();
+        ctx.scale(dpr, dpr);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      // Doble raf para asegurar dimensiones precisas tras render
+      requestAnimationFrame(() => {
+        resizeCanvas();
+      });
+
+      // Sistema de audio procedimental integrado
+      function playOceanRoar(intensity) {
+        try {
+          const audioCtx = (window.escapeSound && window.escapeSound.audioCtx) || 
+                           (window.AudioContext ? new (window.AudioContext || window.webkitAudioContext)() : null);
+          if (!audioCtx) return;
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          if (window.escapeSound && !window.escapeSound.soundEnabled) return;
+
+          // Generador de ruido blanco filtrado para oleaje
+          const bufferSize = audioCtx.sampleRate * 1.2;
+          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * 0.4;
+          }
+
+          const noise = audioCtx.createBufferSource();
+          noise.buffer = buffer;
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(180 + intensity * 25, audioCtx.currentTime);
+          filter.frequency.exponentialRampToValueAtTime(350 + intensity * 40, audioCtx.currentTime + 0.6);
+          filter.frequency.exponentialRampToValueAtTime(140, audioCtx.currentTime + 1.2);
+
+          const gain = audioCtx.createGain();
+          const vol = Math.min(0.04 + (intensity / 30) * 0.18, 0.22);
+          gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 0.3);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          noise.start();
+          noise.stop(audioCtx.currentTime + 1.25);
+        } catch (e) {
+          // Silencioso en caso de restricción de autoplay
+        }
+      }
+
+      function playSirenSound() {
+        try {
+          const audioCtx = (window.escapeSound && window.escapeSound.audioCtx) || 
+                           (window.AudioContext ? new (window.AudioContext || window.webkitAudioContext)() : null);
+          if (!audioCtx || (window.escapeSound && !window.escapeSound.soundEnabled)) return;
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          const now = audioCtx.currentTime;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.linearRampToValueAtTime(950, now + 0.3);
+          osc.frequency.linearRampToValueAtTime(600, now + 0.6);
+
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.65);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc.stop(now + 0.66);
+        } catch (e) {}
+      }
+
+      // Emisión de partículas de espuma y salpicadura
+      function spawnSprayParticles(x, y, count, force) {
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: x + (Math.random() * 20 - 10),
+            y: y + (Math.random() * 12 - 6),
+            vx: (Math.random() * 3 + 1) * (Math.random() > 0.3 ? 1 : -0.5) * (force * 0.6 + 0.5),
+            vy: -(Math.random() * 3.5 + 1.5) * (force * 0.8 + 0.5),
+            size: Math.random() * 4 + 2,
+            alpha: 1,
+            maxLife: 30 + Math.random() * 25,
+            life: 0
+          });
+        }
+        if (particles.length > 90) {
+          particles.splice(0, particles.length - 90);
+        }
+      }
+
+      // Función para calcular la altura topográfica Y del terreno en cualquier X del canvas
+      function getGroundY(canvasX) {
+        if (w <= 0) return h * 0.71;
+        const nx = Math.max(0, Math.min(1000, (canvasX / w) * 1000));
+        let ny;
+        if (nx <= 260) {
+          // Fosa oceánica profunda (-100m)
+          const t = nx / 260;
+          ny = 440 - t * 5;
+        } else if (nx <= 400) {
+          // Talud continental ascendente hacia la orilla (nx=400, ny=355)
+          const t = (nx - 260) / 140;
+          const s = t * t * (3 - 2 * t);
+          ny = 435 - s * 80;
+        } else if (nx <= 580) {
+          // Playa costera de arena dorada (nx=580, ny=320)
+          const t = (nx - 400) / 180;
+          const s = t * t * (3 - 2 * t);
+          ny = 355 - s * 35;
+        } else if (nx <= 880) {
+          // Ladera montañosa de evacuación (nx=880, ny=128)
+          const t = (nx - 580) / 300;
+          const s = t * t * (3 - 2 * t);
+          ny = 320 - s * 192;
+        } else {
+          // Meseta de la cima segura (+30m) (nx=1000, ny=110)
+          const t = Math.min(1, (nx - 880) / 120);
+          ny = 128 - t * 18;
+        }
+        return (ny / 500) * h;
+      }
+
+      // Referencias a los elementos SVG interactivos
+      const svgUmbrella = document.getElementById('svgPropUmbrella');
+      const svgHouse = document.getElementById('svgPropHouse');
+      const svgPalm = document.getElementById('svgPropPalm');
+      const svgSchool = document.getElementById('svgPropSchool');
+
+      // Actualizar UI, indicadores, telemetría y personajes según altura
+      function updateVisuals(m) {
+        targetMeters = m;
+        meterBadge.textContent = `${m} m`;
+        slider.value = m;
+
+        // Presets activos
         presets.forEach(p => {
-          if (parseInt(p.getAttribute('data-m'), 10) === meters) {
+          if (parseInt(p.getAttribute('data-m'), 10) === m) {
             p.classList.add('active');
           } else {
             p.classList.remove('active');
           }
         });
 
-        // Altura y avance del agua calculados proporcionalmente
-        // 1m: height 24%, width 35%
-        // 30m: height 78%, width 65%
-        const heightPct = 22 + (meters / 30) * 56;
-        const widthPct = 32 + (meters / 30) * 33;
-        waterLayer.style.height = `${heightPct}%`;
-        waterLayer.style.width = `${widthPct}%`;
+        // Telemetría científica HUD
+        const speedKmh = Math.round(20 + m * 2.5);
+        hudWaveHeight.textContent = `${m}.0 m`;
+        hudWaveSpeed.textContent = `${speedKmh} km/h`;
 
-        // Etiquetas de severidad y respuesta de personajes
-        if (meters <= 2) {
+        if (m <= 2) {
+          // CALMA (1m - 2m)
           severityBadge.textContent = 'Calma 🌊';
           severityBadge.style.color = '#0369A1';
           severityBadge.style.background = '#E0F2FE';
-          beachElements.style.opacity = '1';
-          beachElements.innerHTML = '<span>🏖️</span><span>🏠</span><span>🌴</span><span>👦👧</span>';
-          hillEvacuees.innerHTML = '<span>🏕️</span>';
-        } else if (meters <= 7) {
+          severityBadge.style.borderColor = '#BAE6FD';
+
+          hudImpactLevel.textContent = 'Calma / Sin Riesgo';
+          hudImpactLevel.style.color = '#4ADE80';
+          hudEvacState.textContent = 'Playa Segura 🏖️';
+          hudEvacState.style.color = '#4ADE80';
+
+          beachPeople.style.display = 'block';
+          beachPeopleIcons.textContent = '👦👧';
+          beachPeople.style.left = '49%';
+          beachPeople.style.bottom = '28%';
+
+          midHillEvacuees.style.display = 'none';
+
+          summitPeople.textContent = '🧑‍🤝‍🧑';
+          summitStatusBadge.textContent = 'Zona Segura';
+          summitStatusBadge.style.color = '#15803D';
+          summitStatusBadge.style.borderColor = '#22C55E';
+
+          // Props SVG intactos
+          if (svgUmbrella) svgUmbrella.setAttribute('transform', 'translate(455, 340) rotate(0)');
+          if (svgHouse) svgHouse.style.opacity = '1';
+          if (svgPalm) svgPalm.setAttribute('transform', 'translate(562, 292) rotate(0)');
+          if (svgSchool) svgSchool.style.opacity = '1';
+        } else if (m <= 7) {
+          // OLEAJE FUERTE (5m)
           severityBadge.textContent = 'Oleaje Fuerte ⚠️';
           severityBadge.style.color = '#D97706';
           severityBadge.style.background = '#FEF3C7';
-          beachElements.style.opacity = '0.9';
-          beachElements.innerHTML = '<span>🌊</span><span>🏠</span><span>🌴</span><span>🏃‍♂️🏃‍♀️</span>';
-          hillEvacuees.innerHTML = '<span>🏕️</span><span>🧑‍🤝‍🧑</span>';
-        } else if (meters <= 18) {
+          severityBadge.style.borderColor = '#FDE68A';
+
+          hudImpactLevel.textContent = 'Moderado / Inunda Orilla';
+          hudImpactLevel.style.color = '#FCD34D';
+          hudEvacState.textContent = 'Subir a Cota +5m 🏃';
+          hudEvacState.style.color = '#FCD34D';
+
+          beachPeople.style.display = 'block';
+          beachPeopleIcons.textContent = '🏃‍♂️🏃‍♀️';
+          beachPeople.style.left = '62%';
+          beachPeople.style.bottom = '35%';
+
+          midHillEvacuees.style.display = 'none';
+
+          summitPeople.textContent = '🧑‍🤝‍🧑';
+          summitStatusBadge.textContent = 'Refugio Preparado';
+          summitStatusBadge.style.color = '#0284C7';
+          summitStatusBadge.style.borderColor = '#38BDF8';
+
+          if (svgUmbrella) svgUmbrella.setAttribute('transform', 'translate(455, 340) rotate(-14 16 12)');
+          if (svgHouse) svgHouse.style.opacity = '0.95';
+          if (svgPalm) svgPalm.setAttribute('transform', 'translate(562, 292) rotate(-6 16 42)');
+          if (svgSchool) svgSchool.style.opacity = '1';
+        } else if (m <= 18) {
+          // ALERTA DE TSUNAMI (15m)
           severityBadge.textContent = '¡Alerta de Tsunami! 🚨';
           severityBadge.style.color = '#EA580C';
           severityBadge.style.background = '#FFEDD5';
-          beachElements.style.opacity = '0.5';
-          beachElements.innerHTML = '<span>🌊🌊</span><span>🚨</span>';
-          hillEvacuees.innerHTML = '<span>🏕️</span><span>🧑‍🤝‍🧑🙌</span><span style="color: #15803D; font-weight:bold; font-size:0.9rem;">¡A salvo!</span>';
+          severityBadge.style.borderColor = '#FDBA74';
+
+          hudImpactLevel.textContent = 'Severo / Desborde Masivo';
+          hudImpactLevel.style.color = '#FB923C';
+          hudEvacState.textContent = 'Evacuando a Cota +15m 🚨';
+          hudEvacState.style.color = '#FB923C';
+
+          beachPeople.style.display = 'none';
+          midHillEvacuees.style.display = 'block';
+          midHillEvacuees.innerHTML = '<span>🏃‍♂️🏃‍♀️💨</span>';
+          midHillEvacuees.style.left = '75%';
+          midHillEvacuees.style.bottom = '52%';
+
+          summitPeople.textContent = '🧑‍🤝‍🧑🙌';
+          summitStatusBadge.textContent = '¡Ruta a Cima Activa!';
+          summitStatusBadge.style.color = '#EA580C';
+          summitStatusBadge.style.borderColor = '#FB923C';
+
+          if (svgUmbrella) svgUmbrella.setAttribute('transform', 'translate(452, 335) rotate(-30 16 12)');
+          if (svgHouse) svgHouse.style.opacity = '0.75';
+          if (svgPalm) svgPalm.setAttribute('transform', 'translate(562, 292) rotate(-16 16 42)');
+          if (svgSchool) svgSchool.style.opacity = '0.85';
         } else {
-          severityBadge.textContent = '¡Mega Tsunami! 🌊🌊🌊';
+          // MEGA TSUNAMI (30m)
+          severityBadge.textContent = '¡MEGA TSUNAMI! 🌊🌊🌊';
           severityBadge.style.color = '#B91C1C';
           severityBadge.style.background = '#FEE2E2';
-          beachElements.style.opacity = '0.2';
-          beachElements.innerHTML = '<span>🌊🌊🌊</span>';
-          hillEvacuees.innerHTML = '<span>⛰️🏕️</span><span>🧑‍🤝‍🧑🎉</span><span style="color: #15803D; font-weight:bold; font-size:0.9rem;">¡Refugio Protegido!</span>';
+          severityBadge.style.borderColor = '#FCA5A5';
+
+          hudImpactLevel.textContent = '¡CATASTRÓFICO / OLA GIGANTE!';
+          hudImpactLevel.style.color = '#F87171';
+          hudEvacState.textContent = '¡A SALVO EN CIMA +30m! 🏆';
+          hudEvacState.style.color = '#4ADE80';
+
+          beachPeople.style.display = 'none';
+          midHillEvacuees.style.display = 'none';
+
+          summitPeople.innerHTML = '<span>🧑‍🤝‍🧑🎉✨</span>';
+          summitStatusBadge.textContent = '¡100% Protegidos en Cima!';
+          summitStatusBadge.style.color = '#15803D';
+          summitStatusBadge.style.borderColor = '#22C55E';
+
+          if (svgUmbrella) svgUmbrella.setAttribute('transform', 'translate(448, 325) rotate(-55 16 12)');
+          if (svgHouse) svgHouse.style.opacity = '0.4';
+          if (svgPalm) svgPalm.setAttribute('transform', 'translate(562, 292) rotate(-26 16 42)');
+          if (svgSchool) svgSchool.style.opacity = '0.5';
         }
       }
 
+      // Eventos interactivos del slider y presets
       slider.addEventListener('input', () => {
         const val = parseInt(slider.value, 10);
-        updateSimulation(val);
+        updateVisuals(val);
+        playOceanRoar(val);
         if (window.escapeSound) window.escapeSound.playClick();
       });
 
-      presets.forEach(p => {
-        p.addEventListener('click', () => {
-          const val = parseInt(p.getAttribute('data-m'), 10);
-          updateSimulation(val);
+      presets.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = parseInt(btn.getAttribute('data-m'), 10);
+          updateVisuals(val);
+          playOceanRoar(val);
+          if (val >= 15) playSirenSound();
           if (window.escapeSound) window.escapeSound.playPop();
         });
       });
 
-      // Inicializar
-      updateSimulation(1);
+      // =========================================================================
+      // SECUENCIA CINEMÁTICA "SIMULAR OLA" (DRAWBACK -> SURGE -> IMPACT -> SAFE)
+      // =========================================================================
+      btnLaunch.addEventListener('click', () => {
+        if (isSimulating) return;
+        isSimulating = true;
+        simPhase = 1;
+        simTimer = 0;
+        btnLaunch.disabled = true;
+        btnLaunch.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Simulando...';
+        btnLaunch.style.opacity = '0.85';
+
+        if (targetMeters >= 15) {
+          playSirenSound();
+        }
+        playOceanRoar(targetMeters);
+      });
+
+      // =========================================================================
+      // BUCLE DE RENDERIZADO HIDRODINÁMICO A 60 FPS
+      // =========================================================================
+      function renderSimulationLoop() {
+        requestAnimationFrame(renderSimulationLoop);
+
+        if (!canvas || w <= 0 || h <= 0) {
+          resizeCanvas();
+          return;
+        }
+
+        ctx.clearRect(0, 0, w, h);
+        wavePhase += 0.038;
+
+        // Suavizado dinámico del metro de altura
+        currentMeters += (targetMeters - currentMeters) * 0.12;
+
+        // Lógica cinemática de fases de impacto
+        if (isSimulating) {
+          simTimer++;
+          if (simPhase === 1) {
+            // Fase 1: Drawback (el mar se retira mar adentro antes del tsunami)
+            drawbackOffset += (Math.min(targetMeters * 3.5, 65) - drawbackOffset) * 0.08;
+            if (simTimer > 50) {
+              simPhase = 2; // Inicia la embestida de la ola
+              simTimer = 0;
+              playOceanRoar(targetMeters * 1.5);
+              if (targetMeters >= 15) playSirenSound();
+            }
+          } else if (simPhase === 2) {
+            // Fase 2: Gran oleaje y avance sobre la costa
+            drawbackOffset += (-Math.min(targetMeters * 2.8, 55) - drawbackOffset) * 0.12;
+            const impactX = w * (0.34 + (targetMeters / 30) * 0.32);
+            const impactY = getGroundY(impactX) - 15;
+            if (Math.random() < 0.6) {
+              spawnSprayParticles(impactX, impactY, 3, targetMeters / 10);
+            }
+            if (simTimer > 80) {
+              simPhase = 3; // Impacto máximo y cota alcanzada
+              simTimer = 0;
+              if (typeof confetti === 'function' && targetMeters >= 15) {
+                confetti({
+                  particleCount: targetMeters >= 30 ? 60 : 35,
+                  spread: 60,
+                  origin: { x: 0.88, y: 0.28 }
+                });
+              }
+              if (window.escapeSound) window.escapeSound.playSuccess();
+            }
+          } else if (simPhase === 3) {
+            // Fase 3: Retorno gradual a reposo
+            drawbackOffset += (0 - drawbackOffset) * 0.06;
+            if (simTimer > 60) {
+              isSimulating = false;
+              simPhase = 0;
+              drawbackOffset = 0;
+              btnLaunch.disabled = false;
+              btnLaunch.innerHTML = '<i class="fa-solid fa-play"></i> Simular Ola';
+              btnLaunch.style.opacity = '1';
+            }
+          }
+        } else {
+          drawbackOffset += (0 - drawbackOffset) * 0.1;
+        }
+
+        // =======================================================================
+        // =======================================================================
+        // CÁLCULO DE PERFIL DE LA OLA (SHALLOW WATER SHOALING EFFECT)
+        // =======================================================================
+        const baseWaterY = (355 / 500) * h; // Nivel medio del mar en reposo en la orilla
+        const waveScale = currentMeters / 30;
+
+        // Runup normalizado (nx entre 402 en calma y 835 en mega tsunami de 30m)
+        let baseNxRunUp;
+        if (currentMeters <= 5) {
+          baseNxRunUp = 402 + ((currentMeters - 1) / 4) * 128; // 402 a 530 (inunda orilla y playa)
+        } else if (currentMeters <= 15) {
+          baseNxRunUp = 530 + ((currentMeters - 5) / 10) * 190; // 530 a 720 (inunda pueblo y supera cota +5m)
+        } else {
+          baseNxRunUp = 720 + ((currentMeters - 15) / 15) * 115; // 720 a 835 (alcanza ladera antes de cota +30m)
+        }
+
+        const frontRunUpX = Math.max(w * 0.15, (baseNxRunUp / 1000) * w - drawbackOffset);
+        const peakWaveHeightPx = 12 + Math.pow(waveScale, 0.82) * (h * 0.52);
+
+        const stepX = 5;
+
+        // =======================================================================
+        // CUERPO OCEÁNICO UNIFICADO Y SÓLIDO (PINTADO TODO DE AZUL SIN LÍNEAS RARAS)
+        // =======================================================================
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0, getGroundY(0));
+        ctx.lineTo(0, baseWaterY);
+
+        let wavePoints = [];
+        for (let x = 0; x <= frontRunUpX; x += stepX) {
+          const shoalingMult = 1 + (x / (w * 0.65)) * 1.5;
+          const osc1 = Math.sin((x * 0.024) - (wavePhase * 1.4)) * (4 + waveScale * 8 * shoalingMult);
+          const osc2 = Math.sin((x * 0.048) + (wavePhase * 1.6)) * 2.2;
+
+          let crestRise = 0;
+          const shoalingStartX = w * 0.12;
+          if (x > shoalingStartX && x <= frontRunUpX) {
+            const crestProgress = (x - shoalingStartX) / (frontRunUpX - shoalingStartX);
+            crestRise = Math.pow(Math.sin(crestProgress * Math.PI * 0.95), 1.4) * peakWaveHeightPx;
+          }
+
+          let y = baseWaterY - (osc1 + osc2 + crestRise) + (drawbackOffset * 0.4);
+          const groundY = getGroundY(x);
+          const distToFront = frontRunUpX - x;
+          if (distToFront < 35) {
+            const blend = distToFront / 35;
+            y = groundY - (groundY - y) * Math.sin(blend * Math.PI * 0.5);
+          }
+          y = Math.min(y, groundY);
+          wavePoints.push({ x, y });
+          ctx.lineTo(x, y);
+        }
+
+        // Trazado del fondo del terreno exactamente hacia atrás (CERO CORTE VERTICAL)
+        ctx.lineTo(frontRunUpX, getGroundY(frontRunUpX));
+        for (let x = frontRunUpX; x >= 0; x -= stepX) {
+          ctx.lineTo(x, getGroundY(x));
+        }
+        ctx.lineTo(0, getGroundY(0));
+        ctx.closePath();
+
+        // PINTADA TODA AZUL SÓLIDO (Gradiente oceánico vibrante sin transparencia)
+        const waterGrad = ctx.createLinearGradient(0, baseWaterY - peakWaveHeightPx, 0, h);
+        waterGrad.addColorStop(0, '#00B4D8');    // Turquesa brillante en la cresta
+        waterGrad.addColorStop(0.20, '#0077B6'); // Azul océano vivo
+        waterGrad.addColorStop(0.60, '#023E8A'); // Azul marino profundo
+        waterGrad.addColorStop(1, '#03045E');    // Azul medianoche abisal
+        ctx.fillStyle = waterGrad;
+        ctx.fill();
+        ctx.restore();
+
+        // =======================================================================
+        // CAPA 2: CRESTA DE ESPUMA BLANCA Y BORDE DE CONTACTO DE OLA
+        // =======================================================================
+        if (wavePoints.length > 2) {
+          ctx.beginPath();
+          ctx.moveTo(wavePoints[0].x, wavePoints[0].y);
+          for (let i = 1; i < wavePoints.length; i++) {
+            ctx.lineTo(wavePoints[i].x, wavePoints[i].y);
+          }
+          ctx.lineWidth = Math.max(3.5, 3.5 + waveScale * 5);
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.stroke();
+
+          // Espuma burbujeante secundaria bajo la cresta
+          ctx.beginPath();
+          for (let i = 2; i < wavePoints.length; i += 3) {
+            const pt = wavePoints[i];
+            const foamY = pt.y + 4 + Math.sin(wavePhase * 2.5 + pt.x * 0.1) * 3;
+            ctx.arc(pt.x, foamY, 2 + waveScale * 2.5, 0, Math.PI * 2);
+          }
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+          ctx.fill();
+
+          // Lengua espumosa redondeada en el frente de contacto del agua con la costa
+          const tipGroundY = getGroundY(frontRunUpX);
+          ctx.beginPath();
+          ctx.ellipse(frontRunUpX - 4, tipGroundY - 2, 8 + waveScale * 14, 4 + waveScale * 5, -0.15, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+          ctx.fill();
+        }
+
+        // =======================================================================
+        // CAPA 4: CHORROS DE SALPICADURAS Y GOTAS EN SUSPENSIÓN (PARTÍCULAS)
+        // =======================================================================
+        if (currentMeters > 3 && Math.random() < 0.45) {
+          const spawnPt = wavePoints[Math.floor(wavePoints.length * 0.88)] || { x: frontRunUpX, y: baseWaterY };
+          spawnSprayParticles(spawnPt.x, spawnPt.y, 2, currentMeters / 12);
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.18; // Gravedad
+          p.life++;
+          p.alpha = Math.max(0, 1 - (p.life / p.maxLife));
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.9})`;
+          ctx.fill();
+
+          if (p.life >= p.maxLife || p.y > h) {
+            particles.splice(i, 1);
+          }
+        }
+
+        ctx.restore();
+      }
+
+      // Iniciar bucle
+      renderSimulationLoop();
+
+      // Inicializar simulación en estado Calma (1m)
+      updateVisuals(1);
     });
   </script>
 </body>

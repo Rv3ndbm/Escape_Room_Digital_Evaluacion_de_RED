@@ -144,6 +144,39 @@ function initAdventureMap() {
 
     container.appendChild(stationEl);
   });
+
+  // Hitbox de proximidad inteligente: asegura que ningún clic en el mapa se pierda si se hace clic cerca del nodo
+  const trackArea = document.querySelector('.map-track-area');
+  if (trackArea && !trackArea.dataset.proximityBound) {
+    trackArea.dataset.proximityBound = 'true';
+    trackArea.addEventListener('click', (e) => {
+      // Si el clic ya cayó directamente dentro de una estación o en sus hijos, no intervenir
+      if (e.target.closest('.map-station')) return;
+
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+      const stations = container.querySelectorAll('.map-station');
+      let closestStation = null;
+      let minDistance = 125; // Radio generoso de 125px alrededor del centro de cada nodo
+
+      stations.forEach((st) => {
+        const node = st.querySelector('.station-node') || st;
+        const rect = node.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dist = Math.hypot(clickX - centerX, clickY - centerY);
+
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestStation = st;
+        }
+      });
+
+      if (closestStation) {
+        closestStation.click();
+      }
+    });
+  }
 }
 
 function showMapNotice(message) {

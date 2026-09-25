@@ -5,58 +5,68 @@
  * ==========================================================================
  */
 
-/* Flotación suave y orgánica para stickers y mascotas */
+/* Flotación suave y orgánica para stickers y mascotas (Hardware-accelerated, cero parpadeo y cero artefactos de píxeles) */
 @keyframes softFloat {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-8px) rotate(1.5deg);
+    transform: translate3d(0, -8px, 0);
   }
 }
 
 @keyframes softFloatSlow {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-12px) rotate(-2deg);
+    transform: translate3d(0, -10px, 0);
   }
 }
 
 .anim-float {
   animation: softFloat 4.2s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .anim-float-slow {
   animation: softFloatSlow 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Brillo y pulsación tierna para botones y estaciones activas */
 @keyframes pastelPulse {
   0%, 100% {
-    transform: scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
     box-shadow: 0 6px 20px rgba(56, 189, 248, 0.28);
   }
   50% {
-    transform: scale(1.035);
+    transform: translate3d(0, 0, 0) scale(1.035);
     box-shadow: 0 10px 28px rgba(56, 189, 248, 0.45);
   }
 }
 
 .anim-pulse {
   animation: pastelPulse 2.4s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Pulsación de la estación actual en el mapa */
+/* Pulsación de la estación actual en el mapa (Sin scale para evitar artefactos subpixel) */
 @keyframes stationBeacon {
   0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.45), 0 8px 24px rgba(15, 23, 42, 0.22);
   }
   50% {
-    transform: scale(1.08);
-    box-shadow: 0 0 0 14px rgba(56, 189, 248, 0);
+    box-shadow: 0 0 0 12px rgba(56, 189, 248, 0), 0 10px 28px rgba(2, 132, 199, 0.35);
   }
 }
 
@@ -67,18 +77,22 @@
 /* Destello de trofeo y estrellas */
 @keyframes starShine {
   0%, 100% {
-    transform: scale(1) rotate(0deg);
+    transform: translate3d(0, 0, 0) scale(1);
     opacity: 0.9;
   }
   50% {
-    transform: scale(1.25) rotate(15deg);
+    transform: translate3d(0, 0, 0) scale(1.25);
     opacity: 1;
-    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.8));
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
   }
 }
 
 .anim-star-shine {
   animation: starShine 2.8s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Temblor para la alarma sísmica de la Sala 3 */
@@ -150,7 +164,7 @@
 }
 
 /* ==========================================================================
-   MICRO-INTERACCIONES Y EFECTO DE RAYITOS / CHISPAS DE COLOR AL HACER CLIC
+   MICRO-INTERACCIONES Y EFECTO DE RAYITOS Y BRILLITOS AL HACER CLIC
    ========================================================================== */
 
 /* Contenedor flotante para los destellos y rayitos del clic */
@@ -159,91 +173,137 @@
   pointer-events: none;
   z-index: 99999;
   user-select: none;
+  contain: layout style;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
-/* Onda expansiva suave al hacer clic */
+/* Onda expansiva ultra-suave y acuosa tipo 'drop' */
 .click-ripple-wave {
   position: absolute;
   border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0.2);
-  border: 2.5px solid rgba(56, 189, 248, 0.75);
-  animation: rippleExpand 0.48s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
   pointer-events: none;
+  transform: translate3d(-50%, -50%, 0) scale(0);
+  border: 2px solid rgba(56, 189, 248, 0.7);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+  animation: softRipple 0.52s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+  will-change: transform, opacity;
 }
 
-@keyframes rippleExpand {
+@keyframes softRipple {
   0% {
-    width: 14px;
-    height: 14px;
-    transform: translate(-50%, -50%) scale(0.2);
+    width: 10px;
+    height: 10px;
+    transform: translate3d(-50%, -50%, 0) scale(0.2);
     opacity: 0.95;
   }
+  60% {
+    opacity: 0.6;
+  }
   100% {
-    width: 70px;
-    height: 70px;
-    transform: translate(-50%, -50%) scale(1.15);
+    width: 68px;
+    height: 68px;
+    transform: translate3d(-50%, -50%, 0) scale(1.1);
     opacity: 0;
   }
 }
 
-/* Partícula individual de estrellita / destello */
+/* Rayitos de luz alargados y redondeados con trayectoria radial */
+.click-sparkle-ray {
+  position: absolute;
+  width: 3.2px;
+  height: 13px;
+  border-radius: 999px;
+  transform-origin: center bottom;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) rotate(var(--angle)) translateY(0) scaleY(0);
+  animation: softRayShoot 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 0 6px currentColor;
+  will-change: transform, opacity;
+}
+
+@keyframes softRayShoot {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) rotate(var(--angle)) translateY(0) scaleY(0.2);
+  }
+  18% {
+    opacity: 0.95;
+    transform: translate3d(-50%, -50%, 0) rotate(var(--angle)) translateY(calc(var(--dist) * -0.4)) scaleY(1.1);
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) rotate(var(--angle)) translateY(calc(var(--dist) * -1.25)) scaleY(0.2);
+  }
+}
+
+/* Brillitos y destellos flotantes (estrellitas, chispas y diamantitos) */
 .click-sparkle-item {
   position: absolute;
-  transform: translate(-50%, -50%) scale(0);
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 800;
   line-height: 1;
-  animation: sparkleFly 0.58s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0);
+  animation: softSparkleFloat 0.58s cubic-bezier(0.2, 0.9, 0.35, 1.25) forwards;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
+  will-change: transform, opacity;
 }
 
-@keyframes sparkleFly {
+@keyframes softSparkleFloat {
   0% {
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.2) rotate(0deg);
-    opacity: 1;
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.1) rotate(0deg);
   }
-  50% {
+  20% {
     opacity: 1;
-    transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1.25) rotate(var(--rot));
+    transform: translate3d(-50%, -50%, 0) translate3d(calc(var(--tx) * 0.4), calc(var(--ty) * 0.4), 0) scale(1.2) rotate(var(--rot));
+  }
+  65% {
+    opacity: 0.9;
   }
   100% {
-    transform: translate(-50%, -50%) translate(calc(var(--tx) * 1.3), calc(var(--ty) * 1.3)) scale(0) rotate(calc(var(--rot) * 2));
     opacity: 0;
+    transform: translate3d(-50%, -50%, 0) translate3d(var(--tx), var(--ty), 0) scale(0.3) rotate(calc(var(--rot) * 1.8));
   }
 }
 
-/* Rayitos de colores alargados */
-.click-sparkle-ray {
-  position: absolute;
-  width: 3.5px;
-  height: 16px;
-  border-radius: 3px;
-  transform-origin: center bottom;
-  animation: rayShoot 0.52s ease-out forwards;
+/* Halo suave de cursor (Efecto etéreo y soft moderno en PC) */
+.soft-cursor-halo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99990;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(254, 240, 138, 0.08) 40%, transparent 70%);
+  filter: blur(14px);
+  transition: opacity 0.3s ease;
+  will-change: transform;
 }
 
-@keyframes rayShoot {
-  0% {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scaleY(0.4);
-    opacity: 1;
-  }
-  55% {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--dist) * -0.85)) scaleY(1.25);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--dist) * -1.25)) scaleY(0);
-    opacity: 0;
-  }
-}
-
+/* ==========================================================================
+   MICRO-INTERACCIONES Y DESTELLES EN BOTONES
+   ========================================================================== */
 /* Destello brillante que cruza los botones al pasar el cursor (Shine Sweep) */
 .btn-fun {
   position: relative;
   overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .btn-fun::after {
@@ -254,25 +314,54 @@
   width: 45%;
   height: 220%;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 100%);
-  transform: rotate(25deg);
+  transform: rotate(25deg) translateZ(0);
   pointer-events: none;
   opacity: 0;
+  visibility: hidden;
 }
 
 .btn-fun:hover::after {
   opacity: 1;
+  visibility: visible;
   left: 140%;
   transition: left 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Efecto rebote elástico agradable en botones y tarjetas al hacer clic (:active) */
-.btn-fun:active,
-.btn-hud-pill:active,
-.avatar-chip:active,
-.option-card:active,
-.btn-stepper-item:active {
-  transform: scale(0.93) translateY(1px) !important;
-  transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+/* Sensación Soft Háptica: Spring elástico en todos los elementos interactivos */
+button, 
+a.btn-fun, 
+a.btn-hud-pill, 
+.avatar-chip, 
+.option-card, 
+.map-station, 
+.btn-stepper-item, 
+.intro-step-card, 
+.btn-mag-pill,
+.tsunami-btn-meter,
+.backpack-phone-item,
+.sim-ctrl-btn,
+.phone-action-btn,
+.phone-nav-tab {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.22s ease, 
+              border-color 0.2s ease !important;
+}
+
+button:active, 
+a.btn-fun:active, 
+a.btn-hud-pill:active, 
+.avatar-chip:active, 
+.option-card:active, 
+.map-station:active, 
+.btn-stepper-item:active, 
+.intro-step-card:active,
+.btn-mag-pill:active,
+.tsunami-btn-meter:active,
+.backpack-phone-item:active,
+.sim-ctrl-btn:active,
+.phone-action-btn:active {
+  transform: scale(0.93) translateY(2px) !important;
+  transition: transform 0.08s ease-out !important;
 }
 
 /* Micro-interacción: Tarjetas de opciones de respuesta con hover magnético suave */

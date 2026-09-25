@@ -102,6 +102,10 @@ html, body {
   position: absolute;
   opacity: 0.55;
   filter: drop-shadow(0 4px 12px rgba(186, 230, 253, 0.4));
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* ==========================================================================
@@ -570,15 +574,20 @@ html, body {
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 
 .btn-fun:hover {
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(-2px) scale(1.02) translateZ(0);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .btn-fun:active {
-  transform: translateY(1px) scale(0.98);
+  transform: translateY(1px) scale(0.98) translateZ(0);
 }
 
 .btn-fun-primary {
@@ -934,35 +943,36 @@ html, body {
 }
 
 /* ==========================================================================
-   PANTALLA 2: INTRODUCCIÓN Y REGLAS (DIAPOSITIVA CENTRADA, AMPLIA Y BALANCEADA)
+   PANTALLA 2: INTRODUCCIÓN Y REGLAS (DIAPOSITIVA CENTRADA, SIMPLE, CERO SCROLL)
    ========================================================================== */
 .slide-card.intro-slide-card {
-  width: 100%;
-  max-width: 1020px;
+  width: 96%;
+  max-width: 1360px;
   height: auto;
-  max-height: calc(100vh - 96px);
+  max-height: calc(100vh - 90px);
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: clamp(16px, 2.5vh, 28px) clamp(22px, 3.5vw, 44px);
+  padding: clamp(22px, 3.4vh, 42px) clamp(30px, 4.5vw, 64px);
   box-sizing: border-box;
+  box-shadow: 0 16px 44px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
 }
 
 .intro-container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 2vh, 20px);
+  gap: clamp(16px, 2.6vh, 28px);
   margin: 0 auto;
   box-sizing: border-box;
 }
 
-/* Cabecera */
+/* Cabecera amigable y personalizada */
 .intro-header-block {
   text-align: center;
   display: flex;
@@ -971,97 +981,116 @@ html, body {
   gap: 6px;
 }
 
-.intro-header-badge {
+.intro-welcome-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: var(--pastel-blue-light);
   color: var(--pastel-blue-dark);
   font-family: var(--font-title);
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-  font-weight: 700;
-  padding: 5px 16px;
+  font-size: clamp(0.96rem, 1.25vw, 1.15rem);
+  font-weight: 800;
+  padding: 7px 24px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.15);
 }
 
 .intro-header-title {
   font-family: var(--font-title);
-  font-size: clamp(1.6rem, 2.7vw, 2.25rem);
-  font-weight: 700;
-  color: #0284C7;
-  margin: 0;
-  line-height: 1.2;
+  font-size: clamp(1.95rem, 3.2vw, 2.85rem);
+  font-weight: 800;
+  color: #0369A1;
+  margin: 2px 0 0 0;
+  line-height: 1.15;
 }
 
-/* Cuadrícula de 2 Tarjetas */
-.intro-grid {
+.player-highlight-name {
+  color: #D97706;
+  text-decoration: underline;
+  text-decoration-color: #FCD34D;
+  text-underline-offset: 6px;
+}
+
+.intro-subtitle-simple {
+  font-size: clamp(1.1rem, 1.45vw, 1.32rem);
+  color: var(--text-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Fila de 3 Tarjetas Visuales e Intuitivas */
+.intro-steps-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(16px, 2.4vw, 26px);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.6vw, 32px);
   width: 100%;
 }
 
-.intro-card {
+.intro-step-card {
+  position: relative;
   background: white;
-  border-radius: var(--radius-xl);
-  padding: clamp(16px, 2.2vh, 24px) clamp(18px, 2.4vw, 28px);
+  border-radius: clamp(20px, 2.2vw, 28px);
+  padding: clamp(24px, 3.4vh, 36px) clamp(18px, 2.2vw, 26px);
+  min-height: clamp(250px, 33vh, 320px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 10px;
-  box-shadow: 0 6px 20px rgba(30, 41, 59, 0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  justify-content: flex-start;
+  gap: clamp(10px, 1.6vh, 16px);
+  border: 3px solid #E2E8F0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
-.intro-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(30, 41, 59, 0.12);
+.intro-step-card:hover {
+  transform: translateY(-5px) scale(1.025);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.15);
+  border-color: #38BDF8;
 }
 
-.intro-card-mission {
-  border: 2.5px solid #BAE6FD;
-  background: linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 60%);
+.intro-step-card:active {
+  transform: scale(0.97);
 }
 
-.intro-card-goal {
-  border: 2.5px solid #BBF7D0;
-  background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 60%);
-}
-
-.intro-card-top-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+/* Badge numérico superior */
+.step-card-num-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0284C7;
+  color: white;
   font-family: var(--font-title);
-  font-size: clamp(0.82rem, 1vw, 0.94rem);
-  font-weight: 700;
-  padding: 4px 14px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 4px 20px;
   border-radius: var(--radius-pill);
+  box-shadow: 0 3px 8px rgba(2, 132, 199, 0.4);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
-.intro-card-mission .intro-card-top-badge {
-  background: #E0F2FE;
-  color: #0369A1;
+/* Icono Hero de cada paso */
+.step-card-emoji-hero {
+  font-size: clamp(3rem, 4.6vw, 4rem);
+  line-height: 1;
+  margin-top: 6px;
 }
 
-.intro-card-goal .intro-card-top-badge {
-  background: #DCFCE7;
-  color: #15803D;
-}
-
-.intro-card-title {
+.step-card-heading {
   font-family: var(--font-title);
-  font-size: clamp(1.22rem, 1.6vw, 1.45rem);
-  font-weight: 700;
+  font-size: clamp(1.26rem, 1.75vw, 1.6rem);
+  font-weight: 800;
   color: var(--text-main);
   margin: 0;
 }
 
-/* Pastillas temáticas dentro de las tarjetas */
-.intro-disasters-chips,
-.intro-steps-chips {
+/* Pastillas temáticas dentro de la tarjeta */
+.step-card-stations-pills {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1070,196 +1099,176 @@ html, body {
   margin: 4px 0;
 }
 
-.intro-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-title);
-  font-size: clamp(0.85rem, 1.05vw, 0.96rem);
+.step-station-pill {
+  font-size: clamp(0.88rem, 1.15vw, 1.02rem);
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 5px 13px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.chip-volcan {
-  background: #FFE4E6;
-  color: #BE123C;
-  border: 1.5px solid #FECDD3;
-}
-
-.chip-tsunami {
-  background: #E0F2FE;
-  color: #0369A1;
-  border: 1.5px solid #BAE6FD;
-}
-
-.chip-sismo {
-  background: #FEF3C7;
-  color: #B45309;
-  border: 1.5px solid #FDE68A;
-}
-
-.chip-calor {
-  background: #FFEDD5;
-  color: #C2410C;
-  border: 1.5px solid #FED7AA;
-}
-
-.chip-step {
   background: #F1F5F9;
   color: #334155;
-  border: 1.5px solid #E2E8F0;
+  border: 1.5px solid #CBD5E1;
 }
 
-.chip-step-gold {
-  background: #FEF08A;
-  color: #854D0E;
-  border: 1.5px solid #FDE047;
-  font-weight: 800;
-}
-
-.intro-step-arrow {
-  color: #94A3B8;
-  font-size: 0.82rem;
-  display: inline-flex;
-  align-items: center;
-}
-
-.intro-card-text {
-  font-size: clamp(0.96rem, 1.2vw, 1.12rem);
+.step-card-desc {
+  font-size: clamp(0.98rem, 1.25vw, 1.14rem);
   color: var(--text-muted);
   line-height: 1.45;
   margin: 0;
 }
 
-/* La Regla de Oro */
-.golden-rule-banner {
-  background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 100%);
-  border: 2.5px dashed #F59E0B;
-  border-radius: var(--radius-lg);
-  padding: clamp(10px, 1.6vh, 16px) clamp(16px, 2.2vw, 24px);
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 1.8vw, 20px);
-  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18);
-  width: 100%;
-  box-sizing: border-box;
+/* TARJETA 2: LA REGLA DE ORO (ESTILO HERO DORADO LLAMATIVO Y ELEGANTE) */
+.intro-step-golden {
+  background: linear-gradient(180deg, #FEFCE8 0%, #FEF9C3 100%);
+  border: 3.5px solid #F59E0B;
+  box-shadow: 0 10px 28px rgba(245, 158, 11, 0.25);
 }
 
-.golden-star-icon {
-  font-size: clamp(2.2rem, 3vw, 2.8rem);
-  color: #D97706;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  filter: drop-shadow(0 2px 6px rgba(217, 119, 6, 0.3));
+.intro-step-golden:hover {
+  border-color: #D97706;
+  box-shadow: 0 16px 36px rgba(245, 158, 11, 0.35);
 }
 
-.golden-rule-content {
-  text-align: left;
+.gold-badge {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+  box-shadow: 0 3px 10px rgba(217, 119, 6, 0.45);
 }
 
-.golden-rule-content h4 {
-  font-family: var(--font-title);
-  font-size: clamp(1.05rem, 1.3vw, 1.22rem);
-  font-weight: 700;
+.golden-heading {
   color: #92400E;
-  margin: 0 0 3px 0;
 }
 
-.golden-rule-content p {
-  font-size: clamp(0.9rem, 1.1vw, 1.04rem);
+.step-card-golden-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.16);
+  color: #B45309;
+  font-family: var(--font-title);
+  font-size: clamp(0.9rem, 1.18vw, 1.05rem);
+  font-weight: 800;
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+}
+
+.golden-desc {
   color: #78350F;
   font-weight: 600;
-  margin: 0;
-  line-height: 1.4;
 }
 
-/* Contenedor y Botón de Inicio */
+/* Recompensa */
+.pill-reward {
+  background: #E0F2FE;
+  color: #0369A1;
+  border-color: #BAE6FD;
+}
+
+.pill-reward-gold {
+  background: #FEF08A;
+  color: #854D0E;
+  border-color: #FDE047;
+  font-weight: 800;
+}
+
+.intro-step-arrow {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Botón CTA Inferior */
 .intro-cta-wrap {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 2px;
+  margin-top: 6px;
 }
 
 .btn-intro-start {
-  font-size: clamp(1.12rem, 1.45vw, 1.28rem);
-  padding: clamp(12px, 1.8vh, 16px) clamp(28px, 3.6vw, 44px);
-  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.38);
+  font-size: clamp(1.26rem, 1.7vw, 1.52rem);
+  padding: clamp(15px, 2.4vh, 20px) clamp(42px, 5.2vw, 64px);
+  gap: 14px;
+  box-shadow: 0 8px 26px rgba(2, 132, 199, 0.4);
+  border-radius: var(--radius-pill);
   animation: introPulse 2.8s infinite ease-in-out;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @keyframes introPulse {
   0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 8px 22px rgba(2, 132, 199, 0.38);
+    transform: translate3d(0, 0, 0) scale(1);
+    box-shadow: 0 8px 26px rgba(2, 132, 199, 0.4);
   }
   50% {
-    transform: scale(1.03);
-    box-shadow: 0 10px 28px rgba(2, 132, 199, 0.55);
+    transform: translate3d(0, 0, 0) scale(1.035);
+    box-shadow: 0 12px 32px rgba(2, 132, 199, 0.6);
   }
 }
 
 .btn-intro-start:hover {
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-3px) scale(1.045) translateZ(0);
 }
 
-/* Reglas Responsive y Adaptabilidad sin Scroll */
+/* Adaptabilidad para pantallas compactas */
 @media (max-height: 720px) {
   .slide-card.intro-slide-card {
-    padding: 10px 20px;
-    max-height: calc(100vh - 86px);
+    padding: 10px 18px;
+    max-height: calc(100vh - 84px);
   }
   .intro-container {
     gap: 8px;
   }
-  .intro-card {
-    padding: 10px 14px;
+  .intro-header-title {
+    font-size: 1.45rem;
+  }
+  .intro-subtitle-simple {
+    font-size: 0.92rem;
+  }
+  .intro-step-card {
+    padding: 10px 12px;
+    min-height: auto;
     gap: 6px;
   }
-  .intro-card-title {
-    font-size: 1.1rem;
+  .step-card-num-badge {
+    top: -10px;
+    font-size: 0.76rem;
+    padding: 2px 12px;
   }
-  .intro-card-text {
-    font-size: 0.86rem;
-    line-height: 1.35;
+  .step-card-emoji-hero {
+    font-size: 2rem;
+    margin-top: 2px;
   }
-  .intro-chip {
+  .step-card-heading {
+    font-size: 1.08rem;
+  }
+  .step-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  .step-station-pill {
     font-size: 0.78rem;
-    padding: 3px 8px;
+    padding: 2px 8px;
   }
-  .golden-rule-banner {
-    padding: 8px 14px;
-    gap: 12px;
-  }
-  .golden-star-icon {
-    font-size: 1.8rem;
-  }
-  .golden-rule-content h4 {
-    font-size: 0.95rem;
-  }
-  .golden-rule-content p {
-    font-size: 0.82rem;
+  .step-card-golden-tip {
+    font-size: 0.78rem;
+    padding: 2px 8px;
   }
   .btn-intro-start {
-    font-size: 1.02rem;
-    padding: 9px 24px;
+    font-size: 1.05rem;
+    padding: 10px 24px;
   }
 }
 
-@media (max-width: 680px) {
-  .intro-grid {
+@media (max-width: 768px) {
+  .intro-steps-row {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  .intro-card {
-    padding: 12px 16px;
-  }
-  .slide-card.intro-slide-card {
-    padding: 14px 16px;
+  .intro-step-card {
+    min-height: auto;
   }
 }
 
@@ -1334,6 +1343,7 @@ html, body {
   height: 100%;
   pointer-events: none;
   z-index: 2;
+  transform: translateZ(0);
 }
 
 .map-path-glow {
@@ -1373,6 +1383,25 @@ html, body {
   position: relative;
   transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hitbox invisible ultra-generosa para garantizar clics 100% certeros en niños */
+.map-station::before {
+  content: '';
+  position: absolute;
+  inset: -60px -32px -28px -32px;
+  border-radius: 40px;
+  background: transparent;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.map-station > * {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
 }
 
 /* Escalonamiento vertical que calza con el relieve de cada bioma */
@@ -1419,18 +1448,21 @@ html, body {
   height: clamp(74px, 6.2vw, 88px);
   border-radius: 50%;
   background: white;
-  border: 4.5px solid #CBD5E1;
+  border: 5px solid #CBD5E1;
+  background-clip: padding-box;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22), inset 0 2px 4px rgba(255, 255, 255, 0.9);
   position: relative;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-sizing: border-box;
 }
 
 .station-icon-emoji {
   font-size: clamp(2rem, 2.8vw, 2.6rem);
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));
+  text-shadow: 0 2px 5px rgba(0,0,0,0.18);
+  user-select: none;
 }
 
 .station-badge-num {
@@ -1448,8 +1480,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2.5px solid white;
+  border: 2px solid white;
+  background-clip: padding-box;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 /* Tarjeta de Información bajo el Nodo */
@@ -1638,8 +1672,7 @@ html, body {
 }
 
 .map-station.current .station-node {
-  box-shadow: 0 0 0 7px rgba(56, 189, 248, 0.45), 0 10px 28px rgba(2, 132, 199, 0.35);
-  animation: stationBeacon 2s infinite;
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.45), 0 10px 28px rgba(2, 132, 199, 0.35);
 }
 
 .station-pulse-ring {
@@ -1649,6 +1682,7 @@ html, body {
   border: 3px solid #38BDF8;
   animation: beaconPulse 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
   pointer-events: none;
+  box-sizing: border-box;
 }
 
 @keyframes beaconPulse {
@@ -1689,7 +1723,8 @@ html, body {
 
 .avatar-face {
   font-size: 2rem;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  user-select: none;
 }
 
 /* 3. Completada */
@@ -1710,8 +1745,10 @@ html, body {
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  border: 2.5px solid white;
+  border: 2px solid white;
+  background-clip: padding-box;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.45);
+  box-sizing: border-box;
 }
 
 /* Adaptabilidad del Mapa en Pantallas Compactas */
@@ -1804,70 +1841,123 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 40%, #FEF08A 75%, #FDE047 100%);
+  background: #E0F2FE;
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
 }
 
 .tsunami-controls-bar {
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border-bottom: 2px solid rgba(226, 232, 240, 0.8);
+  justify-content: center;
+  gap: clamp(6px, 1vw, 10px);
+  border-bottom: 2px solid rgba(226, 232, 240, 0.9);
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 20;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tsunami-presets {
   display: flex;
-  gap: 8px;
+  gap: 5px;
+  flex-shrink: 0;
 }
 
 .btn-preset {
   font-family: var(--font-title);
-  font-size: 0.88rem;
-  font-weight: 600;
-  padding: 5px 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  height: 32px;
+  padding: 0 8px;
   border-radius: var(--radius-pill);
   border: 1.5px solid #CBD5E1;
   background: white;
+  color: #475569;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
-.btn-preset:hover, .btn-preset.active {
-  background: #0284C7;
+.btn-preset[data-m="1"] {
+  width: 92px;
+  min-width: 92px;
+  max-width: 92px;
+}
+
+.btn-preset[data-m="5"] {
+  width: 92px;
+  min-width: 92px;
+  max-width: 92px;
+}
+
+.btn-preset[data-m="15"] {
+  width: 96px;
+  min-width: 96px;
+  max-width: 96px;
+}
+
+.btn-preset[data-m="30"] {
+  width: 136px;
+  min-width: 136px;
+  max-width: 136px;
+}
+
+.btn-preset:hover {
+  border-color: #38BDF8;
+  color: #0284C7;
+}
+
+.btn-preset.active {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
   color: white;
-  border-color: #0369A1;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+  border-color: #0284C7;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
 }
 
 .tsunami-slider-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex: 1;
-  max-width: 440px;
+  gap: 6px;
+  width: 210px;
+  min-width: 210px;
+  max-width: 210px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .tsunami-slider-label {
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-main);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .tsunami-range {
   flex: 1;
-  height: 10px;
-  border-radius: 5px;
-  background: #CBD5E1;
+  min-width: 60px;
+  height: 7px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #38BDF8 0%, #F59E0B 50%, #EF4444 100%);
   outline: none;
   cursor: pointer;
   accent-color: #0284C7;
@@ -1875,123 +1965,286 @@ html, body {
 
 .tsunami-meter-badge {
   font-family: var(--font-title);
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 4px 12px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  height: 26px;
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
   border-radius: var(--radius-pill);
   background: #0284C7;
   color: white;
-  min-width: 68px;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(2, 132, 199, 0.3);
+  font-variant-numeric: tabular-nums;
+  box-sizing: border-box;
 }
 
+.btn-tsunami-launch {
+  font-family: var(--font-title);
+  font-size: 0.8rem;
+  font-weight: 700;
+  height: 32px;
+  width: 122px;
+  min-width: 122px;
+  max-width: 122px;
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.btn-tsunami-launch:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.tsunami-severity-badge {
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  font-weight: 800;
+  height: 32px;
+  width: 172px;
+  min-width: 172px;
+  max-width: 172px;
+  color: #0369A1;
+  background: #E0F2FE;
+  border: 1.5px solid #BAE6FD;
+  border-radius: var(--radius-pill);
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+/* Escenario Costero Panorámico */
 .tsunami-stage-viewport {
   flex: 1;
   min-height: 0;
   position: relative;
   overflow: hidden;
   display: flex;
+  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 45%, #F0FDF4 100%);
 }
 
-/* Paisaje de Tsunami */
+/* Cielo Atmosférico */
+.scene-sky-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .scene-sun {
   position: absolute;
-  top: 15px;
-  right: 60px;
-  font-size: 3.2rem;
+  top: 14px;
+  left: 60px;
+  font-size: 2.6rem;
   animation: starShine 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.7));
+  z-index: 1;
 }
 
-.scene-hill {
+.scene-cloud {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 38%;
-  height: 82%;
-  background: linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%);
-  border-top-left-radius: 140px;
-  border-top: 4px solid #65A30D;
-  z-index: 5;
+  font-size: 1.7rem;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+  animation: cloudDrift 28s linear infinite;
+  z-index: 1;
+}
+
+.cloud-1 { top: 10px; left: 4%; animation-duration: 32s; }
+.cloud-2 { top: 32px; left: 24%; animation-duration: 40s; animation-delay: -10s; }
+.cloud-3 { top: 18px; left: 45%; animation-duration: 36s; animation-delay: -18s; }
+
+@keyframes cloudDrift {
+  from { transform: translateX(-60px); }
+  to { transform: translateX(calc(100vw + 60px)); }
+}
+
+.scene-seagull {
+  position: absolute;
+  font-size: 1.1rem;
+  opacity: 0.75;
+  animation: seagullFly 16s linear infinite;
+  z-index: 1;
+}
+
+.gull-1 { top: 40px; left: 14%; animation-duration: 18s; }
+.gull-2 { top: 62px; left: 20%; animation-duration: 22s; animation-delay: -6s; }
+
+@keyframes seagullFly {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(35px, -12px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Lienzo SVG Ilustrado con Relieve Realista */
+.coastal-terrain-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Capa de Elementos y Personajes Sobre el Terreno */
+.coastal-props-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Personajes en Playa */
+.beach-people-cluster {
+  position: absolute;
+  bottom: 28%;
+  left: 49%;
+  font-size: 1.55rem;
+  z-index: 8;
+  transition: all 0.35s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Evacuados en Media Colina (+15m) */
+.mid-hill-evacuees {
+  position: absolute;
+  bottom: 50%;
+  left: 75%;
+  font-size: 1.5rem;
+  z-index: 9;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Postes de Cota de Altitud (Metros) */
+.altitude-pole {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.pole-flag {
+  font-family: var(--font-title);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  border: 1.5px solid white;
+  white-space: nowrap;
+}
+
+.pole-5m { bottom: 31%; left: 63%; }
+.pole-5m .pole-flag { background: #DC2626; color: white; }
+
+.pole-15m { bottom: 53%; left: 74%; }
+.pole-15m .pole-flag { background: #EA580C; color: white; }
+
+/* Cima Segura (+30m): Refugio y Celebración (Mirador Despejado sin Solapamiento) */
+.summit-safe-zone {
+  position: absolute;
+  top: 12%;
+  right: 1.5%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 14px;
+  gap: 3px;
+  z-index: 12;
+  pointer-events: none;
 }
 
-.hill-shelter {
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid #365314;
-  border-radius: var(--radius-pill);
-  padding: 4px 14px;
+.summit-people-safe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.people-safe-icons {
+  font-size: 1.45rem;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+}
+
+.safe-status-pill {
   font-family: var(--font-title);
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #14532D;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: 0.7rem;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.96);
+  color: #15803D;
+  border: 1.5px solid #22C55E;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+/* Lienzo Canvas Hidrodinámico de la Ola (60 FPS) */
+.tsunami-wave-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Telemetría Científica HUD Flotante */
+.tsunami-hud-telemetry {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-pill);
+  height: 28px;
+  padding: 0 14px;
   display: flex;
   align-items: center;
-  gap: 6px;
-}
-
-.hill-evacuees {
-  margin-top: 8px;
-  font-size: 1.8rem;
-  display: flex;
-  gap: 8px;
-  transition: all 0.3s;
-}
-
-.scene-beach {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 25%;
-  background: #FDE047;
-  border-top: 3px solid #EAB308;
-  z-index: 3;
-}
-
-.beach-elements {
-  position: absolute;
-  bottom: 22px;
-  left: 38%;
-  font-size: 2.2rem;
-  display: flex;
-  gap: 16px;
-  z-index: 4;
-}
-
-/* Capa de Agua y Ola Dinámica */
-.scene-water-layer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 48%;
-  background: linear-gradient(180deg, #38BDF8 0%, #0284C7 60%, #0369A1 100%);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 6;
-  border-top-right-radius: 60px;
-  box-shadow: 0 -4px 18px rgba(2, 132, 199, 0.4);
-}
-
-.water-crest {
-  position: absolute;
-  top: -16px;
-  right: -8px;
-  font-size: 2.4rem;
+  gap: 10px;
   color: white;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+  font-size: 0.72rem;
+  z-index: 25;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  pointer-events: none;
+  max-width: 95%;
+  box-sizing: border-box;
 }
 
-.water-foam {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 4px;
+.telemetry-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.telemetry-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(148, 163, 184, 0.4);
 }
 
 /* ==========================================================================
@@ -2248,14 +2501,15 @@ html, body {
   flex: 1;
   min-height: 0;
   position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .app-tab-page {
   flex: 1;
+  height: 100%;
+  min-height: 0;
   display: none;
   flex-direction: column;
   padding: 10px 12px;
@@ -2296,64 +2550,462 @@ html, body {
   margin: 0;
 }
 
-/* Vista 1: Inicio (Placas Tectónicas) */
-.plates-box-mini {
-  background: #EFF6FF;
-  border: 1.5px dashed #93C5FD;
+/* ==========================================================================
+   VISTA 1: SIMULADOR AVANZADO DE CHOQUE TECTÓNICO Y ONDAS SÍSMICAS (SISMOKIDS)
+   ========================================================================== */
+.tectonic-sim-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  gap: clamp(6px, 1.4vh, 10px);
+}
+
+/* Escenario Geológico en Corte Transversal */
+.crust-stage-box {
+  position: relative;
+  background: linear-gradient(180deg, #BAE6FD 0%, #E0F2FE 30%, #4ADE80 32%, #15803D 34%, #78350F 55%, #381A05 100%);
+  border: 2px solid #93C5FD;
   border-radius: var(--radius-md);
-  padding: 10px 8px;
-  text-align: center;
-  margin-top: 6px;
+  height: clamp(138px, 28vh, 175px);
+  min-height: 128px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), 0 3px 8px rgba(15, 23, 42, 0.08);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Capa de Superficie con Arbolitos, Casas y Montañas */
+.crust-surface-strip {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 10px;
+  z-index: 4;
+  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+
+.surface-shaker.is-shaking {
+  animation: surfaceJitter 0.1s infinite;
+}
+
+@keyframes surfaceJitter {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-2px, -2px) rotate(-1deg); }
+  50% { transform: translate(2px, 1px) rotate(1deg); }
+  75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.surface-prop {
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+  transition: transform 0.2s;
+}
+
+/* Las Dos Placas Tectónicas (Corteza Subterránea) */
+.crust-plates-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: clamp(86px, 19vh, 114px);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0 4px;
+  z-index: 2;
+  gap: 2px;
+}
+
+.tectonic-plate-block {
+  flex: 1;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 6px;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.plate-continental {
+  background: linear-gradient(135deg, #B45309 0%, #78350F 50%, #451A03 100%);
+  border: 1.5px solid #F59E0B;
+  border-right: 2.5px solid #FBBF24;
+}
+
+.plate-oceanic {
+  background: linear-gradient(225deg, #0284C7 0%, #0369A1 35%, #451A03 85%);
+  border: 1.5px solid #38BDF8;
+  border-left: 2.5px solid #FBBF24;
+}
+
+.plate-badge-tag {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.plate-continental .plate-badge-tag {
+  background: rgba(180, 83, 9, 0.85);
+}
+
+.plate-oceanic .plate-badge-tag {
+  background: rgba(3, 105, 161, 0.85);
+  align-self: flex-end;
+}
+
+.plate-strata-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  opacity: 0.35;
+}
+
+.strata-line {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 1px;
+}
+
+/* Falla y Foco Sísmico (Hipocentro) */
+.fault-seam-center {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  z-index: 5;
+  pointer-events: none;
 }
 
-.plates-row-interactive {
+.hypocenter-core {
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle, #FDE047 0%, #EA580C 60%, #DC2626 100%);
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 10px #F59E0B, 0 0 18px rgba(239, 68, 68, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  font-size: 1.8rem;
+  font-size: 0.75rem;
+  color: #78350F;
+  animation: coreGlow 1.8s infinite ease-in-out;
+  transition: transform 0.15s;
 }
 
-.btn-mini-action {
+@keyframes coreGlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 8px #F59E0B; }
+  50% { transform: scale(1.18); box-shadow: 0 0 16px #EF4444; }
+}
+
+.hypocenter-label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #FEF08A;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-top: 1px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+/* Ondas Sísmicas Expansivas (Ondas P y Ondas S) */
+.seismic-wave-rings {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 170px;
+  pointer-events: none;
+  z-index: 3;
+  display: none;
+}
+
+.seismic-wave-rings.is-active {
+  display: block;
+}
+
+.wave-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Onda P: Rápida, dorada */
+.wave-ring-p {
+  border: 2.5px solid #FBBF24;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.8);
+  animation: wavePropagateP 0.9s cubic-bezier(0.1, 0.7, 0.3, 1) infinite;
+}
+
+/* Onda S: Más lenta, roja/anaranjada, ondulante */
+.wave-ring-s {
+  border: 3.5px dashed #EF4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.9);
+  animation: wavePropagateS 1.25s cubic-bezier(0.15, 0.65, 0.35, 1) infinite 0.2s;
+}
+
+@keyframes wavePropagateP {
+  0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0; }
+}
+
+@keyframes wavePropagateS {
+  0% { transform: translate(-50%, -50%) scale(0.1) rotate(0deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.25) rotate(45deg); opacity: 0; }
+}
+
+/* Banner de instrucción rápida e intuitiva para niños */
+.sismo-quick-tip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  border: 1.5px solid #DDD6FE;
+  border-radius: var(--radius-pill);
+  padding: 5px 10px;
+  font-size: 0.74rem;
+  color: #5B21B6;
+  margin-bottom: 5px;
+  box-shadow: 0 1px 3px rgba(109, 40, 217, 0.06);
+  flex-shrink: 0;
+}
+
+.sismo-quick-tip .tip-icon {
+  font-size: 0.88rem;
+  flex-shrink: 0;
+}
+
+/* Leyenda Didáctica de Ondas (Oculta por prescindible según pedido de usabilidad) */
+.waves-didactic-legend {
+  display: none;
+}
+
+.legend-wave-p {
+  color: #D97706;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.legend-wave-s {
+  color: #DC2626;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Controles de Choque Tectónico */
+.clash-controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.magnitude-selector-pills {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-mag-pill {
+  flex: 1;
   font-family: var(--font-title);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  background: #3B82F6;
+  padding: clamp(5px, 1.1vh, 7px) 8px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #E2E8F0;
+  background: white;
+  color: #64748B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-mag-pill.active {
+  background: #EDE9FE;
+  border-color: #8B5CF6;
+  color: #6D28D9;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);
+}
+
+.btn-clash-trigger {
+  width: 100%;
+  font-family: var(--font-title);
+  font-size: clamp(0.88rem, 1.8vh, 0.95rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 50%, #DC2626 100%);
   color: white;
   border: none;
   border-radius: var(--radius-pill);
-  padding: 4px 12px;
+  padding: clamp(8px, 1.6vh, 11px) 16px;
   cursor: pointer;
-  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.38);
+  transition: all 0.2s ease;
 }
 
-.btn-mini-action:hover {
-  background: #1D4ED8;
-  transform: scale(1.05);
+.btn-clash-trigger:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.45);
+}
+
+.btn-clash-trigger:active {
+  transform: scale(0.97);
+}
+
+/* Sismógrafo Digital en Vivo */
+.digital-seismo-box {
+  background: #0F172A;
+  border: 2px solid #334155;
+  border-radius: var(--radius-md);
+  padding: 8px 10px 6px 10px;
+  color: white;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 3px 8px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 94px;
+  gap: 5px;
+}
+
+.seismo-top-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  margin-bottom: 1px;
+}
+
+.seismo-title-tag {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: #38BDF8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.seismo-mag-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: #1E293B;
+  color: #4ADE80;
+  border: 1px solid #334155;
+  transition: all 0.3s ease;
+}
+
+.seismo-mag-badge.is-alarm {
+  background: #991B1B;
+  color: #FEF08A;
+  border-color: #EF4444;
+  animation: seismoAlarmPulse 0.5s infinite alternate;
+}
+
+@keyframes seismoAlarmPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); box-shadow: 0 0 10px #EF4444; }
+}
+
+.seismo-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 48px;
+  background: #020617;
+  border-radius: 6px;
+  border: 1px solid #1E293B;
+  overflow: hidden;
+}
+
+.seismo-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.seismo-phase-indicator {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94A3B8;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1px;
+  padding: 0 2px;
 }
 
 /* Vista 2: Guía de Emergencia */
+#pageGuia {
+  height: 100%;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .phone-steps-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
+  gap: 8px;
+  flex: 1;
+  justify-content: space-around;
+  margin-top: 2px;
 }
 
 .phone-step-card {
   background: #F0FDF4;
   border: 1.5px solid #BBF7D0;
   border-radius: var(--radius-md);
-  padding: 7px 10px;
+  padding: clamp(8px, 1.6vh, 12px) 12px;
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   transition: transform 0.2s;
+  flex: 1;
 }
 
 .phone-step-card:hover {
@@ -2362,12 +3014,12 @@ html, body {
 }
 
 .phone-step-icon {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .phone-step-info h5 {
   font-family: var(--font-title);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #166534;
   margin: 0;
 }
@@ -2379,28 +3031,38 @@ html, body {
 }
 
 /* Vista 3: Mochila de Prevención */
+#pageMochila {
+  height: 100%;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .backpack-phone-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-top: 6px;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  flex: 1;
+  margin-top: 4px;
 }
 
 .backpack-phone-item {
   background: #FFF7ED;
   border: 2px solid #FFEDD5;
   border-radius: var(--radius-md);
-  padding: 10px 6px;
+  padding: 8px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
   transition: all 0.2s;
   font-family: var(--font-title);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #9A3412;
+  height: 100%;
 }
 
 .backpack-phone-item:hover {
@@ -2415,14 +3077,20 @@ html, body {
 }
 
 /* Vista 4: Alarma Sísmica en el Teléfono */
+#pageAlarma {
+  height: 100%;
+}
+
 .alarm-phone-container {
   flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
-  gap: 10px;
+  gap: 12px;
+  padding: 10px 0;
 }
 
 .btn-phone-sos-alarm {
@@ -2759,7 +3427,10 @@ html, body {
 .trophy-hero-icon {
   font-size: clamp(3.5rem, 5.5vw, 4.8rem);
   animation: starShine 3s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.45));
+  text-shadow: 0 4px 12px rgba(245, 158, 11, 0.45);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .final-title {

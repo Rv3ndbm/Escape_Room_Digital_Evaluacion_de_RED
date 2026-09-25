@@ -102,6 +102,30 @@ class SoundSystem {
     osc.stop(now + 0.06);
   }
 
+  // Tap ultra-suave para micro-interacciones hápticas (burbuja amortiguada)
+  playSoftTap() {
+    if (!this.soundEnabled) return;
+    this.init();
+    if (!this.audioCtx) return;
+
+    const now = this.audioCtx.currentTime;
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(540, now);
+    osc.frequency.exponentialRampToValueAtTime(320, now + 0.05);
+
+    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+    osc.connect(gain);
+    gain.connect(this.audioCtx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.06);
+  }
+
   // Sonido de acierto / éxito musical alegre
   playSuccess() {
     if (!this.soundEnabled) return;
@@ -325,8 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// 4. MICRO-INTERACCIONES VISUALES: RAYITOS DE COLORES Y DESTELLOS AL HACER CLIC
-(function initClickParticles() {
+// 4. MICRO-INTERACCIONES VISUALES Y HÁPTICAS: RAYITOS, BRILLITOS Y FEEDBACK TÁCTIL
+(function initClickMicroInteractions() {
   const PASTEL_COLORS = [
     '#38BDF8', // Celeste cielo
     '#34D399', // Verde menta
@@ -338,13 +362,13 @@ document.addEventListener('DOMContentLoaded', () => {
     '#F472B6'  // Rosa chicle
   ];
 
-  const SPARKLE_SHAPES = ['✦', '★', '✨', '●', '✦', '☀'];
+  const SPARKLE_SHAPES = ['✦', '★', '✨', '●', '✦', '⭐', '🌸'];
   let lastBurstTime = 0;
 
   function createClickSparkleBurst(x, y) {
     const now = Date.now();
-    // Prevenir saturación en clicks continuos ultra-rápidos (mínimo 45ms)
-    if (now - lastBurstTime < 45) return;
+    // Prevenir saturación en clics continuos ultra-rápidos (mínimo 35ms)
+    if (now - lastBurstTime < 35) return;
     lastBurstTime = now;
 
     const burst = document.createElement('div');
@@ -352,30 +376,32 @@ document.addEventListener('DOMContentLoaded', () => {
     burst.style.left = `${x}px`;
     burst.style.top = `${y}px`;
 
-    // 1. Onda expansiva circular suave (ripple)
+    // 1. Onda expansiva ultra-suave circular tipo drop (ripple)
     const ripple = document.createElement('div');
     ripple.className = 'click-ripple-wave';
     const rippleColor = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
     ripple.style.borderColor = rippleColor;
+    ripple.style.boxShadow = `0 0 10px ${rippleColor}`;
     burst.appendChild(ripple);
 
-    // 2. Rayitos de colores proyectados en abanico circular (7 rayitos)
+    // 2. Rayitos de colores en abanico circular suave (6 a 7 rayitos)
     const rayCount = 7;
     const baseAngleOffset = Math.random() * 360;
     for (let i = 0; i < rayCount; i++) {
       const ray = document.createElement('div');
       ray.className = 'click-sparkle-ray';
-      const angle = baseAngleOffset + (i * (360 / rayCount)) + (Math.random() * 16 - 8);
-      const dist = 32 + Math.random() * 24; // Distancia 32px a 56px
+      const angle = baseAngleOffset + (i * (360 / rayCount)) + (Math.random() * 14 - 7);
+      const dist = 30 + Math.random() * 24; // 30px a 54px
       const color = PASTEL_COLORS[(i + Math.floor(Math.random() * 2)) % PASTEL_COLORS.length];
 
       ray.style.setProperty('--angle', `${angle.toFixed(1)}deg`);
       ray.style.setProperty('--dist', `${dist.toFixed(1)}px`);
       ray.style.backgroundColor = color;
+      ray.style.color = color;
       burst.appendChild(ray);
     }
 
-    // 3. Destellitos / estrellitas flotantes con rebote (5 unidades)
+    // 3. Brillitos / estrellitas flotantes con trayectoria orgánica (5 unidades)
     const starCount = 5;
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('span');
@@ -383,13 +409,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const char = SPARKLE_SHAPES[Math.floor(Math.random() * SPARKLE_SHAPES.length)];
       star.textContent = char;
 
-      const rad = ((i * (360 / starCount)) + Math.random() * 30) * (Math.PI / 180);
+      const rad = ((i * (360 / starCount)) + Math.random() * 25) * (Math.PI / 180);
       const dist = 22 + Math.random() * 26;
       const tx = Math.cos(rad) * dist;
       const ty = Math.sin(rad) * dist;
       const rot = Math.floor(Math.random() * 360);
       const color = PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)];
-      const size = 11 + Math.floor(Math.random() * 8);
+      const size = 11 + Math.floor(Math.random() * 7);
 
       star.style.setProperty('--tx', `${tx.toFixed(1)}px`);
       star.style.setProperty('--ty', `${ty.toFixed(1)}px`);
@@ -402,12 +428,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(burst);
 
-    // Limpieza automática tras completar la animación (600ms)
+    // Limpieza automática tras completar la animación (580ms)
     setTimeout(() => {
       if (burst.parentNode) {
         burst.parentNode.removeChild(burst);
       }
-    }, 620);
+    }, 600);
+  }
+
+  // Soft cursor halo para una sensación etérea y suave al mover el ratón (solo en PC con puntero fino)
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const cursorHalo = document.createElement('div');
+    cursorHalo.className = 'soft-cursor-halo';
+    document.body.appendChild(cursorHalo);
+
+    let mouseX = -200, mouseY = -200;
+    let haloX = -200, haloY = -200;
+    let haloVisible = false;
+
+    window.addEventListener('pointermove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!haloVisible) {
+        haloVisible = true;
+        cursorHalo.style.opacity = '1';
+      }
+    }, { passive: true });
+
+    window.addEventListener('mouseleave', () => {
+      if (haloVisible) {
+        haloVisible = false;
+        cursorHalo.style.opacity = '0';
+      }
+    }, { passive: true });
+
+    function renderHalo() {
+      haloX += (mouseX - haloX) * 0.16;
+      haloY += (mouseY - haloY) * 0.16;
+      cursorHalo.style.transform = `translate3d(${haloX}px, ${haloY}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(renderHalo);
+    }
+    requestAnimationFrame(renderHalo);
   }
 
   // Escuchar eventos táctiles y de puntero globales con passive: true
@@ -420,16 +481,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generar rayitos y destellos alegres en las coordenadas exactas del clic/toque
     createClickSparkleBurst(e.clientX, e.clientY);
 
-    // Audio-feedback amigable para elementos interactivos
-    const targetInteractive = e.target.closest(
-      'button, a, input, select, .btn-fun, .option-card, .avatar-chip, .map-station, .btn-hud-pill, .btn-stepper-item, .phone-nav-tab, .backpack-phone-item, .phone-action-btn'
+    // Sensación háptica táctil (Vibration API en dispositivos móviles / táctiles)
+    if (navigator.vibrate) {
+      try {
+        const isHeroAction = e.target.closest && e.target.closest('.btn-fun-primary, .btn-start-adventure, .btn-intro-start, .btn-clash-trigger');
+        if (isHeroAction) {
+          navigator.vibrate([10, 30, 15]);
+        } else {
+          navigator.vibrate(8);
+        }
+      } catch (err) {
+        // Ignorar si el navegador no permite vibración en background
+      }
+    }
+
+    // Audio-feedback amigable y háptico para elementos interactivos
+    const targetInteractive = e.target.closest && e.target.closest(
+      'button, a, input, select, .btn-fun, .option-card, .avatar-chip, .map-station, .btn-hud-pill, .btn-stepper-item, .phone-nav-tab, .backpack-phone-item, .phone-action-btn, .intro-step-card, .btn-mag-pill, .tsunami-btn-meter, .sim-ctrl-btn'
     );
 
     if (targetInteractive && window.escapeSound) {
-      if (targetInteractive.classList.contains('avatar-chip') || targetInteractive.classList.contains('btn-stepper-item')) {
+      if (targetInteractive.classList.contains('avatar-chip') || targetInteractive.classList.contains('btn-stepper-item') || targetInteractive.classList.contains('intro-step-card')) {
+        window.escapeSound.playPop();
+      } else if (targetInteractive.classList.contains('btn-fun-primary') || targetInteractive.classList.contains('btn-start-adventure') || targetInteractive.classList.contains('btn-intro-start')) {
         window.escapeSound.playPop();
       } else {
-        window.escapeSound.playClick();
+        if (window.escapeSound.playSoftTap) {
+          window.escapeSound.playSoftTap();
+        } else {
+          window.escapeSound.playClick();
+        }
       }
     }
   }, { passive: true });
