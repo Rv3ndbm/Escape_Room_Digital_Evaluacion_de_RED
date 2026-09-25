@@ -79,43 +79,84 @@
             </span>
           </div>
 
-          <!-- Distribución en 2 Columnas para Máximo Aprovechamiento Horizontal -->
+          <!-- Distribución en 2 Columnas: Cómo Funciona tu Pantalla + Reglas de la Misión -->
           <div class="instructions-columns-grid">
             
-            <!-- COLUMNA 1 (Izquierda): Mapa de Pantalla Dividida + Botón de Inicio -->
+            <!-- COLUMNA 1 (Izquierda): Maqueta Explicativa de la Pantalla + Botón de Inicio -->
             <div class="instructions-panel">
               <div>
                 <p class="instructions-panel-title">
-                  🖥️ Así está organizada cada sala en tu pantalla:
+                  <i class="fa-solid fa-desktop" style="color: #2563EB;"></i> Así funciona y se distribuye tu pantalla:
                 </p>
 
+                <!-- Maqueta interactiva visual de sala -->
                 <div class="layout-preview-mockup">
-                  <!-- Lado Izquierdo: Contenido -->
-                  <div class="layout-zone-preview zone-left">
-                    <div class="layout-zone-tag" style="color: #2563EB;">
-                      <i class="fa-solid fa-display"></i>
-                      <span>IZQUIERDA: Recurso (RED)</span>
+                  <div class="mockup-window-header">
+                    <div class="mockup-window-dots">
+                      <span class="dot-red"></span>
+                      <span class="dot-yellow"></span>
+                      <span class="dot-green"></span>
                     </div>
-                    <div style="background: #0F172A; color: #93C5FD; border-radius: 8px; padding: 0.55rem; font-size: 0.88rem; font-family: monospace; display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center;">
-                      <span>🎬 Video</span> | <span>🔬 Simulador 3D</span> | <span>🎮 Juego</span>
-                    </div>
-                    <p style="font-size: 0.92rem; color: #475569; margin: 0; line-height: 1.45;">
-                      Observas y experimentas con las fases, botones y controles interactivos del fenómeno.
-                    </p>
+                    <span class="mockup-window-title">
+                      <i class="fa-solid fa-columns"></i> Pantalla de cada Sala: 50% Exploración RED | 50% Evaluación
+                    </span>
                   </div>
 
-                  <!-- Lado Derecho: Preguntas -->
-                  <div class="layout-zone-preview zone-right">
-                    <div class="layout-zone-tag" style="color: #16A34A;">
-                      <i class="fa-solid fa-clipboard-question"></i>
-                      <span>DERECHA: Preguntas</span>
+                  <div class="mockup-body-split">
+                    <!-- Lado Izquierdo: Contenido RED -->
+                    <div class="layout-zone-preview zone-left">
+                      <div class="layout-zone-badge badge-blue">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <span>1° IZQUIERDA: Recurso (RED)</span>
+                      </div>
+                      <div class="zone-screen-visual visual-dark">
+                        <div class="mini-control-pills">
+                          <span>🎬 Video</span>
+                          <span>🔬 Simulador 3D</span>
+                          <span>🎮 Juego</span>
+                        </div>
+                      </div>
+                      <div class="zone-action-hint hint-blue">
+                        <i class="fa-solid fa-hand-pointer"></i>
+                        <span><strong>Primero exploras aquí:</strong> activa los controles, prueba las fases y observa el fenómeno.</span>
+                      </div>
                     </div>
-                    <div style="background: #F0FDF4; border: 1.5px solid #86EFAC; color: #166534; border-radius: 8px; padding: 0.55rem; font-size: 0.88rem; font-weight: bold; text-align: center;">
-                      ❓ 2 Preguntas por Ronda (1/2 y 2/2)
+
+                    <!-- Lado Derecho: Preguntas -->
+                    <div class="layout-zone-preview zone-right">
+                      <div class="layout-zone-badge badge-green">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                        <span>2° DERECHA: Preguntas</span>
+                      </div>
+                      <div class="zone-screen-visual visual-light">
+                        <div class="mini-round-card round-active">
+                          <span>❓ 2 Rondas × 2 Preguntas (4 en total)</span>
+                        </div>
+                      </div>
+                      <div class="zone-action-hint hint-green">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span><strong>Luego evalúas aquí:</strong> respondes con base en lo explorado. ¡Reintentos ilimitados!</span>
+                      </div>
                     </div>
-                    <p style="font-size: 0.92rem; color: #475569; margin: 0; line-height: 1.45;">
-                      Respondes evaluando el recurso. Si te equivocas, podrás pulsar <em>"Volver a aprender"</em> para reintentar.
-                    </p>
+                  </div>
+
+                  <!-- Barra de Flujo Rápido de la Sala -->
+                  <div class="instructions-workflow-bar">
+                    <div class="workflow-step-pill">
+                      <span class="wf-num">1</span> 🔬 Explora el RED
+                    </div>
+                    <i class="fa-solid fa-chevron-right workflow-arrow"></i>
+                    <div class="workflow-step-pill">
+                      <span class="wf-num">2</span> ❓ Ronda 1 (2 preg.)
+                    </div>
+                    <i class="fa-solid fa-chevron-right workflow-arrow"></i>
+                    <div class="workflow-step-pill">
+                      <span class="wf-num">3</span> 🎯 Ronda 2 (2 preg.)
+                    </div>
+                    <i class="fa-solid fa-chevron-right workflow-arrow"></i>
+                    <div class="workflow-step-pill">
+                      <span class="wf-num">4</span> 🏆 ¡Avanzas de Sala!
+                    </div>
                   </div>
                 </div>
               </div>
@@ -123,10 +164,10 @@
               <!-- Caja de Llamado de Acción y Botón de Inicio -->
               <div class="instructions-cta-box">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                  <span style="font-size: 2.5rem;" class="animate__animated animate__pulse animate__infinite">👉</span>
+                  <span style="font-size: 2.3rem;" class="animate__animated animate__pulse animate__infinite">👉</span>
                   <div>
-                    <strong style="font-family: var(--font-hand); font-size: 1.4rem; color: #1D4ED8; display: block; line-height: 1.1;">¡La salida está en tus manos!</strong>
-                    <span style="font-size: 0.95rem; color: #475569;">¿Listo para ingresar a la primera sala?</span>
+                    <strong style="font-family: var(--font-hand); font-size: 1.35rem; color: #1D4ED8; display: block; line-height: 1.1;">¡Todo listo para la misión!</strong>
+                    <span style="font-size: 0.92rem; color: #475569;">¿Preparado para entrar a la primera sala?</span>
                   </div>
                 </div>
 
@@ -137,40 +178,64 @@
               </div>
             </div>
 
-            <!-- COLUMNA 2 (Derecha): Los 7 Pasos de la Misión -->
-            <div class="instructions-steps-panel">
-              <p class="instructions-steps-panel-header">
-                <span>📋 Los 7 Pasos para Superar el Escape Room:</span>
+            <!-- COLUMNA 2 (Derecha): Reglas de Oro y Dinámica de la Misión (4 Reglas Clave) -->
+            <div class="instructions-rules-panel">
+              <p class="instructions-rules-panel-header">
+                <i class="fa-solid fa-clipboard-check" style="color: #059669;"></i>
+                <span>Reglas y Recomendaciones de la Misión:</span>
               </p>
               
-              <ul class="mission-steps-list">
-                <li class="mission-step-item">
-                  <span class="mission-step-num">1</span>
-                  <span><strong>Lee cuidadosamente</strong> cada desafío que plantea la estación.</span>
+              <ul class="mission-rules-list">
+                <!-- Regla 1: Orden de Trabajo -->
+                <li class="mission-rule-card rule-explore">
+                  <div class="rule-card-icon">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                  </div>
+                  <div class="rule-card-content">
+                    <span class="rule-card-title">1. Primero el RED, luego las preguntas</span>
+                    <p class="rule-card-desc">
+                      <strong>Orden obligatorio:</strong> No intentes adivinar. Interactúa primero con el recurso de la izquierda (activa botones y fases). ¡Todas las preguntas evalúan lo que experimentes allí!
+                    </p>
+                  </div>
                 </li>
-                <li class="mission-step-item">
-                  <span class="mission-step-num">2</span>
-                  <span><strong>Observa y explora</strong> el Recurso Educativo Digital a la izquierda.</span>
+
+                <!-- Regla 2: 2 Rondas de 2 Preguntas -->
+                <li class="mission-rule-card rule-rounds">
+                  <div class="rule-card-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                  </div>
+                  <div class="rule-card-content">
+                    <span class="rule-card-title">2. Estructura: 2 Rondas de 2 Preguntas</span>
+                    <p class="rule-card-desc">
+                      Cada sala tiene <strong>4 preguntas en total</strong> distribuidas en 2 rondas. Al superar las 2 preguntas de la Ronda 1, desbloquearás la Ronda 2 con preguntas de mayor análisis.
+                    </p>
+                  </div>
                 </li>
-                <li class="mission-step-item">
-                  <span class="mission-step-num">3</span>
-                  <span><strong>Analiza su calidad, pertinencia y usabilidad</strong> según los criterios.</span>
+
+                <!-- Regla 3: Si te equivocas, vuelve a intentar -->
+                <li class="mission-rule-card rule-retry">
+                  <div class="rule-card-icon">
+                    <i class="fa-solid fa-rotate-left"></i>
+                  </div>
+                  <div class="rule-card-content">
+                    <span class="rule-card-title">3. Sin miedo al error: ¡Reintentos libres!</span>
+                    <p class="rule-card-desc">
+                      Si eliges una respuesta incorrecta, el sistema te dará una <strong>pista formativa</strong> y podrás pulsar <em>"Volver a aprender"</em> para reintentar cuantas veces necesites.
+                    </p>
+                  </div>
                 </li>
-                <li class="mission-step-item">
-                  <span class="mission-step-num">4</span>
-                  <span><strong>Responde las 2 preguntas</strong> de evaluación en cada ronda.</span>
-                </li>
-                <li class="mission-step-item">
-                  <span class="mission-step-num">5</span>
-                  <span><strong>Justifica tus decisiones</strong> leyendo la retroalimentación didáctica.</span>
-                </li>
-                <li class="mission-step-item">
-                  <span class="mission-step-num">6</span>
-                  <span><strong>Guarda las claves secretas</strong> que desbloquearás al final de cada sala.</span>
-                </li>
-                <li class="mission-step-item">
-                  <span class="mission-step-num">7</span>
-                  <span>Al finalizar las cuatro salas, <strong>utiliza las claves</strong> para escapar.</span>
+
+                <!-- Regla 4: Lectura Cuidadosa -->
+                <li class="mission-rule-card rule-read">
+                  <div class="rule-card-icon">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                  </div>
+                  <div class="rule-card-content">
+                    <span class="rule-card-title">4. Lee cuidadosamente antes de responder</span>
+                    <p class="rule-card-desc">
+                      Tómate tu tiempo. Lee con atención cada enunciado y las opciones. Este Escape Room evalúa tu <strong>criterio crítico</strong> sobre la calidad educativa y técnica del RED.
+                    </p>
+                  </div>
                 </li>
               </ul>
             </div>

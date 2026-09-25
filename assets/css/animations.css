@@ -291,39 +291,25 @@
 }
 
 /* ==========================================================================
-   21. TRANSICIONES Y ANIMACIONES TIPO PRESENTACIÓN DIDÁCTICA (UI/UX)
+   21. TRANSICIONES Y ANIMACIONES RÁPIDAS Y FLUIDAS (SIN DELAYS MOLESTOS)
    ========================================================================== */
 
-/* Entrada suave de la página al cargar (Presentation Slide Enter) */
+/* Acelerar animaciones de Animate.css para que no causen retraso visual */
+:root {
+  --animate-duration: 0.28s !important;
+  --animate-delay: 0s !important;
+}
+
+/* Mantener animaciones continuas/infinitas a velocidad natural */
+.animate__infinite {
+  --animate-duration: 1.6s !important;
+}
+
+/* Entrada sutil y suave de la pantalla sin parpadeo blanco */
 @keyframes presentationPageEnter {
   0% {
-    opacity: 0;
-    transform: translateY(12px) scale(0.995);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.page-presentation-enter {
-  animation: presentationPageEnter 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Salida suave al navegar entre páginas */
-.page-transition-exit {
-  opacity: 0 !important;
-  transform: translateY(-8px) scale(0.99) !important;
-  filter: blur(1px) !important;
-  transition: opacity 0.22s cubic-bezier(0.4, 0, 1, 1), transform 0.22s cubic-bezier(0.4, 0, 1, 1), filter 0.22s ease !important;
-  pointer-events: none !important;
-}
-
-/* Entrada sutil de diapositiva superior (HUD) */
-@keyframes presentationSlideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-16px);
+    opacity: 0.9;
+    transform: translateY(3px);
   }
   100% {
     opacity: 1;
@@ -331,60 +317,104 @@
   }
 }
 
-/* Entrada sutil desde la izquierda (Zona de recursos/diapositiva) */
-@keyframes presentationSlideRight {
-  0% {
-    opacity: 0;
-    transform: translateX(-16px);
+.page-presentation-enter {
+  animation: presentationPageEnter 0.18s ease-out both;
+}
+
+/* Micro-animaciones refinadas para que el contenido sea visible de inmediato */
+@keyframes subtleFadeInDown {
+  from {
+    opacity: 0.7;
+    transform: translateY(-6px);
   }
-  100% {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFadeInUp {
+  from {
+    opacity: 0.7;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFadeInLeft {
+  from {
+    opacity: 0.65;
+    transform: translateX(-8px);
+  }
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-/* Entrada sutil desde la derecha (Zona de preguntas) */
-@keyframes presentationSlideLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(16px);
+@keyframes subtleFadeInRight {
+  from {
+    opacity: 0.65;
+    transform: translateX(8px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
-/* Entrada sutil en zoom suave */
-@keyframes presentationZoomSoft {
-  0% {
-    opacity: 0;
-    transform: scale(0.96);
+@keyframes subtleZoomIn {
+  from {
+    opacity: 0.75;
+    transform: scale(0.985);
   }
-  100% {
+  to {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-/* Aplicación escalonada (Staggered presentation) */
-.top-hud {
-  animation: presentationSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+@keyframes subtleFadeIn {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.resource-container,
-.instructions-panel,
-.story-board-card {
-  animation: presentationSlideRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+/* Reemplazar desplazamientos pesados de Animate.css por entradas ultra-rápidas y elegantes */
+.animate__fadeInDown {
+  animation-name: subtleFadeInDown !important;
+  animation-duration: 0.22s !important;
 }
 
-.questions-container,
-.instructions-steps-panel {
-  animation: presentationSlideLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+.animate__fadeInUp {
+  animation-name: subtleFadeInUp !important;
+  animation-duration: 0.22s !important;
 }
 
-.bottom-bar {
-  animation: presentationPageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+.animate__fadeInLeft {
+  animation-name: subtleFadeInLeft !important;
+  animation-duration: 0.24s !important;
+}
+
+.animate__fadeInRight {
+  animation-name: subtleFadeInRight !important;
+  animation-duration: 0.24s !important;
+}
+
+.animate__zoomIn:not(.animate__infinite) {
+  animation-name: subtleZoomIn !important;
+  animation-duration: 0.24s !important;
+}
+
+.animate__fadeIn {
+  animation-name: subtleFadeIn !important;
+  animation-duration: 0.2s !important;
 }
 
 /* Efecto de selección visual pop en opciones */

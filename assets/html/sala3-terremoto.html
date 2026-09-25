@@ -30,22 +30,23 @@
     .seismic-lab-layout {
       display: grid;
       grid-template-columns: minmax(360px, 420px) 1fr;
-      gap: 14px;
+      gap: 16px;
       height: 100%;
       min-height: 0;
       background: radial-gradient(circle at 10% 20%, #F8FAFC 0%, #EFF6FF 100%);
       border-radius: var(--radius-card);
       border: 1.5px solid #E2E8F0;
-      padding: 10px;
+      padding: 12px;
       box-sizing: border-box;
       overflow: hidden;
+      align-items: center;
     }
 
     @media (max-width: 1200px) {
       .seismic-lab-layout {
         grid-template-columns: minmax(340px, 390px) 1fr;
-        gap: 10px;
-        padding: 8px;
+        gap: 12px;
+        padding: 10px;
       }
     }
 
@@ -54,6 +55,11 @@
         grid-template-columns: 1fr;
         height: auto;
         overflow-y: visible;
+        align-items: stretch;
+      }
+      .seismic-telemetry-dashboard {
+        max-height: none;
+        margin: 16px auto 0 auto;
       }
     }
 
@@ -113,48 +119,6 @@
       border-radius: 0 3px 3px 0;
     }
 
-    /* Guía Rápida de la App */
-    .app-quick-guide-card {
-      background: white;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 8px 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .quick-guide-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .guide-step-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 8px;
-      padding: 6px 8px;
-    }
-
-    .step-num-bubble {
-      width: 20px;
-      height: 20px;
-      background: #2563EB;
-      color: white;
-      border-radius: 50%;
-      font-size: 0.72rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
 
     /* Barra Superior del Sistema Operativo */
     .phone-status-bar {
@@ -552,15 +516,21 @@
       border-radius: 9999px;
     }
 
-    /* Subcolumna Derecha: Dashboard de Monitoreo Geofísico */
+    /* Subcolumna Derecha: Dashboard de Monitoreo Geofísico y Guía Centrada a la par del Celular */
     .seismic-telemetry-dashboard {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      justify-content: center;
+      gap: 14px;
       height: 100%;
+      max-height: 585px;
       min-height: 0;
       overflow-y: auto;
-      padding-right: 4px;
+      padding: 6px 4px;
+      box-sizing: border-box;
+      margin: auto;
+      width: 100%;
+      max-width: 480px;
     }
 
     .seismic-telemetry-dashboard::-webkit-scrollbar {
@@ -574,129 +544,206 @@
     /* Sello Oficial de Rigor */
     .scientific-rigor-seal {
       background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-      border: 1.5px solid #F59E0B;
-      border-radius: 12px;
-      padding: 7px 10px;
+      border: 2px solid #F59E0B;
+      border-radius: 16px;
+      padding: 11px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.16);
+      user-select: none;
     }
     .scientific-rigor-seal:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.28);
+      border-color: #D97706;
     }
 
-    /* Escala Richter Interactiva */
-    .richter-scale-container {
-      background: white;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 8px 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    .seal-icon-badge {
+      font-size: 1.85rem;
+      filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));
       flex-shrink: 0;
     }
-    .richter-scale-header {
-      display: flex;
-      justify-content: space-between;
+
+    .seal-content {
+      flex: 1;
+      line-height: 1.25;
+    }
+
+    .seal-title {
+      font-family: var(--font-hand);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #92400E;
+    }
+
+    .seal-subtitle {
+      font-size: 0.78rem;
+      color: #B45309;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .seal-badge-status {
+      background: #FFFFFF;
+      color: #92400E;
+      border: 1px solid #FCD34D;
+      font-family: var(--font-hand);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 6px;
+      gap: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      flex-shrink: 0;
     }
-    .richter-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+
+    /* Tarjeta de Guía Rápida de la App */
+    .app-quick-guide-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 13px 15px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      flex-shrink: 0;
     }
-    .richter-scale-card {
-      background: #F8FAFC;
-      border: 1.5px solid #CBD5E1;
+
+    .quick-guide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 8px;
+    }
+
+    .guide-header-icon {
+      width: 28px;
+      height: 28px;
       border-radius: 8px;
-      padding: 5px 6px;
+      background: #EFF6FF;
+      color: #2563EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .guide-header-title {
+      font-family: var(--font-hand);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0F172A;
+      display: block;
+    }
+
+    .guide-header-subtitle {
+      font-size: 0.74rem;
+      color: #64748B;
+      display: block;
+    }
+
+    .quick-guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .guide-step-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 10px 13px;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
-      text-align: left;
+      user-select: none;
+    }
+
+    .guide-step-item:hover {
+      background: #FFFFFF;
+      border-color: #93C5FD;
+      transform: translateX(3px);
+      box-shadow: 0 3px 10px rgba(59, 130, 246, 0.1);
+    }
+
+    .guide-step-item.active-step {
+      background: #FFFFFF;
+      border-color: #2563EB;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.16);
+      transform: translateX(4px);
+    }
+
+    .step-num-bubble {
+      width: 25px;
+      height: 25px;
+      background: #2563EB;
+      color: white;
+      border-radius: 50%;
+      font-size: 0.78rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
       transition: all 0.2s;
     }
-    .richter-scale-card:hover {
-      transform: translateY(-1.5px);
-      border-color: #94A3B8;
-    }
-    .richter-scale-card.active {
-      border-color: #DC2626;
-      background: #FEF2F2;
-      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
-    }
-    .richter-scale-card.mag-4.active {
-      border-color: #10B981;
-      background: #F0FDF4;
-      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
-    }
-    .richter-scale-card.mag-6.active {
-      border-color: #F59E0B;
-      background: #FFFBEB;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+
+    .guide-step-item.active-step .step-num-bubble {
+      background: #1D4ED8;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
     }
 
-    /* Protocolo D.C.H. (Drop, Cover, Hold) */
-    .dch-protocol-box {
-      background: white;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 8px 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      flex-shrink: 0;
-    }
-    .dch-steps-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-top: 5px;
-    }
-    .dch-step-pill {
-      background: #F8FAFC;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 8px;
-      padding: 6px 4px;
-      text-align: center;
-      transition: all 0.25s;
-    }
-    .dch-step-pill.highlight-step {
-      background: #FEF3C7;
-      border-color: #F59E0B;
-      transform: scale(1.04);
-      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+    .guide-step-body {
+      flex: 1;
+      line-height: 1.25;
     }
 
-    /* Checklist de Rigor Científico */
-    .scientific-checklist-box {
-      background: #F0FDF4;
-      border: 1.5px solid #BBF7D0;
-      border-radius: 12px;
-      padding: 7px 10px;
-      flex-shrink: 0;
-    }
-
-    /* Post-It Escolar */
-    .seismic-postit-note {
-      background: #FEF9C3;
-      border: 1.5px solid #FDE047;
-      border-radius: 10px;
-      padding: 7px 10px;
-      font-family: var(--font-hand);
+    .guide-step-title {
+      color: #0F172A;
       font-size: 0.88rem;
-      color: #713F12;
-      box-shadow: 2px 3px 6px rgba(0,0,0,0.06);
-      transform: rotate(-0.5deg);
-      position: relative;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .guide-step-item.active-step .guide-step-title {
+      color: #1D4ED8;
+      font-weight: 700;
+    }
+
+    .guide-step-desc {
+      margin: 0;
+      font-size: 0.77rem;
+      color: #64748B;
+      line-height: 1.3;
+    }
+
+    .step-arrow {
+      color: #94A3B8;
+      font-size: 0.75rem;
+      transition: transform 0.2s;
       flex-shrink: 0;
     }
-    .seismic-postit-pin {
-      position: absolute;
-      top: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.95rem;
+
+    .guide-step-item:hover .step-arrow {
+      color: #2563EB;
+      transform: translateX(2px);
+    }
+
+    .guide-step-item.active-step .step-arrow {
+      color: #1D4ED8;
+      transform: translateX(3px);
     }
 
     /* Modal Educativo de Certificación */
@@ -1059,69 +1106,62 @@
             <!-- Subcolumna Derecha: Guía Rápida de la App & Certificación de Calidad -->
             <div class="seismic-telemetry-dashboard">
               
-              <!-- Tarjeta de Acreditación Oficial / Sello de Rigor -->
-              <div id="btnScientificSeal" class="scientific-rigor-seal" title="Toca para ver el certificado de rigor científico">
-                <div style="font-size: 1.6rem; filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));">🏅</div>
-                <div style="flex: 1; line-height: 1.2;">
-                  <div style="font-family: var(--font-hand); font-size: 0.95rem; font-weight: bold; color: #92400E;">
+              <!-- Tarjeta 1: Acreditación Oficial / Sello de Rigor Científico -->
+              <div id="btnScientificSeal" class="scientific-rigor-seal" role="button" tabindex="0" title="Toca para ver el certificado oficial de rigor científico">
+                <div class="seal-icon-badge">🏅</div>
+                <div class="seal-content">
+                  <div class="seal-title">
                     Avalado por Instituto Geofísico & Protección Civil
                   </div>
-                  <div style="font-size: 0.74rem; color: #B45309;">
+                  <div class="seal-subtitle">
                     Criterio RED: Calidad y Rigor de la Información Científica
                   </div>
                 </div>
-                <span class="badge bg-warning text-dark" style="font-family: var(--font-hand); font-size: 0.75rem; padding: 2px 6px;">
-                  Verificado
+                <span class="seal-badge-status">
+                  <i class="fa-solid fa-circle-check"></i> Verificado
                 </span>
               </div>
 
-              <!-- Tarjeta de Guía Rápida de la App SismoKids -->
+              <!-- Tarjeta 2: Guía Rápida Interactiva para Explorar la App -->
               <div class="app-quick-guide-card">
                 <div class="quick-guide-header">
-                  <span style="font-family: var(--font-hand); font-size: 0.92rem; font-weight: bold; color: #1E293B;">
-                    <i class="fa-solid fa-gamepad" style="color: #2563EB;"></i> Guía Rápida para Explorar la App
-                  </span>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div class="guide-header-icon"><i class="fa-solid fa-compass"></i></div>
+                    <div>
+                      <span class="guide-header-title">Guía de Exploración en la App</span>
+                      <span class="guide-header-subtitle">Toca cada paso para probarlo directamente en el celular</span>
+                    </div>
+                  </div>
                 </div>
                 
                 <div class="quick-guide-steps">
-                  <div class="guide-step-item">
+                  <div class="guide-step-item clickable-step active-step" id="guideStep1" data-tab="sismo" role="button" tabindex="0" title="Toca para ir a Sismógrafo & Simulacro en el celular">
                     <span class="step-num-bubble">1</span>
-                    <div style="flex: 1;">
-                      <strong style="color: #0F172A; font-size: 0.82rem;">📈 Prueba el Sismógrafo & Drill:</strong>
-                      <p style="margin: 0; font-size: 0.74rem; color: #64748B; line-height: 1.2;">Elige una magnitud y pulsa <em>¡Iniciar Simulacro!</em> para observar las ondas y la sacudida en el aula.</p>
-                      <div style="display: flex; gap: 5px; margin-top: 4px;">
-                        <button class="richter-scale-card mag-4" data-mag="4" type="button" style="padding: 2px 6px; font-size: 0.68rem; border-radius: 6px; cursor: pointer; border: 1px solid #CBD5E1; background: white;">4.0 Leve 🍃</button>
-                        <button class="richter-scale-card mag-6 active" data-mag="6" type="button" style="padding: 2px 6px; font-size: 0.68rem; border-radius: 6px; cursor: pointer; border: 1px solid #F59E0B; background: #FFFBEB;">6.5 Fuerte ⚠️</button>
-                        <button class="richter-scale-card mag-8" data-mag="8" type="button" style="padding: 2px 6px; font-size: 0.68rem; border-radius: 6px; cursor: pointer; border: 1px solid #CBD5E1; background: white;">8.0 Mayor 🚨</button>
-                      </div>
+                    <div class="guide-step-body">
+                      <strong class="guide-step-title">📈 Sismógrafo & Simulacro:</strong>
+                      <p class="guide-step-desc">Elige una magnitud y pulsa <em>¡Iniciar Simulacro!</em> para observar las ondas y la sacudida en el aula.</p>
                     </div>
+                    <i class="fa-solid fa-chevron-right step-arrow"></i>
                   </div>
 
-                  <div class="guide-step-item">
+                  <div class="guide-step-item clickable-step" id="guideStep2" data-tab="mochila" role="button" tabindex="0" title="Toca para ir a la Mochila 72h en el celular">
                     <span class="step-num-bubble">2</span>
-                    <div>
-                      <strong style="color: #0F172A; font-size: 0.82rem;">🎒 Empaca la Mochila 72h:</strong>
-                      <p style="margin: 0; font-size: 0.74rem; color: #64748B; line-height: 1.2;">Toca la pestaña <em>Mochila</em> en el celular y guarda los 5 artículos vitales de supervivencia.</p>
+                    <div class="guide-step-body">
+                      <strong class="guide-step-title">🎒 Mochila 72 Horas:</strong>
+                      <p class="guide-step-desc">Toca la pestaña <em>Mochila</em> y empaca los 5 artículos vitales de supervivencia.</p>
                     </div>
+                    <i class="fa-solid fa-chevron-right step-arrow"></i>
                   </div>
 
-                  <div class="guide-step-item">
+                  <div class="guide-step-item clickable-step" id="guideStep3" data-tab="consejos" role="button" tabindex="0" title="Toca para ir a Consejos y Protocolos en el celular">
                     <span class="step-num-bubble">3</span>
-                    <div>
-                      <strong style="color: #0F172A; font-size: 0.82rem;">📋 Aprende la Regla de Oro:</strong>
-                      <p style="margin: 0; font-size: 0.74rem; color: #64748B; line-height: 1.2;">En la pestaña <em>Consejos</em> repasa el protocolo internacional: <strong>Agáchate, Cúbrete y Sujétate</strong>.</p>
+                    <div class="guide-step-body">
+                      <strong class="guide-step-title">📋 Protocolo y Regla de Oro:</strong>
+                      <p class="guide-step-desc">Revisa en <em>Consejos</em> las medidas de protección: <strong>Agáchate, Cúbrete y Sujétate</strong>.</p>
                     </div>
+                    <i class="fa-solid fa-chevron-right step-arrow"></i>
                   </div>
                 </div>
-              </div>
-
-              <!-- Pista Didáctica Compacta -->
-              <div class="seismic-postit-note" style="padding: 6px 10px;">
-                <div class="seismic-postit-pin">📌</div>
-                <strong style="font-size: 0.82rem;">¡Pista para Evaluar la Calidad!</strong>
-                <p style="margin: 2px 0 0 0; font-size: 0.78rem; line-height: 1.25;">
-                  Comprueba que la app esté respaldada por expertos geofísicos oficiales, no invente predicciones falsas y enseñe medidas de protección reales.
-                </p>
               </div>
 
             </div>
@@ -1202,6 +1242,7 @@
       initRoomValidation('sala3');
 
       // 2. Control de Pestañas de la App Móvil
+      // 2. Control de Pestañas del Celular SismoKids 24/7 y Guía Lateral Interactiva
       const tabSismo = document.getElementById('tabBtnSismo');
       const tabMochila = document.getElementById('tabBtnMochila');
       const tabConsejos = document.getElementById('tabBtnConsejos');
@@ -1213,23 +1254,45 @@
       const alertBanner = document.getElementById('sismoAlertBanner');
       const studentEmoji = document.getElementById('studentEmoji');
       const magButtons = document.querySelectorAll('.app-magnitude-btn');
-      const richterCards = document.querySelectorAll('.richter-scale-card');
       const magDisplayTag = document.getElementById('magDisplayTag');
 
-      function switchPhoneTab(activeBtn, activeView) {
+      const guideStep1 = document.getElementById('guideStep1');
+      const guideStep2 = document.getElementById('guideStep2');
+      const guideStep3 = document.getElementById('guideStep3');
+      const guideSteps = [guideStep1, guideStep2, guideStep3];
+
+      function updateActiveGuideStep(stepIdx) {
+        guideSteps.forEach((st, idx) => {
+          if (st) {
+            if (idx === stepIdx) st.classList.add('active-step');
+            else st.classList.remove('active-step');
+          }
+        });
+      }
+
+      function switchPhoneTab(activeBtn, activeView, stepIdx) {
         [tabSismo, tabMochila, tabConsejos].forEach(b => b.classList.remove('active'));
         activeBtn.classList.add('active');
 
         [viewSismo, viewMochila, viewConsejos].forEach(v => v.style.display = 'none');
         activeView.style.display = 'flex';
+        
+        if (typeof stepIdx === 'number') {
+          updateActiveGuideStep(stepIdx);
+        }
+
         if (window.escapeSound) window.escapeSound.playPop();
       }
 
-      tabSismo.addEventListener('click', () => switchPhoneTab(tabSismo, viewSismo));
-      tabMochila.addEventListener('click', () => switchPhoneTab(tabMochila, viewMochila));
-      tabConsejos.addEventListener('click', () => switchPhoneTab(tabConsejos, viewConsejos));
+      tabSismo.addEventListener('click', () => switchPhoneTab(tabSismo, viewSismo, 0));
+      tabMochila.addEventListener('click', () => switchPhoneTab(tabMochila, viewMochila, 1));
+      tabConsejos.addEventListener('click', () => switchPhoneTab(tabConsejos, viewConsejos, 2));
 
-      // 3. Selección Sincronizada de Magnitud (Celular y Tablero Geofísico)
+      if (guideStep1) guideStep1.addEventListener('click', () => switchPhoneTab(tabSismo, viewSismo, 0));
+      if (guideStep2) guideStep2.addEventListener('click', () => switchPhoneTab(tabMochila, viewMochila, 1));
+      if (guideStep3) guideStep3.addEventListener('click', () => switchPhoneTab(tabConsejos, viewConsejos, 2));
+
+      // 3. Selección Sincronizada de Magnitud
       let selectedMag = 6;
 
       function updateMagnitude(mag) {
@@ -1244,15 +1307,6 @@
           }
         });
 
-        // Actualizar tarjetas del tablero de telemetría
-        richterCards.forEach(card => {
-          if (parseInt(card.getAttribute('data-mag')) === selectedMag) {
-            card.classList.add('active');
-          } else {
-            card.classList.remove('active');
-          }
-        });
-
         // Actualizar badge en el sismógrafo
         const labelText = selectedMag === 4 ? '4.0 Leve' : (selectedMag === 6 ? '6.5 Fuerte' : '8.0 Mayor');
         if (magDisplayTag) magDisplayTag.textContent = `${labelText} Richter`;
@@ -1262,14 +1316,6 @@
 
       magButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const mag = parseInt(this.getAttribute('data-mag'));
-          updateMagnitude(mag);
-        });
-      });
-
-      richterCards.forEach(card => {
-        card.addEventListener('click', function(e) {
           e.stopPropagation();
           const mag = parseInt(this.getAttribute('data-mag'));
           updateMagnitude(mag);
@@ -1390,13 +1436,9 @@
       }
       requestAnimationFrame(renderSeismographFrame);
 
-      // 6. Lógica del Simulacro Escolar y Secuencia Didáctica D.C.H.
+      // 6. Lógica del Simulacro Escolar
       const btnDrill = document.getElementById('btnRunEarthquakeDrill');
       const btnSiren = document.getElementById('btnPhoneSiren');
-      const stepDch1 = document.getElementById('stepDch1');
-      const stepDch2 = document.getElementById('stepDch2');
-      const stepDch3 = document.getElementById('stepDch3');
-      const dchLiveStatus = document.getElementById('dchLiveStatus');
 
       function triggerSeismicSimulation() {
         if (isDrilling) return;
@@ -1414,40 +1456,26 @@
         if (hangingLamp) hangingLamp.classList.add('lamp-swaying');
         if (studentEmoji) studentEmoji.textContent = '🙇‍♂️';
 
-        // Banner en el celular
+        // Banner en el celular: Fase 1 Agáchate (0s - 1.2s)
         if (alertBanner) {
           alertBanner.style.background = '#EF4444';
           alertBanner.style.color = '#FFFFFF';
-          alertBanner.innerHTML = '🚨 <strong>¡ALERTA SÍSMICA!</strong> ¡Agáchate, cúbrete y sujétate!';
-        }
-
-        // Fases D.C.H. en la Estación Geofísica
-        // Fase 1: Agáchate (0s - 1.2s)
-        if (stepDch1) stepDch1.classList.add('highlight-step');
-        if (dchLiveStatus) {
-          dchLiveStatus.textContent = 'Paso 1: ¡Agáchate!';
-          dchLiveStatus.className = 'badge bg-warning text-dark';
+          alertBanner.innerHTML = '🚨 <strong>¡ALERTA SÍSMICA!</strong> Paso 1: ¡Agáchate!';
         }
 
         // Fase 2: Cúbrete (1.2s - 2.4s)
         setTimeout(() => {
           if (!isDrilling) return;
-          if (stepDch1) stepDch1.classList.remove('highlight-step');
-          if (stepDch2) stepDch2.classList.add('highlight-step');
-          if (dchLiveStatus) {
-            dchLiveStatus.textContent = 'Paso 2: ¡Cúbrete!';
-            dchLiveStatus.className = 'badge bg-info text-dark';
+          if (alertBanner) {
+            alertBanner.innerHTML = '🚨 <strong>¡SIMULACRO EN CURSO!</strong> Paso 2: ¡Cúbrete bajo el pupitre!';
           }
         }, 1200);
 
         // Fase 3: Sujétate (2.4s - 3.6s)
         setTimeout(() => {
           if (!isDrilling) return;
-          if (stepDch2) stepDch2.classList.remove('highlight-step');
-          if (stepDch3) stepDch3.classList.add('highlight-step');
-          if (dchLiveStatus) {
-            dchLiveStatus.textContent = 'Paso 3: ¡Sujétate!';
-            dchLiveStatus.className = 'badge bg-success';
+          if (alertBanner) {
+            alertBanner.innerHTML = '🚨 <strong>¡SIMULACRO EN CURSO!</strong> Paso 3: ¡Sujétate firmemente!';
           }
         }, 2400);
 
@@ -1456,12 +1484,6 @@
           if (phoneDevice) phoneDevice.classList.remove('phone-shaking');
           if (hangingLamp) hangingLamp.classList.remove('lamp-swaying');
           if (studentEmoji) studentEmoji.textContent = '🧑‍🎓';
-
-          [stepDch1, stepDch2, stepDch3].forEach(s => s && s.classList.remove('highlight-step'));
-          if (dchLiveStatus) {
-            dchLiveStatus.textContent = 'Norma Internacional';
-            dchLiveStatus.className = 'badge bg-primary';
-          }
 
           if (alertBanner) {
             alertBanner.style.background = '#DCFCE7';

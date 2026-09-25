@@ -9,53 +9,57 @@
 const ROOMS_CONFIG = {
   'sala1': {
     code: '312',
-    criterion: 'Pertinencia y Calidad',
+    criterion: 'Reto 1: Video Educativo - El Volcán',
     nextPage: 'sala2-tsunami.html',
     badgeText: '¡RETO 1 SUPERADO!',
     successTitle: '¡Felicidades, Explorador/a Científico/a!',
     achievementHeader: '🎯 Has Dominado el Reto 1: El Volcán',
-    successExplanation: '<strong>¡Excelente análisis científico!</strong> Has verificado que el video y el simulador de 4 fases cumplen con rigor la explicación geológica de la presión subterránea y el ascenso de lava en la cámara magmática.',
+    successExplanation: '<strong>¡Excelente análisis científico!</strong> Has verificado que el video cumple con rigor: presenta información directa del fenómeno natural, tiene alta calidad explicativa, es pertinente para quinto grado y cuenta con una usabilidad clara.',
     btnContinueText: '¡Continuar al Reto 2: El Tsunami! 🌊',
     rounds: [
       {
         roundNumber: '1/2',
-        title: 'Ronda 1/2: Exploración Inicial del Recurso',
+        title: 'Ronda 1/2: Relación con el Fenómeno y Criterio de Calidad',
         q1: {
           id: 's1_r1_q1',
           text: '¿El video presenta información relacionada directamente con el fenómeno natural estudiado?',
           options: [
-            { label: 'Si', isCorrect: true, feedback: '¡Exacto! El video explica de forma directa cómo y por qué se producen las erupciones volcánicas.' },
-            { label: 'No', isCorrect: false, feedback: '💡 Observa el video a la izquierda: describe las partes de un volcán y el movimiento real del magma.' },
-            { label: 'Mas o menos', isCorrect: false, feedback: '💡 El video está enfocado 100% en la vulcanología y las etapas de erupción.' }
+            { label: 'A. Sí', isCorrect: true, feedback: '¡Exacto! El video aborda de forma directa y visual el fenómeno de las erupciones volcánicas, explicando cómo asciende el magma desde el interior de la Tierra.' },
+            { label: 'B. No', isCorrect: false, feedback: '💡 Observa con atención el video: describe la estructura de un volcán, la cámara magmática y el proceso real de una erupción, por lo que sí está directamente relacionado con el tema.' }
           ]
         },
         q2: {
           id: 's1_r1_q2',
           text: 'Si el video presenta información clara, organizada y relacionada con el tema, ¿qué criterio estás analizando?',
           options: [
-            { label: 'A. Calidad', isCorrect: true, feedback: '¡Correcto! La claridad, exactitud y organización del contenido corresponden al criterio de Calidad.' },
-            { label: 'B. Decoración', isCorrect: false, feedback: '💡 La decoración se refiere solo a adornos visuales; cuando analizamos el rigor y la claridad del tema evaluamos la Calidad.' }
+            { label: 'A. Calidad', isCorrect: true, feedback: '¡Correcto! La claridad en las explicaciones, la estructura lógica y la precisión científica son los componentes esenciales del criterio de Calidad.' },
+            { label: 'B. Decoración', isCorrect: false, feedback: '💡 La decoración solo abarca adornos visuales secundarios; cuando analizamos la claridad y organización conceptual del tema evaluamos la Calidad.' },
+            { label: 'C. Velocidad', isCorrect: false, feedback: '💡 La velocidad mide el tiempo de reproducción o conexión técnica, no la claridad conceptual ni la organización del contenido.' },
+            { label: 'D. Entretenimiento', isCorrect: false, feedback: '💡 Aunque un video educativo puede ser entretenido, evaluar la claridad, veracidad y organización de los conceptos corresponde a la Calidad pedagógica.' }
           ]
         }
       },
       {
         roundNumber: '2/2',
-        title: 'Ronda 2/2: Análisis de Pertinencia y Fases',
+        title: 'Ronda 2/2: Pertinencia Curricular y Usabilidad del Video',
         q1: {
           id: 's1_r2_q1',
-          text: 'Después de probar el simulador de 4 fases, ¿crees que la información nos sirve de verdad para entender por qué hacen erupción los volcanes?',
+          text: 'El video explica las erupciones volcánicas y fue seleccionado para apoyar el aprendizaje de este tema en quinto grado. ¿Qué criterio se evidencia?',
           options: [
-            { label: 'Si, es totalmente pertinente', isCorrect: true, feedback: '¡Brillante! El simulador muestra cómo la presión de gases impulsa el magma por la chimenea.' },
-            { label: 'No, no aporta nada', isCorrect: false, feedback: '💡 Observa las Fases 1 (Presión) y 2 (Ascenso) en el simulador interactivo para ver el proceso.' },
-            { label: 'Solo muestra efectos sin explicación', isCorrect: false, feedback: '💡 Cada una de las 4 fases representa un proceso geológico exacto.' }
+            { label: 'A. Pertinencia', isCorrect: true, feedback: '¡Excelente! La Pertinencia asegura que el recurso responda con precisión al objetivo formativo y al grado escolar de los estudiantes.' },
+            { label: 'B. Tamaño', isCorrect: false, feedback: '💡 El tamaño del archivo o video es una característica técnica de almacenamiento, no define si el tema es adecuado para quinto grado.' },
+            { label: 'C. Color', isCorrect: false, feedback: '💡 El color es un componente estético de diseño gráfico, pero no determina si el recurso apoya el objetivo de aprendizaje curricular.' },
+            { label: 'D. Duración', isCorrect: false, feedback: '💡 La duración indica cuántos minutos dura el video, pero el criterio que valida si el recurso sirve para el objetivo de aprendizaje de quinto grado es la Pertinencia.' }
           ]
         },
         q2: {
           id: 's1_r2_q2',
-          text: 'Cuando comprobamos si un recurso digital responde exactamente a nuestro objetivo de aprendizaje, ¿qué criterio evaluamos?',
+          text: 'Si los estudiantes pueden reproducir el video, comprender sus explicaciones y navegar fácilmente por él, ¿qué criterio se está considerando?',
           options: [
-            { label: 'A. Pertinencia', isCorrect: true, feedback: '¡Excelente! La Pertinencia asegura que el recurso sirva justamente para lo que necesitamos aprender.' },
-            { label: 'B. Tamaño', isCorrect: false, feedback: '💡 El tamaño de los archivos no define si la lección es adecuada. El criterio correcto es la Pertinencia.' }
+            { label: 'A. Calidad', isCorrect: false, feedback: '💡 La calidad evalúa el rigor y exactitud de los datos científicos; la facilidad técnica para reproducir, comprender y navegar corresponde a la Usabilidad.' },
+            { label: 'B. Usabilidad', isCorrect: true, feedback: '¡Brillante! La Usabilidad evalúa qué tan fácil, cómodo, intuitivo y accesible resulta utilizar y navegar por el recurso digital sin frustraciones.' },
+            { label: 'C. Pertinencia', isCorrect: false, feedback: '💡 La pertinencia revisa la adecuación al tema del currículo; la facilidad con la que los estudiantes controlan y navegan por el video es la Usabilidad.' },
+            { label: 'D. Decoración', isCorrect: false, feedback: '💡 La decoración se limita al aspecto estético visual, no a la facilidad de uso e interacción técnica del reproductor.' }
           ]
         }
       }
@@ -63,53 +67,57 @@ const ROOMS_CONFIG = {
   },
   'sala2': {
     code: '741',
-    criterion: 'Usabilidad y Manejo',
+    criterion: 'Reto 2: Simulador Interactivo - El Tsunami',
     nextPage: 'sala3-terremoto.html',
     badgeText: '¡RETO 2 SUPERADO!',
     successTitle: '¡Felicidades, Navegante Científico/a!',
     achievementHeader: '🎯 Has Dominado el Reto 2: El Tsunami',
-    successExplanation: '<strong>¡Gran criterio tecnológico!</strong> Comprobaste que la combinación del juego Stop Disasters y el simulador de costa ofrece controles intuitivos para entender la evacuación hacia zonas altas.',
+    successExplanation: '<strong>¡Gran criterio tecnológico!</strong> Comprobaste las características clave de un simulador: permite interactuar y observar cambios en tiempo real, demuestra una alta interactividad, es pertinente para el tema y ofrece una usabilidad intuitiva.',
     btnContinueText: '¡Continuar al Reto 3: El Terremoto! 🏢',
     rounds: [
       {
         roundNumber: '1/2',
-        title: 'Ronda 1/2: Exploración del Juego y la Simulación',
+        title: 'Ronda 1/2: Naturaleza del Simulador e Interactividad',
         q1: {
           id: 's2_r1_q1',
-          text: '¿El recurso sobre tsunamis te permite experimentar qué sucede cuando cambian las condiciones de la ola en la costa?',
+          text: '¿Qué característica diferencia a un simulador interactivo de un recurso que solamente presenta información?',
           options: [
-            { label: 'Si', isCorrect: true, feedback: '¡Así es! Al ajustar los metros de la ola o jugar a defender la costa puedes ver el impacto inmediato.' },
-            { label: 'No', isCorrect: false, feedback: '💡 Prueba el deslizador de altura (5m, 15m, 30m) o el juego interactivo a la izquierda.' },
-            { label: 'Mas o menos', isCorrect: false, feedback: '💡 El simulador y el juego muestran claramente cómo reacciona el mar y la población.' }
+            { label: 'A. Permite al estudiante interactuar y observar cambios.', isCorrect: true, feedback: '¡Exacto! El simulador va más allá de la lectura pasiva: permite manipular variables activas (como la altura de la ola) y ver en tiempo real qué sucede en la costa.' },
+            { label: 'B. Tiene más imágenes.', isCorrect: false, feedback: '💡 Un libro o infografía estática también puede tener muchas imágenes, pero no te permite modificar variables ni experimentar activamente.' },
+            { label: 'C. Utiliza letras grandes.', isCorrect: false, feedback: '💡 El tamaño de letra es una pauta de diseño tipográfico y legibilidad, no una característica que defina la simulación interactiva.' },
+            { label: 'D. Tiene música.', isCorrect: false, feedback: '💡 La música es un componente sonoro multimedia; puede estar en cualquier medio y no convierte a un recurso en un simulador activo.' }
           ]
         },
         q2: {
           id: 's2_r1_q2',
-          text: 'Si los botones, deslizadores y pestañas responden con facilidad y sin confundir al estudiante, ¿qué criterio estás evaluando?',
+          text: 'Si el simulador permite modificar variables y observar los resultados, ¿qué característica está demostrando?',
           options: [
-            { label: 'A. Usabilidad', isCorrect: true, feedback: '¡Exacto! La Usabilidad mide qué tan intuitivo, cómodo y fácil de navegar es el recurso.' },
-            { label: 'B. Velocidad de internet', isCorrect: false, feedback: '💡 La velocidad de internet depende de la red; la facilidad de manejo de la herramienta es su Usabilidad.' }
+            { label: 'A. Interactividad', isCorrect: true, feedback: '¡Muy bien! La Interactividad es la capacidad del software de responder a las acciones y decisiones del usuario modificando el entorno en tiempo real.' },
+            { label: 'B. Decoración', isCorrect: false, feedback: '💡 La decoración solo adorna el aspecto gráfico externo; no permite al usuario intervenir ni alterar las variables del fenómeno.' },
+            { label: 'C. Publicidad', isCorrect: false, feedback: '💡 La publicidad corresponde a anuncios comerciales ajenos a la experimentación científica y formativa.' },
+            { label: 'D. Tamaño', isCorrect: false, feedback: '💡 El tamaño mide dimensiones o peso digital, no la capacidad interactiva de respuesta y manipulación de variables.' }
           ]
         }
       },
       {
         roundNumber: '2/2',
-        title: 'Ronda 2/2: Evaluación de Autonomía de Uso',
+        title: 'Ronda 2/2: Pertinencia del Simulador y Evaluación de Usabilidad',
         q1: {
           id: 's2_r2_q1',
-          text: '¿Un estudiante de 4.º de primaria puede aprender a evacuar hacia la colina alta de forma autónoma usando esta herramienta?',
+          text: 'El simulador fue diseñado para comprender cómo se producen los tsunamis. ¿Es pertinente?',
           options: [
-            { label: 'Si, es fácil y comprensible', isCorrect: true, feedback: '¡Totalmente! La señalización visual y la cota segura (+30m) orientan al alumno sin dificultad.' },
-            { label: 'No, es demasiado complicado', isCorrect: false, feedback: '💡 Fíjate en las pestañas panorámicas (Mar, Playa, Pueblo, Colina); son muy sencillas de explorar.' },
-            { label: 'Requiere ayuda de un programador', isCorrect: false, feedback: '💡 Los controles están diseñados para niños de primaria con botones claros y directos.' }
+            { label: 'A. Sí', isCorrect: true, feedback: '¡Totalmente correcto! Es pertinente porque sus herramientas y escenarios están específicamente concebidos para lograr el objetivo de comprender la física y prevención de tsunamis.' },
+            { label: 'B. No', isCorrect: false, feedback: '💡 Reflexiona sobre la meta: si estamos aprendiendo sobre la formación de tsunamis y evacuación costera, y el simulador recrea ese proceso con exactitud, ¡sí es plenamente pertinente!' }
           ]
         },
         q2: {
           id: 's2_r2_q2',
-          text: 'Para decir que un recurso digital tiene "buena usabilidad", ¿qué característica debe cumplir principalmente?',
+          text: 'Para evaluar la usabilidad debemos preguntarnos principalmente:',
           options: [
-            { label: 'A. Ser intuitivo y fácil de usar', isCorrect: true, feedback: '¡Correcto! Una buena usabilidad permite usar el recurso sin perderse ni frustrarse.' },
-            { label: 'B. Tener música muy ruidosa', isCorrect: false, feedback: '💡 El ruido no mejora el manejo; la claridad y sencillez de los controles sí lo hacen.' }
+            { label: 'A. ¿Tiene muchos colores?', isCorrect: false, feedback: '💡 La paleta de colores corresponde al diseño estético. La Usabilidad se pregunta si el usuario puede operar y navegar la herramienta sin enredos.' },
+            { label: 'B. ¿Es fácil de utilizar y comprender?', isCorrect: true, feedback: '¡Respuesta impecable! La Usabilidad evalúa fundamentalmente que la interfaz sea fácil de manejar, intuitiva y que cualquier estudiante pueda comprenderla con rapidez.' },
+            { label: 'C. ¿Tiene música?', isCorrect: false, feedback: '💡 La música es un recurso auditivo que puede ser agradable, pero no determina si la interfaz se maneja y comprende con facilidad.' },
+            { label: 'D. ¿Tiene muchas imágenes?', isCorrect: false, feedback: '💡 Llenar una pantalla de imágenes no significa que sea fácil de usar; al contrario, demasiados elementos pueden sobrecargar la interfaz.' }
           ]
         }
       }
@@ -117,53 +125,57 @@ const ROOMS_CONFIG = {
   },
   'sala3': {
     code: '985',
-    criterion: 'Calidad y Rigor Científico',
+    criterion: 'Reto 3: Aplicación Móvil - Terremotos',
     nextPage: 'sala4-calor.html',
     badgeText: '¡RETO 3 SUPERADO!',
     successTitle: '¡Felicidades, Experto/a en Prevención!',
     achievementHeader: '🎯 Has Dominado el Reto 3: El Terremoto',
-    successExplanation: '<strong>¡Análisis riguroso completado!</strong> Verificaste que los datos sismológicos y las medidas de la mochila de 72 horas y autoprotección escolar provienen de protocolos oficiales que salvan vidas.',
+    successExplanation: '<strong>¡Análisis riguroso completado!</strong> Comprobaste que la aplicación sobre terremotos favorece la calidad por su información correcta y actualizada, cumple pertinencia curricular con el tema de estudio, ofrece alta usabilidad y aprendiste que los buenos gráficos no reemplazan la pertinencia.',
     btnContinueText: '¡Continuar al Reto 4: Ola de Calor! ☀️',
     rounds: [
       {
         roundNumber: '1/2',
-        title: 'Ronda 1/2: Exploración de la App Móvil',
+        title: 'Ronda 1/2: Calidad Informativa y Pertinencia Temática',
         q1: {
           id: 's3_r1_q1',
-          text: '¿La aplicación móvil educativa presenta información real sobre cómo actuar antes y durante un sismo?',
+          text: 'Una aplicación presenta información correcta y actualizada sobre los terremotos. ¿Qué criterio favorece?',
           options: [
-            { label: 'Si', isCorrect: true, feedback: '¡Correcto! Muestra el sismógrafo, la mochila de emergencia y las normas de agacharse y cubrirse.' },
-            { label: 'No', isCorrect: false, feedback: '💡 Explora la app en el teléfono a la izquierda tocando las pestañas de simulacro y consejos.' },
-            { label: 'Mas o menos', isCorrect: false, feedback: '💡 Las 3 secciones de la app cubren protocolos certificados de autoprotección escolar.' }
+            { label: 'A. Calidad', isCorrect: true, feedback: '¡Excelente! La veracidad, el rigor científico y la actualización permanente de los datos son los indicadores fundamentales del criterio de Calidad del contenido.' },
+            { label: 'B. Usabilidad', isCorrect: false, feedback: '💡 La usabilidad evalúa qué tan simple es pulsar botones y navegar, mientras que la exactitud y veracidad de la información corresponden a la Calidad.' },
+            { label: 'C. Decoración', isCorrect: false, feedback: '💡 La decoración abarca la apariencia visual exterior, no la exactitud ni el sustento científico de los datos sobre sismos.' },
+            { label: 'D. Velocidad', isCorrect: false, feedback: '💡 La velocidad se relaciona con el rendimiento técnico del dispositivo, pero no garantiza que los conceptos explicados sean correctos ni actualizados.' }
           ]
         },
         q2: {
           id: 's3_r1_q2',
-          text: 'Si las recomendaciones provienen de geofísicos y organismos de Protección Civil certificados, ¿qué criterio garantizamos?',
+          text: 'La aplicación permite aprender sobre terremotos, que es precisamente el tema que estamos estudiando. ¿Qué criterio cumple?',
           options: [
-            { label: 'A. Calidad y Rigor', isCorrect: true, feedback: '¡Exacto! El rigor de las fuentes y la veracidad de la información garantizan la Calidad.' },
-            { label: 'B. Precio de la app', isCorrect: false, feedback: '💡 El costo no determina si la ciencia es verdadera; la confiabilidad de los datos es la Calidad.' }
+            { label: 'A. Pertinencia', isCorrect: true, feedback: '¡Así se hace! La Pertinencia significa que el recurso se ajusta con exactitud al tema de estudio y a los objetivos formativos que se quieren alcanzar.' },
+            { label: 'B. Usabilidad', isCorrect: false, feedback: '💡 La usabilidad mide la facilidad de manejo de la app; la coincidencia directa entre el tema de clase y la aplicación es la Pertinencia.' },
+            { label: 'C. Tamaño', isCorrect: false, feedback: '💡 El tamaño de almacenamiento de la aplicación no define si su tema coincide con nuestro plan de estudio.' },
+            { label: 'D. Calidad', isCorrect: false, feedback: '💡 La calidad asegura que los datos sean rigurosos, pero el hecho de que apoye justo el tema curricular que estamos abordando es la Pertinencia.' }
           ]
         }
       },
       {
         roundNumber: '2/2',
-        title: 'Ronda 2/2: Verificación de Contenido Pedagógico',
+        title: 'Ronda 2/2: Usabilidad de la Interfaz y Criterio Pedagógico',
         q1: {
           id: 's3_r2_q1',
-          text: '¿Crees que los elementos de la mochila de emergencia (linterna, agua, botiquín, silbato, radio) están bien justificados?',
+          text: 'La aplicación tiene botones claros, instrucciones sencillas y permite navegar sin dificultad. ¿Qué criterio cumple?',
           options: [
-            { label: 'Si, son vitales para 72 horas', isCorrect: true, feedback: '¡Excelente! Esos 5 elementos son el estándar internacional de supervivencia básica.' },
-            { label: 'No, son objetos innecesarios', isCorrect: false, feedback: '💡 Revisa el minijuego de la mochila en el teléfono para entender la utilidad de cada uno.' },
-            { label: 'Faltan juguetes y golosinas', isCorrect: false, feedback: '💡 Una mochila de emergencia prioriza la hidratación, primeros auxilios y comunicación.' }
+            { label: 'A. Usabilidad', isCorrect: true, feedback: '¡Totalmente acertado! Una interfaz con botones visibles, instrucciones comprensibles y navegación sin tropiezos es el ejemplo perfecto de una alta Usabilidad.' },
+            { label: 'B. Pertinencia', isCorrect: false, feedback: '💡 La pertinencia revisa si el tema es el adecuado; la facilidad con la que el alumno navega y presiona botones sin enredos es la Usabilidad.' },
+            { label: 'C. Calidad', isCorrect: false, feedback: '💡 La calidad analiza la veracidad científica de la información; la sencillez de los controles e instrucciones pertenece a la Usabilidad.' },
+            { label: 'D. Decoración', isCorrect: false, feedback: '💡 La decoración solo embellece los gráficos; el diseño accesible, intuitivo y fácil de operar es la Usabilidad del software.' }
           ]
         },
         q2: {
           id: 's3_r2_q2',
-          text: '¿Por qué es fundamental que un recurso sobre desastres naturales tenga alta Calidad informativa?',
+          text: 'Una aplicación tiene excelentes gráficos, pero la información no tiene relación con el objetivo de aprendizaje. ¿Es pertinente?',
           options: [
-            { label: 'A. Porque de ello depende la seguridad y la vida', isCorrect: true, feedback: '¡Brillante! Datos erróneos en una emergencia son peligrosos; la calidad salva vidas.' },
-            { label: 'B. Porque tiene colores más bonitos', isCorrect: false, feedback: '💡 El diseño apoya, pero lo crucial es la veracidad y rigor científico del contenido.' }
+            { label: 'A. Sí', isCorrect: false, feedback: '💡 ¡Cuidado! Que una aplicación tenga gráficos espectaculares no sirve de nada si no enseña lo que necesitamos aprender. Por eso NO es pertinente.' },
+            { label: 'B. No', isCorrect: true, feedback: '¡Pensamiento crítico formidable! Por más bonitos o avanzados que sean los gráficos, si el recurso no guarda relación con el objetivo de aprendizaje, NO es pertinente.' }
           ]
         }
       }
@@ -171,53 +183,57 @@ const ROOMS_CONFIG = {
   },
   'sala4': {
     code: '624',
-    criterion: 'Accesibilidad e Inclusión',
+    criterion: 'Reto 4: Multimedia Interactivo - Ola de Calor',
     nextPage: 'final.html',
     badgeText: '¡RETO 4 SUPERADO!',
     successTitle: '¡Misión Cumplida, Guardián del Planeta!',
     achievementHeader: '🎯 Has Dominado el Reto 4: La Ola de Calor',
-    successExplanation: '<strong>¡Inclusión educativa ejemplar!</strong> Aprendiste que todo material didáctico debe diseñarse para que todas las personas, sin importar sus condiciones visuales o auditivas, puedan aprender en igualdad.',
-    btnContinueText: '¡Ir a la Graduación y Ver Mi Medalla! 🎓',
+    successExplanation: '<strong>¡Pensamiento crítico ejemplar!</strong> Demostraste un dominio integral reconociendo la calidad sustentada en fuentes confiables, la pertinencia con las metas de aprendizaje, la usabilidad accesible y el juicio crítico frente a contenidos sin respaldo.',
+    btnContinueText: '¡Ir al Registro de Evidencias y Código Final! 🚨',
     rounds: [
       {
         roundNumber: '1/2',
-        title: 'Ronda 1/2: Exploración del Juego y Adaptabilidad',
+        title: 'Ronda 1/2: Calidad por Fuentes Confiables y Pertinencia',
         q1: {
           id: 's4_r1_q1',
-          text: '¿El recurso sobre el calor y las capas de la Tierra ofrece alternativas para ajustar el tamaño de texto o el contraste?',
+          text: 'Después de explorar el recurso: ¿Cuál de las siguientes características permite reconocer que un recurso presenta información de calidad?',
           options: [
-            { label: 'Si', isCorrect: true, feedback: '¡Así es! Cuenta con herramientas de inclusión para facilitar la lectura a cualquier alumno.' },
-            { label: 'No', isCorrect: false, feedback: '💡 Observa la barra amarilla sobre el juego a la izquierda con los botones de Letra Grande y Alto Contraste.' },
-            { label: 'Mas o menos', isCorrect: false, feedback: '💡 Las opciones de accesibilidad adaptan la interfaz de forma inmediata.' }
+            { label: 'A. Utiliza muchos colores y animaciones.', isCorrect: false, feedback: '💡 Los colores y animaciones atraen la vista, pero no garantizan que los datos sobre las olas de calor sean verdaderos ni respaldados por la ciencia.' },
+            { label: 'B. Presenta información clara, organizada y basada en fuentes confiables.', isCorrect: true, feedback: '¡Extraordinario! La Calidad informativa se sustenta en la claridad de las explicaciones, una organización coherente y el respaldo en fuentes científicas u oficiales verificables.' },
+            { label: 'C. Tiene música llamativa.', isCorrect: false, feedback: '💡 La música llamativa es un accesorio auditivo que incluso puede distraer; en ningún caso asegura la veracidad ni la calidad del contenido.' },
+            { label: 'D. Tiene muchas imágenes.', isCorrect: false, feedback: '💡 Incluir abundantes imágenes no avala la exactitud ni el valor educativo del contenido; la calidad reside en el rigor y respaldo de la información.' }
           ]
         },
         q2: {
           id: 's4_r1_q2',
-          text: 'Cuando aseguramos que niños con dificultades visuales o auditivas puedan aprender sin barreras, ¿qué criterio aplicamos?',
+          text: 'El objetivo de aprendizaje es comprender qué es una ola de calor y conocer algunas medidas de prevención. El recurso explica estos aspectos. ¿Es pertinente para el propósito de aprendizaje?',
           options: [
-            { label: 'A. Accesibilidad', isCorrect: true, feedback: '¡Correcto! La Accesibilidad garantiza la inclusión e igualdad de oportunidades de aprendizaje.' },
-            { label: 'B. Competencia', isCorrect: false, feedback: '💡 No se trata de competir, sino de no dejar a ningún estudiante atrás mediante la Accesibilidad.' }
+            { label: 'A. Sí.', isCorrect: true, feedback: '¡Correcto! Cumple con total Pertinencia porque su contenido se alinea directamente con la definición del fenómeno y las pautas de prevención que se buscaban aprender.' },
+            { label: 'B. No.', isCorrect: false, feedback: '💡 Analiza la relación: la meta era comprender las olas de calor y medidas de autocuidado, y el recurso explica precisamente esos dos temas. ¡Por lo tanto sí es pertinente!' }
           ]
         }
       },
       {
         roundNumber: '2/2',
-        title: 'Ronda 2/2: Inclusión y Diseño Universal',
+        title: 'Ronda 2/2: Usabilidad de la Interfaz y Pensamiento Crítico',
         q1: {
           id: 's4_r2_q1',
-          text: 'Si un recurso tiene letras minúsculas borrosas y fondos con poco contraste, ¿qué problema presenta?',
+          text: 'Para utilizar el recurso, los estudiantes deben navegar por diferentes apartados. Los botones son visibles, las instrucciones son claras y la información se puede consultar fácilmente. ¿Qué criterio se está evaluando?',
           options: [
-            { label: 'Baja accesibilidad para los alumnos', isCorrect: true, feedback: '¡Muy bien observado! El bajo contraste y textos diminutos crean barreras para aprender.' },
-            { label: 'Es un recurso perfecto', isCorrect: false, feedback: '💡 Si los estudiantes no pueden leer cómodamente, el recurso no es inclusivo.' },
-            { label: 'Solo le falta más música', isCorrect: false, feedback: '💡 La accesibilidad visual es prioritaria para la comprensión de textos y diagramas.' }
+            { label: 'A. Calidad', isCorrect: false, feedback: '💡 La calidad analiza la veracidad y rigor científico del texto; la visibilidad de los botones y la facilidad para recorrer apartados evalúan la Usabilidad.' },
+            { label: 'B. Pertinencia', isCorrect: false, feedback: '💡 La pertinencia evalúa la correspondencia con el plan de estudios; la fluidez y sencillez para interactuar con la interfaz es la Usabilidad.' },
+            { label: 'C. Usabilidad', isCorrect: true, feedback: '¡Excelente precisión! Botones claros, instrucciones transparentes y una navegación ágil y sin complicaciones son las características definitivas de la Usabilidad.' },
+            { label: 'D. Decoración', isCorrect: false, feedback: '💡 La decoración abarca únicamente los elementos decorativos, mientras que la facilidad de uso y exploración funcional es la Usabilidad.' }
           ]
         },
         q2: {
           id: 's4_r2_q2',
-          text: '¿Qué lección final nos enseña la evaluación de Recursos Educativos Digitales?',
+          text: 'Una página presenta imágenes muy llamativas sobre las olas de calor, pero la información no tiene autor, no indica sus fuentes y contiene datos que no pueden comprobarse. ¿Considerarías que este recurso tiene una calidad adecuada?',
           options: [
-            { label: 'A. Evaluar calidad, pertinencia y usabilidad', isCorrect: true, feedback: '¡Excelente! Saber evaluar recursos digitales nos convierte en usuarios críticos y conscientes.' },
-            { label: 'B. Usar el primer enlace que encontremos', isCorrect: false, feedback: '💡 Siempre debemos analizar con criterio antes de confiar en un recurso digital.' }
+            { label: 'A. Sí, porque tiene imágenes bonitas.', isCorrect: false, feedback: '💡 ¡Cuidado! Las imágenes atractivas no convierten una información dudosa en verdadera. Sin fuentes ni autor comprobable, carece de calidad.' },
+            { label: 'B. Sí, porque es interactivo.', isCorrect: false, feedback: '💡 Que una página sea interactiva no valida que sus datos sean científicos; la interactividad sin rigor puede transmitir mitos perjudiciales.' },
+            { label: 'C. No, porque la información no presenta suficiente respaldo.', isCorrect: true, feedback: '¡Pensamiento crítico sobresaliente! Si una página no cita fuentes, no identifica autores capacitados y muestra datos incomprobables, NO tiene una calidad adecuada y no debemos confiar en ella.' },
+            { label: 'D. Sí, porque es digital.', isCorrect: false, feedback: '💡 El soporte digital no es garantía de verdad: en internet abunda información sin sustento. La calidad depende del rigor de los autores y fuentes.' }
           ]
         }
       }
@@ -269,32 +285,56 @@ function renderCurrentRound() {
   const questionColumn = document.querySelector('.question-column');
   if (!questionColumn) return;
 
+  // Numeración secuencial de preguntas: Ronda 1 -> Preguntas 1 y 2; Ronda 2 -> Preguntas 3 y 4
+  const q1Num = currentRoomState.roundIndex === 0 ? '1' : '3';
+  const q2Num = currentRoomState.roundIndex === 0 ? '2' : '4';
+
+  // Detección de longitud de opciones para aplicar el diseño idóneo (grilla compacta vs stack vertical)
+  const isQ1Long = roundData.q1.options.some(opt => opt.label.length > 22);
+  const isQ2Long = roundData.q2.options.some(opt => opt.label.length > 22);
+
+  const q1LayoutClass = isQ1Long ? 'options-vertical-stack' : (roundData.q1.options.length === 2 ? 'options-two-col' : 'options-grid-2x2');
+  const q2LayoutClass = isQ2Long ? 'options-vertical-stack' : (roundData.q2.options.length === 2 ? 'options-two-col' : 'options-grid-2x2');
+
+  const startProgressCount = currentRoomState.roundIndex * 2;
+
   questionColumn.innerHTML = `
-    <!-- Cabecera del Criterio y Badge de Ronda 1/2 o 2/2 -->
+    <!-- Cabecera del Criterio y Badges de Ronda y Progreso -->
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 0.35rem;">
       <div class="question-badge" style="margin-bottom: 0;">
         <i class="fa-solid fa-compass"></i> ${room.criterion}
       </div>
-      <div class="round-indicator-badge">
-        <i class="fa-solid fa-flag-checkered"></i>
-        <span>Ronda ${roundData.roundNumber}</span>
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <div class="round-indicator-badge">
+          <i class="fa-solid fa-flag-checkered"></i>
+          <span>Ronda ${roundData.roundNumber}</span>
+        </div>
+        <div class="progress-questions-badge" id="questionsProgressBadge">
+          <i class="fa-solid fa-circle-check"></i>
+          <span id="questionsProgressText">${startProgressCount}/4 Preguntas</span>
+        </div>
       </div>
     </div>
 
     <!-- Título de la Ronda -->
-    <div style="font-family: var(--font-hand); font-size: 1.12rem; font-weight: bold; color: #1E3A8A; margin-bottom: 0.4rem;">
+    <div style="font-family: var(--font-hand); font-size: 1.12rem; font-weight: bold; color: #1E3A8A; margin-bottom: 0.35rem;">
       ${roundData.title}
     </div>
 
     <!-- Contenedor de las 2 Preguntas -->
     <div class="questions-round-container">
       
-      <!-- PREGUNTA 1 -->
+      <!-- PREGUNTA 1 DE LA RONDA -->
       <div class="question-block" id="blockQ1">
-        <h3 class="question-block-title">
-          1. ${roundData.q1.text}
-        </h3>
-        <div class="question-options-horizontal" id="optionsQ1">
+        <div class="question-block-header">
+          <h3 class="question-block-title">
+            ${q1Num}. ${roundData.q1.text}
+          </h3>
+          <span class="question-mini-status" id="miniStatusQ1" style="display: none;">
+            <i class="fa-solid fa-check"></i> Correcta
+          </span>
+        </div>
+        <div class="question-options-horizontal ${q1LayoutClass}" id="optionsQ1">
           ${roundData.q1.options.map((opt, idx) => `
             <button type="button" class="option-pill-btn" data-question="q1" data-index="${idx}" data-correct="${opt.isCorrect}">
               <span>${opt.label}</span>
@@ -303,12 +343,17 @@ function renderCurrentRound() {
         </div>
       </div>
 
-      <!-- PREGUNTA 2 -->
+      <!-- PREGUNTA 2 DE LA RONDA -->
       <div class="question-block" id="blockQ2">
-        <h3 class="question-block-title">
-          2. ${roundData.q2.text}
-        </h3>
-        <div class="question-options-horizontal" id="optionsQ2">
+        <div class="question-block-header">
+          <h3 class="question-block-title">
+            ${q2Num}. ${roundData.q2.text}
+          </h3>
+          <span class="question-mini-status" id="miniStatusQ2" style="display: none;">
+            <i class="fa-solid fa-check"></i> Correcta
+          </span>
+        </div>
+        <div class="question-options-horizontal ${q2LayoutClass}" id="optionsQ2">
           ${roundData.q2.options.map((opt, idx) => `
             <button type="button" class="option-pill-btn" data-question="q2" data-index="${idx}" data-correct="${opt.isCorrect}">
               <span>${opt.label}</span>
@@ -319,12 +364,16 @@ function renderCurrentRound() {
 
     </div>
 
-    <!-- Contenedor dinámico de retroalimentación / Volver a aprender -->
-    <div id="roundFeedbackZone" style="margin-top: 0.5rem; min-height: 28px;"></div>
-
-    <div class="direct-select-hint" style="margin-top: 0.4rem;">
-      <i class="fa-solid fa-hand-pointer" style="color: #2563EB;"></i>
-      <span>Selecciona tu respuesta en ambas preguntas para completar la ronda</span>
+    <!-- Contenedor dinámico y responsive de retroalimentación / Verificador (1/4, 2/4, 3/4) -->
+    <div id="roundFeedbackZone" class="round-feedback-zone">
+      <div class="verification-status-card status-pending" id="verificationCard">
+        <span class="verification-status-pill pill-gray">
+          <i class="fa-solid fa-hand-pointer"></i> Guía
+        </span>
+        <span class="verification-status-text">
+          Selecciona tu respuesta en ambas preguntas para verificar tu análisis.
+        </span>
+      </div>
     </div>
   `;
 
@@ -344,7 +393,7 @@ function renderCurrentRound() {
 }
 
 /**
- * Maneja la selección de una opción en Q1 o Q2
+ * Maneja la selección de una opción en Q1 o Q2 con verificador 1/4, 2/4, 3/4
  */
 function handleOptionSelection(qKey, optIdx, isCorrect, clickedBtn) {
   const room = ROOMS_CONFIG[currentRoomState.roomKey];
@@ -382,32 +431,54 @@ function handleOptionSelection(qKey, optIdx, isCorrect, clickedBtn) {
   clickedBtn.classList.add('correct-highlight');
   if (window.escapeSound) window.escapeSound.playOptionSelect();
 
-  // Comprobar si ambas preguntas están respondidas
+  // Marcar visualmente el bloque de la pregunta resuelta
+  const blockId = qKey === 'q1' ? 'blockQ1' : 'blockQ2';
+  const miniId = qKey === 'q1' ? 'miniStatusQ1' : 'miniStatusQ2';
+  const blockEl = document.getElementById(blockId);
+  if (blockEl) blockEl.classList.add('is-answered-correct');
+  const miniEl = document.getElementById(miniId);
+  if (miniEl) miniEl.style.display = 'inline-flex';
+
+  // Calcular progreso total de preguntas en la sala (1/4, 2/4, 3/4, 4/4)
+  const roundBase = currentRoomState.roundIndex * 2;
+  let inRound = 0;
   const selQ1 = currentRoomState.selectedAnswers.q1;
   const selQ2 = currentRoomState.selectedAnswers.q2;
+  if (selQ1 && selQ1.isCorrect) inRound++;
+  if (selQ2 && selQ2.isCorrect) inRound++;
+  const totalCorrect = roundBase + inRound;
+
+  // Actualizar indicador de progreso en la cabecera
+  const progressText = document.getElementById('questionsProgressText');
+  if (progressText) {
+    progressText.textContent = `${totalCorrect}/4 Preguntas`;
+  }
 
   if (selQ1 && selQ2 && selQ1.isCorrect && selQ2.isCorrect) {
-    // ==========================================
-    // AMBAS CORRECTAS EN ESTA RONDA
-    // ==========================================
-    if (window.escapeSound) window.escapeSound.playSuccess();
-
-    if (typeof confetti === 'function') {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#2D5A46', '#F2B705', '#3B82F6', '#10B981', '#EF4444']
-      });
-    }
-
+    // Ambas preguntas de la ronda actual están correctas
     if (currentRoomState.roundIndex < room.rounds.length - 1) {
-      // Avanzar a la Ronda 2/2
-      const feedbackZone = document.getElementById('roundFeedbackZone');
+      // ==========================================
+      // RONDA 1/2 COMPLETADA: PROGRESO 2/4
+      // ==========================================
+      if (window.escapeSound) window.escapeSound.playSuccess();
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 75,
+          spread: 65,
+          origin: { y: 0.6 },
+          colors: ['#2D5A46', '#F2B705', '#3B82F6', '#10B981']
+        });
+      }
+
       if (feedbackZone) {
         feedbackZone.innerHTML = `
-          <div style="font-family: var(--font-hand); font-size: 1.05rem; font-weight: bold; color: #15803D; background: #DCFCE7; border: 1.5px solid #86EFAC; border-radius: 8px; padding: 6px 12px; text-align: center;" class="animate__animated animate__fadeIn">
-            🎉 ¡Ronda 1/2 superada con éxito! Pasando a la Ronda 2/2...
+          <div class="verification-status-card status-round-complete animate__animated animate__fadeIn">
+            <span class="verification-status-pill pill-blue">
+              <i class="fa-solid fa-trophy"></i> 2/4
+            </span>
+            <span class="verification-status-text">
+              🎉 ¡Ronda 1/2 superada con éxito! Pasando a la Ronda 2/2...
+            </span>
           </div>
         `;
       }
@@ -415,21 +486,56 @@ function handleOptionSelection(qKey, optIdx, isCorrect, clickedBtn) {
       setTimeout(() => {
         currentRoomState.roundIndex++;
         renderCurrentRound();
-      }, 1100);
+      }, 550);
 
     } else {
-      // COMPLETADO RETO TOTAL (Ronda 2/2 completada)
+      // ==========================================
+      // RETO TOTAL COMPLETADO (4/4): ALERTA EN MITAD DE PANTALLA
+      // (Se mantiene la alerta central como pidió el usuario)
+      // ==========================================
+      if (window.escapeSound) window.escapeSound.playSuccess();
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#2D5A46', '#F2B705', '#3B82F6', '#10B981', '#EF4444']
+        });
+      }
       handleRoomCompleted(room);
     }
   } else {
-    // Falta una por responder correctamente
-    const feedbackZone = document.getElementById('roundFeedbackZone');
+    // Falta una por responder en la ronda actual
     if (feedbackZone) {
-      feedbackZone.innerHTML = `
-        <div style="font-family: var(--font-hand); font-size: 0.92rem; color: #166534; background: #DCFCE7; padding: 3px 10px; border-radius: 8px; border: 1px solid #86EFAC; text-align: center;">
-          ✔️ ¡Respuesta correcta! Ahora responde la otra pregunta de la ronda.
-        </div>
-      `;
+      if (totalCorrect === 1) {
+        // ==========================================
+        // PROGRESO 1/4 (Ronda 1, una respondida)
+        // ==========================================
+        feedbackZone.innerHTML = `
+          <div class="verification-status-card status-correct animate__animated animate__fadeIn">
+            <span class="verification-status-pill pill-green">
+              <i class="fa-solid fa-circle-check"></i> 1/4
+            </span>
+            <span class="verification-status-text">
+              ¡Respuesta correcta! Ahora responde la otra pregunta de esta ronda.
+            </span>
+          </div>
+        `;
+      } else if (totalCorrect === 3) {
+        // ==========================================
+        // PROGRESO 3/4 (Ronda 2, una respondida)
+        // ==========================================
+        feedbackZone.innerHTML = `
+          <div class="verification-status-card status-correct animate__animated animate__fadeIn">
+            <span class="verification-status-pill pill-green">
+              <i class="fa-solid fa-circle-check"></i> 3/4
+            </span>
+            <span class="verification-status-text">
+              ¡Gran análisis! Respuesta correcta. Responde la última pregunta para completar el reto.
+            </span>
+          </div>
+        `;
+      }
     }
   }
 }
@@ -494,6 +600,24 @@ function showLearnAgainModal(qKey, optData, qData, roundData, clickedBtn) {
       clickedBtn.classList.remove('wrong-highlight');
     }
     currentRoomState.selectedAnswers[qKey] = null;
+
+    // Si ninguna pregunta de la ronda está correcta, mantener el estado guía
+    const otherQKey = qKey === 'q1' ? 'q2' : 'q1';
+    if (!currentRoomState.selectedAnswers[otherQKey] || !currentRoomState.selectedAnswers[otherQKey].isCorrect) {
+      const feedbackZone = document.getElementById('roundFeedbackZone');
+      if (feedbackZone) {
+        feedbackZone.innerHTML = `
+          <div class="verification-status-card status-pending" id="verificationCard">
+            <span class="verification-status-pill pill-gray">
+              <i class="fa-solid fa-hand-pointer"></i> Guía
+            </span>
+            <span class="verification-status-text">
+              Selecciona tu respuesta en ambas preguntas para verificar tu análisis.
+            </span>
+          </div>
+        `;
+      }
+    }
   }
 
   const retryBtn = overlay.querySelector('#btnRetryLearnModal');
@@ -588,9 +712,7 @@ function handleRoomCompleted(room) {
         continueBtn.addEventListener('click', () => {
           if (window.escapeSound) window.escapeSound.playPop();
           continueBtn.innerHTML = '<span>Cargando siguiente misión...</span> <i class="fa-solid fa-spinner fa-spin"></i>';
-          setTimeout(() => {
-            window.location.href = room.nextPage;
-          }, 250);
+          window.location.href = room.nextPage;
         });
       }
 

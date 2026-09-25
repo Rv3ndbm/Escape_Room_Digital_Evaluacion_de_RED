@@ -1019,14 +1019,16 @@ function initHudMusicButton() {
 }
 
 /**
- * Transición suave entre páginas tipo diapositiva de presentación
+ * Transición suave entre páginas con navegación inmediata y fluida
  */
 function initPageTransitions() {
-  // Aplicar animación suave de entrada
-  const screen = document.querySelector('.escape-room-screen') || document.body;
-  screen.classList.add('page-presentation-enter');
+  // Aplicar animación sutil de entrada
+  const screen = document.querySelector('.escape-room-screen');
+  if (screen) {
+    screen.classList.add('page-presentation-enter');
+  }
 
-  // Interceptar clicks en enlaces internos para hacer transición tipo presentación suave
+  // Interceptar clicks en enlaces internos para reproducir sonido y navegar de inmediato sin delay
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
@@ -1052,19 +1054,13 @@ function initPageTransitions() {
       return;
     }
 
-    // Interceptar para transición suave
-    e.preventDefault();
-
     if (window.escapeSound) {
       window.escapeSound.playPageTurn();
     }
 
-    // Aplicar animación de salida de diapositiva
-    screen.classList.add('page-transition-exit');
-
-    setTimeout(() => {
-      window.location.href = href;
-    }, 220);
+    // Navegación inmediata y natural: sin pantalla en blanco ni setTimeout innecesario
+    e.preventDefault();
+    window.location.href = href;
   });
 }
 
