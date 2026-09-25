@@ -943,6 +943,158 @@ html, body {
 }
 
 /* ==========================================================================
+   ELEMENTOS DE FONDO VIVO (ALTO CONTRASTE, FLOTACIÓN Y COLOR)
+   ========================================================================== */
+
+/* Mini-insignias interactivas y flotantes del fondo */
+.bg-floating-badge {
+  position: absolute;
+  width: clamp(38px, 3.2vw, 44px);
+  height: clamp(38px, 3.2vw, 44px);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.15rem, 1.25vw, 1.35rem);
+  z-index: 1;
+  user-select: none;
+  pointer-events: auto;
+  cursor: pointer;
+  border: 2.5px solid transparent;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.bg-floating-badge:hover {
+  transform: scale(1.35) rotate(12deg) !important;
+  z-index: 10;
+}
+
+/* Variantes de color de alto contraste con resplandor suave */
+.badge-blue {
+  border-color: #0284C7;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.38);
+  animation: livelySwayA 5.4s ease-in-out infinite;
+}
+
+.badge-red {
+  border-color: #EF4444;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.38);
+  animation: livelySwayB 5.8s ease-in-out infinite;
+  animation-delay: -1.2s;
+}
+
+.badge-yellow {
+  border-color: #F59E0B;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.42);
+  animation: livelySwayA 6.2s ease-in-out infinite;
+  animation-delay: -2.4s;
+}
+
+.badge-green {
+  border-color: #10B981;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.38);
+  animation: livelySwayB 5.6s ease-in-out infinite;
+  animation-delay: -3.5s;
+}
+
+.badge-purple {
+  border-color: #8B5CF6;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.38);
+  animation: livelySwayC 6s ease-in-out infinite;
+  animation-delay: -1.8s;
+}
+
+/* Orbes luminosos flotantes de colores intensos */
+.bg-color-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+.orb-vibrant-blue {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 35% 35%, #38BDF8, #0284C7 80%);
+  box-shadow: 0 0 18px rgba(2, 132, 199, 0.7);
+  animation: livelySwayA 6s ease-in-out infinite, orbGlowPulse 3.8s ease-in-out infinite;
+}
+
+.orb-vibrant-red {
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 35% 35%, #F87171, #EF4444 80%);
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.75);
+  animation: livelySwayB 5.2s ease-in-out infinite, orbGlowPulse 3.2s ease-in-out infinite;
+  animation-delay: -1.5s;
+}
+
+.orb-vibrant-yellow {
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle at 35% 35%, #FDE047, #F59E0B 80%);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.75);
+  animation: livelySwayC 6.6s ease-in-out infinite, orbGlowPulse 4.2s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+.orb-vibrant-green {
+  width: 19px;
+  height: 19px;
+  background: radial-gradient(circle at 35% 35%, #4ADE80, #10B981 80%);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.7);
+  animation: livelySwayA 5.8s ease-in-out infinite, orbGlowPulse 3.5s ease-in-out infinite;
+  animation-delay: -2.8s;
+}
+
+/* Destellos estelares ✦ de 4 puntas */
+.bg-sparkle-star {
+  position: absolute;
+  font-size: 1.4rem;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+  animation: sparkleSpinTwinkle 8s linear infinite;
+}
+
+.star-blue {
+  color: #0284C7;
+  filter: drop-shadow(0 0 8px rgba(2, 132, 199, 0.8));
+}
+
+.star-red {
+  color: #EF4444;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.8));
+  animation-duration: 7s;
+  animation-delay: -2.5s;
+}
+
+.star-yellow {
+  color: #F59E0B;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.9));
+  animation-duration: 9s;
+  animation-delay: -4s;
+}
+
+.star-green {
+  color: #10B981;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+  animation-duration: 7.5s;
+  animation-delay: -1.2s;
+}
+
+@media (max-width: 1100px) {
+  .bg-floating-badge {
+    display: none;
+  }
+}
+
+/* ==========================================================================
    PANTALLA 2: INTRODUCCIÓN Y REGLAS (DIAPOSITIVA CENTRADA, SIMPLE, CERO SCROLL)
    ========================================================================== */
 .slide-card.intro-slide-card {
@@ -2081,21 +2233,92 @@ html, body {
   to { transform: translateX(calc(100vw + 60px)); }
 }
 
-.scene-seagull {
+/* Bandada de Pájaros y Aves Marinas Volando en el Cielo Costero */
+.scene-bird {
   position: absolute;
-  font-size: 1.1rem;
-  opacity: 0.75;
-  animation: seagullFly 16s linear infinite;
-  z-index: 1;
+  font-size: 1.35rem;
+  filter: drop-shadow(0 3px 6px rgba(15, 23, 42, 0.15));
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+  will-change: transform;
 }
 
-.gull-1 { top: 40px; left: 14%; animation-duration: 18s; }
-.gull-2 { top: 62px; left: 20%; animation-duration: 22s; animation-delay: -6s; }
+.bird-1 {
+  top: 12%;
+  left: -50px;
+  animation: birdFlyAcross 14s linear infinite;
+}
 
-@keyframes seagullFly {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(35px, -12px); }
-  100% { transform: translate(0, 0); }
+.bird-2 {
+  top: 20%;
+  left: -70px;
+  font-size: 1.2rem;
+  animation: birdFlyAcross 16s linear infinite;
+  animation-delay: -5s;
+}
+
+.bird-3 {
+  top: 16%;
+  left: -60px;
+  font-size: 1.15rem;
+  animation: birdFlyAcross 13.5s linear infinite;
+  animation-delay: -9s;
+}
+
+.bird-4 {
+  top: 26%;
+  left: -80px;
+  font-size: 1.3rem;
+  animation: birdFlyAcross 17s linear infinite;
+  animation-delay: -12s;
+}
+
+.bird-5 {
+  top: 9%;
+  left: -90px;
+  font-size: 1.5rem;
+  animation: birdFlyAcross 19s linear infinite;
+  animation-delay: -3.5s;
+}
+
+@keyframes birdFlyAcross {
+  0% {
+    transform: translate3d(-60px, 0, 0) scale(0.95);
+  }
+  25% {
+    transform: translate3d(25vw, -16px, 0) scale(1.04);
+  }
+  50% {
+    transform: translate3d(50vw, 10px, 0) scale(1);
+  }
+  75% {
+    transform: translate3d(75vw, -14px, 0) scale(1.04);
+  }
+  100% {
+    transform: translate3d(calc(100vw + 60px), -6px, 0) scale(0.95);
+  }
+}
+
+/* Globo aerostático y cometa volando en la brisa */
+.scene-sky-balloon {
+  position: absolute;
+  top: 10%;
+  left: 26%;
+  font-size: 2.1rem;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scene-sky-kite {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  font-size: 1.8rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Lienzo SVG Ilustrado con Relieve Realista */
@@ -2116,25 +2339,82 @@ html, body {
   pointer-events: none;
 }
 
-/* Personajes en Playa */
-.beach-people-cluster {
+/* Personajes en Playa (Ubicados naturalmente en la arena dorada) */
+/* Personajes Infantiles Ilustrados con Bocadillos Explicativos (Comprensibles para Niños) */
+.kid-character-badge {
   position: absolute;
-  bottom: 28%;
-  left: 49%;
-  font-size: 1.55rem;
-  z-index: 8;
-  transition: all 0.35s ease;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  z-index: 12;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Evacuados en Media Colina (+15m) */
-.mid-hill-evacuees {
+.kid-figure-icon {
+  font-size: 1.55rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+}
+
+.kid-speech-bubble {
+  font-family: var(--font-title);
+  font-size: 0.68rem;
+  font-weight: 800;
+  background: #FFFFFF;
+  color: #0369A1;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #38BDF8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  position: relative;
+  text-align: center;
+}
+
+.kid-speech-bubble::after {
+  content: '';
   position: absolute;
-  bottom: 50%;
-  left: 75%;
-  font-size: 1.5rem;
-  z-index: 9;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px 4px 0;
+  border-style: solid;
+  border-color: #38BDF8 transparent;
+  display: block;
+  width: 0;
+}
+
+.beach-kid-badge {
+  bottom: 29%;
+  left: 43%;
+}
+
+.evac-kid-badge {
+  bottom: 53%;
+  left: 71%;
+}
+
+.evac-bubble {
+  color: #EA580C;
+  border-color: #F97316;
+}
+.evac-bubble::after {
+  border-color: #F97316 transparent;
+}
+
+.safe-summit-badge {
+  top: 6.5%;
+  right: 5%;
+}
+
+.safe-bubble {
+  color: #15803D;
+  border-color: #22C55E;
+}
+.safe-bubble::after {
+  border-color: #22C55E transparent;
 }
 
 /* Postes de Cota de Altitud (Metros) */
@@ -2153,50 +2433,6 @@ html, body {
   border-radius: var(--radius-pill);
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   border: 1.5px solid white;
-  white-space: nowrap;
-}
-
-.pole-5m { bottom: 31%; left: 63%; }
-.pole-5m .pole-flag { background: #DC2626; color: white; }
-
-.pole-15m { bottom: 53%; left: 74%; }
-.pole-15m .pole-flag { background: #EA580C; color: white; }
-
-/* Cima Segura (+30m): Refugio y Celebración (Mirador Despejado sin Solapamiento) */
-.summit-safe-zone {
-  position: absolute;
-  top: 12%;
-  right: 1.5%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  z-index: 12;
-  pointer-events: none;
-}
-
-.summit-people-safe {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-}
-
-.people-safe-icons {
-  font-size: 1.45rem;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-}
-
-.safe-status-pill {
-  font-family: var(--font-title);
-  font-size: 0.7rem;
-  font-weight: 800;
-  background: rgba(255, 255, 255, 0.96);
-  color: #15803D;
-  border: 1.5px solid #22C55E;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   white-space: nowrap;
 }
 

@@ -19,12 +19,13 @@
   <!-- Contenedor Maestro Pantalla Completa (CERO SCROLL) -->
   <div class="app-screen">
     
-    <!-- Elementos Decorativos Flotantes Pastel de Fondo ("Cositas de fondo llamativas") -->
+    <!-- Elementos Decorativos Flotantes de Fondo con Vida y Alto Contraste -->
     <div class="ambient-bg">
-      <div class="aura-blob" style="width: 380px; height: 380px; background: #BAE6FD; top: -60px; left: -60px;"></div>
-      <div class="aura-blob" style="width: 400px; height: 400px; background: #FEF08A; bottom: -80px; right: -60px;"></div>
-      <div class="aura-blob" style="width: 320px; height: 320px; background: #BBF7D0; top: 25%; right: 8%;"></div>
-      <div class="aura-blob" style="width: 300px; height: 300px; background: #FED7AA; bottom: 20%; left: 8%;"></div>
+      <!-- Auras de Color Vivas y Dinámicas (Azul, Amarillo, Rojo y Verde) -->
+      <div class="aura-blob" style="width: 420px; height: 420px; background: rgba(56, 189, 248, 0.42); top: -70px; left: -70px;"></div>
+      <div class="aura-blob" style="width: 440px; height: 440px; background: rgba(253, 224, 71, 0.42); bottom: -80px; right: -70px;"></div>
+      <div class="aura-blob" style="width: 340px; height: 340px; background: rgba(248, 113, 113, 0.3); top: 38%; left: 3%;"></div>
+      <div class="aura-blob" style="width: 330px; height: 330px; background: rgba(74, 222, 128, 0.32); bottom: 18%; right: 6%;"></div>
 
       <!-- Stickers Animados de Dibujos Animados (Desastres y Ciencia Amigables) -->
       <img src="assets/media/sun-sunglasses.svg" alt="Sol alegre" class="ambient-sticker ambient-sticker-sun anim-float" title="¡Día brillante para salvar la Tierra!">
@@ -33,6 +34,30 @@
       <img src="assets/media/wave-cute.svg" alt="Ola marina" class="ambient-sticker ambient-sticker-wave anim-float-slow" title="¡Estación Tsunami!">
       <img src="assets/media/earth-planet.svg" alt="Planeta Tierra sonriente" class="ambient-sticker ambient-sticker-earth anim-float-slow" title="¡Nuestra Misión!">
       <img src="assets/media/tornado-cute.svg" alt="Tornado curioso" class="ambient-sticker ambient-sticker-tornado anim-float" title="¡Fenómenos naturales!">
+
+      <!-- Mini-insignias Flotantes Interactivas con Colores Vivos (Azul, Rojo, Amarillo, Verde) -->
+      <div class="bg-floating-badge badge-blue" style="top: 25%; left: 9.5%;" title="¡Agua viva! 💧">💧</div>
+      <div class="bg-floating-badge badge-red" style="top: 59%; left: 8.5%;" title="¡Energía volcánica! 🔥">🔥</div>
+      <div class="bg-floating-badge badge-green" style="bottom: 19%; left: 8.5%;" title="¡Vida en la Tierra! 🌱">🌱</div>
+      <div class="bg-floating-badge badge-yellow" style="top: 26%; right: 9.5%;" title="¡Rayo de energía! ⚡">⚡</div>
+      <div class="bg-floating-badge badge-blue" style="top: 60%; right: 8.5%;" title="¡Fuerza del océano! 🌊">🌊</div>
+      <div class="bg-floating-badge badge-purple" style="bottom: 20%; right: 9%;" title="¡Ciencia y cosmos! 🪐">🪐</div>
+
+      <!-- Orbes Luminosos de Alto Contraste (Azul, Rojo, Amarillo y Verde) -->
+      <div class="bg-color-orb orb-vibrant-blue" style="top: 36%; left: 14%;"></div>
+      <div class="bg-color-orb orb-vibrant-red" style="top: 72%; left: 12.5%;"></div>
+      <div class="bg-color-orb orb-vibrant-green" style="bottom: 8%; left: 13.5%;"></div>
+      <div class="bg-color-orb orb-vibrant-yellow" style="top: 38%; right: 13.5%;"></div>
+      <div class="bg-color-orb orb-vibrant-red" style="top: 73%; right: 12.5%;"></div>
+      <div class="bg-color-orb orb-vibrant-blue" style="bottom: 8%; right: 13.5%;"></div>
+
+      <!-- Destellos Estelares ✦ de 4 Puntas -->
+      <div class="bg-sparkle-star star-yellow" style="top: 6%; left: 13%;">✦</div>
+      <div class="bg-sparkle-star star-red" style="top: 42%; left: 11%;">✦</div>
+      <div class="bg-sparkle-star star-green" style="bottom: 24%; left: 13.5%;">✦</div>
+      <div class="bg-sparkle-star star-blue" style="top: 7%; right: 12.5%;">✦</div>
+      <div class="bg-sparkle-star star-yellow" style="top: 43%; right: 11.5%;">✦</div>
+      <div class="bg-sparkle-star star-blue" style="bottom: 25%; right: 13.5%;">✦</div>
     </div>
 
     <!-- Barra Superior HUD -->
@@ -240,6 +265,17 @@
         if (e.key === 'Enter') {
           startBtn.click();
         }
+      });
+
+      // Micro-interacción: Insignias flotantes interactivas del fondo
+      document.querySelectorAll('.bg-floating-badge').forEach(badge => {
+        badge.addEventListener('click', () => {
+          if (window.escapeSound) window.escapeSound.playPop();
+          badge.classList.add('animate__animated', 'animate__rubberBand');
+          badge.addEventListener('animationend', () => {
+            badge.classList.remove('animate__animated', 'animate__rubberBand');
+          }, { once: true });
+        });
       });
     });
   </script>
